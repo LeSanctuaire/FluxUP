@@ -10,9 +10,9 @@
   --bg-hover:      #1a1a2e;
 
   /* Accents */
-  --accent-orange: #ff6b2b;
+  --accent-orange: #ff5500;
   --accent-neon:   #00e5cc;
-  --accent-orange-glow: rgba(255, 107, 43, 0.25);
+  --accent-orange-glow: rgba(255, 85, 0, 0.35);
   --accent-neon-glow:   rgba(0, 229, 204, 0.20);
 
   /* Texte */

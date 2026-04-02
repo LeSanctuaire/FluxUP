@@ -1,30 +1,55 @@
 <script>
   import { player } from '../core/player.svelte.js';
+  import { getRandomStation } from '../services/radioAPI.js';
 
-  // État réactif depuis le store player
   let track       = $derived(player.currentTrack);
   let playing     = $derived(player.playing);
   let volume      = $derived(player.volume);
-  let progress    = $derived(player.progress);   // 0–100
+  let progress    = $derived(player.progress);
   let duration    = $derived(player.duration);
   let currentTime = $derived(player.currentTime);
   let isRadio     = $derived(player.isRadio);
   let hasError    = $derived(player.hasError);
 
-  function formatTime(sec) {
+  /** En cours de chargement d'une station aléatoire */
+  let radioShuffle = $state(false);
+
+  function formatTime(/** @type {number} */ sec) {
     if (!sec || isNaN(sec)) return '0:00';
     const m = Math.floor(sec / 60);
     const s = Math.floor(sec % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
   }
 
-  function handleSeek(e) {
-    const pct = e.target.value / 100;
+  function handleSeek(/** @type {Event} */ e) {
+    const pct = Number(/** @type {HTMLInputElement} */ (e.target).value) / 100;
     player.seek(pct);
   }
 
-  function handleVolume(e) {
-    player.setVolume(Number(e.target.value) / 100);
+  function handleVolume(/** @type {Event} */ e) {
+    player.setVolume(Number(/** @type {HTMLInputElement} */ (e.target).value) / 100);
+  }
+
+  /** Change pour une autre station radio aléatoire (exclut la station en cours) */
+  async function shuffleRadio() {
+    if (radioShuffle) return;
+    radioShuffle = true;
+    try {
+      const currentId = track?.id ?? null;
+      const station = await getRandomStation(currentId);
+      if (!station) return;
+      player.play({
+        id:        station.stationuuid,
+        title:     station.name,
+        artist:    [station.country, station.tags].filter(Boolean).join(' · '),
+        src:       station.url_resolved,
+        thumbnail: station.favicon || null,
+        isRadio:   true,
+        meta:      station,
+      });
+    } finally {
+      radioShuffle = false;
+    }
   }
 </script>
 
@@ -52,23 +77,37 @@
       {#if !isRadio}
         <button class="ctrl-btn" aria-label="Précédent" onclick={() => player.prev()}>⏮</button>
       {/if}
+
       <button class="ctrl-btn play-btn" aria-label={playing ? 'Pause' : 'Play'}
         onclick={() => player.toggle()}>
         {playing ? '⏸' : '▶'}
       </button>
+
       {#if !isRadio}
         <button class="ctrl-btn" aria-label="Suivant" onclick={() => player.next()}>⏭</button>
+      {/if}
+
+      {#if isRadio}
+        <!-- Bouton station aléatoire — visible uniquement en mode radio -->
+        <button
+          class="ctrl-btn shuffle-btn"
+          class:spinning={radioShuffle}
+          aria-label="Station aléatoire"
+          title="Station aléatoire"
+          disabled={radioShuffle}
+          onclick={shuffleRadio}
+        >
+          {radioShuffle ? '…' : '⇄'}
+        </button>
       {/if}
     </div>
 
     {#if isRadio}
-      <!-- Badge LIVE pour les flux radio -->
       <div class="live-badge" aria-label="Lecture en direct">
         <span class="live-dot" aria-hidden="true"></span>
         EN DIRECT
       </div>
     {:else}
-      <!-- Barre de progression (clips uniquement) -->
       <div class="progress-bar">
         <span class="time">{formatTime(currentTime)}</span>
         <input
@@ -115,7 +154,6 @@
     padding: 0 var(--space-xl);
   }
 
-  /* Track info */
   .player-track {
     display: flex;
     align-items: center;
@@ -170,7 +208,6 @@
     white-space: nowrap;
   }
 
-  /* Contrôles centraux */
   .player-center {
     flex: 1;
     display: flex;
@@ -196,7 +233,8 @@
     border-radius: var(--radius-sm);
     line-height: 1;
   }
-  .ctrl-btn:hover { color: var(--text-primary); transform: scale(1.15); }
+  .ctrl-btn:hover:not(:disabled) { color: var(--text-primary); transform: scale(1.15); }
+  .ctrl-btn:disabled { opacity: 0.4; cursor: wait; }
 
   .play-btn {
     font-size: 1.4rem;
@@ -209,11 +247,38 @@
     justify-content: center;
     transition: background var(--transition-fast), box-shadow var(--transition-fast);
   }
-  .play-btn:hover {
+  .play-btn:hover:not(:disabled) {
     background: var(--accent-neon-glow);
     box-shadow: 0 0 16px var(--accent-neon-glow);
     color: var(--accent-neon);
     transform: scale(1.05);
+  }
+
+  /* ── Bouton station aléatoire ────────────────────────────────────────── */
+  .shuffle-btn {
+    font-size: 1.2rem;
+    color: var(--accent-orange);
+    width: 30px; height: 30px;
+    border: 1px solid rgba(255,107,43,0.35) !important;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
+  }
+  .shuffle-btn:hover:not(:disabled) {
+    background: rgba(255,107,43,0.12);
+    box-shadow: 0 0 12px var(--accent-orange-glow);
+    color: #ff8c45;
+    transform: scale(1.12);
+  }
+  .shuffle-btn.spinning {
+    animation: spin 0.7s linear infinite;
+    color: var(--accent-orange);
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
   }
 
   /* Progress bar */
@@ -233,7 +298,6 @@
     flex-shrink: 0;
   }
 
-  /* Sliders */
   .slider {
     -webkit-appearance: none;
     appearance: none;
@@ -265,7 +329,6 @@
     box-shadow: 0 0 6px var(--accent-neon-glow);
   }
 
-  /* Volume */
   .player-right {
     display: flex;
     align-items: center;
@@ -285,7 +348,6 @@
     );
   }
 
-  /* Badge EN DIRECT */
   .live-badge {
     display: flex;
     align-items: center;
@@ -298,8 +360,7 @@
   }
 
   .live-dot {
-    width: 7px;
-    height: 7px;
+    width: 7px; height: 7px;
     border-radius: 50%;
     background: var(--accent-neon);
     box-shadow: 0 0 6px var(--accent-neon-glow);
@@ -311,7 +372,6 @@
     50%       { opacity: 0.4; transform: scale(0.75); }
   }
 
-  /* Erreur flux */
   .track-error {
     font-size: var(--text-xs);
     color: #ff4d4d;
@@ -320,7 +380,6 @@
     white-space: nowrap;
   }
 
-  /* Mobile : masquer volume et infos piste */
   @media (max-width: 600px) {
     .player-track { flex: 0 0 120px; }
     .player-right { display: none; }

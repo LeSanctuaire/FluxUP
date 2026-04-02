@@ -89,6 +89,24 @@ const FALLBACK_STATIONS = [
   { stationuuid: 'fallback-4', name: 'KEXP 90.3 FM',       country: 'USA',    tags: 'indie, alternative', bitrate: 128, url_resolved: 'https://live-aacplus-64.kexp.org/kexp64.aac',         favicon: '' },
 ];
 
+/** Cache interne pour éviter de re-fetcher à chaque clic "radio aléatoire". */
+let _radioCache = null;
+
+/**
+ * Retourne une station aléatoire parmi les vedettes.
+ * La liste est mise en cache après le premier appel.
+ * @param {string} [excludeId] stationuuid a exclure (station en cours de lecture)
+ * @returns {Promise<Station | null>}
+ */
+export async function getRandomStation(excludeId = null) {
+  if (!_radioCache) _radioCache = await getFeaturedRadios(20);
+  const pool = excludeId
+    ? _radioCache.filter(/** @param {Station} s */ s => s.stationuuid !== excludeId)
+    : _radioCache;
+  if (!pool.length) return null;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
 /**
  * @typedef {{ stationuuid: string, name: string, country: string, tags: string, bitrate: number, url_resolved: string, favicon: string }} Station
  */
