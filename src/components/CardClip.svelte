@@ -131,11 +131,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    min-width: 0; /* flex child : empêche le texte long d'élargir la card */
   }
 
   .card-artist {
     font-size: var(--text-xs);
     color: var(--text-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
   }
 
   .card-meta {

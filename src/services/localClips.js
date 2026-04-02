@@ -60,6 +60,16 @@ export function getFeaturedClips(limit = 6) {
 }
 
 /**
+ * Les N derniers clips du JSON (par ordre d'insertion — fin du tableau).
+ * Utilisé pour le "Radar des Sorties".
+ * @param {number} [limit]
+ * @returns {EnrichedClip[]}
+ */
+export function getRecentClips(limit = 12) {
+  return allClips.slice(-limit).reverse();
+}
+
+/**
  * Cherche un clip par youtubeId ou slug.
  * @param {string} idOrSlug
  * @returns {EnrichedClip | undefined}
