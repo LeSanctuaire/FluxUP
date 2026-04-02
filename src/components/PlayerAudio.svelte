@@ -73,52 +73,76 @@
 
   <!-- Contrôles centraux -->
   <div class="player-center">
-    <div class="controls">
-      {#if !isRadio}
-        <button class="ctrl-btn" aria-label="Précédent" onclick={() => player.prev()}>⏮</button>
-      {/if}
+    {#if track}
+      <!-- Contrôles actifs (flux en cours) -->
+      <div class="controls">
+        {#if !isRadio}
+          <button class="ctrl-btn" aria-label="Précédent" onclick={() => player.prev()}>⏮</button>
+        {/if}
 
-      <button class="ctrl-btn play-btn" aria-label={playing ? 'Pause' : 'Play'}
-        onclick={() => player.toggle()}>
-        {playing ? '⏸' : '▶'}
-      </button>
+        <button class="ctrl-btn play-btn" aria-label={playing ? 'Pause' : 'Play'}
+          onclick={() => player.toggle()}>
+          {playing ? '⏸' : '▶'}
+        </button>
 
-      {#if !isRadio}
-        <button class="ctrl-btn" aria-label="Suivant" onclick={() => player.next()}>⏭</button>
-      {/if}
+        {#if !isRadio}
+          <button class="ctrl-btn" aria-label="Suivant" onclick={() => player.next()}>⏭</button>
+        {/if}
+
+        {#if isRadio}
+          <button
+            class="ctrl-btn shuffle-btn"
+            class:spinning={radioShuffle}
+            aria-label="Station aléatoire"
+            title="Station aléatoire"
+            disabled={radioShuffle}
+            onclick={shuffleRadio}
+          >
+            {radioShuffle ? '…' : '⇄'}
+          </button>
+        {/if}
+
+        <button
+          class="ctrl-btn stop-btn"
+          aria-label="Arrêter la lecture"
+          title="Stop"
+          onclick={() => player.stop()}
+        >
+          ⏹
+        </button>
+      </div>
 
       {#if isRadio}
-        <!-- Bouton station aléatoire — visible uniquement en mode radio -->
-        <button
-          class="ctrl-btn shuffle-btn"
-          class:spinning={radioShuffle}
-          aria-label="Station aléatoire"
-          title="Station aléatoire"
-          disabled={radioShuffle}
-          onclick={shuffleRadio}
-        >
-          {radioShuffle ? '…' : '⇄'}
-        </button>
+        <div class="live-badge" aria-label="Lecture en direct">
+          <span class="live-dot" aria-hidden="true"></span>
+          EN DIRECT
+        </div>
+      {:else}
+        <div class="progress-bar">
+          <span class="time">{formatTime(currentTime)}</span>
+          <input
+            type="range" min="0" max="100"
+            value={progress}
+            oninput={handleSeek}
+            aria-label="Progression"
+            class="slider progress-slider"
+          />
+          <span class="time">{formatTime(duration)}</span>
+        </div>
       {/if}
-    </div>
 
-    {#if isRadio}
-      <div class="live-badge" aria-label="Lecture en direct">
-        <span class="live-dot" aria-hidden="true"></span>
-        EN DIRECT
-      </div>
     {:else}
-      <div class="progress-bar">
-        <span class="time">{formatTime(currentTime)}</span>
-        <input
-          type="range" min="0" max="100"
-          value={progress}
-          oninput={handleSeek}
-          aria-label="Progression"
-          class="slider progress-slider"
-        />
-        <span class="time">{formatTime(duration)}</span>
-      </div>
+      <!-- Aucun flux — bouton de lancement -->
+      <button
+        class="launch-btn"
+        class:loading={radioShuffle}
+        disabled={radioShuffle}
+        onclick={shuffleRadio}
+        aria-label="Lancer un flux radio aléatoire"
+      >
+        <span>{radioShuffle ? '…' : '▶'}</span>
+        {radioShuffle ? 'Chargement…' : 'Lancer un flux radio'}
+      </button>
     {/if}
   </div>
 
@@ -281,6 +305,52 @@
     to   { transform: rotate(360deg); }
   }
 
+  /* ── Bouton "Lancer un flux radio" (état idle) ───────────────────────── */
+  .launch-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 8px var(--space-xl);
+    background: transparent;
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-full);
+    color: var(--accent-neon);
+    font-family: var(--font-base);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      background var(--transition-fast),
+      box-shadow var(--transition-fast),
+      color var(--transition-fast);
+  }
+  .launch-btn:hover:not(:disabled) {
+    background: var(--accent-neon-glow);
+    box-shadow: 0 0 18px var(--accent-neon-glow);
+  }
+  .launch-btn:disabled { opacity: 0.5; cursor: wait; }
+
+  /* ── Bouton Stop ─────────────────────────────────────────────────────── */
+  .stop-btn {
+    font-size: 1rem;
+    color: var(--text-muted);
+    width: 28px; height: 28px;
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+  .stop-btn:hover {
+    color: #ff4d4d;
+    border-color: rgba(255, 77, 77, 0.5) !important;
+    box-shadow: 0 0 8px rgba(255, 77, 77, 0.3);
+    transform: scale(1.1);
+  }
+
   /* Progress bar */
   .progress-bar {
     display: flex;
@@ -355,15 +425,15 @@
     font-size: var(--text-xs);
     font-weight: 700;
     letter-spacing: 0.08em;
-    color: var(--accent-neon);
+    color: #ff3333;
     padding: 2px 0;
   }
 
   .live-dot {
     width: 7px; height: 7px;
     border-radius: 50%;
-    background: var(--accent-neon);
-    box-shadow: 0 0 6px var(--accent-neon-glow);
+    background: #ff3333;
+    box-shadow: 0 0 6px rgba(255,51,51,0.7);
     animation: pulse-dot 1.4s ease-in-out infinite;
   }
 

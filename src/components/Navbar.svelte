@@ -6,7 +6,7 @@
   /** @type {{ currentRoute: string }} */
   let { currentRoute = '#/' } = $props();
 
-  // Structure du mega-menu
+  // Structure du menu (inchangée)
   const menuItems = [
     {
       label: 'Accueil',
@@ -34,19 +34,10 @@
       mega: true,
       sections: [
         {
-          title: 'Parcourir',
+          title: 'Selections',
           links: [
-            { label: 'Par artiste', href: '#/explorer' },
-            { label: 'Par genre', href: '#/explorer' },
-            { label: 'Par année', href: '#/explorer' },
-          ],
-        },
-        {
-          title: 'Sélections',
-          links: [
-            { label: 'Playlists curées', href: '#/explorer' },
-            { label: 'Albums spotlight', href: '#/explorer' },
-            { label: 'Exclusivités', href: '#/explorer' },
+            { label: 'La Crypte', href: '#' },
+            { label: 'Reggae - Dub - Roots', href: '#' },
           ],
         },
       ],
@@ -75,21 +66,27 @@
     },
   ];
 
-  let mobileOpen  = $state(false);
-  let activeMenu  = $state(null);
+  let sidebarOpen  = $state(false);
+  let activeMenu   = $state(null);
   let radioLoading = $state(false);
 
-  function toggleDesktop(/** @type {string} */ label) {
+  function toggleSidebar() {
+    sidebarOpen = !sidebarOpen;
+    if (!sidebarOpen) activeMenu = null;
+  }
+
+  function toggleMenu(/** @type {string} */ label) {
     activeMenu = activeMenu === label ? null : label;
   }
 
   function closeAll() {
+    sidebarOpen = false;
     activeMenu  = null;
-    mobileOpen  = false;
   }
 
   function handleOutsideClick(/** @type {MouseEvent} */ event) {
-    if (!(/** @type {Element} */ (event.target)).closest('.navbar')) closeAll();
+    const t = /** @type {Element} */ (event.target);
+    if (!t.closest('.sidebar') && !t.closest('.sidebar-toggle')) closeAll();
   }
 
   /** Lance la modal "Me Surprendre" (clip aléatoire) */
@@ -124,277 +121,605 @@
 
 <svelte:window onclick={handleOutsideClick} />
 
-<nav class="navbar" aria-label="Navigation principale">
-  <div class="nav-inner container">
+<!-- ── Bouton toggle (toujours visible, flottant haut-gauche) ─────────────── -->
+<button
+  class="sidebar-toggle"
+  class:is-open={sidebarOpen}
+  onclick={(e) => { e.stopPropagation(); toggleSidebar(); }}
+  aria-label={sidebarOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+  aria-expanded={sidebarOpen}
+>
+  <span></span><span></span><span></span>
+</button>
 
-    <!-- Logo -->
-    <a href="#/" class="logo" aria-label="FluxUP accueil" onclick={closeAll}>
+<!-- ── Dé 3D flottant "Me Surprendre" (à gauche du bouton Écouter) ────────────── -->
+<button
+  class="top-dice"
+  onclick={openDiceSurprise}
+  aria-label="Clip surprise aléatoire"
+  title="Me Surprendre"
+>
+  <span class="ndice-wrap" aria-hidden="true">
+    <span class="ndice-cube">
+      <span class="ndice-face ndice-front">⚀</span>
+      <span class="ndice-face ndice-back">⚅</span>
+      <span class="ndice-face ndice-right">⚂</span>
+      <span class="ndice-face ndice-left">⚃</span>
+      <span class="ndice-face ndice-top">⚄</span>
+      <span class="ndice-face ndice-bottom">⚁</span>
+    </span>
+  </span>
+</button>
+
+<!-- ── Bouton Retour (visible sur toutes les pages sauf accueil) ─────────── -->
+{#if currentRoute !== '#/' && currentRoute !== '#/home'}
+  <button
+    class="top-back"
+    onclick={() => history.back()}
+    aria-label="Page précédente"
+    title="Retour"
+  >
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Retour</span>
+  </button>
+{/if}
+
+<!-- ── Bouton Écouter / ON AIR (toujours visible, flottant haut-gauche) ──────── -->
+<button
+  class="top-listen"
+  class:loading={radioLoading}
+  class:on-air={player.isRadio && player.playing}
+  onclick={playRandomRadio}
+  aria-label={player.isRadio && player.playing ? 'Radio en cours' : 'Écouter une radio aléatoire'}
+  disabled={radioLoading}
+>
+  {#if player.isRadio && player.playing}
+    <span class="onair-dot" aria-hidden="true"></span> ON AIR
+  {:else}
+    <span>{radioLoading ? '…' : '▶'}</span> Écouter
+  {/if}
+</button>
+
+<!-- ── Logo FLUXUP fixe centré (accueil) ──────────────────────────────────── -->
+<a class="top-logo" href="#/" aria-label="FluxUP — Retour à l'accueil">
+  <em>Flux<span class="neon">UP</span></em>
+</a>
+
+<!-- ── Backdrop semi-transparent (ferme la sidebar au clic) ───────────────── -->
+{#if sidebarOpen}
+  <div
+    class="sidebar-backdrop"
+    onclick={closeAll}
+    aria-hidden="true"
+  ></div>
+{/if}
+
+<!-- ══════════════════════════ SIDEBAR ══════════════════════════ -->
+<nav class="sidebar" class:open={sidebarOpen} aria-label="Navigation principale">
+
+  <!-- En-tête : Logo + bouton replier -->
+  <div class="sidebar-header">
+    <a href="#/" class="logo" onclick={closeAll} aria-label="FluxUP accueil">
       Flux<span class="neon">UP</span>
     </a>
-
-    <!-- Liens desktop -->
-    <ul class="nav-links" role="menubar">
-      {#each menuItems as item}
-        <li class="nav-item" role="none">
-          {#if item.mega}
-            <button
-              class="nav-btn"
-              class:active={currentRoute === item.href || activeMenu === item.label}
-              role="menuitem"
-              aria-haspopup="true"
-              aria-expanded={activeMenu === item.label}
-              onclick={(e) => { e.stopPropagation(); toggleDesktop(item.label); }}
-            >
-              {item.label}
-              <svg class="chevron" class:rotated={activeMenu === item.label}
-                width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
-                <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5"
-                  fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-
-            <div class="mega-menu" class:open={activeMenu === item.label} role="menu">
-              <div class="mega-inner">
-                {#each item.sections as section}
-                  <div class="mega-section">
-                    <p class="mega-section-title">{section.title}</p>
-                    <ul>
-                      {#each section.links as link}
-                        <li>
-                          <a href={link.href} role="menuitem" onclick={closeAll}>
-                            <span class="link-arrow">›</span> {link.label}
-                          </a>
-                        </li>
-                      {/each}
-                    </ul>
-                  </div>
-                {/each}
-              </div>
-            </div>
-
-          {:else}
-            <a
-              href={item.href}
-              class="nav-link"
-              class:active={currentRoute === item.href}
-              role="menuitem"
-              onclick={closeAll}
-            >
-              {item.label}
-            </a>
-          {/if}
-        </li>
-      {/each}
-    </ul>
-
-    <!-- Actions CTA desktop -->
-    <div class="nav-actions">
-      <!-- Bouton dé : ouvre la modal clip aléatoire -->
-      <button
-        class="nav-dice"
-        onclick={openDiceSurprise}
-        aria-label="Clip surprise aléatoire"
-        title="Me Surprendre"
-      >
-        <span class="ndice-wrap" aria-hidden="true">
-          <span class="ndice-cube">
-            <span class="ndice-face ndice-front">⚀</span>
-            <span class="ndice-face ndice-back">⚅</span>
-            <span class="ndice-face ndice-right">⚂</span>
-            <span class="ndice-face ndice-left">⚃</span>
-            <span class="ndice-face ndice-top">⚄</span>
-            <span class="ndice-face ndice-bottom">⚁</span>
-          </span>
-        </span>
-      </button>
-
-      <!-- Bouton Écouter : lance une radio aléatoire -->
-      <button
-        class="nav-cta"
-        class:loading={radioLoading}
-        onclick={playRandomRadio}
-        aria-label="Écouter une radio aléatoire"
-        disabled={radioLoading}
-      >
-        <span>{radioLoading ? '…' : '▶'}</span> Écouter
-      </button>
-    </div>
-
-    <!-- Burger mobile -->
     <button
-      class="burger"
-      class:open={mobileOpen}
-      aria-label={mobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-      aria-expanded={mobileOpen}
-      onclick={(e) => { e.stopPropagation(); mobileOpen = !mobileOpen; activeMenu = null; }}
+      class="sidebar-collapse"
+      onclick={(e) => { e.stopPropagation(); closeAll(); }}
+      aria-label="Replier le menu"
+      title="Replier"
     >
-      <span></span><span></span><span></span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8"
+          stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
     </button>
   </div>
 
-  <!-- ===================== MENU MOBILE ===================== -->
-  <div class="mobile-menu" class:open={mobileOpen} aria-hidden={!mobileOpen}>
-    <ul>
-      {#each menuItems as item}
-        <li class="mobile-item">
-          {#if item.mega}
-            <button
-              class="mobile-btn"
-              class:active={currentRoute === item.href}
-              aria-expanded={activeMenu === item.label}
-              onclick={() => toggleDesktop(item.label)}
-            >
-              {item.label}
-              <svg class="chevron" class:rotated={activeMenu === item.label}
-                width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
-                <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5"
-                  fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
+  <!-- Liens de navigation -->
+  <ul class="sidebar-nav" role="menubar">
+    {#each menuItems as item}
+      <li class="sidebar-item" role="none">
 
-            {#if activeMenu === item.label}
-              <div class="mobile-sub">
-                {#each item.sections as section}
-                  <p class="mobile-section-title">{section.title}</p>
-                  {#each section.links as link}
-                    <a href={link.href} onclick={closeAll}>{link.label}</a>
-                  {/each}
+        {#if item.mega}
+          <!-- Bouton accordéon -->
+          <button
+            class="sidebar-btn"
+            class:active={currentRoute === item.href || activeMenu === item.label}
+            role="menuitem"
+            aria-haspopup="true"
+            aria-expanded={activeMenu === item.label}
+            onclick={() => toggleMenu(item.label)}
+          >
+            <span>{item.label}</span>
+            <svg class="chevron" class:rotated={activeMenu === item.label}
+              width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5"
+                fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <!-- Sous-menu accordéon (dépliable) -->
+          {#if activeMenu === item.label}
+            <div class="sidebar-sub" role="menu">
+              {#each item.sections as section}
+                <p class="sub-title">{section.title}</p>
+                {#each section.links as link}
+                  <a href={link.href} role="menuitem" class="sub-link" onclick={closeAll}>
+                    <span class="link-arrow">›</span>{link.label}
+                  </a>
                 {/each}
-              </div>
-            {/if}
-          {:else}
-            <a
-              href={item.href}
-              class="mobile-link"
-              class:active={currentRoute === item.href}
-              onclick={closeAll}
-            >
-              {item.label}
-            </a>
+              {/each}
+            </div>
           {/if}
-        </li>
-      {/each}
-    </ul>
 
-    <!-- CTA mobile : radio aléatoire + dé -->
-    <div class="mobile-ctas">
-      <button class="mobile-cta" onclick={playRandomRadio} disabled={radioLoading}>
-        {radioLoading ? '…' : '▶'} Écouter maintenant
-      </button>
-      <button class="mobile-dice-cta" onclick={openDiceSurprise} aria-label="Clip surprise">
-        Me Surprendre 🎲
-      </button>
-    </div>
+        {:else}
+          <a
+            href={item.href}
+            class="sidebar-link"
+            class:active={currentRoute === item.href}
+            role="menuitem"
+            onclick={closeAll}
+          >
+            {item.label}
+          </a>
+        {/if}
+
+      </li>
+    {/each}
+  </ul>
+
+  <!-- Actions CTA en bas de sidebar -->
+  <div class="sidebar-actions">
+
+    <!-- Bouton Écouter / ON AIR selon l'état radio -->
+    <button
+      class="btn-listen"
+      class:loading={radioLoading}
+      class:on-air={player.isRadio && player.playing}
+      onclick={playRandomRadio}
+      aria-label={player.isRadio && player.playing ? 'Radio en cours' : 'Écouter une radio aléatoire'}
+      disabled={radioLoading}
+    >
+      {#if player.isRadio && player.playing}
+        <span class="onair-dot" aria-hidden="true"></span> ON AIR
+      {:else}
+        <span>{radioLoading ? '…' : '▶'}</span> Écouter
+      {/if}
+    </button>
+
   </div>
 </nav>
 
 <style>
-  /* ---- Base navbar ---- */
-  .navbar {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: var(--navbar-height);
-    background: rgba(10, 10, 15, 0.95);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-    z-index: var(--z-navbar);
+  /* ── Supprime le padding-top de l'ancienne top-navbar ────────────────────*/
+  :global(body) {
+    padding-top: 0;
   }
 
-  .nav-inner {
+  /* ── Toggle burger (toujours visible, fixé haut-gauche) ──────────────────*/
+  .sidebar-toggle {
+    position: fixed;
+    top: 14px;
+    left: 14px;
+    z-index: calc(var(--z-navbar) + 2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    background: rgba(10, 10, 15, 0.92);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition:
+      background var(--transition-fast),
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+  .sidebar-toggle:hover {
+    background: rgba(0, 229, 204, 0.08);
+    border-color: var(--border-accent);
+    box-shadow: 0 0 10px var(--accent-neon-glow);
+  }
+  .sidebar-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: var(--radius-full);
+    transition: all var(--transition-base);
+    transform-origin: center;
+  }
+  /* Transformation en X quand la sidebar est ouverte */
+  .sidebar-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .sidebar-toggle.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .sidebar-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── Bouton Retour (flottant, visible hors accueil) ─────────────────────*/
+  .top-back {
+    position: fixed;
+    top: 14px;
+    left: 62px;
+    z-index: calc(var(--z-navbar) + 2);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 40px;
+    padding: 0 12px;
+    background: rgba(10, 10, 15, 0.92);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-family: var(--font-base);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast),
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
+    animation: backFadeIn var(--transition-base) ease both;
+  }
+  @keyframes backFadeIn {
+    from { opacity: 0; transform: translateX(-6px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  .top-back:hover {
+    background: rgba(0, 229, 204, 0.08);
+    border-color: var(--border-accent);
+    color: var(--accent-neon);
+    box-shadow: 0 0 10px var(--accent-neon-glow);
+  }
+
+  /* ── Backdrop ─────────────────────────────────────────────────────────────*/
+  .sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    z-index: calc(var(--z-navbar) + 1);
+    animation: backdropIn var(--transition-base) ease both;
+  }
+  @keyframes backdropIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ── Sidebar panel ────────────────────────────────────────────────────────*/
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    background: rgba(10, 10, 15, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid var(--border);
+    z-index: calc(var(--z-navbar) + 2);
+    transform: translateX(-100%);
+    transition: transform var(--transition-slow);
+    overflow: hidden;
+  }
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 6px 0 48px rgba(0, 0, 0, 0.75);
+  }
+  /* Trait dégradé néon sur le bord droit */
+  .sidebar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -1px;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      var(--accent-neon) 0%,
+      var(--accent-orange) 50%,
+      transparent 100%
+    );
+    opacity: 0.45;
+    pointer-events: none;
+  }
+
+  /* ── Dé 3D flottant (haut, juste à gauche du bouton Écouter) ────────────*/
+  .top-dice {
+    position: fixed;
+    top: 14px;
+    left: calc(65% - 48px);
+    z-index: calc(var(--z-navbar) + 2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(10, 10, 15, 0.92);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    padding: 0;
+    transition:
+      background var(--transition-fast),
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+  .top-dice:hover {
+    background: rgba(255, 107, 43, 0.12);
+    border-color: var(--accent-orange);
+    box-shadow: 0 0 12px var(--accent-orange-glow);
+  }
+
+  /* ── Bouton Écouter / ON AIR flottant (haut, à côté du burger) ───────────*/
+  .top-listen {
+    position: fixed;
+    top: 14px;
+    left: 65%;
+    z-index: calc(var(--z-navbar) + 2);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 40px;
+    padding: 0 var(--space-md);
+    background: var(--accent-neon);
+    color: var(--bg-primary);
+    font-family: var(--font-base);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      background var(--transition-fast),
+      box-shadow var(--transition-fast),
+      opacity var(--transition-fast);
+  }
+  .top-listen:hover:not(:disabled) {
+    background: var(--accent-orange);
+    box-shadow: 0 0 18px var(--accent-orange-glow);
+  }
+  .top-listen:disabled,
+  .top-listen.loading { opacity: 0.6; cursor: wait; }
+  .top-listen.on-air {
+    background: #ff3333;
+    box-shadow: 0 0 14px rgba(255, 51, 51, 0.5);
+    animation: onair-pulse 2s ease-in-out infinite;
+  }
+
+  /* ── En-tête ──────────────────────────────────────────────────────────────*/
+  .sidebar-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
-    gap: var(--space-xl);
+    height: 68px;
+    padding: 0 var(--space-md) 0 var(--space-xl);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
   }
 
-  /* ---- Logo ---- */
   .logo {
+    /* décalage pour éviter le chevauchement avec le bouton toggle */
+    padding-left: 44px;
     font-size: var(--text-lg);
     font-weight: 900;
     color: var(--text-primary);
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    flex-shrink: 0;
+    text-decoration: none;
   }
   .logo .neon { color: var(--accent-neon); }
 
-  /* ---- Nav links desktop ---- */
-  .nav-links {
+  /* Bouton replier (flèche ‹ dans le header) */
+  .sidebar-collapse {
     display: flex;
-    list-style: none;
-    gap: var(--space-xs);
     align-items: center;
-    flex: 1;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition:
+      background var(--transition-fast),
+      color var(--transition-fast),
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+  .sidebar-collapse:hover {
+    background: rgba(0, 229, 204, 0.08);
+    border-color: var(--border-accent);
+    color: var(--accent-neon);
+    box-shadow: 0 0 8px var(--accent-neon-glow);
   }
 
-  .nav-item { position: relative; }
+  /* ── Navigation verticale ─────────────────────────────────────────────────*/
+  .sidebar-nav {
+    list-style: none;
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-sm) 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
 
-  .nav-btn,
-  .nav-link {
+  .sidebar-item {
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-item:last-child { border-bottom: none; }
+
+  .sidebar-btn,
+  .sidebar-link {
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: var(--space-sm) var(--space-md);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    color: var(--text-secondary);
+    justify-content: space-between;
+    width: 100%;
+    padding: 14px var(--space-xl);
     background: none;
     border: none;
-    cursor: pointer;
-    transition: color var(--transition-fast), background var(--transition-fast);
-    border-radius: var(--radius-md);
-    text-transform: uppercase;
-    text-decoration: none;
+    color: var(--text-secondary);
     font-family: var(--font-base);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      color var(--transition-fast),
+      background var(--transition-fast);
   }
-
-  .nav-btn:hover, .nav-link:hover,
-  .nav-btn.active, .nav-link.active {
+  .sidebar-btn:hover,
+  .sidebar-link:hover {
     color: var(--text-primary);
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.04);
   }
-  .nav-btn.active, .nav-link.active { color: var(--accent-neon); }
+  .sidebar-btn.active,
+  .sidebar-link.active {
+    color: var(--accent-neon);
+    background: rgba(0, 229, 204, 0.05);
+  }
 
-  .chevron { transition: transform var(--transition-fast); opacity: 0.6; }
+  .chevron {
+    flex-shrink: 0;
+    transition: transform var(--transition-fast);
+    opacity: 0.5;
+  }
   .chevron.rotated { transform: rotate(180deg); opacity: 1; }
 
-  /* ---- Actions CTA (dé + Écouter) ---- */
-  .nav-actions {
+  /* ── Sous-menu accordéon ──────────────────────────────────────────────────*/
+  .sidebar-sub {
+    background: var(--bg-primary);
+    padding: var(--space-sm) var(--space-xl) var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    animation: subSlide var(--transition-base) ease both;
+  }
+  @keyframes subSlide {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .sub-title {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--accent-neon);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: var(--space-sm) 0 var(--space-xs);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: var(--space-xs);
+  }
+
+  .sub-link {
     display: flex;
     align-items: center;
+    gap: var(--space-sm);
+    padding: 6px var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition:
+      color var(--transition-fast),
+      background var(--transition-fast),
+      padding-left var(--transition-fast);
+  }
+  .sub-link:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+    padding-left: var(--space-md);
+  }
+  .link-arrow { color: var(--accent-neon); font-size: 1rem; line-height: 1; }
+
+  /* ── Actions CTA (bas de sidebar) ────────────────────────────────────────*/
+  .sidebar-actions {
+    padding: var(--space-lg) var(--space-xl);
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
     gap: var(--space-sm);
     flex-shrink: 0;
   }
 
-  /* ── Bouton dé navbar ─────────────────────────────────────────────────── */
-  .nav-dice {
+  /* Bouton Écouter / ON AIR */
+  .btn-listen {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-full);
+    gap: var(--space-xs);
+    width: 100%;
+    padding: 10px var(--space-lg);
+    background: var(--accent-neon);
+    color: var(--bg-primary);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius-md);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-family: var(--font-base);
     cursor: pointer;
-    transition: background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
-    padding: 0;
+    transition:
+      background var(--transition-fast),
+      box-shadow var(--transition-fast),
+      opacity var(--transition-fast);
   }
-  .nav-dice:hover {
-    background: rgba(255,107,43,0.12);
-    border-color: var(--accent-orange);
-    box-shadow: 0 0 12px var(--accent-orange-glow);
+  .btn-listen:hover:not(:disabled) {
+    background: var(--accent-orange);
+    box-shadow: 0 0 18px var(--accent-orange-glow);
+  }
+  .btn-listen:disabled,
+  .btn-listen.loading { opacity: 0.6; cursor: wait; }
+  .btn-listen.on-air {
+    background: #ff3333;
+    box-shadow: 0 0 14px rgba(255, 51, 51, 0.45);
+    animation: onair-pulse 2s ease-in-out infinite;
+  }
+  @keyframes onair-pulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(255, 51, 51, 0.45); }
+    50%       { box-shadow: 0 0 24px rgba(255, 51, 51, 0.7); }
   }
 
-  /* Dé 3D miniature (18px) pour la navbar */
+  .onair-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: #fff;
+    border-radius: 50%;
+    flex-shrink: 0;
+    animation: onair-blink 1s ease-in-out infinite;
+  }
+  @keyframes onair-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.15; }
+  }
+
+  /* ── Dé 3D miniature ─────────────────────────────────────────────────────*/
   .ndice-wrap {
     perspective: 44px;
     display: inline-block;
     width: 18px;
     height: 18px;
+    flex-shrink: 0;
   }
   .ndice-cube {
     display: inline-block;
@@ -416,12 +741,12 @@
     backface-visibility: visible;
     animation: ndice-color 3s ease-in-out infinite;
   }
-  .ndice-front  { transform: translateZ(9px); animation: none; filter: invert(1) drop-shadow(0 0 4px rgba(255,255,255,0.95)); }
-  .ndice-back   { transform: rotateY(180deg) translateZ(9px); }
-  .ndice-right  { transform: rotateY(90deg)  translateZ(9px); }
-  .ndice-left   { transform: rotateY(-90deg) translateZ(9px); }
-  .ndice-top    { transform: rotateX(90deg)  translateZ(9px); }
-  .ndice-bottom { transform: rotateX(-90deg) translateZ(9px); }
+  .ndice-front  { transform: translateZ(9px);           animation: none; filter: invert(1) drop-shadow(0 0 4px rgba(255,255,255,0.95)); }
+  .ndice-back   { transform: rotateY(180deg)  translateZ(9px); }
+  .ndice-right  { transform: rotateY(90deg)   translateZ(9px); }
+  .ndice-left   { transform: rotateY(-90deg)  translateZ(9px); }
+  .ndice-top    { transform: rotateX(90deg)   translateZ(9px); }
+  .ndice-bottom { transform: rotateX(-90deg)  translateZ(9px); }
 
   @keyframes ndice-spin {
     0%   { transform: rotateX(0deg)   rotateY(0deg); }
@@ -436,234 +761,57 @@
     100% { filter: invert(1) drop-shadow(0 0 4px rgba(124,58,237,1)); }
   }
 
-  /* ── Bouton Écouter ──────────────────────────────────────────────────── */
-  .nav-cta {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: var(--space-sm) var(--space-lg);
-    background: var(--accent-neon);
-    color: var(--bg-primary);
-    font-size: var(--text-sm);
-    font-weight: 700;
-    border: none;
-    border-radius: var(--radius-full);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    font-family: var(--font-base);
-    cursor: pointer;
-    transition: background var(--transition-fast), box-shadow var(--transition-fast), opacity var(--transition-fast);
-  }
-  .nav-cta:hover:not(:disabled) {
-    background: var(--accent-orange);
-    box-shadow: 0 0 18px var(--accent-orange-glow);
-  }
-  .nav-cta:disabled,
-  .nav-cta.loading { opacity: 0.6; cursor: wait; }
-
-  /* ---- Mega-menu dropdown ---- */
-  .mega-menu {
-    position: absolute;
-    top: calc(100% + 8px);
+  /* ── Logo FLUXUP fixe centré ─────────────────────────────────────────────*/
+  .top-logo {
+    position: fixed;
+    top: 10px;
     left: 50%;
-    transform: translateX(-50%) translateY(-8px);
-    min-width: 220px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-accent);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 0 1px var(--border);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--transition-base), transform var(--transition-base);
-    z-index: var(--z-navbar);
-  }
-  .mega-menu.open {
-    opacity: 1;
-    pointer-events: all;
-    transform: translateX(-50%) translateY(0);
-  }
-  .mega-menu::before {
-    content: '';
-    position: absolute;
-    top: -1px; left: 20px; right: 20px;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent-neon), var(--accent-orange));
-    border-radius: var(--radius-full);
-  }
-
-  .mega-inner {
-    display: flex;
-    gap: var(--space-xl);
-    padding: var(--space-xl);
-  }
-  .mega-section { flex: 1; }
-  .mega-section-title {
-    font-size: var(--text-xs);
-    font-weight: 700;
-    color: var(--accent-neon);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: var(--space-md);
-    padding-bottom: var(--space-sm);
-    border-bottom: 1px solid var(--border);
-  }
-  .mega-section ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
-  .mega-section a {
+    transform: translateX(-50%);
+    z-index: calc(var(--z-navbar) + 2);
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    padding: 6px var(--space-sm);
-    font-size: var(--text-sm);
-    color: var(--text-secondary);
-    border-radius: var(--radius-sm);
-    transition: color var(--transition-fast), background var(--transition-fast), padding-left var(--transition-fast);
+    font-size: var(--text-2xl);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     text-decoration: none;
-  }
-  .mega-section a:hover {
     color: var(--text-primary);
-    background: rgba(255,255,255,0.05);
-    padding-left: var(--space-md);
+    white-space: nowrap;
+    pointer-events: auto;
+    transition: opacity var(--transition-fast);
+    animation: glitch 6s ease-in-out infinite;
   }
-  .link-arrow { color: var(--accent-neon); font-size: 1rem; line-height: 1; }
+  .top-logo:hover { opacity: 0.75; }
+  .top-logo .neon { color: var(--accent-neon); }
 
-  /* ---- Burger ---- */
-  .burger {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: var(--space-sm);
-    width: 36px; height: 36px;
-  }
-  .burger span {
-    display: block;
-    width: 100%; height: 2px;
-    background: var(--text-primary);
-    border-radius: var(--radius-full);
-    transition: all var(--transition-base);
-    transform-origin: center;
-  }
-  .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-  /* ---- Menu mobile ---- */
-  .mobile-menu {
-    display: none;
-    overflow: hidden;
-    max-height: 0;
-    background: var(--bg-secondary);
-    border-top: 1px solid var(--border);
-    transition: max-height var(--transition-slow);
-  }
-  .mobile-menu.open { max-height: 100vh; }
-  .mobile-menu ul { list-style: none; padding: var(--space-md) 0; }
-  .mobile-item { border-bottom: 1px solid var(--border); }
-  .mobile-item:last-child { border-bottom: none; }
-
-  .mobile-btn,
-  .mobile-link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: var(--space-md) var(--space-xl);
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    font-size: var(--text-sm);
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    cursor: pointer;
-    text-decoration: none;
-    transition: color var(--transition-fast);
-    font-family: var(--font-base);
-  }
-  .mobile-btn:hover, .mobile-link:hover,
-  .mobile-btn.active, .mobile-link.active { color: var(--accent-neon); }
-
-  .mobile-sub {
-    background: var(--bg-primary);
-    padding: var(--space-md) var(--space-xl);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-  }
-  .mobile-section-title {
-    font-size: var(--text-xs);
-    font-weight: 700;
-    color: var(--accent-neon);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-top: var(--space-md);
-    margin-bottom: var(--space-xs);
-  }
-  .mobile-section-title:first-child { margin-top: 0; }
-  .mobile-sub a {
-    color: var(--text-secondary);
-    font-size: var(--text-sm);
-    padding: 5px var(--space-sm);
-    border-radius: var(--radius-sm);
-    transition: color var(--transition-fast);
-    text-decoration: none;
-  }
-  .mobile-sub a:hover { color: var(--text-primary); }
-
-  /* CTA zone mobile */
-  .mobile-ctas {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-    margin: var(--space-lg) var(--space-xl);
-  }
-  .mobile-cta {
-    display: block;
-    padding: var(--space-md);
-    text-align: center;
-    background: var(--accent-neon);
-    color: var(--bg-primary);
-    font-weight: 700;
-    font-size: var(--text-sm);
-    border: none;
-    border-radius: var(--radius-lg);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-family: var(--font-base);
-    transition: background var(--transition-fast);
-  }
-  .mobile-cta:hover:not(:disabled) { background: var(--accent-orange); }
-  .mobile-cta:disabled { opacity: 0.6; cursor: wait; }
-
-  .mobile-dice-cta {
-    display: block;
-    padding: var(--space-md);
-    text-align: center;
-    background: transparent;
-    color: var(--accent-orange);
-    font-weight: 600;
-    font-size: var(--text-sm);
-    border: 1px solid var(--accent-orange);
-    border-radius: var(--radius-lg);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-family: var(--font-base);
-    transition: background var(--transition-fast), box-shadow var(--transition-fast);
-  }
-  .mobile-dice-cta:hover {
-    background: rgba(255,107,43,0.1);
-    box-shadow: 0 0 12px var(--accent-orange-glow);
-  }
-
-  /* ---- Responsive ---- */
-  @media (max-width: 900px) {
-    .nav-links, .nav-actions { display: none; }
-    .burger { display: flex; }
-    .mobile-menu { display: block; }
+  @keyframes glitch {
+    0%, 85%, 100% {
+      text-shadow: none;
+      transform: translateX(-50%) skewX(0deg);
+    }
+    86% {
+      text-shadow: -2px 0 var(--accent-orange), 2px 0 var(--accent-neon);
+      transform: translateX(calc(-50% + 2px)) skewX(-1deg);
+    }
+    87% {
+      text-shadow: 2px 0 var(--accent-orange), -2px 0 var(--accent-neon);
+      transform: translateX(calc(-50% - 2px)) skewX(1deg);
+    }
+    88% {
+      text-shadow: -1px 0 var(--accent-neon), 1px 0 var(--accent-orange);
+      transform: translateX(-50%) skewX(0deg);
+    }
+    89% {
+      text-shadow: none;
+      transform: translateX(-50%);
+    }
+    92% {
+      text-shadow: 3px 0 var(--accent-orange), -3px 0 var(--accent-neon);
+      transform: translateX(calc(-50% + 1px)) skewX(-0.5deg);
+    }
+    93% {
+      text-shadow: none;
+      transform: translateX(-50%);
+    }
   }
 </style>

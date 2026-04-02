@@ -3,34 +3,54 @@
   import Button from '../components/Button.svelte';
   import { getFeaturedClips, getRecentClips } from '../services/localClips.js';
   import { surpriseStore } from '../core/surpriseStore.svelte.js';
+  import { getFeaturedRadios } from '../services/radioAPI.js';
+  import { player } from '../core/player.svelte.js';
 
-  const featured = getFeaturedClips(6);
+  const featured = getFeaturedClips(12);
   const recentClips = getRecentClips(12);
 
-  /** @type {HTMLElement | null} */
-  let sliderEl = $state(null);
-  let isPaused = $state(false);
+  /* ── Radios vedette (bloc home) ─────────────────────────────────────── */
+  /** @type {import('../services/radioAPI.js').Station[]} */
+  let homeRadios = $state([]);
+
+  $effect(() => {
+    getFeaturedRadios(9).then(r => (homeRadios = r));
+  });
+
+  /** Joue une station dans le player global */
+  function playStation(/** @type {import('../services/radioAPI.js').Station} */ station) {
+    player.play({
+      id:        station.stationuuid,
+      title:     station.name,
+      artist:    [station.country, station.tags].filter(Boolean).join(' · '),
+      src:       station.url_resolved,
+      thumbnail: station.favicon || null,
+      isRadio:   true,
+      meta:      station,
+    });
+  }
+
+  let activeStationId = $derived(player.isRadio ? player.currentTrack?.id : null);
 
   const CARD_STEP = 296;   // 280px card + ~16px gap
   const SPEED    = 0.6;    // px/frame → ~36px/s à 60fps
 
+  /* ── Slider "Radar des Sorties" ─────────────────────────────────────── */
+  /** @type {HTMLElement | null} */
+  let sliderEl = $state(null);
+  let isPaused = $state(false);
   let rafId = 0;
   let manualScrolling = false;
 
-  /** Boucle RAF : scroll linéaire continu, reset instantané en bout de liste */
   function tick() {
     if (sliderEl && !isPaused && !manualScrolling) {
       const max = sliderEl.scrollWidth - sliderEl.clientWidth;
-      if (sliderEl.scrollLeft >= max - 1) {
-        sliderEl.scrollLeft = 0;
-      } else {
-        sliderEl.scrollLeft += SPEED;
-      }
+      if (sliderEl.scrollLeft >= max - 1) sliderEl.scrollLeft = 0;
+      else sliderEl.scrollLeft += SPEED;
     }
     rafId = requestAnimationFrame(tick);
   }
 
-  /** Défile manuellement de ±3 cards (smooth), suspend l'auto pendant l'animation */
   function slideBy(/** @type {number} */ direction) {
     if (!sliderEl) return;
     manualScrolling = true;
@@ -44,6 +64,37 @@
     if (!sliderEl) return;
     rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
+  });
+
+  /* ── Slider "En Vedette" ─────────────────────────────────────────────── */
+  /** @type {HTMLElement | null} */
+  let featuredSliderEl = $state(null);
+  let isPausedFeatured = $state(false);
+  let rafIdFeatured = 0;
+  let manualScrollingFeatured = false;
+
+  function tickFeatured() {
+    if (featuredSliderEl && !isPausedFeatured && !manualScrollingFeatured) {
+      const max = featuredSliderEl.scrollWidth - featuredSliderEl.clientWidth;
+      if (featuredSliderEl.scrollLeft >= max - 1) featuredSliderEl.scrollLeft = 0;
+      else featuredSliderEl.scrollLeft += SPEED;
+    }
+    rafIdFeatured = requestAnimationFrame(tickFeatured);
+  }
+
+  function slideByFeatured(/** @type {number} */ direction) {
+    if (!featuredSliderEl) return;
+    manualScrollingFeatured = true;
+    const max    = featuredSliderEl.scrollWidth - featuredSliderEl.clientWidth;
+    const target = Math.max(0, Math.min(featuredSliderEl.scrollLeft + direction * CARD_STEP * 3, max));
+    featuredSliderEl.scrollTo({ left: target, behavior: 'smooth' });
+    setTimeout(() => { manualScrollingFeatured = false; }, 650);
+  }
+
+  $effect(() => {
+    if (!featuredSliderEl) return;
+    rafIdFeatured = requestAnimationFrame(tickFeatured);
+    return () => cancelAnimationFrame(rafIdFeatured);
   });
 </script>
 
@@ -116,12 +167,27 @@
   <!-- ======= CLIPS EN VEDETTE ======= -->
   <section class="container section-clips">
     <div class="section-header">
-      <h2 class="section-title">En <span>vedette</span></h2>
-      <Button variant="ghost" size="sm" href="#/clips">Voir tout →</Button>
+      <div>
+        <h2 class="section-title">En <span class="neon">Vedette</span></h2>
+        <p class="section-sub">Les clips incontournables du moment</p>
+      </div>
+      <div class="slider-nav">
+        <button class="slider-btn" onclick={() => slideByFeatured(-1)} aria-label="Précédent">‹</button>
+        <button class="slider-btn" onclick={() => slideByFeatured(1)}  aria-label="Suivant">›</button>
+        <Button variant="ghost" size="sm" href="#/clips">Voir tout →</Button>
+      </div>
     </div>
-    <div class="grid-clips">
+
+    <div class="slider" bind:this={featuredSliderEl} role="region" aria-label="Slider clips en vedette"
+      onmouseenter={() => isPausedFeatured = true}
+      onmouseleave={() => isPausedFeatured = false}
+      ontouchstart={() => isPausedFeatured = true}
+      ontouchend={() => { isPausedFeatured = false; }}
+    >
       {#each featured as clip}
-        <CardClip {clip} />
+        <div class="slider-item">
+          <CardClip {clip} />
+        </div>
       {/each}
     </div>
   </section>
@@ -129,12 +195,44 @@
   <!-- ======= BLOC RADIO ======= -->
   <section class="container section-radio">
     <div class="radio-card">
+
       <div class="radio-info">
         <span class="badge">Live</span>
         <h2>Radio Flux</h2>
         <p>Écoutez des webradios soigneusement sélectionnées ou explorez notre catalogue complet.</p>
         <Button variant="primary" href="#/radio">Ouvrir Radio Flux</Button>
       </div>
+
+      <!-- Grille 3×3 vignettes rondes -->
+      <div class="radio-thumbs" aria-label="Radios en vedette">
+        {#each homeRadios.slice(0, 9) as station}
+          <button
+            class="radio-thumb"
+            class:playing={activeStationId === station.stationuuid}
+            title={station.name}
+            aria-label={`Écouter ${station.name}`}
+            onclick={() => playStation(station)}
+          >
+            {#if station.favicon}
+              <img src={station.favicon} alt={station.name} loading="lazy"
+                onerror={(e) => { const img = /** @type {HTMLImageElement} */ (e.target); img.style.display='none'; const fb = img.parentElement?.querySelector('.thumb-fallback'); if (fb) /** @type {HTMLElement} */ (fb).style.display='flex'; }} />
+              <span class="thumb-fallback" aria-hidden="true" style="display:none">📻</span>
+            {:else}
+              <span class="thumb-fallback" aria-hidden="true">📻</span>
+            {/if}
+            {#if activeStationId === station.stationuuid}
+              <span class="thumb-playing-dot" aria-hidden="true"></span>
+            {/if}
+          </button>
+        {/each}
+        <!-- Squelettes pendant le chargement -->
+        {#if homeRadios.length === 0}
+          {#each Array(9) as _}
+            <div class="radio-thumb thumb-skeleton"></div>
+          {/each}
+        {/if}
+      </div>
+
       <div class="radio-visual" aria-hidden="true">
         <div class="wave-bar"></div>
         <div class="wave-bar"></div>
@@ -360,6 +458,13 @@
   /* ---- Bloc radio ---- */
   .section-radio { margin-bottom: var(--space-2xl); }
 
+  /* Badge "Live" en rouge dans la radio-card */
+  .radio-info :global(.badge) {
+    background: rgba(255, 40, 40, 0.18);
+    color: #ff4444;
+    border: 1px solid rgba(255, 40, 40, 0.35);
+  }
+
   .radio-card {
     display: flex;
     align-items: center;
@@ -407,11 +512,84 @@
     50%       { transform: scaleY(0.3); }
   }
 
+  /* ---- Vignettes radios 3×3 ---- */
+  .radio-thumbs {
+    display: grid;
+    grid-template-columns: repeat(3, 38px);
+    grid-template-rows: repeat(3, 38px);
+    gap: 20px;
+    flex-shrink: 0;
+  }
+
+  .radio-thumb {
+    width: 38px; height: 38px;
+    border-radius: var(--radius-full);
+    border: 2px solid var(--border);
+    background: var(--bg-card);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  }
+  .radio-thumb:hover {
+    border-color: var(--accent-neon);
+    box-shadow: 0 0 10px var(--accent-neon-glow);
+    transform: scale(1.08);
+  }
+  .radio-thumb.playing {
+    border-color: var(--accent-orange);
+    box-shadow: 0 0 12px var(--accent-orange-glow);
+  }
+  .radio-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-full);
+  }
+  .thumb-fallback {
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; height: 100%;
+  }
+  /* Point animé "en lecture" */
+  .thumb-playing-dot {
+    position: absolute;
+    bottom: 2px; right: 2px;
+    width: 10px; height: 10px;
+    border-radius: var(--radius-full);
+    background: var(--accent-orange);
+    box-shadow: 0 0 6px var(--accent-orange-glow);
+    animation: pulse-dot 1.2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  /* Squelette pendant le chargement */
+  .thumb-skeleton {
+    background: linear-gradient(90deg, var(--bg-card) 25%, rgba(255,255,255,0.04) 50%, var(--bg-card) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+    cursor: default;
+  }
+  @keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
   @media (max-width: 768px) {
-    .radio-visual { display: none; }
-    .radio-card   { flex-direction: column; padding: var(--space-xl); }
-    .hero-actions { flex-wrap: wrap; }
+    .radio-visual  { display: none; }
+    .radio-thumbs  { grid-template-columns: repeat(3, 34px); grid-template-rows: repeat(3, 34px); }
+    .radio-thumb   { width: 34px; height: 34px; }
+    .radio-card    { flex-direction: column; padding: var(--space-xl); }
+    .hero-actions  { flex-wrap: wrap; }
     /* Cards plus étroites sur mobile pour voir le suivant */
-    .slider-item  { flex: 0 0 240px; }
+    .slider-item   { flex: 0 0 240px; }
   }
 </style>

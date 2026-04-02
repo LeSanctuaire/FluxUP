@@ -1,15 +1,23 @@
 <script>
   import { debounce } from '../core/utils.js';
-  import { searchRadios, getFeaturedRadios } from '../services/radioAPI.js';
+  import { searchRadios, getFeaturedRadios, getFrenchIndieRadios, PAGE_SIZE } from '../services/radioAPI.js';
   import { player } from '../core/player.svelte.js';
 
-  // Radios en vedette — chargées au démarrage
+  // Mode : 'fr' = radios françaises indépendantes, 'world' = top mondial
+  let mode = $state('fr');
+
+  // État pagination
+  let currentPage = $state(1);
+  let hasMore     = $state(true);
+
+  // Données
   let featured      = $state([]);
   let searchResults = $state([]);
   let query         = $state('');
   let loading       = $state(false);
+  let prevQuery     = '';
 
-  // Station active dérivée du player global — persiste même si l'utilisateur change de page
+  // Station active dérivée du player global
   let activeStation = $derived(
     player.isRadio && player.currentTrack?.meta ? player.currentTrack.meta : null
   );
@@ -17,22 +25,75 @@
   // Erreur flux dérivée du player
   let streamError = $derived(player.isRadio && player.hasError);
 
-  // Chargement initial
+  // Chargement initial + rechargement au changement de mode
   $effect(() => {
-    getFeaturedRadios().then(r => (featured = r));
+    const m = mode; // track la dépendance réactive
+    loadDefault(1, m);
   });
 
-  // Recherche avec debounce
-  const doSearch = debounce(async (q) => {
-    if (!q.trim()) { searchResults = []; return; }
+  /** @param {number} page @param {string} m */
+  async function loadDefault(page, m) {
     loading = true;
-    searchResults = await searchRadios(q);
-    loading = false;
+    const offset = (page - 1) * PAGE_SIZE;
+    const results = m === 'fr'
+      ? await getFrenchIndieRadios(PAGE_SIZE, offset)
+      : await getFeaturedRadios(PAGE_SIZE, offset);
+    featured    = results;
+    hasMore     = results.length === PAGE_SIZE;
+    currentPage = page;
+    loading     = false;
+    scrollToTop();
+  }
+
+  /** Bascule entre les modes France / Monde. @param {string} m */
+  function switchMode(m) {
+    if (m === mode) return;
+    query         = '';
+    searchResults = [];
+    prevQuery     = '';
+    mode          = m; // déclenche le $effect ci-dessus
+  }
+
+  // Recherche avec debounce — réinitialise la page à 1 si la query change
+  const doSearch = debounce(async (q) => {
+    if (!q.trim()) { searchResults = []; hasMore = true; return; }
+    loading = true;
+    if (q !== prevQuery) {
+      currentPage = 1;
+      prevQuery   = q;
+    }
+    const offset  = (currentPage - 1) * PAGE_SIZE;
+    const results = await searchRadios(q, PAGE_SIZE, offset);
+    searchResults = results;
+    hasMore       = results.length === PAGE_SIZE;
+    loading       = false;
+    scrollToTop();
   }, 400);
 
   $effect(() => { doSearch(query); });
 
-  /** Charge et joue une station dans le player global. */
+  /** @param {number} page */
+  async function goToPage(page) {
+    if (page < 1) return;
+    currentPage = page;
+    if (query.trim()) {
+      loading = true;
+      const offset  = (page - 1) * PAGE_SIZE;
+      const results = await searchRadios(query, PAGE_SIZE, offset);
+      searchResults = results;
+      hasMore       = results.length === PAGE_SIZE;
+      loading       = false;
+      scrollToTop();
+    } else {
+      await loadDefault(page, mode);
+    }
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /** Charge et joue une station dans le player global. @param {import('../services/radioAPI.js').Station} station */
   function playStation(station) {
     player.play({
       id:        station.stationuuid,
@@ -41,7 +102,7 @@
       src:       station.url_resolved,
       thumbnail: station.favicon || null,
       isRadio:   true,
-      meta:      station, // conservé pour restaurer activeStation après navigation
+      meta:      station,
     });
   }
 
@@ -51,6 +112,26 @@
   }
 
   let displayList = $derived(query.trim() ? searchResults : featured);
+
+  // Fenêtre glissante de numéros de page (±2 autour de la courante)
+  let pageNumbers = $derived(() => {
+    const pages = [];
+    const range = 2;
+    for (let i = Math.max(1, currentPage - range); i <= currentPage + range; i++) {
+      pages.push(i);
+      if (!hasMore && i >= currentPage) break;
+    }
+    return pages;
+  });
+
+  // Label du sous-titre selon le contexte
+  let subtitle = $derived(
+    query.trim()
+      ? 'résultats de recherche'
+      : mode === 'fr'
+        ? 'radios françaises indépendantes'
+        : 'top votes mondial'
+  );
 </script>
 
 <div class="page fade-in">
@@ -58,7 +139,7 @@
     <!-- En-tête -->
     <div class="page-header">
       <h1 class="section-title">Radio <span>Flux</span></h1>
-      <p class="page-sub">Webradios en direct — sélectionnées et via Browser Radio API</p>
+      <p class="page-sub">Webradios en direct — {subtitle}</p>
     </div>
 
     <!-- Station active -->
@@ -80,7 +161,21 @@
       </div>
     {/if}
 
-    <!-- Recherche -->
+    <!-- Toggle France / Monde -->
+    <div class="mode-toggle" role="group" aria-label="Sélection du mode">
+      <button
+        class="mode-btn"
+        class:active={mode === 'fr'}
+        onclick={() => switchMode('fr')}
+      >🇫🇷 France</button>
+      <button
+        class="mode-btn"
+        class:active={mode === 'world'}
+        onclick={() => switchMode('world')}
+      >🌍 Top mondial</button>
+    </div>
+
+    <!-- Recherche + infos page -->
     <div class="search-row">
       <input
         class="search-input"
@@ -91,6 +186,8 @@
       />
       {#if loading}
         <span class="loading-dot" aria-live="polite">Recherche…</span>
+      {:else if displayList.length}
+        <span class="page-info">Page {currentPage} · {displayList.length} radios</span>
       {/if}
     </div>
 
@@ -131,16 +228,47 @@
           </div>
         {/each}
       </div>
+
+      <!-- Pagination -->
+      <nav class="pagination" aria-label="Navigation des pages">
+        <button
+          class="page-btn"
+          onclick={() => goToPage(currentPage - 1)}
+          disabled={currentPage === 1 || loading}
+          aria-label="Page précédente"
+        >‹ Préc.</button>
+
+        {#each pageNumbers() as p}
+          <button
+            class="page-btn"
+            class:current={p === currentPage}
+            onclick={() => goToPage(p)}
+            disabled={loading}
+            aria-label={`Page ${p}`}
+            aria-current={p === currentPage ? 'page' : undefined}
+          >{p}</button>
+        {/each}
+
+        <button
+          class="page-btn"
+          onclick={() => goToPage(currentPage + 1)}
+          disabled={!hasMore || loading}
+          aria-label="Page suivante"
+        >Suiv. ›</button>
+      </nav>
+
     {:else if !loading}
       <p class="empty-state">
         {query ? `Aucune radio trouvée pour « ${query} »` : 'Chargement des radios…'}
       </p>
+    {:else}
+      <p class="empty-state loading-dot">Chargement…</p>
     {/if}
   </div>
 </div>
 
 <style>
-  .page-header { margin-bottom: var(--space-xl); }
+  .page-header { margin-bottom: var(--space-lg); }
   .page-sub { color: var(--text-secondary); font-size: var(--text-sm); margin-top: var(--space-xs); }
 
   /* Now playing */
@@ -184,7 +312,6 @@
   .np-name  { font-size: var(--text-md); font-weight: 700; color: var(--text-primary); }
   .np-tags  { font-size: var(--text-xs); color: var(--text-secondary); }
 
-  /* État d'erreur flux */
   .now-playing.error {
     border-color: #ff4d4d;
     box-shadow: 0 0 20px rgba(255, 77, 77, 0.2);
@@ -210,6 +337,32 @@
     transition: all var(--transition-fast);
   }
   .np-stop:hover { border-color: #ff4d4d; color: #ff4d4d; }
+
+  /* Toggle France / Monde */
+  .mode-toggle {
+    display: flex;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+  }
+
+  .mode-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    font-family: var(--font-base);
+    transition: all var(--transition-fast);
+  }
+  .mode-btn:hover { border-color: var(--accent-orange); color: var(--accent-orange); }
+  .mode-btn.active {
+    background: var(--accent-orange);
+    border-color: var(--accent-orange);
+    color: #000;
+    font-weight: 700;
+  }
 
   /* Recherche */
   .search-row {
@@ -239,6 +392,11 @@
     font-size: var(--text-xs);
     color: var(--text-muted);
     animation: pulse 1.2s ease-in-out infinite;
+  }
+
+  .page-info {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
   }
 
   /* Grid radios */
@@ -308,6 +466,44 @@
     border-color: var(--accent-neon);
     color: var(--accent-neon);
     box-shadow: 0 0 8px var(--accent-neon-glow);
+  }
+
+  /* Pagination */
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    flex-wrap: wrap;
+  }
+
+  .page-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: var(--text-sm);
+    font-family: var(--font-base);
+    min-width: 40px;
+    transition: all var(--transition-fast);
+  }
+  .page-btn:hover:not(:disabled) {
+    border-color: var(--accent-neon);
+    color: var(--accent-neon);
+  }
+  .page-btn.current {
+    background: var(--accent-neon);
+    border-color: var(--accent-neon);
+    color: #000;
+    font-weight: 700;
+  }
+  .page-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
   }
 
   .empty-state {

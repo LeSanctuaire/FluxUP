@@ -14,6 +14,17 @@
   let currentRoute = $state(window.location.hash || '#/');
   let clipId = $state(null);
 
+  // ----- Bouton scroll-to-top -----
+  let showScrollTop = $state(false);
+
+  function onScroll() {
+    showScrollTop = window.scrollY > 300;
+  }
+
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   function parseHash(hash) {
     const match = hash.match(/^#\/clip\/(.+)$/);
     if (match) {
@@ -27,6 +38,7 @@
   onMount(() => {
     const onHashChange = () => {
       currentRoute = parseHash(window.location.hash);
+      window.scrollTo({ top: 0, behavior: 'instant' });
     };
     window.addEventListener('hashchange', onHashChange);
     currentRoute = parseHash(window.location.hash);
@@ -44,7 +56,7 @@
   }
 </script>
 
-<svelte:window onkeydown={onKeydown} />
+<svelte:window onkeydown={onKeydown} onscroll={onScroll} />
 
 <Navbar {currentRoute} />
 
@@ -70,6 +82,16 @@
 
 <PlayerAudio />
 <Footer />
+
+<!-- ── Bouton scroll-to-top ──────────────────────────────────────────────── -->
+{#if showScrollTop}
+  <button class="scroll-top" onclick={scrollToTop} aria-label="Remonter en haut">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M8 12V4M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.8"
+        stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+{/if}
 
 <!-- ======= MODAL GLOBALE "ME SURPRENDRE" ======= -->
 <!-- Accessible depuis n'importe quelle page via surpriseStore -->
@@ -283,5 +305,39 @@
   @media (max-width: 600px) {
     .surprise-actions { flex-direction: column; align-items: stretch; }
     .surprise-actions .sbtn { text-align: center; }
+  }
+
+  /* ── Bouton scroll-to-top ─────────────────────────────────────────────────*/
+  .scroll-top {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 500;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 10, 15, 0.92);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0;
+    animation: fadeInUp 0.2s ease both;
+    transition:
+      border-color var(--transition-fast),
+      color var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+  .scroll-top:hover {
+    border-color: var(--accent-neon);
+    color: var(--accent-neon);
+    box-shadow: 0 0 12px var(--accent-neon-glow);
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 </style>

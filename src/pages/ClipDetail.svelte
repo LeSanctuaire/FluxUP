@@ -5,7 +5,7 @@
   let { id } = $props();
 
   let meta = $derived(id ? (findClip(id) ?? null) : null);
-  let embedUrl = $derived(id ? `https://www.youtube.com/embed/${id}?autoplay=0&rel=0` : null);
+  let embedUrl = $derived(id ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0` : null);
 </script>
 
 <div class="page fade-in">
