@@ -1,13 +1,21 @@
 <script>
   import { debounce } from '../core/utils.js';
   import { searchRadios, getFeaturedRadios } from '../services/radioAPI.js';
+  import { player } from '../core/player.svelte.js';
 
   // Radios en vedette — chargées au démarrage
-  let featured = $state([]);
+  let featured      = $state([]);
   let searchResults = $state([]);
-  let query = $state('');
-  let loading = $state(false);
-  let activeStation = $state(null);
+  let query         = $state('');
+  let loading       = $state(false);
+
+  // Station active dérivée du player global — persiste même si l'utilisateur change de page
+  let activeStation = $derived(
+    player.isRadio && player.currentTrack?.meta ? player.currentTrack.meta : null
+  );
+
+  // Erreur flux dérivée du player
+  let streamError = $derived(player.isRadio && player.hasError);
 
   // Chargement initial
   $effect(() => {
@@ -24,9 +32,22 @@
 
   $effect(() => { doSearch(query); });
 
+  /** Charge et joue une station dans le player global. */
   function playStation(station) {
-    activeStation = station;
-    // TODO: connecter au player global via player.play({ src: station.url_resolved, ... })
+    player.play({
+      id:        station.stationuuid,
+      title:     station.name,
+      artist:    [station.country, station.tags].filter(Boolean).join(' · '),
+      src:       station.url_resolved,
+      thumbnail: station.favicon || null,
+      isRadio:   true,
+      meta:      station, // conservé pour restaurer activeStation après navigation
+    });
+  }
+
+  /** Arrête la radio et libère le player. */
+  function stopStation() {
+    player.stop();
   }
 
   let displayList = $derived(query.trim() ? searchResults : featured);
@@ -42,16 +63,20 @@
 
     <!-- Station active -->
     {#if activeStation}
-      <div class="now-playing">
+      <div class="now-playing" class:error={streamError}>
         <div class="np-waves" aria-hidden="true">
           <span></span><span></span><span></span><span></span><span></span>
         </div>
         <div class="np-info">
-          <span class="badge">En cours</span>
+          {#if streamError}
+            <span class="badge badge-error">Flux indisponible</span>
+          {:else}
+            <span class="badge">En cours</span>
+          {/if}
           <p class="np-name">{activeStation.name}</p>
           <p class="np-tags">{activeStation.tags ?? ''}</p>
         </div>
-        <button class="np-stop" onclick={() => (activeStation = null)} aria-label="Arrêter">⏹ Stop</button>
+        <button class="np-stop" onclick={stopStation} aria-label="Arrêter">⏹ Stop</button>
       </div>
     {/if}
 
@@ -85,7 +110,7 @@
             <div class="radio-favicon">
               {#if station.favicon}
                 <img src={station.favicon} alt="" width="40" height="40" loading="lazy"
-                  onerror={(e) => { e.target.style.display='none'; }} />
+                  onerror={(e) => { /** @type {HTMLImageElement} */ (e.target).style.display='none'; }} />
               {:else}
                 <span aria-hidden="true">📻</span>
               {/if}
@@ -158,6 +183,21 @@
   .np-info { flex: 1; display: flex; flex-direction: column; gap: 3px; }
   .np-name  { font-size: var(--text-md); font-weight: 700; color: var(--text-primary); }
   .np-tags  { font-size: var(--text-xs); color: var(--text-secondary); }
+
+  /* État d'erreur flux */
+  .now-playing.error {
+    border-color: #ff4d4d;
+    box-shadow: 0 0 20px rgba(255, 77, 77, 0.2);
+  }
+  .now-playing.error .np-waves span {
+    background: #ff4d4d;
+    animation-play-state: paused;
+  }
+  .badge-error {
+    background: rgba(255, 77, 77, 0.15);
+    color: #ff4d4d;
+    border: 1px solid rgba(255, 77, 77, 0.3);
+  }
 
   .np-stop {
     background: none;

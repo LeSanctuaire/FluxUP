@@ -2,12 +2,14 @@
   import { player } from '../core/player.svelte.js';
 
   // État réactif depuis le store player
-  let track     = $derived(player.currentTrack);
-  let playing   = $derived(player.playing);
-  let volume    = $derived(player.volume);
-  let progress  = $derived(player.progress);   // 0–100
-  let duration  = $derived(player.duration);
+  let track       = $derived(player.currentTrack);
+  let playing     = $derived(player.playing);
+  let volume      = $derived(player.volume);
+  let progress    = $derived(player.progress);   // 0–100
+  let duration    = $derived(player.duration);
   let currentTime = $derived(player.currentTime);
+  let isRadio     = $derived(player.isRadio);
+  let hasError    = $derived(player.hasError);
 
   function formatTime(sec) {
     if (!sec || isNaN(sec)) return '0:00';
@@ -32,41 +34,53 @@
     {#if track?.thumbnail}
       <img src={track.thumbnail} alt={track.title} class="track-thumb" width="48" height="48" />
     {:else}
-      <div class="track-thumb-placeholder" aria-hidden="true">♪</div>
+      <div class="track-thumb-placeholder" aria-hidden="true">{isRadio ? '📻' : '♪'}</div>
     {/if}
     <div class="track-meta">
       <span class="track-title">{track?.title ?? 'Aucune piste'}</span>
-      <span class="track-artist">{track?.artist ?? '—'}</span>
+      {#if hasError}
+        <span class="track-error">Flux indisponible</span>
+      {:else}
+        <span class="track-artist">{track?.artist ?? '—'}</span>
+      {/if}
     </div>
   </div>
 
   <!-- Contrôles centraux -->
   <div class="player-center">
     <div class="controls">
-      <button class="ctrl-btn" aria-label="Précédent" onclick={() => player.prev()}>
-        ⏮
-      </button>
+      {#if !isRadio}
+        <button class="ctrl-btn" aria-label="Précédent" onclick={() => player.prev()}>⏮</button>
+      {/if}
       <button class="ctrl-btn play-btn" aria-label={playing ? 'Pause' : 'Play'}
         onclick={() => player.toggle()}>
         {playing ? '⏸' : '▶'}
       </button>
-      <button class="ctrl-btn" aria-label="Suivant" onclick={() => player.next()}>
-        ⏭
-      </button>
+      {#if !isRadio}
+        <button class="ctrl-btn" aria-label="Suivant" onclick={() => player.next()}>⏭</button>
+      {/if}
     </div>
 
-    <!-- Barre de progression -->
-    <div class="progress-bar">
-      <span class="time">{formatTime(currentTime)}</span>
-      <input
-        type="range" min="0" max="100"
-        value={progress}
-        oninput={handleSeek}
-        aria-label="Progression"
-        class="slider progress-slider"
-      />
-      <span class="time">{formatTime(duration)}</span>
-    </div>
+    {#if isRadio}
+      <!-- Badge LIVE pour les flux radio -->
+      <div class="live-badge" aria-label="Lecture en direct">
+        <span class="live-dot" aria-hidden="true"></span>
+        EN DIRECT
+      </div>
+    {:else}
+      <!-- Barre de progression (clips uniquement) -->
+      <div class="progress-bar">
+        <span class="time">{formatTime(currentTime)}</span>
+        <input
+          type="range" min="0" max="100"
+          value={progress}
+          oninput={handleSeek}
+          aria-label="Progression"
+          class="slider progress-slider"
+        />
+        <span class="time">{formatTime(duration)}</span>
+      </div>
+    {/if}
   </div>
 
   <!-- Volume -->
@@ -269,6 +283,41 @@
       var(--border) calc(var(--vol, 70) * 1%),
       var(--border) 100%
     );
+  }
+
+  /* Badge EN DIRECT */
+  .live-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--accent-neon);
+    padding: 2px 0;
+  }
+
+  .live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-neon);
+    box-shadow: 0 0 6px var(--accent-neon-glow);
+    animation: pulse-dot 1.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.75); }
+  }
+
+  /* Erreur flux */
+  .track-error {
+    font-size: var(--text-xs);
+    color: #ff4d4d;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   /* Mobile : masquer volume et infos piste */

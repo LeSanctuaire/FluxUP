@@ -1,131 +1,3876 @@
 [
-  { "youtubeId": "4w3LoMZEpR8",  "title": "IGOR - Lâche",                                         "channelId": "UC3CHRq-l8o1NhZThK3L5yWg", "artists": ["IGOR"],                                   "featured": true  },
-  { "youtubeId": "W0uhfuDVo4M",  "title": "β7",                                                    "channelId": "UCK_ufyegAHeyRVtAvmyJ9Tw", "artists": ["VERSIONBETA7"],                           "featured": true  },
-  { "youtubeId": "vVj322jv6aE",  "title": "ILBOYZZ - Pas grave (Clip Animé)",                     "channelId": "UCez6M4KDyyFSCh3Vdu7sBRQ", "artists": ["ILBOYZZ"],                                "featured": true  },
-  { "youtubeId": "n8W6TtTor-g",  "title": "ATTENDS-MOI",                                          "channelId": "UCIpOIgVYPsvk6y6gbgYzcNA", "artists": ["Lueurdess"],                              "featured": true  },
-  { "youtubeId": "U9i5gOirzwU",  "title": "David Pistol - Bart Simpson (Clip officiel)",          "channelId": "UCaT9WmdFyidy2WVqKX2ZyMQ", "artists": ["DAVID PISTOL"],                           "featured": true  },
-  { "youtubeId": "vYquUjHM3wY",  "title": "COMME SI",                                             "channelId": "UCaT9WmdFyidy2WVqKX2ZyMQ", "artists": ["DAVID PISTOL"],                           "featured": true  },
-  { "youtubeId": "ZHUNCpVZ0OI",  "title": "Peet - Toucher du Bois (Lyrics Vidéo)",               "channelId": "UCGhqKlRzxdgkmrIPI4DN-Tw", "artists": ["Dr PEET"],                                "featured": true  },
-  { "youtubeId": "JMf3UYYMexM",  "title": "Voyager",                                              "channelId": "UCGhqKlRzxdgkmrIPI4DN-Tw", "artists": ["Dr PEET"],                                "featured": true  },
-  { "youtubeId": "4SOT2fI2igE",  "title": "Upsilon - étranges fruits",                            "channelId": "UCRTKHBepIQqiZfhmHYi_IYw", "artists": ["UPSILON"],                                "featured": true  },
-  { "youtubeId": "m9Tl2KKfpPs",  "title": "quand j'y pense",                                      "channelId": "UCqhiqZj-6xoVgLxo0sDzWfw", "artists": ["Oka", "DogisgoD", "Shasta"]                                },
-  { "youtubeId": "j8WQHTiQo2E",  "title": "IMPAR - C'est pas grave",                              "channelId": "UCIVohAqNC2lsPUNmXJGmthA", "artists": ["Impar"]                                                    },
-  { "youtubeId": "iPcSPBfGiTE",  "title": "Les heures défilent",                                  "channelId": "UCuN4KGPgfF2tcUag5hK7mvA", "artists": ["Tigerz", "Bhati"]                                          },
-  { "youtubeId": "HZwjz7W38AY",  "title": "Nemès - NM aka Miller",                                "channelId": "UC0jW5tEUPdWIH0sPAynoP8A", "artists": ["Nemès"]                                                    },
-  { "youtubeId": "dRRZoXHX9UI",  "title": "Kaky - Brooklyn (Clip Officiel)",                      "channelId": "UCS5_frVZSQ2SvCyelCjKGzQ", "artists": ["Kaky"]                                                     },
-  { "youtubeId": "SS5RiqXw9NM",  "title": "ROSÉ",                                                 "channelId": "UCHoNcSGTPLqlgYIy1dMF8BQ", "artists": ["Loonzii"]                                                  },
-  { "youtubeId": "P_J3py6uTAE",  "title": "Zinée - Minitel",                                      "channelId": "UCYwe0x5pDu6AqBRDGqYYzqw", "artists": ["Zinée"]                                                    },
-  { "youtubeId": "aLRUSrp4o9w",  "title": "PAS D'CIEL BLEU",                                      "channelId": "UCgrM6nvvUCgQEYT20cYDFkQ", "artists": ["Dureau"]                                                   },
-  { "youtubeId": "ZD_7chrjO7w",  "title": "La plus belle des manières",                           "channelId": "UCgrM6nvvUCgQEYT20cYDFkQ", "artists": ["Dureau"]                                                   },
-  { "youtubeId": "buwqh5x1rQk",  "title": "Berry",                                                "channelId": "UCTLjtrUofNrepjsANwVUZlA", "artists": ["Tsew The Kid", "Zaky"]                                     },
-  { "youtubeId": "UeAtEXM5XYU",  "title": "Neptune",                                              "channelId": "UCr0-HhE10hFBZQ_0BJjQNWg", "artists": ["Jeune Mort"]                                               },
-  { "youtubeId": "nQ4eT05Iefw",  "title": "VALHALLA",                                             "channelId": "UCsYqYdjuk-qdA5eFVmCCiwQ",  "artists": ["Artel"]                                                    },
-  { "youtubeId": "rDiThliEkQs",  "title": "Grand garçon",                                         "channelId": "UCj2tgQrPhMsDlxIMQ9rQstQ", "artists": ["Absolem"]                                                  },
-  { "youtubeId": "ftwUOuztxbg",  "title": "web7 - nous on bosse (Prod. Focus Beatz, IZEN)",      "channelId": "UC590QE8ncdMq9oHpigIoM4Q", "artists": ["web7"]                                                     },
-  { "youtubeId": "BXRa0rjLP6o",  "title": "SOURIS AVEC LES MOTS",                                 "channelId": "UCUJRWjZIaeX6Bjiq6HDJCaA", "artists": ["Hominguest"]                                               },
-  { "youtubeId": "bdjOffvg0Z8",  "title": "Tengo John - Déluge (Clip Officiel)",                  "channelId": "UC6NOeYQolq4rMPPkIisk9MQ", "artists": ["Tengo John"]                                               },
-  { "youtubeId": "-pVStHHb_Gk",  "title": "EDGE - Hors de l'eau (Clip Officiel)",                 "channelId": "UC7aaAxqg6IzfzGqAmNbsxfg", "artists": ["EDGE"]                                                     },
-  { "youtubeId": "u2bsN-TNT3U",  "title": "Hier Encore",                                          "channelId": "UCSnGU_RsjZkKRldUmxNugvw",  "artists": ["Jazzy Bazz", "EDGE", "Esso Luxueux"]                       },
-  { "youtubeId": "VqOE-P5PaSM",  "title": "Il est temps de le dire",                              "channelId": "UCxbiRyXY4ewRi7Oy_kKID4g", "artists": ["Martin Gal", "Double Diamond"]                             },
-  { "youtubeId": "SZ16XFTUcDs",  "title": "Peet - Isaiah",                                        "channelId": "UCGhqKlRzxdgkmrIPI4DN-Tw", "artists": ["Dr PEET"]                                                  },
-  { "youtubeId": "JQ3uZujRg_M",  "title": "La mort dans les yeux",                                "channelId": "UCJEShA3jhXSUkefoS913EGQ", "artists": ["Hyacinthe"]                                                },
-  { "youtubeId": "KB9ct-QYIRk",  "title": "PEX - CHANSON TRISTE",                                 "channelId": "UCfhYt_2JoGFlLLZ4pSrPoMA", "artists": ["PEX"]                                                      },
-  { "youtubeId": "fDpRtf15-z4",  "title": "INTRO",                                                "channelId": "UCsYqYdjuk-qdA5eFVmCCiwQ",  "artists": ["Artel"]                                                    },
-  { "youtubeId": "sIlXWfMWPjk",  "title": "FAUSSE ROUTE",                                         "channelId": "UC4z7tOWAFsUgbMYGTdJpQJQ", "artists": ["BABOUNE"]                                                  },
-  { "youtubeId": "SEOmmblx3s8",  "title": "ALLONGÉ DANS LA PRAIRIE",                              "channelId": "UCsYqYdjuk-qdA5eFVmCCiwQ",  "artists": ["Artel"]                                                    },
-  { "youtubeId": "RYv6-ToS53k",  "title": "Plan B (feat. Peet)",                                  "channelId": "UCoMqKRvxhSf8rHknLZNpEog", "artists": ["OSMOZE", "PEET"]                                           },
-  { "youtubeId": "pkQdcex67fA",  "title": "Keroué - Cette shit (clip officiel)",                  "channelId": "UChF_2y7rP6BKKdEhQ_SJPKA", "artists": ["Keroué"]                                                   },
-  { "youtubeId": "10m46y7ceJo",  "title": "Rouge sang",                                            "channelId": "UCp3YxwQZ9NWJL4oQdWbvusQ", "artists": ["DIEGO"]                                                    },
-  { "youtubeId": "-bsO1hiPUj4",  "title": "Espace temps (feat. Swing)",                           "channelId": "UCtURAGPrp2F96nQCzJQOVQg", "artists": ["Le Dé", "SWING"]                                           },
-  { "youtubeId": "OLv_EKzQc3I",  "title": "notre route",                                          "channelId": "UCt_HxjKjkUwdchd-ubceJOg", "artists": ["KNOTTY"]                                                   },
-  { "youtubeId": "E3a_c1a73Yk",  "title": "BEEBY - BLE$$$",                                       "channelId": "UC8Q-h2TEsGkDcWXqXuI-EkQ", "artists": ["Beeby"]                                                    },
-  { "youtubeId": "_RSz8OdfrCk",  "title": "Pivi - Du Vin, Des Fleurs, Des Larmes",                "channelId": "UC6hYhEM0cJ8Cv-O7jtPdIiw", "artists": ["PIVI"]                                                     },
-  { "youtubeId": "l6ws45tJYWE",  "title": "pourquoi tu réclames encore ?",                        "channelId": "UCVBSaPcJJsRGYFaRI8oV1TQ", "artists": ["Celestino", "Lovarran"]                                    },
-  { "youtubeId": "FxMEjgnDoV8",  "title": "Plaine des Asphodèles",                                "channelId": "UCF24qrjsTaqO_2nqT1_tcpQ", "artists": ["PRIMERO"]                                                  },
-  { "youtubeId": "nOWY7DukiNw",  "title": "Tomyboy - Meute de luv (Audio Officiel)",              "channelId": "UC-qB0bKWLTuPTaWQn3m8EQA", "artists": ["TOMYBOY"]                                                  },
-  { "youtubeId": "ir5pOZIq3Fc",  "title": "PLUS CETTE VIE",                                       "channelId": "UCIpOIgVYPsvk6y6gbgYzcNA", "artists": ["LUEURDESS"]                                                },
-  { "youtubeId": "bG2YupoIgXg",  "title": "Bigger splash",                                        "channelId": "UCRVWjZ3DYx8fGn2mctJ5Hbw", "artists": ["Shien", "Celestino", "Anbuu"]                              },
-  { "youtubeId": "IjkGWaCmb4Y",  "title": "Vice et Vertu",                                        "channelId": "UCnSuIV4bZaCOM_lH9QEAw7w", "artists": ["Loveni", "Jeune LC"]                                       },
-  { "youtubeId": "HdCLvvi4_ZU",  "title": "vivant",                                               "channelId": "UCt_HxjKjkUwdchd-ubceJOg", "artists": ["KNOTTY"]                                                   },
-  { "youtubeId": "gebpcuwePV0",  "title": "Lord Esperanza - Solitaire",                           "channelId": "UCE4Ykh2JJKBmS_Gf2o5cqIg", "artists": ["Lord Esperanza"]                                          },
-  { "youtubeId": "KCykKb0B6Fg",  "title": "Peet - Out",                                           "channelId": "UCGhqKlRzxdgkmrIPI4DN-Tw", "artists": ["Dr PEET"]                                                  },
-  { "youtubeId": "qisUu7m8Eqg",  "title": "Jazzy Bazz, EDGE, Esso Luxueux - Magma (Clip Officiel)","channelId": "UCSnGU_RsjZkKRldUmxNugvw","artists": ["Jazzy Bazz", "EDGE", "Esso Luxueux"]                       },
-  { "youtubeId": "ZFeavJ8bbYQ",  "title": "FIVE - Carnaval (clip inclusif handicap)",             "channelId": "UChPUVPh7OmNVPtaK00Zsv7w", "artists": ["FIVE"]                                                     },
-  { "youtubeId": "fAXC3qAn9xw",  "title": "CVA",                                                  "channelId": "UCn2H5lRbGUUC9Rn1HdqmrcQ", "artists": ["NES"]                                                      },
-  { "youtubeId": "hGtj7efnQLc",  "title": "Yours truly",                                          "channelId": "UCI71rVb6OX4uzHHbT0s4YJA", "artists": ["DAMLIF"]                                                   },
-  { "youtubeId": "3rNRi9jwtHw",  "title": "Lunaire",                                              "channelId": "UCQ-2k68aY9IPk2lDoJeL58A", "artists": ["RIZLA"]                                                    },
-  { "youtubeId": "sv_vQjiCTJo",  "title": "Peet – 2 Sens feat. Swing",                            "channelId": "UCGhqKlRzxdgkmrIPI4DN-Tw", "artists": ["Dr PEET", "SWING"]                                         },
-  { "youtubeId": "PVxkkeRyekM",  "title": "Grove Street",                                         "channelId": "UCSKvbvDEn9ouvX7v25GEYCQ", "artists": ["ROB"]                                                      },
-  { "youtubeId": "xXs5PeGq0vo",  "title": "Keroué & Limsa Daulnay - Taxi 2 (Visualizer)",        "channelId": "UChF_2y7rP6BKKdEhQ_SJPKA", "artists": ["Keroué", "Limsa d'Aulnay"]                                 },
-  { "youtubeId": "jTCBgANhA8A",  "title": "Golgoth - Jour de Pluie",                              "channelId": "UCmmX2lSO4lF2kTaw69qQSMw", "artists": ["GOLGOTH"]                                                  },
-  { "youtubeId": "_Y6ha5GKf1c",  "title": "PL4YST4TION",                                          "channelId": "UCikCc--ade1Hk1pr_rCVosg", "artists": ["NOUVEL ART", "Cardinal", "M4TIAS"]                          },
-  { "youtubeId": "0NILvh67PGU",  "title": "Deemax - UNIVERS SONS (Prod. Lil Chick) - Clip Officiel","channelId": "UCVYoJ9YGg4K08d_5xkRiI-Q","artists": ["DEEMAX"]                                                  },
-  { "youtubeId": "IQccz4xRnlg",  "title": "Du spirituel dans l'art (feat. Sofiane Pamart)",       "channelId": "UCWbJyrUTqBziB5CmRYct5Mg", "artists": ["Lionel Soulchildren", "Sofiane Pamart"]                    },
-  { "youtubeId": "wWspVO8pYns",  "title": "Lord Esperanza",                                        "channelId": "UCE4Ykh2JJKBmS_Gf2o5cqIg", "artists": ["Lord Esperanza"]                                          },
-  { "youtubeId": "U3YkTiKHKcg",  "title": "Shaga - 500 vices (clip officiel)",                    "channelId": "UCPnxhyAxViN6eEXglzsEiww", "artists": ["SHAGA"]                                                    },
-  { "youtubeId": "yCTJF-0Ry3c",  "title": "La Tête Ailleurs",                                     "channelId": "UCVOjEBDYWw9p14Dah0TIWKw", "artists": ["Swift Guad", "Ol Zico", "Melan", "Itam"]                   },
-  { "youtubeId": "ldbuypcvtyg",  "title": "LA BREITLING SUITE",                                   "channelId": "UCJ5oaHCbjJ4WeoKH0bVr_Fw", "artists": ["JOAQM"]                                                    },
-  { "youtubeId": "Q0mQikWYAcA",  "title": "WESTFALEN",                                            "channelId": "UCBWt_qfJsWXSjFAjEVYLe0g", "artists": ["Pxrselow"]                                                 },
-  { "youtubeId": "UZY1tR2i-0U",  "title": "Grisha - Facile à dire",                               "channelId": "UCxqvP6QMlx1QYTkGQzo_zwA", "artists": ["GRISHA"]                                                   },
-  { "youtubeId": "a7neTSZ0C_Y",  "title": "Un jour peut être",                                    "channelId": "UCC7x6-EaXoCbN52mvWN69hA", "artists": ["BAKAR"]                                                    },
-  { "youtubeId": "OOeQogdUxPw",  "title": "All Day",                                              "channelId": "UCy6tpj2otKrmKw1TSJKwGBw", "artists": ["ARAUJO"]                                                   },
-  { "youtubeId": "gBALPKZLKnk",  "title": "Tianmi - Silence",                                     "channelId": "UC0F__MrMP3xBwy3MNE20pTw", "artists": ["TIANMI"]                                                   },
-  { "youtubeId": "sh_c2xSSg2k",  "title": "Soulager",                                             "channelId": "UC0F__MrMP3xBwy3MNE20pTw", "artists": ["TIANMI"]                                                   },
-  { "youtubeId": "dPwaG3XR-JA",  "title": "FANTÔME",                                              "channelId": "UCuXdZYr9yGA5V2xX9DDIMlQ", "artists": ["MADJ"]                                                     },
-  { "youtubeId": "-m1lu73pCAQ",  "title": "VIENS ON S'EN VA LOIN",                                 "channelId": "UCsYqYdjuk-qdA5eFVmCCiwQ",  "artists": ["Artel"]                                                    },
-  { "youtubeId": "_rKbmcjPK4k",  "title": "Suffit d'un regard",                                   "channelId": "UC04uGhdzbYdX9w1We1FO8PA", "artists": ["ENIAH"]                                                    },
-  { "youtubeId": "KzGFrzwDdV8",  "title": "Ma faute",                                             "channelId": "UCiJf_FU2cxqQJBETFyy2VgQ", "artists": ["Thomas Goldberg"]                                          },
-  { "youtubeId": "9_EFn6MypE0",  "title": "Wallace Cleaver - xénon (Paroles)",                    "channelId": "UCnu495cbo2ZJvaViPdbe76w", "artists": ["WALLACE CLEAVER"]                                          },
-  { "youtubeId": "RxRgEEcilUk",  "title": "PERSELINHO",                                            "channelId": "UCBWt_qfJsWXSjFAjEVYLe0g", "artists": ["Pxrselow"]                                                 },
-  { "youtubeId": "vhI0O73uTUw",  "title": "Tout leur prendre",                                    "channelId": "UCr0-HhE10hFBZQ_0BJjQNWg", "artists": ["Jeune Mort"]                                               },
-  { "youtubeId": "cGCsbxMq1s4",  "title": "L'INVERSE",                                            "channelId": "UC3jD7fkpB1ONUrF8BeXtMrQ", "artists": ["SURPRISE"]                                                 },
-  { "youtubeId": "fB0uUGqviD0",  "title": "Seyté - Jamais",                                       "channelId": "UCMnUOq8gZDfTfwwP-_pR9-w", "artists": ["SEYTE"]                                                    },
-  { "youtubeId": "XBkoeD6x0pI",  "title": "Risqué de te dire",                                    "channelId": "UC1t5cvk9ls94mko7JuOFdnA", "artists": ["CIVIL"]                                                    },
-  { "youtubeId": "6vMEf9YDIJE",  "title": "Nécessaire",                                            "channelId": "UC3CHRq-l8o1NhZThK3L5yWg", "artists": ["IGOR"]                                                     },
-  { "youtubeId": "I2RTYf8Ut8Y",  "title": "Pablo - Insuffisant (audio)",                          "channelId": "UC8MWaoHhEBprXZxlkbSRdBQ", "artists": ["PABLO"]                                                    },
-  { "youtubeId": "3jiQV2ccIJA",  "title": "écrire une fin",                                       "channelId": "UChOoB8RKT2Z0tX2TCFjvoPg", "artists": ["Beka", "Yakary"]                                           },
-  { "youtubeId": "O0n6TRac2kE",  "title": "IGOR - Incroyable",                                    "channelId": "UC3CHRq-l8o1NhZThK3L5yWg", "artists": ["IGOR"]                                                     },
-  { "youtubeId": "RU6nbCm6McU",  "title": "A l'eau",                                               "channelId": "UCVaC9qkzw4q40iG6RVH8D_w", "artists": ["Tonio MC", "Sentin'l"]                                     },
-  { "youtubeId": "UGs74O8KuEc",  "title": "Pablo - Charon (audio)",                               "channelId": "UC8MWaoHhEBprXZxlkbSRdBQ", "artists": ["PABLO"]                                                    },
-  { "youtubeId": "Hg_NqGiwqxY",  "title": "Peet - No Solo",                                       "channelId": "UCGhqKlRzxdgkmrIPI4DN-Tw", "artists": ["Dr PEET"]                                                  },
-  { "youtubeId": "gpUAge_yEj0",  "title": "Nuit d'hotel",                                          "channelId": "UC_b01YmccNwcGGegEqBcsxg", "artists": ["L'or du Commun"]                                           },
-  { "youtubeId": "o9A9159O6uo",  "title": "313 & Oxmo Puccino - Valeurs (Clip officiel)",         "channelId": "UChBxosI8fDrxw6RVxFlSAdQ", "artists": ["313", "Oxmo Puccino"]                                      },
-  { "youtubeId": "dCuHEUFu3nM",  "title": "Alvin Chris ft BRÖ - Un peu beaucoup (Clip officiel)","channelId": "UCr0Jdc8F6HZhnD6ZdZ6ByNQ", "artists": ["Alvin Chris", "BRÖ"]                                        },
-  { "youtubeId": "RpU9NGRrBkM",  "title": "LA ROUTINE DES GENS HEUREUX",                          "channelId": "UC6PjwPbPJYLoOOgiBOItzJw", "artists": ["HOMINGUEST"]                                               },
-  { "youtubeId": "01HEqRH8Wt8",  "title": "SKIA",                                                  "channelId": "UCQEd436dMjreraZkXQNXgHg", "artists": ["SKIA"]                                                     },
-  { "youtubeId": "LVWNDYS0fN8",  "title": "L'Or du Commun - Sable feat. Lous & The Yakuza",       "channelId": "UC_b01YmccNwcGGegEqBcsxg", "artists": ["L'Or du Commun", "Lous", "The Yakuza"]                     },
-  { "youtubeId": "Uquq1uECq6E",  "title": "((FumĒe))",                                             "channelId": "UCD34mVMgzAQhzby7O-f4IZQ", "artists": ["Komēdza"]                                                  },
-  { "youtubeId": "oTEwznF7I-k",  "title": "Ztatik - À venir",                                     "channelId": "UCOpnRiSw8awK0bBBgpmWo1g", "artists": ["ZTATIK"]                                                   },
-  { "youtubeId": "dOAVl2gwVwA",  "title": "Cinquième étage",                                       "channelId": "UCF24qrjsTaqO_2nqT1_tcpQ", "artists": ["PRIMERO"]                                                  },
-  { "youtubeId": "Ko8sobZiwxo",  "title": "Sheldon - Quasar",                                      "channelId": "UCo1zHzOv9O6JuT-jGp_flKw", "artists": ["SHELDON"]                                                  },
-  { "youtubeId": "dFyOOJoF7bI",  "title": "Besoin d'en parler",                                   "channelId": "UCW_maGzHfmOJPtwRV-1zOag", "artists": ["SEYLI"]                                                    },
-  { "youtubeId": "xvtW_MEXnyI",  "title": "Vin's - Outrage I (Official Video)",                   "channelId": "UC2GJz3_g-SBaVE8IzrYJgoQ", "artists": ["VIN'S"]                                                    },
-  { "youtubeId": "J9SPsTFfYmQ",  "title": "Destin",                                               "channelId": "UC8MWaoHhEBprXZxlkbSRdBQ", "artists": ["PABLO"]                                                    },
-  { "youtubeId": "Hcmj1T1kSwk",  "title": "LES VOIX",                                             "channelId": "UC3LQ87yMWhQxmvp0lUAK9Mg", "artists": ["Mademoiselle Lou", "MadeInParis"]                          },
-  { "youtubeId": "3mRTlWfbNm8",  "title": "les yeux dans le vide",                                "channelId": "UCt_HxjKjkUwdchd-ubceJOg", "artists": ["KNOTTY"]                                                   },
-  { "youtubeId": "v3BKSL290kQ",  "title": "Keroué - Cramé (Clip officiel)",                       "channelId": "UChF_2y7rP6BKKdEhQ_SJPKA", "artists": ["Keroué"]                                                   },
-  { "youtubeId": "aW4A5AYVp6I",  "title": "Lord Esperanza",                                        "channelId": "UCE4Ykh2JJKBmS_Gf2o5cqIg", "artists": ["Lord Esperanza"]                                          },
-  { "youtubeId": "d_QkgfIaXYk",  "title": "IGOR - Vide",                                          "channelId": "UC3CHRq-l8o1NhZThK3L5yWg", "artists": ["IGOR"]                                                     },
-  { "youtubeId": "tVLXtY_RBW4",  "title": "Seyté - Luna ft Nadia Paz",                            "channelId": "UCMnUOq8gZDfTfwwP-_pR9-w", "artists": ["SEYTE"]                                                    },
-  { "youtubeId": "FPHWyML2lXw",  "title": "Eesah Yasuke - Mon ciel (prod. Al777) Clip Officiel", "channelId": "UCUChXW_a1cZ3uhuMHRd_Aqg", "artists": ["Eesah Yasuke"]                                             },
-  { "youtubeId": "G2xPvZhu4cg",  "title": "Cerf volant",                                          "channelId": "UCS5_frVZSQ2SvCyelCjKGzQ", "artists": ["Kaky"]                                                     },
-  { "youtubeId": "E59FNwfNgbY",  "title": "Merde (Outro)",                                        "channelId": "UCZz-I0tsMCqEirxCAjAiI0A", "artists": ["JOSMAN"]                                                   },
-  { "youtubeId": "4sowO7N_xPI",  "title": "IMPAR - Fermer mon coeur",                             "channelId": "UCIVohAqNC2lsPUNmXJGmthA", "artists": ["IMPAR"]                                                    },
-  { "youtubeId": "gVVsZOU35-w",  "title": "Dr PEET",                                               "channelId": "UCGhqKlRzxdgkmrIPI4DN-Tw", "artists": ["Dr PEET"]                                                  },
-  { "youtubeId": "N2w-vmxgMpY",  "title": "Mauvaise Bouche - Dingue",                             "channelId": "UCUem65uxJw94_Xqs6-RKwbA", "artists": ["MAUVAISE BOUCHE"]                                          },
-  { "youtubeId": "W66vaJWfiGY",  "title": "Sopico - Thème (Objet Video)",                         "channelId": "UCNbkz3Mpu6QVZ3ujee7kyzA", "artists": ["SOPICO"]                                                   },
-  { "youtubeId": "f3aOEmOBNqA",  "title": "Bekar",                                                 "channelId": "UCOvYc9SLXqnfOB-jEiYo_Xg", "artists": ["BEKAR"]                                                    },
-  { "youtubeId": "cxY_RylGNzE",  "title": "FLYNT",                                                 "channelId": "UCEkCOqs7JLIXKysd9CAFB9Q", "artists": ["FLYNT"]                                                    },
-  { "youtubeId": "ZThKmAQ_DhE",  "title": "Remets",                                               "channelId": "UCSDfjMqtqNBKacROu3XJOAQ", "artists": ["LOUVAR"]                                                   },
-  { "youtubeId": "dNTtTGaJ9GY",  "title": "ŒUVRE",                                                "channelId": "UCz3KCKF7Fi32FWOOfhLdnUg", "artists": ["SCYLLA"]                                                   },
-  { "youtubeId": "L_Vuc7NX8UE",  "title": "MAUVAIS POUR LE BUSINESS",                             "channelId": "UCEkCOqs7JLIXKysd9CAFB9Q", "artists": ["FLYNT"]                                                    },
-  { "youtubeId": "KfIpMZpZXOk",  "title": "robdbloc - Rien ne change (Clip Officiel)",            "channelId": "UCSKvbvDEn9ouvX7v25GEYCQ", "artists": ["ROB"]                                                      },
-  { "youtubeId": "tx-6QpteLtg",  "title": "Lil Yan - EN FAIT ÇA VA / DÉSOLÉ MERCI (Lyric Vidéo)","channelId": "UCUZF77hYYh35RKhdFjZWDXw", "artists": ["LIL YAN"]                                                  },
-  { "youtubeId": "2xo94pPzSx8",  "title": "Carmin",                                               "channelId": "UCRVWjZ3DYx8fGn2mctJ5Hbw", "artists": ["SHIEN"]                                                    },
-  { "youtubeId": "YFhaZA5wSko",  "title": "BERKAR",                                               "channelId": "UCOvYc9SLXqnfOB-jEiYo_Xg", "artists": ["BERKAR"]                                                   },
-  { "youtubeId": "dMQiGAamrV4",  "title": "Tsew The Kid - Messe-basse (session officielle)",      "channelId": "UCTLjtrUofNrepjsANwVUZlA", "artists": ["TSEW THE KID"]                                             },
-  { "youtubeId": "qvpzJ1oNAVM",  "title": "Tellement",                                            "channelId": "UC768C9fCkvlfK_n5tTNFRpQ", "artists": ["DAVID PISTOL"]                                             },
-  { "youtubeId": "cckwSmM5Egk",  "title": "The Doug - poison (visualizer)",                       "channelId": "UCpW2QeJTbaXthKEcHlPpE-Q", "artists": ["THE DOUG"]                                                 },
-  { "youtubeId": "9OgZ6OLlnEw",  "title": "AAMO - ZER01 (CLIP)",                                  "channelId": "UCVD7jLLqkB4XLz4MZGWHo2w", "artists": ["AAMO"]                                                     },
-  { "youtubeId": "VvgUzKtylkg",  "title": "AAMO - MÉRITANT (Lyric Vidéo)",                        "channelId": "UCVD7jLLqkB4XLz4MZGWHo2w", "artists": ["AAMO"]                                                     }
+  {
+    "youtubeId": "4w3LoMZEpR8",
+    "title": "IGOR - Lâche",
+    "channelId": "UC3CHRq-l8o1NhZThK3L5yWg",
+    "artists": [
+      "IGOR"
+    ],
+    "slug": "igor-lache",
+    "thumbnail": "https://i.ytimg.com/vi/4w3LoMZEpR8/mqdefault.jpg",
+    "featured": true
+  },
+  {
+    "youtubeId": "W0uhfuDVo4M",
+    "title": "β7",
+    "channelId": "UCK_ufyegAHeyRVtAvmyJ9Tw",
+    "artists": [
+      "VERSIONBETA7"
+    ],
+    "slug": "versionbeta7-7",
+    "thumbnail": "https://i.ytimg.com/vi/W0uhfuDVo4M/mqdefault.jpg",
+    "featured": true
+  },
+  {
+    "youtubeId": "vVj322jv6aE",
+    "title": "ILBOYZZ - Pas grave (Clip Animé)",
+    "channelId": "UCez6M4KDyyFSCh3Vdu7sBRQ",
+    "artists": [
+      "ILBOYZZ"
+    ],
+    "slug": "ilboyzz-pas-grave-clip-anime",
+    "thumbnail": "https://i.ytimg.com/vi/vVj322jv6aE/mqdefault.jpg",
+    "featured": true
+  },
+  {
+    "youtubeId": "n8W6TtTor-g",
+    "title": "ATTENDS-MOI",
+    "channelId": "UCIpOIgVYPsvk6y6gbgYzcNA",
+    "artists": [
+      "Lueurdess"
+    ],
+    "slug": "lueurdess-attends-moi",
+    "thumbnail": "https://i.ytimg.com/vi/n8W6TtTor-g/mqdefault.jpg",
+    "featured": true
+  },
+  {
+    "youtubeId": "U9i5gOirzwU",
+    "title": "David Pistol - Bart Simpson (Clip officiel)",
+    "channelId": "UCaT9WmdFyidy2WVqKX2ZyMQ",
+    "artists": [
+      "DAVID PISTOL"
+    ],
+    "slug": "david-pistol-bart-simpson-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/U9i5gOirzwU/mqdefault.jpg",
+    "featured": true
+  },
+  {
+    "youtubeId": "vYquUjHM3wY",
+    "title": "COMME SI",
+    "channelId": "UCaT9WmdFyidy2WVqKX2ZyMQ",
+    "artists": [
+      "DAVID PISTOL"
+    ],
+    "slug": "david-pistol-comme-si",
+    "thumbnail": "https://i.ytimg.com/vi/vYquUjHM3wY/mqdefault.jpg",
+    "featured": true
+  },
+  {
+    "youtubeId": "ZHUNCpVZ0OI",
+    "title": "Peet - Toucher du Bois (Lyrics Vidéo)",
+    "channelId": "UCGhqKlRzxdgkmrIPI4DN-Tw",
+    "artists": [
+      "Dr PEET"
+    ],
+    "slug": "dr-peet-peet-toucher-du-bois-lyrics-video",
+    "thumbnail": "https://i.ytimg.com/vi/ZHUNCpVZ0OI/mqdefault.jpg",
+    "featured": true
+  },
+  {
+    "youtubeId": "JMf3UYYMexM",
+    "title": "Voyager",
+    "channelId": "UCGhqKlRzxdgkmrIPI4DN-Tw",
+    "artists": [
+      "Dr PEET"
+    ],
+    "slug": "dr-peet-voyager",
+    "thumbnail": "https://i.ytimg.com/vi/JMf3UYYMexM/mqdefault.jpg",
+    "featured": true
+  },
+  {
+    "youtubeId": "4SOT2fI2igE",
+    "title": "Upsilon - étranges fruits",
+    "channelId": "UCRTKHBepIQqiZfhmHYi_IYw",
+    "artists": [
+      "UPSILON"
+    ],
+    "slug": "upsilon-etranges-fruits",
+    "thumbnail": "https://i.ytimg.com/vi/4SOT2fI2igE/mqdefault.jpg",
+    "featured": true
+  },
+  {
+    "youtubeId": "m9Tl2KKfpPs",
+    "title": "quand j'y pense",
+    "channelId": "UCqhiqZj-6xoVgLxo0sDzWfw",
+    "artists": [
+      "Oka",
+      "DogisgoD",
+      "Shasta"
+    ],
+    "slug": "oka-quand-jy-pense",
+    "thumbnail": "https://i.ytimg.com/vi/m9Tl2KKfpPs/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "j8WQHTiQo2E",
+    "title": "IMPAR - C'est pas grave",
+    "channelId": "UCIVohAqNC2lsPUNmXJGmthA",
+    "artists": [
+      "Impar"
+    ],
+    "slug": "impar-cest-pas-grave",
+    "thumbnail": "https://i.ytimg.com/vi/j8WQHTiQo2E/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "iPcSPBfGiTE",
+    "title": "Les heures défilent",
+    "channelId": "UCuN4KGPgfF2tcUag5hK7mvA",
+    "artists": [
+      "Tigerz",
+      "Bhati"
+    ],
+    "slug": "tigerz-les-heures-defilent",
+    "thumbnail": "https://i.ytimg.com/vi/iPcSPBfGiTE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "HZwjz7W38AY",
+    "title": "Nemès - NM aka Miller",
+    "channelId": "UC0jW5tEUPdWIH0sPAynoP8A",
+    "artists": [
+      "Nemès"
+    ],
+    "slug": "nemes-nm-aka-miller",
+    "thumbnail": "https://i.ytimg.com/vi/HZwjz7W38AY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "dRRZoXHX9UI",
+    "title": "Kaky - Brooklyn (Clip Officiel)",
+    "channelId": "UCS5_frVZSQ2SvCyelCjKGzQ",
+    "artists": [
+      "Kaky"
+    ],
+    "slug": "kaky-brooklyn-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/dRRZoXHX9UI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "SS5RiqXw9NM",
+    "title": "ROSÉ",
+    "channelId": "UCHoNcSGTPLqlgYIy1dMF8BQ",
+    "artists": [
+      "Loonzii"
+    ],
+    "slug": "loonzii-rose",
+    "thumbnail": "https://i.ytimg.com/vi/SS5RiqXw9NM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "P_J3py6uTAE",
+    "title": "Zinée - Minitel",
+    "channelId": "UCYwe0x5pDu6AqBRDGqYYzqw",
+    "artists": [
+      "Zinée"
+    ],
+    "slug": "zinee-minitel",
+    "thumbnail": "https://i.ytimg.com/vi/P_J3py6uTAE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "aLRUSrp4o9w",
+    "title": "PAS D'CIEL BLEU",
+    "channelId": "UCgrM6nvvUCgQEYT20cYDFkQ",
+    "artists": [
+      "Dureau"
+    ],
+    "slug": "dureau-pas-dciel-bleu",
+    "thumbnail": "https://i.ytimg.com/vi/aLRUSrp4o9w/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ZD_7chrjO7w",
+    "title": "La plus belle des manières",
+    "channelId": "UCgrM6nvvUCgQEYT20cYDFkQ",
+    "artists": [
+      "Dureau"
+    ],
+    "slug": "dureau-la-plus-belle-des-manieres",
+    "thumbnail": "https://i.ytimg.com/vi/ZD_7chrjO7w/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "buwqh5x1rQk",
+    "title": "Berry",
+    "channelId": "UCTLjtrUofNrepjsANwVUZlA",
+    "artists": [
+      "Tsew The Kid",
+      "Zaky"
+    ],
+    "slug": "tsew-the-kid-berry",
+    "thumbnail": "https://i.ytimg.com/vi/buwqh5x1rQk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "UeAtEXM5XYU",
+    "title": "Neptune",
+    "channelId": "UCr0-HhE10hFBZQ_0BJjQNWg",
+    "artists": [
+      "Jeune Mort"
+    ],
+    "slug": "jeune-mort-neptune",
+    "thumbnail": "https://i.ytimg.com/vi/UeAtEXM5XYU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "nQ4eT05Iefw",
+    "title": "VALHALLA",
+    "channelId": "UCsYqYdjuk-qdA5eFVmCCiwQ",
+    "artists": [
+      "Artel"
+    ],
+    "slug": "artel-valhalla",
+    "thumbnail": "https://i.ytimg.com/vi/nQ4eT05Iefw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "rDiThliEkQs",
+    "title": "Grand garçon",
+    "channelId": "UCj2tgQrPhMsDlxIMQ9rQstQ",
+    "artists": [
+      "Absolem"
+    ],
+    "slug": "absolem-grand-garcon",
+    "thumbnail": "https://i.ytimg.com/vi/rDiThliEkQs/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ftwUOuztxbg",
+    "title": "web7 - nous on bosse (Prod. Focus Beatz, IZEN)",
+    "channelId": "UC590QE8ncdMq9oHpigIoM4Q",
+    "artists": [
+      "web7"
+    ],
+    "slug": "web7-nous-on-bosse-prod-focus-beatz-izen",
+    "thumbnail": "https://i.ytimg.com/vi/ftwUOuztxbg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "BXRa0rjLP6o",
+    "title": "SOURIS AVEC LES MOTS",
+    "channelId": "UCUJRWjZIaeX6Bjiq6HDJCaA",
+    "artists": [
+      "Hominguest"
+    ],
+    "slug": "hominguest-souris-avec-les-mots",
+    "thumbnail": "https://i.ytimg.com/vi/BXRa0rjLP6o/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "bdjOffvg0Z8",
+    "title": "Tengo John - Déluge (Clip Officiel)",
+    "channelId": "UC6NOeYQolq4rMPPkIisk9MQ",
+    "artists": [
+      "Tengo John"
+    ],
+    "slug": "tengo-john-deluge-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/bdjOffvg0Z8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "-pVStHHb_Gk",
+    "title": "EDGE - Hors de l'eau (Clip Officiel)",
+    "channelId": "UC7aaAxqg6IzfzGqAmNbsxfg",
+    "artists": [
+      "EDGE"
+    ],
+    "slug": "edge-hors-de-leau-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/-pVStHHb_Gk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "u2bsN-TNT3U",
+    "title": "Hier Encore",
+    "channelId": "UCSnGU_RsjZkKRldUmxNugvw",
+    "artists": [
+      "Jazzy Bazz",
+      "EDGE",
+      "Esso Luxueux"
+    ],
+    "slug": "jazzy-bazz-hier-encore",
+    "thumbnail": "https://i.ytimg.com/vi/u2bsN-TNT3U/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "VqOE-P5PaSM",
+    "title": "Il est temps de le dire",
+    "channelId": "UCxbiRyXY4ewRi7Oy_kKID4g",
+    "artists": [
+      "Martin Gal",
+      "Double Diamond"
+    ],
+    "slug": "martin-gal-il-est-temps-de-le-dire",
+    "thumbnail": "https://i.ytimg.com/vi/VqOE-P5PaSM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "SZ16XFTUcDs",
+    "title": "Peet - Isaiah",
+    "channelId": "UCGhqKlRzxdgkmrIPI4DN-Tw",
+    "artists": [
+      "Dr PEET"
+    ],
+    "slug": "dr-peet-peet-isaiah",
+    "thumbnail": "https://i.ytimg.com/vi/SZ16XFTUcDs/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "JQ3uZujRg_M",
+    "title": "La mort dans les yeux",
+    "channelId": "UCJEShA3jhXSUkefoS913EGQ",
+    "artists": [
+      "Hyacinthe"
+    ],
+    "slug": "hyacinthe-la-mort-dans-les-yeux",
+    "thumbnail": "https://i.ytimg.com/vi/JQ3uZujRg_M/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "KB9ct-QYIRk",
+    "title": "PEX - CHANSON TRISTE",
+    "channelId": "UCfhYt_2JoGFlLLZ4pSrPoMA",
+    "artists": [
+      "PEX"
+    ],
+    "slug": "pex-chanson-triste",
+    "thumbnail": "https://i.ytimg.com/vi/KB9ct-QYIRk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "fDpRtf15-z4",
+    "title": "INTRO",
+    "channelId": "UCsYqYdjuk-qdA5eFVmCCiwQ",
+    "artists": [
+      "Artel"
+    ],
+    "slug": "artel-intro",
+    "thumbnail": "https://i.ytimg.com/vi/fDpRtf15-z4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "sIlXWfMWPjk",
+    "title": "FAUSSE ROUTE",
+    "channelId": "UC4z7tOWAFsUgbMYGTdJpQJQ",
+    "artists": [
+      "BABOUNE"
+    ],
+    "slug": "baboune-fausse-route",
+    "thumbnail": "https://i.ytimg.com/vi/sIlXWfMWPjk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "SEOmmblx3s8",
+    "title": "ALLONGÉ DANS LA PRAIRIE",
+    "channelId": "UCsYqYdjuk-qdA5eFVmCCiwQ",
+    "artists": [
+      "Artel"
+    ],
+    "slug": "artel-allonge-dans-la-prairie",
+    "thumbnail": "https://i.ytimg.com/vi/SEOmmblx3s8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "RYv6-ToS53k",
+    "title": "Plan B (feat. Peet)",
+    "channelId": "UCoMqKRvxhSf8rHknLZNpEog",
+    "artists": [
+      "OSMOZE",
+      "PEET"
+    ],
+    "slug": "osmoze-plan-b-feat-peet",
+    "thumbnail": "https://i.ytimg.com/vi/RYv6-ToS53k/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "pkQdcex67fA",
+    "title": "Keroué - Cette shit (clip officiel)",
+    "channelId": "UChF_2y7rP6BKKdEhQ_SJPKA",
+    "artists": [
+      "Keroué"
+    ],
+    "slug": "keroue-cette-shit-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/pkQdcex67fA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "10m46y7ceJo",
+    "title": "Rouge sang",
+    "channelId": "UCp3YxwQZ9NWJL4oQdWbvusQ",
+    "artists": [
+      "DIEGO"
+    ],
+    "slug": "diego-rouge-sang",
+    "thumbnail": "https://i.ytimg.com/vi/10m46y7ceJo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "-bsO1hiPUj4",
+    "title": "Espace temps (feat. Swing)",
+    "channelId": "UCtURAGPrp2F96nQCzJQOVQg",
+    "artists": [
+      "Le Dé",
+      "SWING"
+    ],
+    "slug": "le-de-espace-temps-feat-swing",
+    "thumbnail": "https://i.ytimg.com/vi/-bsO1hiPUj4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "OLv_EKzQc3I",
+    "title": "notre route",
+    "channelId": "UCt_HxjKjkUwdchd-ubceJOg",
+    "artists": [
+      "KNOTTY"
+    ],
+    "slug": "knotty-notre-route",
+    "thumbnail": "https://i.ytimg.com/vi/OLv_EKzQc3I/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "E3a_c1a73Yk",
+    "title": "BEEBY - BLE$$$",
+    "channelId": "UC8Q-h2TEsGkDcWXqXuI-EkQ",
+    "artists": [
+      "Beeby"
+    ],
+    "slug": "beeby-ble",
+    "thumbnail": "https://i.ytimg.com/vi/E3a_c1a73Yk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "_RSz8OdfrCk",
+    "title": "Pivi - Du Vin, Des Fleurs, Des Larmes",
+    "channelId": "UC6hYhEM0cJ8Cv-O7jtPdIiw",
+    "artists": [
+      "PIVI"
+    ],
+    "slug": "pivi-du-vin-des-fleurs-des-larmes",
+    "thumbnail": "https://i.ytimg.com/vi/_RSz8OdfrCk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "l6ws45tJYWE",
+    "title": "pourquoi tu réclames encore ?",
+    "channelId": "UCVBSaPcJJsRGYFaRI8oV1TQ",
+    "artists": [
+      "Celestino",
+      "Lovarran"
+    ],
+    "slug": "celestino-pourquoi-tu-reclames-encore",
+    "thumbnail": "https://i.ytimg.com/vi/l6ws45tJYWE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "FxMEjgnDoV8",
+    "title": "Plaine des Asphodèles",
+    "channelId": "UCF24qrjsTaqO_2nqT1_tcpQ",
+    "artists": [
+      "PRIMERO"
+    ],
+    "slug": "primero-plaine-des-asphodeles",
+    "thumbnail": "https://i.ytimg.com/vi/FxMEjgnDoV8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "nOWY7DukiNw",
+    "title": "Tomyboy - Meute de luv (Audio Officiel)",
+    "channelId": "UC-qB0bKWLTuPTaWQn3m8EQA",
+    "artists": [
+      "TOMYBOY"
+    ],
+    "slug": "tomyboy-meute-de-luv-audio-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/nOWY7DukiNw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ir5pOZIq3Fc",
+    "title": "PLUS CETTE VIE",
+    "channelId": "UCIpOIgVYPsvk6y6gbgYzcNA",
+    "artists": [
+      "LUEURDESS"
+    ],
+    "slug": "lueurdess-plus-cette-vie",
+    "thumbnail": "https://i.ytimg.com/vi/ir5pOZIq3Fc/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "bG2YupoIgXg",
+    "title": "Bigger splash",
+    "channelId": "UCRVWjZ3DYx8fGn2mctJ5Hbw",
+    "artists": [
+      "Shien",
+      "Celestino",
+      "Anbuu"
+    ],
+    "slug": "shien-bigger-splash",
+    "thumbnail": "https://i.ytimg.com/vi/bG2YupoIgXg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "IjkGWaCmb4Y",
+    "title": "Vice et Vertu",
+    "channelId": "UCnSuIV4bZaCOM_lH9QEAw7w",
+    "artists": [
+      "Loveni",
+      "Jeune LC"
+    ],
+    "slug": "loveni-vice-et-vertu",
+    "thumbnail": "https://i.ytimg.com/vi/IjkGWaCmb4Y/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "HdCLvvi4_ZU",
+    "title": "vivant",
+    "channelId": "UCt_HxjKjkUwdchd-ubceJOg",
+    "artists": [
+      "KNOTTY"
+    ],
+    "slug": "knotty-vivant",
+    "thumbnail": "https://i.ytimg.com/vi/HdCLvvi4_ZU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "gebpcuwePV0",
+    "title": "Lord Esperanza - Solitaire",
+    "channelId": "UCE4Ykh2JJKBmS_Gf2o5cqIg",
+    "artists": [
+      "Lord Esperanza"
+    ],
+    "slug": "lord-esperanza-solitaire",
+    "thumbnail": "https://i.ytimg.com/vi/gebpcuwePV0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "KCykKb0B6Fg",
+    "title": "Peet - Out",
+    "channelId": "UCGhqKlRzxdgkmrIPI4DN-Tw",
+    "artists": [
+      "Dr PEET"
+    ],
+    "slug": "dr-peet-peet-out",
+    "thumbnail": "https://i.ytimg.com/vi/KCykKb0B6Fg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "qisUu7m8Eqg",
+    "title": "Jazzy Bazz, EDGE, Esso Luxueux - Magma (Clip Officiel)",
+    "channelId": "UCSnGU_RsjZkKRldUmxNugvw",
+    "artists": [
+      "Jazzy Bazz",
+      "EDGE",
+      "Esso Luxueux"
+    ],
+    "slug": "jazzy-bazz-edge-esso-luxueux-magma-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/qisUu7m8Eqg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ZFeavJ8bbYQ",
+    "title": "FIVE - Carnaval (clip inclusif handicap)",
+    "channelId": "UChPUVPh7OmNVPtaK00Zsv7w",
+    "artists": [
+      "FIVE"
+    ],
+    "slug": "five-carnaval-clip-inclusif-handicap",
+    "thumbnail": "https://i.ytimg.com/vi/ZFeavJ8bbYQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "fAXC3qAn9xw",
+    "title": "CVA",
+    "channelId": "UCn2H5lRbGUUC9Rn1HdqmrcQ",
+    "artists": [
+      "NES"
+    ],
+    "slug": "nes-cva",
+    "thumbnail": "https://i.ytimg.com/vi/fAXC3qAn9xw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "hGtj7efnQLc",
+    "title": "Yours truly",
+    "channelId": "UCI71rVb6OX4uzHHbT0s4YJA",
+    "artists": [
+      "DAMLIF"
+    ],
+    "slug": "damlif-yours-truly",
+    "thumbnail": "https://i.ytimg.com/vi/hGtj7efnQLc/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "3rNRi9jwtHw",
+    "title": "Lunaire",
+    "channelId": "UCQ-2k68aY9IPk2lDoJeL58A",
+    "artists": [
+      "RIZLA"
+    ],
+    "slug": "rizla-lunaire",
+    "thumbnail": "https://i.ytimg.com/vi/3rNRi9jwtHw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "sv_vQjiCTJo",
+    "title": "Peet – 2 Sens feat. Swing",
+    "channelId": "UCGhqKlRzxdgkmrIPI4DN-Tw",
+    "artists": [
+      "Dr PEET",
+      "SWING"
+    ],
+    "slug": "dr-peet-peet-2-sens-feat-swing",
+    "thumbnail": "https://i.ytimg.com/vi/sv_vQjiCTJo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "PVxkkeRyekM",
+    "title": "Grove Street",
+    "channelId": "UCSKvbvDEn9ouvX7v25GEYCQ",
+    "artists": [
+      "ROB"
+    ],
+    "slug": "rob-grove-street",
+    "thumbnail": "https://i.ytimg.com/vi/PVxkkeRyekM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "xXs5PeGq0vo",
+    "title": "Keroué & Limsa Daulnay - Taxi 2 (Visualizer)",
+    "channelId": "UChF_2y7rP6BKKdEhQ_SJPKA",
+    "artists": [
+      "Keroué",
+      "Limsa d'Aulnay"
+    ],
+    "slug": "keroue-limsa-daulnay-taxi-2-visualizer",
+    "thumbnail": "https://i.ytimg.com/vi/xXs5PeGq0vo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "jTCBgANhA8A",
+    "title": "Golgoth - Jour de Pluie",
+    "channelId": "UCmmX2lSO4lF2kTaw69qQSMw",
+    "artists": [
+      "GOLGOTH"
+    ],
+    "slug": "golgoth-jour-de-pluie",
+    "thumbnail": "https://i.ytimg.com/vi/jTCBgANhA8A/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "_Y6ha5GKf1c",
+    "title": "PL4YST4TION",
+    "channelId": "UCikCc--ade1Hk1pr_rCVosg",
+    "artists": [
+      "NOUVEL ART",
+      "Cardinal",
+      "M4TIAS"
+    ],
+    "slug": "nouvel-art-pl4yst4tion",
+    "thumbnail": "https://i.ytimg.com/vi/_Y6ha5GKf1c/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "0NILvh67PGU",
+    "title": "Deemax - UNIVERS SONS (Prod. Lil Chick) - Clip Officiel",
+    "channelId": "UCVYoJ9YGg4K08d_5xkRiI-Q",
+    "artists": [
+      "DEEMAX"
+    ],
+    "slug": "deemax-univers-sons-prod-lil-chick-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/0NILvh67PGU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "IQccz4xRnlg",
+    "title": "Du spirituel dans l'art (feat. Sofiane Pamart)",
+    "channelId": "UCWbJyrUTqBziB5CmRYct5Mg",
+    "artists": [
+      "Lionel Soulchildren",
+      "Sofiane Pamart"
+    ],
+    "slug": "lionel-soulchildren-du-spirituel-dans-lart-feat-sofiane-pamart",
+    "thumbnail": "https://i.ytimg.com/vi/IQccz4xRnlg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "wWspVO8pYns",
+    "title": "Lord Esperanza",
+    "channelId": "UCE4Ykh2JJKBmS_Gf2o5cqIg",
+    "artists": [
+      "Lord Esperanza"
+    ],
+    "slug": "lord-esperanza",
+    "thumbnail": "https://i.ytimg.com/vi/wWspVO8pYns/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "U3YkTiKHKcg",
+    "title": "Shaga - 500 vices (clip officiel)",
+    "channelId": "UCPnxhyAxViN6eEXglzsEiww",
+    "artists": [
+      "SHAGA"
+    ],
+    "slug": "shaga-500-vices-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/U3YkTiKHKcg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "yCTJF-0Ry3c",
+    "title": "La Tête Ailleurs",
+    "channelId": "UCVOjEBDYWw9p14Dah0TIWKw",
+    "artists": [
+      "Swift Guad",
+      "Ol Zico",
+      "Melan",
+      "Itam"
+    ],
+    "slug": "swift-guad-la-tete-ailleurs",
+    "thumbnail": "https://i.ytimg.com/vi/yCTJF-0Ry3c/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ldbuypcvtyg",
+    "title": "LA BREITLING SUITE",
+    "channelId": "UCJ5oaHCbjJ4WeoKH0bVr_Fw",
+    "artists": [
+      "JOAQM"
+    ],
+    "slug": "joaqm-la-breitling-suite",
+    "thumbnail": "https://i.ytimg.com/vi/ldbuypcvtyg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Q0mQikWYAcA",
+    "title": "WESTFALEN",
+    "channelId": "UCBWt_qfJsWXSjFAjEVYLe0g",
+    "artists": [
+      "Pxrselow"
+    ],
+    "slug": "pxrselow-westfalen",
+    "thumbnail": "https://i.ytimg.com/vi/Q0mQikWYAcA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "UZY1tR2i-0U",
+    "title": "Grisha - Facile à dire",
+    "channelId": "UCxqvP6QMlx1QYTkGQzo_zwA",
+    "artists": [
+      "GRISHA"
+    ],
+    "slug": "grisha-facile-a-dire",
+    "thumbnail": "https://i.ytimg.com/vi/UZY1tR2i-0U/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "a7neTSZ0C_Y",
+    "title": "Un jour peut être",
+    "channelId": "UCC7x6-EaXoCbN52mvWN69hA",
+    "artists": [
+      "BAKAR"
+    ],
+    "slug": "bakar-un-jour-peut-etre",
+    "thumbnail": "https://i.ytimg.com/vi/a7neTSZ0C_Y/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "OOeQogdUxPw",
+    "title": "All Day",
+    "channelId": "UCy6tpj2otKrmKw1TSJKwGBw",
+    "artists": [
+      "ARAUJO"
+    ],
+    "slug": "araujo-all-day",
+    "thumbnail": "https://i.ytimg.com/vi/OOeQogdUxPw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "gBALPKZLKnk",
+    "title": "Tianmi - Silence",
+    "channelId": "UC0F__MrMP3xBwy3MNE20pTw",
+    "artists": [
+      "TIANMI"
+    ],
+    "slug": "tianmi-silence",
+    "thumbnail": "https://i.ytimg.com/vi/gBALPKZLKnk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "sh_c2xSSg2k",
+    "title": "Soulager",
+    "channelId": "UC0F__MrMP3xBwy3MNE20pTw",
+    "artists": [
+      "TIANMI"
+    ],
+    "slug": "tianmi-soulager",
+    "thumbnail": "https://i.ytimg.com/vi/sh_c2xSSg2k/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "dPwaG3XR-JA",
+    "title": "FANTÔME",
+    "channelId": "UCuXdZYr9yGA5V2xX9DDIMlQ",
+    "artists": [
+      "MADJ"
+    ],
+    "slug": "madj-fantome",
+    "thumbnail": "https://i.ytimg.com/vi/dPwaG3XR-JA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "-m1lu73pCAQ",
+    "title": "VIENS ON S'EN VA LOIN",
+    "channelId": "UCsYqYdjuk-qdA5eFVmCCiwQ",
+    "artists": [
+      "Artel"
+    ],
+    "slug": "artel-viens-on-sen-va-loin",
+    "thumbnail": "https://i.ytimg.com/vi/-m1lu73pCAQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "_rKbmcjPK4k",
+    "title": "Suffit d'un regard",
+    "channelId": "UC04uGhdzbYdX9w1We1FO8PA",
+    "artists": [
+      "ENIAH"
+    ],
+    "slug": "eniah-suffit-dun-regard",
+    "thumbnail": "https://i.ytimg.com/vi/_rKbmcjPK4k/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "KzGFrzwDdV8",
+    "title": "Ma faute",
+    "channelId": "UCiJf_FU2cxqQJBETFyy2VgQ",
+    "artists": [
+      "Thomas Goldberg"
+    ],
+    "slug": "thomas-goldberg-ma-faute",
+    "thumbnail": "https://i.ytimg.com/vi/KzGFrzwDdV8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "9_EFn6MypE0",
+    "title": "Wallace Cleaver - xénon (Paroles)",
+    "channelId": "UCnu495cbo2ZJvaViPdbe76w",
+    "artists": [
+      "WALLACE CLEAVER"
+    ],
+    "slug": "wallace-cleaver-xenon-paroles",
+    "thumbnail": "https://i.ytimg.com/vi/9_EFn6MypE0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "RxRgEEcilUk",
+    "title": "PERSELINHO",
+    "channelId": "UCBWt_qfJsWXSjFAjEVYLe0g",
+    "artists": [
+      "Pxrselow"
+    ],
+    "slug": "pxrselow-perselinho",
+    "thumbnail": "https://i.ytimg.com/vi/RxRgEEcilUk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "vhI0O73uTUw",
+    "title": "Tout leur prendre",
+    "channelId": "UCr0-HhE10hFBZQ_0BJjQNWg",
+    "artists": [
+      "Jeune Mort"
+    ],
+    "slug": "jeune-mort-tout-leur-prendre",
+    "thumbnail": "https://i.ytimg.com/vi/vhI0O73uTUw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "cGCsbxMq1s4",
+    "title": "L'INVERSE",
+    "channelId": "UC3jD7fkpB1ONUrF8BeXtMrQ",
+    "artists": [
+      "SURPRISE"
+    ],
+    "slug": "surprise-linverse",
+    "thumbnail": "https://i.ytimg.com/vi/cGCsbxMq1s4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "fB0uUGqviD0",
+    "title": "Seyté - Jamais",
+    "channelId": "UCMnUOq8gZDfTfwwP-_pR9-w",
+    "artists": [
+      "SEYTE"
+    ],
+    "slug": "seyte-jamais",
+    "thumbnail": "https://i.ytimg.com/vi/fB0uUGqviD0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "XBkoeD6x0pI",
+    "title": "Risqué de te dire",
+    "channelId": "UC1t5cvk9ls94mko7JuOFdnA",
+    "artists": [
+      "CIVIL"
+    ],
+    "slug": "civil-risque-de-te-dire",
+    "thumbnail": "https://i.ytimg.com/vi/XBkoeD6x0pI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "6vMEf9YDIJE",
+    "title": "Nécessaire",
+    "channelId": "UC3CHRq-l8o1NhZThK3L5yWg",
+    "artists": [
+      "IGOR"
+    ],
+    "slug": "igor-necessaire",
+    "thumbnail": "https://i.ytimg.com/vi/6vMEf9YDIJE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "I2RTYf8Ut8Y",
+    "title": "Pablo - Insuffisant (audio)",
+    "channelId": "UC8MWaoHhEBprXZxlkbSRdBQ",
+    "artists": [
+      "PABLO"
+    ],
+    "slug": "pablo-insuffisant-audio",
+    "thumbnail": "https://i.ytimg.com/vi/I2RTYf8Ut8Y/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "3jiQV2ccIJA",
+    "title": "écrire une fin",
+    "channelId": "UChOoB8RKT2Z0tX2TCFjvoPg",
+    "artists": [
+      "Beka",
+      "Yakary"
+    ],
+    "slug": "beka-ecrire-une-fin",
+    "thumbnail": "https://i.ytimg.com/vi/3jiQV2ccIJA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "O0n6TRac2kE",
+    "title": "IGOR - Incroyable",
+    "channelId": "UC3CHRq-l8o1NhZThK3L5yWg",
+    "artists": [
+      "IGOR"
+    ],
+    "slug": "igor-incroyable",
+    "thumbnail": "https://i.ytimg.com/vi/O0n6TRac2kE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "RU6nbCm6McU",
+    "title": "A l'eau",
+    "channelId": "UCVaC9qkzw4q40iG6RVH8D_w",
+    "artists": [
+      "Tonio MC",
+      "Sentin'l"
+    ],
+    "slug": "tonio-mc-a-leau",
+    "thumbnail": "https://i.ytimg.com/vi/RU6nbCm6McU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "UGs74O8KuEc",
+    "title": "Pablo - Charon (audio)",
+    "channelId": "UC8MWaoHhEBprXZxlkbSRdBQ",
+    "artists": [
+      "PABLO"
+    ],
+    "slug": "pablo-charon-audio",
+    "thumbnail": "https://i.ytimg.com/vi/UGs74O8KuEc/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Hg_NqGiwqxY",
+    "title": "Peet - No Solo",
+    "channelId": "UCGhqKlRzxdgkmrIPI4DN-Tw",
+    "artists": [
+      "Dr PEET"
+    ],
+    "slug": "dr-peet-peet-no-solo",
+    "thumbnail": "https://i.ytimg.com/vi/Hg_NqGiwqxY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "gpUAge_yEj0",
+    "title": "Nuit d'hotel",
+    "channelId": "UC_b01YmccNwcGGegEqBcsxg",
+    "artists": [
+      "L'or du Commun"
+    ],
+    "slug": "lor-du-commun-nuit-dhotel",
+    "thumbnail": "https://i.ytimg.com/vi/gpUAge_yEj0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "o9A9159O6uo",
+    "title": "313 & Oxmo Puccino - Valeurs (Clip officiel)",
+    "channelId": "UChBxosI8fDrxw6RVxFlSAdQ",
+    "artists": [
+      "313",
+      "Oxmo Puccino"
+    ],
+    "slug": "313-oxmo-puccino-valeurs-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/o9A9159O6uo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "dCuHEUFu3nM",
+    "title": "Alvin Chris ft BRÖ - Un peu beaucoup (Clip officiel)",
+    "channelId": "UCr0Jdc8F6HZhnD6ZdZ6ByNQ",
+    "artists": [
+      "Alvin Chris",
+      "BRÖ"
+    ],
+    "slug": "alvin-chris-ft-bro-un-peu-beaucoup-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/dCuHEUFu3nM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "RpU9NGRrBkM",
+    "title": "LA ROUTINE DES GENS HEUREUX",
+    "channelId": "UC6PjwPbPJYLoOOgiBOItzJw",
+    "artists": [
+      "HOMINGUEST"
+    ],
+    "slug": "hominguest-la-routine-des-gens-heureux",
+    "thumbnail": "https://i.ytimg.com/vi/RpU9NGRrBkM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "01HEqRH8Wt8",
+    "title": "SKIA",
+    "channelId": "UCQEd436dMjreraZkXQNXgHg",
+    "artists": [
+      "SKIA"
+    ],
+    "slug": "skia",
+    "thumbnail": "https://i.ytimg.com/vi/01HEqRH8Wt8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "LVWNDYS0fN8",
+    "title": "L'Or du Commun - Sable feat. Lous & The Yakuza",
+    "channelId": "UC_b01YmccNwcGGegEqBcsxg",
+    "artists": [
+      "L'Or du Commun",
+      "Lous",
+      "The Yakuza"
+    ],
+    "slug": "lor-du-commun-sable-feat-lous-the-yakuza",
+    "thumbnail": "https://i.ytimg.com/vi/LVWNDYS0fN8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Uquq1uECq6E",
+    "title": "((FumĒe))",
+    "channelId": "UCD34mVMgzAQhzby7O-f4IZQ",
+    "artists": [
+      "Komēdza"
+    ],
+    "slug": "komedza-fumee",
+    "thumbnail": "https://i.ytimg.com/vi/Uquq1uECq6E/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "oTEwznF7I-k",
+    "title": "Ztatik - À venir",
+    "channelId": "UCOpnRiSw8awK0bBBgpmWo1g",
+    "artists": [
+      "ZTATIK"
+    ],
+    "slug": "ztatik-a-venir",
+    "thumbnail": "https://i.ytimg.com/vi/oTEwznF7I-k/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "dOAVl2gwVwA",
+    "title": "Cinquième étage",
+    "channelId": "UCF24qrjsTaqO_2nqT1_tcpQ",
+    "artists": [
+      "PRIMERO"
+    ],
+    "slug": "primero-cinquieme-etage",
+    "thumbnail": "https://i.ytimg.com/vi/dOAVl2gwVwA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Ko8sobZiwxo",
+    "title": "Sheldon - Quasar",
+    "channelId": "UCo1zHzOv9O6JuT-jGp_flKw",
+    "artists": [
+      "SHELDON"
+    ],
+    "slug": "sheldon-quasar",
+    "thumbnail": "https://i.ytimg.com/vi/Ko8sobZiwxo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "dFyOOJoF7bI",
+    "title": "Besoin d'en parler",
+    "channelId": "UCW_maGzHfmOJPtwRV-1zOag",
+    "artists": [
+      "SEYLI"
+    ],
+    "slug": "seyli-besoin-den-parler",
+    "thumbnail": "https://i.ytimg.com/vi/dFyOOJoF7bI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "xvtW_MEXnyI",
+    "title": "Vin's - Outrage I (Official Video)",
+    "channelId": "UC2GJz3_g-SBaVE8IzrYJgoQ",
+    "artists": [
+      "VIN'S"
+    ],
+    "slug": "vins-outrage-i-official-video",
+    "thumbnail": "https://i.ytimg.com/vi/xvtW_MEXnyI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "J9SPsTFfYmQ",
+    "title": "Destin",
+    "channelId": "UC8MWaoHhEBprXZxlkbSRdBQ",
+    "artists": [
+      "PABLO"
+    ],
+    "slug": "pablo-destin",
+    "thumbnail": "https://i.ytimg.com/vi/J9SPsTFfYmQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Hcmj1T1kSwk",
+    "title": "LES VOIX",
+    "channelId": "UC3LQ87yMWhQxmvp0lUAK9Mg",
+    "artists": [
+      "Mademoiselle Lou",
+      "MadeInParis"
+    ],
+    "slug": "mademoiselle-lou-les-voix",
+    "thumbnail": "https://i.ytimg.com/vi/Hcmj1T1kSwk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "3mRTlWfbNm8",
+    "title": "les yeux dans le vide",
+    "channelId": "UCt_HxjKjkUwdchd-ubceJOg",
+    "artists": [
+      "KNOTTY"
+    ],
+    "slug": "knotty-les-yeux-dans-le-vide",
+    "thumbnail": "https://i.ytimg.com/vi/3mRTlWfbNm8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "v3BKSL290kQ",
+    "title": "Keroué - Cramé (Clip officiel)",
+    "channelId": "UChF_2y7rP6BKKdEhQ_SJPKA",
+    "artists": [
+      "Keroué"
+    ],
+    "slug": "keroue-crame-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/v3BKSL290kQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "aW4A5AYVp6I",
+    "title": "Lord Esperanza",
+    "channelId": "UCE4Ykh2JJKBmS_Gf2o5cqIg",
+    "artists": [
+      "Lord Esperanza"
+    ],
+    "slug": "lord-esperanza",
+    "thumbnail": "https://i.ytimg.com/vi/aW4A5AYVp6I/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "d_QkgfIaXYk",
+    "title": "IGOR - Vide",
+    "channelId": "UC3CHRq-l8o1NhZThK3L5yWg",
+    "artists": [
+      "IGOR"
+    ],
+    "slug": "igor-vide",
+    "thumbnail": "https://i.ytimg.com/vi/d_QkgfIaXYk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "tVLXtY_RBW4",
+    "title": "Seyté - Luna ft Nadia Paz",
+    "channelId": "UCMnUOq8gZDfTfwwP-_pR9-w",
+    "artists": [
+      "SEYTE"
+    ],
+    "slug": "seyte-luna-ft-nadia-paz",
+    "thumbnail": "https://i.ytimg.com/vi/tVLXtY_RBW4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "FPHWyML2lXw",
+    "title": "Eesah Yasuke - Mon ciel (prod. Al777) Clip Officiel",
+    "channelId": "UCUChXW_a1cZ3uhuMHRd_Aqg",
+    "artists": [
+      "Eesah Yasuke"
+    ],
+    "slug": "eesah-yasuke-mon-ciel-prod-al777-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/FPHWyML2lXw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "G2xPvZhu4cg",
+    "title": "Cerf volant",
+    "channelId": "UCS5_frVZSQ2SvCyelCjKGzQ",
+    "artists": [
+      "Kaky"
+    ],
+    "slug": "kaky-cerf-volant",
+    "thumbnail": "https://i.ytimg.com/vi/G2xPvZhu4cg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "E59FNwfNgbY",
+    "title": "Merde (Outro)",
+    "channelId": "UCZz-I0tsMCqEirxCAjAiI0A",
+    "artists": [
+      "JOSMAN"
+    ],
+    "slug": "josman-merde-outro",
+    "thumbnail": "https://i.ytimg.com/vi/E59FNwfNgbY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "4sowO7N_xPI",
+    "title": "IMPAR - Fermer mon coeur",
+    "channelId": "UCIVohAqNC2lsPUNmXJGmthA",
+    "artists": [
+      "IMPAR"
+    ],
+    "slug": "impar-fermer-mon-coeur",
+    "thumbnail": "https://i.ytimg.com/vi/4sowO7N_xPI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "gVVsZOU35-w",
+    "title": "Dr PEET",
+    "channelId": "UCGhqKlRzxdgkmrIPI4DN-Tw",
+    "artists": [
+      "Dr PEET"
+    ],
+    "slug": "dr-peet",
+    "thumbnail": "https://i.ytimg.com/vi/gVVsZOU35-w/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "N2w-vmxgMpY",
+    "title": "Mauvaise Bouche - Dingue",
+    "channelId": "UCUem65uxJw94_Xqs6-RKwbA",
+    "artists": [
+      "MAUVAISE BOUCHE"
+    ],
+    "slug": "mauvaise-bouche-dingue",
+    "thumbnail": "https://i.ytimg.com/vi/N2w-vmxgMpY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "W66vaJWfiGY",
+    "title": "Sopico - Thème (Objet Video)",
+    "channelId": "UCNbkz3Mpu6QVZ3ujee7kyzA",
+    "artists": [
+      "SOPICO"
+    ],
+    "slug": "sopico-theme-objet-video",
+    "thumbnail": "https://i.ytimg.com/vi/W66vaJWfiGY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "f3aOEmOBNqA",
+    "title": "Bekar",
+    "channelId": "UCOvYc9SLXqnfOB-jEiYo_Xg",
+    "artists": [
+      "BEKAR"
+    ],
+    "slug": "bekar",
+    "thumbnail": "https://i.ytimg.com/vi/f3aOEmOBNqA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "cxY_RylGNzE",
+    "title": "FLYNT",
+    "channelId": "UCEkCOqs7JLIXKysd9CAFB9Q",
+    "artists": [
+      "FLYNT"
+    ],
+    "slug": "flynt",
+    "thumbnail": "https://i.ytimg.com/vi/cxY_RylGNzE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ZThKmAQ_DhE",
+    "title": "Remets",
+    "channelId": "UCSDfjMqtqNBKacROu3XJOAQ",
+    "artists": [
+      "LOUVAR"
+    ],
+    "slug": "louvar-remets",
+    "thumbnail": "https://i.ytimg.com/vi/ZThKmAQ_DhE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "dNTtTGaJ9GY",
+    "title": "ŒUVRE",
+    "channelId": "UCz3KCKF7Fi32FWOOfhLdnUg",
+    "artists": [
+      "SCYLLA"
+    ],
+    "slug": "scylla-uvre",
+    "thumbnail": "https://i.ytimg.com/vi/dNTtTGaJ9GY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "L_Vuc7NX8UE",
+    "title": "MAUVAIS POUR LE BUSINESS",
+    "channelId": "UCEkCOqs7JLIXKysd9CAFB9Q",
+    "artists": [
+      "FLYNT"
+    ],
+    "slug": "flynt-mauvais-pour-le-business",
+    "thumbnail": "https://i.ytimg.com/vi/L_Vuc7NX8UE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "KfIpMZpZXOk",
+    "title": "robdbloc - Rien ne change (Clip Officiel)",
+    "channelId": "UCSKvbvDEn9ouvX7v25GEYCQ",
+    "artists": [
+      "ROB"
+    ],
+    "slug": "robdbloc-rien-ne-change-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/KfIpMZpZXOk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "tx-6QpteLtg",
+    "title": "Lil Yan - EN FAIT ÇA VA / DÉSOLÉ MERCI (Lyric Vidéo)",
+    "channelId": "UCUZF77hYYh35RKhdFjZWDXw",
+    "artists": [
+      "LIL YAN"
+    ],
+    "slug": "lil-yan-en-fait-ca-va-desole-merci-lyric-video",
+    "thumbnail": "https://i.ytimg.com/vi/tx-6QpteLtg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "2xo94pPzSx8",
+    "title": "Carmin",
+    "channelId": "UCRVWjZ3DYx8fGn2mctJ5Hbw",
+    "artists": [
+      "SHIEN"
+    ],
+    "slug": "shien-carmin",
+    "thumbnail": "https://i.ytimg.com/vi/2xo94pPzSx8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "YFhaZA5wSko",
+    "title": "BERKAR",
+    "channelId": "UCOvYc9SLXqnfOB-jEiYo_Xg",
+    "artists": [
+      "BERKAR"
+    ],
+    "slug": "berkar",
+    "thumbnail": "https://i.ytimg.com/vi/YFhaZA5wSko/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "dMQiGAamrV4",
+    "title": "Tsew The Kid - Messe-basse (session officielle)",
+    "channelId": "UCTLjtrUofNrepjsANwVUZlA",
+    "artists": [
+      "TSEW THE KID"
+    ],
+    "slug": "tsew-the-kid-messe-basse-session-officielle",
+    "thumbnail": "https://i.ytimg.com/vi/dMQiGAamrV4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "qvpzJ1oNAVM",
+    "title": "Tellement",
+    "channelId": "UC768C9fCkvlfK_n5tTNFRpQ",
+    "artists": [
+      "DAVID PISTOL"
+    ],
+    "slug": "david-pistol-tellement",
+    "thumbnail": "https://i.ytimg.com/vi/qvpzJ1oNAVM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "cckwSmM5Egk",
+    "title": "The Doug - poison (visualizer)",
+    "channelId": "UCpW2QeJTbaXthKEcHlPpE-Q",
+    "artists": [
+      "THE DOUG"
+    ],
+    "slug": "the-doug-poison-visualizer",
+    "thumbnail": "https://i.ytimg.com/vi/cckwSmM5Egk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "9OgZ6OLlnEw",
+    "title": "AAMO - ZER01 (CLIP)",
+    "channelId": "UCVD7jLLqkB4XLz4MZGWHo2w",
+    "artists": [
+      "AAMO"
+    ],
+    "slug": "aamo-zer01-clip",
+    "thumbnail": "https://i.ytimg.com/vi/9OgZ6OLlnEw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "VvgUzKtylkg",
+    "title": "AAMO - MÉRITANT (Lyric Vidéo)",
+    "channelId": "UCVD7jLLqkB4XLz4MZGWHo2w",
+    "artists": [
+      "AAMO"
+    ],
+    "slug": "aamo-meritant-lyric-video",
+    "thumbnail": "https://i.ytimg.com/vi/VvgUzKtylkg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "grjLqKIzsAM",
+    "title": "SOLIDE",
+    "channelId": "",
+    "artists": [
+      "WIT."
+    ],
+    "slug": "wit-solide",
+    "thumbnail": "https://i.ytimg.com/vi/grjLqKIzsAM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "I5wmZQhIs0E",
+    "title": "Pare-Brise",
+    "channelId": "",
+    "artists": [
+      "ABSOLEM"
+    ],
+    "slug": "absolem-pare-brise",
+    "thumbnail": "https://i.ytimg.com/vi/I5wmZQhIs0E/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "GQstFudMDl0",
+    "title": "Les étoiles tombent",
+    "channelId": "",
+    "artists": [
+      "808NOCHE"
+    ],
+    "slug": "808noche-les-etoiles-tombent",
+    "thumbnail": "https://i.ytimg.com/vi/GQstFudMDl0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "d4N5-sQPTLw",
+    "title": "Boîte sombre",
+    "channelId": "",
+    "artists": [
+      "2TAF"
+    ],
+    "slug": "2taf-boite-sombre",
+    "thumbnail": "https://i.ytimg.com/vi/d4N5-sQPTLw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "EWZKz3faAy8",
+    "title": "HANDS IN THE DIRT",
+    "channelId": "",
+    "artists": [
+      "LUKX"
+    ],
+    "slug": "lukx-hands-in-the-dirt",
+    "thumbnail": "https://i.ytimg.com/vi/EWZKz3faAy8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "fhztqGmiK6I",
+    "title": "Sang de grec",
+    "channelId": "",
+    "artists": [
+      "Chanje"
+    ],
+    "slug": "chanje-sang-de-grec",
+    "thumbnail": "https://i.ytimg.com/vi/fhztqGmiK6I/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "EVhGAqt2JzQ",
+    "title": "MERRICK",
+    "channelId": "",
+    "artists": [
+      "Chanje"
+    ],
+    "slug": "chanje-merrick",
+    "thumbnail": "https://i.ytimg.com/vi/EVhGAqt2JzQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "gvDsw0md07E",
+    "title": "Le temps nous a tout pris",
+    "channelId": "",
+    "artists": [
+      "ARTEL"
+    ],
+    "slug": "artel-le-temps-nous-a-tout-pris",
+    "thumbnail": "https://i.ytimg.com/vi/gvDsw0md07E/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "fAD_NmbtGWA",
+    "title": "Batterie faible",
+    "channelId": "",
+    "artists": [
+      "Cléon · Melan"
+    ],
+    "slug": "cleon-melan-batterie-faible",
+    "thumbnail": "https://i.ytimg.com/vi/fAD_NmbtGWA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "oYM6r5FK2P8",
+    "title": "ARAAME",
+    "channelId": "",
+    "artists": [
+      "Kryptoo"
+    ],
+    "slug": "kryptoo-araame",
+    "thumbnail": "https://i.ytimg.com/vi/oYM6r5FK2P8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "u6sKzywIuXw",
+    "title": "Trop tard",
+    "channelId": "",
+    "artists": [
+      "Bijo"
+    ],
+    "slug": "bijo-trop-tard",
+    "thumbnail": "https://i.ytimg.com/vi/u6sKzywIuXw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "DV93KP2nFQc",
+    "title": "VICES",
+    "channelId": "",
+    "artists": [
+      "Loonzii"
+    ],
+    "slug": "loonzii-vices",
+    "thumbnail": "https://i.ytimg.com/vi/DV93KP2nFQc/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "_COErYqazUM",
+    "title": "jean - Procrastinateur",
+    "channelId": "",
+    "artists": [
+      "jean"
+    ],
+    "slug": "jean-procrastinateur",
+    "thumbnail": "https://i.ytimg.com/vi/_COErYqazUM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "9ijjh6dzgw4",
+    "title": "Mer orange",
+    "channelId": "",
+    "artists": [
+      "VERSIONBETA7"
+    ],
+    "slug": "versionbeta7-mer-orange",
+    "thumbnail": "https://i.ytimg.com/vi/9ijjh6dzgw4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "vyC6nEDuIjo",
+    "title": "Deadman (feat. AnNie .Adaa)",
+    "channelId": "",
+    "artists": [
+      "Nunca · anNie · Adaa"
+    ],
+    "slug": "nunca-annie-adaa-deadman-feat-annie-adaa",
+    "thumbnail": "https://i.ytimg.com/vi/vyC6nEDuIjo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "K6lYWyl2uL4",
+    "title": "... fuir.",
+    "channelId": "",
+    "artists": [
+      "Lake"
+    ],
+    "slug": "lake-fuir",
+    "thumbnail": "https://i.ytimg.com/vi/K6lYWyl2uL4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "vDrUfGTi2lc",
+    "title": "qu'une vie",
+    "channelId": "",
+    "artists": [
+      "OSO"
+    ],
+    "slug": "oso-quune-vie",
+    "thumbnail": "https://i.ytimg.com/vi/vDrUfGTi2lc/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "k1XrQ6g6Rgg",
+    "title": "Drip & Flow",
+    "channelId": "",
+    "artists": [
+      "FURLAX"
+    ],
+    "slug": "furlax-drip-flow",
+    "thumbnail": "https://i.ytimg.com/vi/k1XrQ6g6Rgg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "et7InAunCNE",
+    "title": "Orchidée",
+    "channelId": "",
+    "artists": [
+      "MARCEAU"
+    ],
+    "slug": "marceau-orchidee",
+    "thumbnail": "https://i.ytimg.com/vi/et7InAunCNE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "nbGrKhw-I8g",
+    "title": "Hyacinthe - Olivia + Grande Ourse",
+    "channelId": "",
+    "artists": [
+      "HYACINTHE"
+    ],
+    "slug": "hyacinthe-olivia-grande-ourse",
+    "thumbnail": "https://i.ytimg.com/vi/nbGrKhw-I8g/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "IFY0IsD-0W0",
+    "title": "Fredz - La vérité (clip officiel)",
+    "channelId": "",
+    "artists": [
+      "FREDZ"
+    ],
+    "slug": "fredz-la-verite-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/IFY0IsD-0W0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "c4YJmB75lHM",
+    "title": "F & F",
+    "channelId": "",
+    "artists": [
+      "PRIMERO"
+    ],
+    "slug": "primero-f-f",
+    "thumbnail": "https://i.ytimg.com/vi/c4YJmB75lHM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Zm0bj5L67LM",
+    "title": "VOLODIA - Appel Manqué feat. Phases Cachées [Studio Clip]",
+    "channelId": "",
+    "artists": [
+      "VOLODIA · Phases Cachées"
+    ],
+    "slug": "volodia-phases-cachees-volodia-appel-manque-feat-phases-cachees-studio-clip",
+    "thumbnail": "https://i.ytimg.com/vi/Zm0bj5L67LM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "063Bs92PLq4",
+    "title": "Don du Ciel",
+    "channelId": "",
+    "artists": [
+      "PRINCESSE"
+    ],
+    "slug": "princesse-don-du-ciel",
+    "thumbnail": "https://i.ytimg.com/vi/063Bs92PLq4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "E8SjwfbZ3rU",
+    "title": "Différente",
+    "channelId": "",
+    "artists": [
+      "CABALLERO"
+    ],
+    "slug": "caballero-differente",
+    "thumbnail": "https://i.ytimg.com/vi/E8SjwfbZ3rU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "fseO14_JvT4",
+    "title": "SEB - nunchi (Visualizer)",
+    "channelId": "",
+    "artists": [
+      "SEB"
+    ],
+    "slug": "seb-nunchi-visualizer",
+    "thumbnail": "https://i.ytimg.com/vi/fseO14_JvT4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "3wfn0F0rebM",
+    "title": "J'ai trop bu",
+    "channelId": "",
+    "artists": [
+      "CIELBLEU"
+    ],
+    "slug": "cielbleu-jai-trop-bu",
+    "thumbnail": "https://i.ytimg.com/vi/3wfn0F0rebM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "DfGNOWK4dS8",
+    "title": "Lord Esperanza - Différent (Clip officiel)",
+    "channelId": "",
+    "artists": [
+      "LORD ESPERANZA"
+    ],
+    "slug": "lord-esperanza-different-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/DfGNOWK4dS8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "-g_n0JCZsNI",
+    "title": "Bloqué dans un rêve",
+    "channelId": "",
+    "artists": [
+      "DUB SILENCE"
+    ],
+    "slug": "dub-silence-bloque-dans-un-reve",
+    "thumbnail": "https://i.ytimg.com/vi/-g_n0JCZsNI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "8_54xXY7jlY",
+    "title": "A minuit",
+    "channelId": "",
+    "artists": [
+      "BEKAR"
+    ],
+    "slug": "bekar-a-minuit",
+    "thumbnail": "https://i.ytimg.com/vi/8_54xXY7jlY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "97aQ1OLbkYA",
+    "title": "Under canopée",
+    "channelId": "",
+    "artists": [
+      "Thimajin"
+    ],
+    "slug": "thimajin-under-canopee",
+    "thumbnail": "https://i.ytimg.com/vi/97aQ1OLbkYA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "IsqQRKZK_hs",
+    "title": "Minotaurus",
+    "channelId": "",
+    "artists": [
+      "Hotel Paradisio"
+    ],
+    "slug": "hotel-paradisio-minotaurus",
+    "thumbnail": "https://i.ytimg.com/vi/IsqQRKZK_hs/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "94ayVyxkAaw",
+    "title": "Dans l'appart",
+    "channelId": "",
+    "artists": [
+      "T.O."
+    ],
+    "slug": "to-dans-lappart",
+    "thumbnail": "https://i.ytimg.com/vi/94ayVyxkAaw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "N9Xadgzna7s",
+    "title": "Abîme",
+    "channelId": "",
+    "artists": [
+      "Hotel Paradisio"
+    ],
+    "slug": "hotel-paradisio-abime",
+    "thumbnail": "https://i.ytimg.com/vi/N9Xadgzna7s/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "6WaqzD-k8PA",
+    "title": "SOLEIL NOIR",
+    "channelId": "",
+    "artists": [
+      "Chanje"
+    ],
+    "slug": "chanje-soleil-noir",
+    "thumbnail": "https://i.ytimg.com/vi/6WaqzD-k8PA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "thXGsRFt2So",
+    "title": "LA TOUR ET LE FOU",
+    "channelId": "",
+    "artists": [
+      "M le maudit"
+    ],
+    "slug": "m-le-maudit-la-tour-et-le-fou",
+    "thumbnail": "https://i.ytimg.com/vi/thXGsRFt2So/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "fkyv_adjGNQ",
+    "title": "Croque-mitaine",
+    "channelId": "",
+    "artists": [
+      "Karma"
+    ],
+    "slug": "karma-croque-mitaine",
+    "thumbnail": "https://i.ytimg.com/vi/fkyv_adjGNQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "8EypTR90Sxw",
+    "title": "jrépondsplus",
+    "channelId": "",
+    "artists": [
+      "MARTIN GAL"
+    ],
+    "slug": "martin-gal-jrepondsplus",
+    "thumbnail": "https://i.ytimg.com/vi/8EypTR90Sxw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "WdKUBC3H2hU",
+    "title": "DESPAWN",
+    "channelId": "",
+    "artists": [
+      "SKYWAY"
+    ],
+    "slug": "skyway-despawn",
+    "thumbnail": "https://i.ytimg.com/vi/WdKUBC3H2hU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "18-rWkLqoAY",
+    "title": "Thomas Goldberg - Tom (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "Thomas Goldberg"
+    ],
+    "slug": "thomas-goldberg-tom-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/18-rWkLqoAY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "wFSIus78oSw",
+    "title": "BAD NEW$",
+    "channelId": "",
+    "artists": [
+      "Loonzii"
+    ],
+    "slug": "loonzii-bad-new",
+    "thumbnail": "https://i.ytimg.com/vi/wFSIus78oSw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "gLYkgxKEDPk",
+    "title": "OUKHTY",
+    "channelId": "",
+    "artists": [
+      "SKYWAY"
+    ],
+    "slug": "skyway-oukhty",
+    "thumbnail": "https://i.ytimg.com/vi/gLYkgxKEDPk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "iqk2Uxj8RVM",
+    "title": "KOULOUKA",
+    "channelId": "",
+    "artists": [
+      "Lesram"
+    ],
+    "slug": "lesram-koulouka",
+    "thumbnail": "https://i.ytimg.com/vi/iqk2Uxj8RVM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "UgNn8ATdKyk",
+    "title": "Automatique",
+    "channelId": "",
+    "artists": [
+      "Lekas"
+    ],
+    "slug": "lekas-automatique",
+    "thumbnail": "https://i.ytimg.com/vi/UgNn8ATdKyk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "pjA2di6KlNE",
+    "title": "Lake - Brillant (clip officiel)",
+    "channelId": "",
+    "artists": [
+      "Lake"
+    ],
+    "slug": "lake-brillant-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/pjA2di6KlNE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "6iXqvpd5T78",
+    "title": "Ville - Hominguest (Audio)",
+    "channelId": "",
+    "artists": [
+      "Ville"
+    ],
+    "slug": "ville-hominguest-audio",
+    "thumbnail": "https://i.ytimg.com/vi/6iXqvpd5T78/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "XF5FkLKj758",
+    "title": "On est pas fort (feat. Esmo)",
+    "channelId": "",
+    "artists": [
+      "LUPI'O · Esmo"
+    ],
+    "slug": "lupio-esmo-on-est-pas-fort-feat-esmo",
+    "thumbnail": "https://i.ytimg.com/vi/XF5FkLKj758/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Ef04amVUmbs",
+    "title": "PAR SEMAINE",
+    "channelId": "",
+    "artists": [
+      "Chanje"
+    ],
+    "slug": "chanje-par-semaine",
+    "thumbnail": "https://i.ytimg.com/vi/Ef04amVUmbs/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "5m_I9Lw1PMs",
+    "title": "Belle plus que bête",
+    "channelId": "",
+    "artists": [
+      "Kryptoo"
+    ],
+    "slug": "kryptoo-belle-plus-que-bete",
+    "thumbnail": "https://i.ytimg.com/vi/5m_I9Lw1PMs/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "z7B_HcyvmuM",
+    "title": "J'TE MENTIRAI",
+    "channelId": "",
+    "artists": [
+      "Karma"
+    ],
+    "slug": "karma-jte-mentirai",
+    "thumbnail": "https://i.ytimg.com/vi/z7B_HcyvmuM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "kIn8eo1PLPY",
+    "title": "Tellement",
+    "channelId": "",
+    "artists": [
+      "Shien"
+    ],
+    "slug": "shien-tellement",
+    "thumbnail": "https://i.ytimg.com/vi/kIn8eo1PLPY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ZTdpvi99dzk",
+    "title": "Y'a R qui change",
+    "channelId": "",
+    "artists": [
+      "LUPI'O"
+    ],
+    "slug": "lupio-ya-r-qui-change",
+    "thumbnail": "https://i.ytimg.com/vi/ZTdpvi99dzk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "dukPMmVLEX4",
+    "title": "DEMÉLÈVR",
+    "channelId": "",
+    "artists": [
+      "Mak'Nil"
+    ],
+    "slug": "maknil-demelevr",
+    "thumbnail": "https://i.ytimg.com/vi/dukPMmVLEX4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Iaa9ebrpsXU",
+    "title": "BLUE",
+    "channelId": "",
+    "artists": [
+      "PHLP"
+    ],
+    "slug": "phlp-blue",
+    "thumbnail": "https://i.ytimg.com/vi/Iaa9ebrpsXU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "10tvdCFKv8M",
+    "title": "BRARDA (ft. Joey Larsé) - JUSTE UN PEU",
+    "channelId": "",
+    "artists": [
+      "BRARDA"
+    ],
+    "slug": "brarda-ft-joey-larse-juste-un-peu",
+    "thumbnail": "https://i.ytimg.com/vi/10tvdCFKv8M/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "alhVz54xQek",
+    "title": "eldorado",
+    "channelId": "",
+    "artists": [
+      "skrim'Z"
+    ],
+    "slug": "skrimz-eldorado",
+    "thumbnail": "https://i.ytimg.com/vi/alhVz54xQek/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "95NqhZLrtgw",
+    "title": "L’ombre attire le sombre",
+    "channelId": "",
+    "artists": [
+      "Secro Star"
+    ],
+    "slug": "secro-star-lombre-attire-le-sombre",
+    "thumbnail": "https://i.ytimg.com/vi/95NqhZLrtgw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "va_SI8Si9JM",
+    "title": "Masques, pt. 2",
+    "channelId": "",
+    "artists": [
+      "Thomas Goldberg"
+    ],
+    "slug": "thomas-goldberg-masques-pt-2",
+    "thumbnail": "https://i.ytimg.com/vi/va_SI8Si9JM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "MP40FrqJlpA",
+    "title": "VVILL - TORNADE",
+    "channelId": "",
+    "artists": [
+      "VVILL"
+    ],
+    "slug": "vvill-tornade",
+    "thumbnail": "https://i.ytimg.com/vi/MP40FrqJlpA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "5HFCPCIVW5E",
+    "title": "Wallace Cleaver - Incendie",
+    "channelId": "",
+    "artists": [
+      "Wallace Cleaver"
+    ],
+    "slug": "wallace-cleaver-incendie",
+    "thumbnail": "https://i.ytimg.com/vi/5HFCPCIVW5E/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "CrhG7QG0t8c",
+    "title": "BEN plg - Le goût du sel (prod. Le Caméléon x Lucci' x Murer)",
+    "channelId": "",
+    "artists": [
+      "Ben_plg"
+    ],
+    "slug": "benplg-ben-plg-le-gout-du-sel-prod-le-cameleon-x-lucci-x-murer",
+    "thumbnail": "https://i.ytimg.com/vi/CrhG7QG0t8c/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "nNfv0OrjkdI",
+    "title": "Karma - DON",
+    "channelId": "",
+    "artists": [
+      "Karma"
+    ],
+    "slug": "karma-don",
+    "thumbnail": "https://i.ytimg.com/vi/nNfv0OrjkdI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "m3ebqlnPTCI",
+    "title": "PERSONNEL",
+    "channelId": "",
+    "artists": [
+      "Nagä"
+    ],
+    "slug": "naga-personnel",
+    "thumbnail": "https://i.ytimg.com/vi/m3ebqlnPTCI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "VFhNyDVldC8",
+    "title": "Thomas Goldberg - Failles (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "Thomas Goldberg"
+    ],
+    "slug": "thomas-goldberg-failles-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/VFhNyDVldC8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "40ihbG01I0A",
+    "title": "Interlude (Bien ou quoi)",
+    "channelId": "",
+    "artists": [
+      "RIZLA"
+    ],
+    "slug": "rizla-interlude-bien-ou-quoi",
+    "thumbnail": "https://i.ytimg.com/vi/40ihbG01I0A/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ES_id7_qXs4",
+    "title": "SUR LE GUN",
+    "channelId": "",
+    "artists": [
+      "YVNNIS"
+    ],
+    "slug": "yvnnis-sur-le-gun",
+    "thumbnail": "https://i.ytimg.com/vi/ES_id7_qXs4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "1WLMJTI9VuA",
+    "title": "ON VERRA DEMAIN",
+    "channelId": "",
+    "artists": [
+      "BEEBY"
+    ],
+    "slug": "beeby-on-verra-demain",
+    "thumbnail": "https://i.ytimg.com/vi/1WLMJTI9VuA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "8jW932ApmIo",
+    "title": "Chahu - Possible",
+    "channelId": "",
+    "artists": [
+      "CHAHU"
+    ],
+    "slug": "chahu-possible",
+    "thumbnail": "https://i.ytimg.com/vi/8jW932ApmIo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "yi6eXqrsyzQ",
+    "title": "Svudvde - Inconditionnel (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "SVUDVDE"
+    ],
+    "slug": "svudvde-inconditionnel-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/yi6eXqrsyzQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "TRVjVaLPrqY",
+    "title": "La doudoune à Wenger",
+    "channelId": "",
+    "artists": [
+      "MUMUR!"
+    ],
+    "slug": "mumur-la-doudoune-a-wenger",
+    "thumbnail": "https://i.ytimg.com/vi/TRVjVaLPrqY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "fpBkUvFbWMc",
+    "title": "chien noir - Échappées belles (Clip officiel)",
+    "channelId": "",
+    "artists": [
+      "CHIEN NOIR"
+    ],
+    "slug": "chien-noir-echappees-belles-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/fpBkUvFbWMc/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "9P78QdV6vmE",
+    "title": "SCYLLA & FURAX BARBAROSSA - La reine des ombres (Clip officiel)",
+    "channelId": "",
+    "artists": [
+      "SCYLLA · FURAX"
+    ],
+    "slug": "scylla-furax-barbarossa-la-reine-des-ombres-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/9P78QdV6vmE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "xwED6YmFOXo",
+    "title": "FURLAX - KITOKO",
+    "channelId": "",
+    "artists": [
+      "FURLAX"
+    ],
+    "slug": "furlax-kitoko",
+    "thumbnail": "https://i.ytimg.com/vi/xwED6YmFOXo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "vQO6Lq9-5SY",
+    "title": "Petit Alex",
+    "channelId": "",
+    "artists": [
+      "BEKAR"
+    ],
+    "slug": "bekar-petit-alex",
+    "thumbnail": "https://i.ytimg.com/vi/vQO6Lq9-5SY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "R43OQN4tJIY",
+    "title": "Sans la pluie",
+    "channelId": "",
+    "artists": [
+      "BEKAR"
+    ],
+    "slug": "bekar-sans-la-pluie",
+    "thumbnail": "https://i.ytimg.com/vi/R43OQN4tJIY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "uqcAbOjrn5o",
+    "title": "Sentin'l - C'est normal feat Melan",
+    "channelId": "",
+    "artists": [
+      "SENTIN'L · MELAN"
+    ],
+    "slug": "sentinl-melan-sentinl-cest-normal-feat-melan",
+    "thumbnail": "https://i.ytimg.com/vi/uqcAbOjrn5o/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "XPSv8nCBRzU",
+    "title": "Berry - X FILES (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "BERRY"
+    ],
+    "slug": "berry-x-files-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/XPSv8nCBRzU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "06Hrmwt-zdk",
+    "title": "Keroué - 100K / GRANIT (clips officiels)",
+    "channelId": "",
+    "artists": [
+      "KEROUE"
+    ],
+    "slug": "keroue-100k-granit-clips-officiels",
+    "thumbnail": "https://i.ytimg.com/vi/06Hrmwt-zdk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "7eRomUNwR7E",
+    "title": "Swing - Gris",
+    "channelId": "",
+    "artists": [
+      "SWING"
+    ],
+    "slug": "swing-gris",
+    "thumbnail": "https://i.ytimg.com/vi/7eRomUNwR7E/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "WILmEPWPOvA",
+    "title": "Lomepal - Avion (Official Audio)",
+    "channelId": "",
+    "artists": [
+      "LOMEPAL"
+    ],
+    "slug": "lomepal-avion-official-audio",
+    "thumbnail": "https://i.ytimg.com/vi/WILmEPWPOvA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Y3GtQnUKmdg",
+    "title": "BLAZI BLAZA",
+    "channelId": "",
+    "artists": [
+      "ISHA"
+    ],
+    "slug": "isha-blazi-blaza",
+    "thumbnail": "https://i.ytimg.com/vi/Y3GtQnUKmdg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "fY2fFwnH6UA",
+    "title": "313 - Ecchymoses, PT. II (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "313"
+    ],
+    "slug": "313-ecchymoses-pt-ii-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/fY2fFwnH6UA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "GANPot8BlHY",
+    "title": "Passage",
+    "channelId": "",
+    "artists": [
+      "SHELDON"
+    ],
+    "slug": "sheldon-passage",
+    "thumbnail": "https://i.ytimg.com/vi/GANPot8BlHY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "E94NXSZkY68",
+    "title": "Peet - Silencieux",
+    "channelId": "",
+    "artists": [
+      "Dr PEET"
+    ],
+    "slug": "dr-peet-peet-silencieux",
+    "thumbnail": "https://i.ytimg.com/vi/E94NXSZkY68/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "emWWHG49QFg",
+    "title": "Hatem",
+    "channelId": "",
+    "artists": [
+      "BEKAR · GEORGIO"
+    ],
+    "slug": "bekar-georgio-hatem",
+    "thumbnail": "https://i.ytimg.com/vi/emWWHG49QFg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Uh2ot-Kx9BM",
+    "title": "Phasm x Absolem - TLJ Feat. Swing (Prod by Convok)",
+    "channelId": "",
+    "artists": [
+      "PHASM · SWING · ABSOLEM"
+    ],
+    "slug": "phasm-swing-absolem-phasm-x-absolem-tlj-feat-swing-prod-by-convok",
+    "thumbnail": "https://i.ytimg.com/vi/Uh2ot-Kx9BM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "bbyQKJFSa3o",
+    "title": "Madiba",
+    "channelId": "",
+    "artists": [
+      "PABLO"
+    ],
+    "slug": "pablo-madiba",
+    "thumbnail": "https://i.ytimg.com/vi/bbyQKJFSa3o/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "caTU3mTqcN4",
+    "title": "Bekar - Efferalgan",
+    "channelId": "",
+    "artists": [
+      "BEKAR"
+    ],
+    "slug": "bekar-efferalgan",
+    "thumbnail": "https://i.ytimg.com/vi/caTU3mTqcN4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "KCxw_dDkcoU",
+    "title": "Le retour du printemps 2.0",
+    "channelId": "",
+    "artists": [
+      "SEYTE"
+    ],
+    "slug": "seyte-le-retour-du-printemps-20",
+    "thumbnail": "https://i.ytimg.com/vi/KCxw_dDkcoU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "lM7bqRa6Yac",
+    "title": "Prétentieuse",
+    "channelId": "",
+    "artists": [
+      "IGOR"
+    ],
+    "slug": "igor-pretentieuse",
+    "thumbnail": "https://i.ytimg.com/vi/lM7bqRa6Yac/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "dPViEQ2S4TQ",
+    "title": "Incompris",
+    "channelId": "",
+    "artists": [
+      "Devi REED"
+    ],
+    "slug": "devi-reed-incompris",
+    "thumbnail": "https://i.ytimg.com/vi/dPViEQ2S4TQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "DbsQm5SXLRg",
+    "title": "ENFER",
+    "channelId": "",
+    "artists": [
+      "AZUR"
+    ],
+    "slug": "azur-enfer",
+    "thumbnail": "https://i.ytimg.com/vi/DbsQm5SXLRg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "wBVdB8SLROE",
+    "title": "The Doug - Faire le bien (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "THE DOUG"
+    ],
+    "slug": "the-doug-faire-le-bien-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/wBVdB8SLROE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "M5x3oeVxnjc",
+    "title": "The Doug - Les calmants",
+    "channelId": "",
+    "artists": [
+      "THE DOUG"
+    ],
+    "slug": "the-doug-les-calmants",
+    "thumbnail": "https://i.ytimg.com/vi/M5x3oeVxnjc/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "aFtdBpf0P6s",
+    "title": "The Doug - Génération",
+    "channelId": "",
+    "artists": [
+      "THE DOUG"
+    ],
+    "slug": "the-doug-generation",
+    "thumbnail": "https://i.ytimg.com/vi/aFtdBpf0P6s/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "8ZHYTm9ThQM",
+    "title": "Comme la vie est belle",
+    "channelId": "",
+    "artists": [
+      "THE DOUG"
+    ],
+    "slug": "the-doug-comme-la-vie-est-belle",
+    "thumbnail": "https://i.ytimg.com/vi/8ZHYTm9ThQM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "dVXHjV8jjKU",
+    "title": "Sécurité",
+    "channelId": "",
+    "artists": [
+      "BEKAR"
+    ],
+    "slug": "bekar-securite",
+    "thumbnail": "https://i.ytimg.com/vi/dVXHjV8jjKU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "itUGiq_dD7Q",
+    "title": "Ichon - Naufragé (Page 5)",
+    "channelId": "",
+    "artists": [
+      "ICHON"
+    ],
+    "slug": "ichon-naufrage-page-5",
+    "thumbnail": "https://i.ytimg.com/vi/itUGiq_dD7Q/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "eME1V5D8HQM",
+    "title": "Primero feat. Roméo Elvis - Deux Deux",
+    "channelId": "",
+    "artists": [
+      "PRIMERO · ROMEO ELVIS"
+    ],
+    "slug": "primero-romeo-elvis-primero-feat-romeo-elvis-deux-deux",
+    "thumbnail": "https://i.ytimg.com/vi/eME1V5D8HQM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "UJc3SnJ-UTc",
+    "title": "MAUDIT",
+    "channelId": "",
+    "artists": [
+      "LOONZII"
+    ],
+    "slug": "loonzii-maudit",
+    "thumbnail": "https://i.ytimg.com/vi/UJc3SnJ-UTc/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Ow_8HFJk8kY",
+    "title": "MAC SEAMUS - R.A.S FT SIMONY",
+    "channelId": "",
+    "artists": [
+      "MAC SEAMUS · SIMONY"
+    ],
+    "slug": "mac-seamus-simony-mac-seamus-ras-ft-simony",
+    "thumbnail": "https://i.ytimg.com/vi/Ow_8HFJk8kY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "d-sh49wophU",
+    "title": "Feu rouge",
+    "channelId": "",
+    "artists": [
+      "SHELDON"
+    ],
+    "slug": "sheldon-feu-rouge",
+    "thumbnail": "https://i.ytimg.com/vi/d-sh49wophU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "3Oa_PHz843E",
+    "title": "EDGE - Schémas Monotones (Clip officiel)",
+    "channelId": "",
+    "artists": [
+      "EDGE"
+    ],
+    "slug": "edge-schemas-monotones-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/3Oa_PHz843E/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Y49fvNauX7M",
+    "title": "Interlude",
+    "channelId": "",
+    "artists": [
+      "SWING"
+    ],
+    "slug": "swing-interlude",
+    "thumbnail": "https://i.ytimg.com/vi/Y49fvNauX7M/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "UBXYQ1FZMcE",
+    "title": "KIRUA",
+    "channelId": "",
+    "artists": [
+      "COSTA · EDGE"
+    ],
+    "slug": "costa-edge-kirua",
+    "thumbnail": "https://i.ytimg.com/vi/UBXYQ1FZMcE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "u9rhOrHM2eQ",
+    "title": "📺 Volodia - Mirages [Official Video]",
+    "channelId": "",
+    "artists": [
+      "VOLODIA"
+    ],
+    "slug": "volodia-mirages-official-video",
+    "thumbnail": "https://i.ytimg.com/vi/u9rhOrHM2eQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "2z58HBwOpA8",
+    "title": "Médicament",
+    "channelId": "",
+    "artists": [
+      "LMA"
+    ],
+    "slug": "lma-medicament",
+    "thumbnail": "https://i.ytimg.com/vi/2z58HBwOpA8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "2tp3FTq96_8",
+    "title": "Keroué - Lance flamme (Visualizer)",
+    "channelId": "",
+    "artists": [
+      "KEROUE"
+    ],
+    "slug": "keroue-lance-flamme-visualizer",
+    "thumbnail": "https://i.ytimg.com/vi/2tp3FTq96_8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "P6Nry8unHa0",
+    "title": "Peet - Rêver mieux",
+    "channelId": "",
+    "artists": [
+      "Dr PEET"
+    ],
+    "slug": "dr-peet-peet-rever-mieux",
+    "thumbnail": "https://i.ytimg.com/vi/P6Nry8unHa0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "zgMsOudTIpo",
+    "title": "Roméo Elvis - L'adresse (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "ROMEO ELVIS"
+    ],
+    "slug": "romeo-elvis-ladresse-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/zgMsOudTIpo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "AMGyLOkQKGI",
+    "title": "Svudvde ft. A2h - Victoire (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "SVUDVDE · A2h"
+    ],
+    "slug": "svudvde-a2h-svudvde-ft-a2h-victoire-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/AMGyLOkQKGI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Kuuy1xJVxwQ",
+    "title": "Josman - J'allume",
+    "channelId": "",
+    "artists": [
+      "JOSMAN"
+    ],
+    "slug": "josman-jallume",
+    "thumbnail": "https://i.ytimg.com/vi/Kuuy1xJVxwQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "-XqFcM97FSg",
+    "title": "Josman - TENDU (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "JOSMAN"
+    ],
+    "slug": "josman-tendu-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/-XqFcM97FSg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "-EWrTj5Jpuc",
+    "title": "Josman - LOTO (Clip officiel)",
+    "channelId": "",
+    "artists": [
+      "JOSMAN"
+    ],
+    "slug": "josman-loto-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/-EWrTj5Jpuc/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "BPFWh4okr1A",
+    "title": "Josman - Prendre L'Air",
+    "channelId": "",
+    "artists": [
+      "JOSMAN"
+    ],
+    "slug": "josman-prendre-lair",
+    "thumbnail": "https://i.ytimg.com/vi/BPFWh4okr1A/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "XUk_9Hs-BWY",
+    "title": "Cheeko - Jamais Né, Jamais Mort (Naâman Tribute)",
+    "channelId": "",
+    "artists": [
+      "CHEEKO"
+    ],
+    "slug": "cheeko-jamais-ne-jamais-mort-naaman-tribute",
+    "thumbnail": "https://i.ytimg.com/vi/XUk_9Hs-BWY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "9SPkkLPPR_A",
+    "title": "Tsew The Kid - Amoureuse (clip officiel)",
+    "channelId": "",
+    "artists": [
+      "TSEW THE KID"
+    ],
+    "slug": "tsew-the-kid-amoureuse-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/9SPkkLPPR_A/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "7qPesM0_IUU",
+    "title": "Renard Tortue - Tic-Tac (Taleur & Vite)",
+    "channelId": "",
+    "artists": [
+      "RENARD TORTUE"
+    ],
+    "slug": "renard-tortue-tic-tac-taleur-vite",
+    "thumbnail": "https://i.ytimg.com/vi/7qPesM0_IUU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Pgg3o5HSZVg",
+    "title": "TIGERZ - PAPILLON",
+    "channelId": "",
+    "artists": [
+      "TIGERZ"
+    ],
+    "slug": "tigerz-papillon",
+    "thumbnail": "https://i.ytimg.com/vi/Pgg3o5HSZVg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "q5_iHkyzpFs",
+    "title": "Kaky - La tête pleine [Clip officiel]",
+    "channelId": "",
+    "artists": [
+      "KAKY"
+    ],
+    "slug": "kaky-la-tete-pleine-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/q5_iHkyzpFs/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "fxgLxTX8Xt8",
+    "title": "C'était pas à cause de toi",
+    "channelId": "",
+    "artists": [
+      "TSEW THE KID"
+    ],
+    "slug": "tsew-the-kid-cetait-pas-a-cause-de-toi",
+    "thumbnail": "https://i.ytimg.com/vi/fxgLxTX8Xt8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "jk0K5gYB-E8",
+    "title": "AYA",
+    "channelId": "",
+    "artists": [
+      "WHITE CORBEAU"
+    ],
+    "slug": "white-corbeau-aya",
+    "thumbnail": "https://i.ytimg.com/vi/jk0K5gYB-E8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "PfiAmsN1mb8",
+    "title": "LUNI - FAMOUS",
+    "channelId": "",
+    "artists": [
+      "LUNI"
+    ],
+    "slug": "luni-famous",
+    "thumbnail": "https://i.ytimg.com/vi/PfiAmsN1mb8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "5K4ldXv34R8",
+    "title": "08. Roméo Elvis - 4x4 (lyrics vidéo)",
+    "channelId": "",
+    "artists": [
+      "ROMEO ELVIS"
+    ],
+    "slug": "romeo-elvis-08-romeo-elvis-4x4-lyrics-video",
+    "thumbnail": "https://i.ytimg.com/vi/5K4ldXv34R8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "uzCxKF3rKZ0",
+    "title": "Dans ma tête",
+    "channelId": "",
+    "artists": [
+      "H-RIF"
+    ],
+    "slug": "h-rif-dans-ma-tete",
+    "thumbnail": "https://i.ytimg.com/vi/uzCxKF3rKZ0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Oq1M_wCDef0",
+    "title": "Ciel qui brille",
+    "channelId": "",
+    "artists": [
+      "H-RIF"
+    ],
+    "slug": "h-rif-ciel-qui-brille",
+    "thumbnail": "https://i.ytimg.com/vi/Oq1M_wCDef0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "N60WxQpmP_c",
+    "title": "Le jour se lève",
+    "channelId": "",
+    "artists": [
+      "Altayr"
+    ],
+    "slug": "altayr-le-jour-se-leve",
+    "thumbnail": "https://i.ytimg.com/vi/N60WxQpmP_c/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "yCWw5C4P5ZU",
+    "title": "After Life",
+    "channelId": "",
+    "artists": [
+      "LINTON"
+    ],
+    "slug": "linton-after-life",
+    "thumbnail": "https://i.ytimg.com/vi/yCWw5C4P5ZU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "E30ytc_JH3M",
+    "title": "EN CHINOIS SUR MON COUDE",
+    "channelId": "",
+    "artists": [
+      "P",
+      "rselow"
+    ],
+    "slug": "p-en-chinois-sur-mon-coude",
+    "thumbnail": "https://i.ytimg.com/vi/E30ytc_JH3M/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "vE3t3uR4kp0",
+    "title": "À MA PLACE",
+    "channelId": "",
+    "artists": [
+      "DEEMAX"
+    ],
+    "slug": "deemax-a-ma-place",
+    "thumbnail": "https://i.ytimg.com/vi/vE3t3uR4kp0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "EujZiD8Sm9k",
+    "title": "JOUR DE FÊTE",
+    "channelId": "",
+    "artists": [
+      "LOONZII"
+    ],
+    "slug": "loonzii-jour-de-fete",
+    "thumbnail": "https://i.ytimg.com/vi/EujZiD8Sm9k/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "2VewiyKhFzQ",
+    "title": "YG Pablo & @SofianePamart - Lune",
+    "channelId": "",
+    "artists": [
+      "YG PABLO · SOFIANE PAMART"
+    ],
+    "slug": "yg-pablo-sofiane-pamart-yg-pablo-sofianepamart-lune",
+    "thumbnail": "https://i.ytimg.com/vi/2VewiyKhFzQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "dwgofx8pcB4",
+    "title": "Les voies de Dieu",
+    "channelId": "",
+    "artists": [
+      "UPSILON"
+    ],
+    "slug": "upsilon-les-voies-de-dieu",
+    "thumbnail": "https://i.ytimg.com/vi/dwgofx8pcB4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ekAYYyWgQ-o",
+    "title": "Pitt - S.O.S (Lyric Video)",
+    "channelId": "",
+    "artists": [
+      "PITT"
+    ],
+    "slug": "pitt-sos-lyric-video",
+    "thumbnail": "https://i.ytimg.com/vi/ekAYYyWgQ-o/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "79IsVKJvbfk",
+    "title": "Primero - Trac (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "PRIMERO"
+    ],
+    "slug": "primero-trac-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/79IsVKJvbfk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Rp9bGr8k_SA",
+    "title": "Matière première",
+    "channelId": "",
+    "artists": [
+      "SCYLLA"
+    ],
+    "slug": "scylla-matiere-premiere",
+    "thumbnail": "https://i.ytimg.com/vi/Rp9bGr8k_SA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "we5IBFF6lrI",
+    "title": "Retour dans les abysses",
+    "channelId": "",
+    "artists": [
+      "SCYLLA"
+    ],
+    "slug": "scylla-retour-dans-les-abysses",
+    "thumbnail": "https://i.ytimg.com/vi/we5IBFF6lrI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "jrskgqhSkz0",
+    "title": "Pansement",
+    "channelId": "",
+    "artists": [
+      "L'OR DU COMMUN"
+    ],
+    "slug": "lor-du-commun-pansement",
+    "thumbnail": "https://i.ytimg.com/vi/jrskgqhSkz0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "klh7c3eetCw",
+    "title": "Keroué - PDM (clip officiel)",
+    "channelId": "",
+    "artists": [
+      "KEROUE"
+    ],
+    "slug": "keroue-pdm-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/klh7c3eetCw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "IFfKmkLJL9c",
+    "title": "Tsew The Kid - Mon étoile (lyrics video)",
+    "channelId": "",
+    "artists": [
+      "TSEW THE KID"
+    ],
+    "slug": "tsew-the-kid-mon-etoile-lyrics-video",
+    "thumbnail": "https://i.ytimg.com/vi/IFfKmkLJL9c/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "HRS0mAlTPZ4",
+    "title": "Swing - Rivage (Prod. Le Motel)",
+    "channelId": "",
+    "artists": [
+      "SWING"
+    ],
+    "slug": "swing-rivage-prod-le-motel",
+    "thumbnail": "https://i.ytimg.com/vi/HRS0mAlTPZ4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "FeOKBrDX0YE",
+    "title": "YO - (HYPER) À l'eau (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "YO"
+    ],
+    "slug": "yo-hyper-a-leau-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/FeOKBrDX0YE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "dQ99iNSHtoM",
+    "title": "Dans ma famille",
+    "channelId": "",
+    "artists": [
+      "THE DOUG"
+    ],
+    "slug": "the-doug-dans-ma-famille",
+    "thumbnail": "https://i.ytimg.com/vi/dQ99iNSHtoM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "9u3xZ6zQYow",
+    "title": "Zélie & Mauvaise Bouche - faut que je m'en souvienne (lyrics vidéo)",
+    "channelId": "",
+    "artists": [
+      "ZELIE · MAUVAISE BOUCHE"
+    ],
+    "slug": "zelie-mauvaise-bouche-faut-que-je-men-souvienne-lyrics-video",
+    "thumbnail": "https://i.ytimg.com/vi/9u3xZ6zQYow/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "zPtmOS5AxZo",
+    "title": "CONS’ DE LOVE",
+    "channelId": "",
+    "artists": [
+      "DISIZ"
+    ],
+    "slug": "disiz-cons-de-love",
+    "thumbnail": "https://i.ytimg.com/vi/zPtmOS5AxZo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "__nCSbPDU2s",
+    "title": "Yvnnis - GARE DU NORD",
+    "channelId": "",
+    "artists": [
+      "YVNNIS"
+    ],
+    "slug": "yvnnis-gare-du-nord",
+    "thumbnail": "https://i.ytimg.com/vi/__nCSbPDU2s/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Hk-6U6WCsKI",
+    "title": "SWING - Déluge",
+    "channelId": "",
+    "artists": [
+      "SWING"
+    ],
+    "slug": "swing-deluge",
+    "thumbnail": "https://i.ytimg.com/vi/Hk-6U6WCsKI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "eUaxMNdT7Cc",
+    "title": "Berry, Anglade, Beeby - Mauvais Sang (Clip Officiel) | La Place",
+    "channelId": "",
+    "artists": [
+      "BERRY · ANGLADE · BEEBY"
+    ],
+    "slug": "berry-anglade-beeby-mauvais-sang-clip-officiel-la-place",
+    "thumbnail": "https://i.ytimg.com/vi/eUaxMNdT7Cc/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Okc7nEUWzFQ",
+    "title": "Roméo Elvis - Maquette (audio officiel)",
+    "channelId": "",
+    "artists": [
+      "ROMEO ELVIS"
+    ],
+    "slug": "romeo-elvis-maquette-audio-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/Okc7nEUWzFQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "EKFATDelxjI",
+    "title": "J'ME DETESTE",
+    "channelId": "",
+    "artists": [
+      "KNOTTY"
+    ],
+    "slug": "knotty-jme-deteste",
+    "thumbnail": "https://i.ytimg.com/vi/EKFATDelxjI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ItIMe6rj4Ag",
+    "title": "Tunnel",
+    "channelId": "",
+    "artists": [
+      "SHELDON"
+    ],
+    "slug": "sheldon-tunnel",
+    "thumbnail": "https://i.ytimg.com/vi/ItIMe6rj4Ag/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "phOslBPRg80",
+    "title": "Bandana noir",
+    "channelId": "",
+    "artists": [
+      "KIKESA"
+    ],
+    "slug": "kikesa-bandana-noir",
+    "thumbnail": "https://i.ytimg.com/vi/phOslBPRg80/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "_CnUgVoB2Us",
+    "title": "KIKESA - FEAT. X FREESTYLE D'ADIEU",
+    "channelId": "",
+    "artists": [
+      "KIKESA"
+    ],
+    "slug": "kikesa-feat-x-freestyle-dadieu",
+    "thumbnail": "https://i.ytimg.com/vi/_CnUgVoB2Us/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "1QOFUaQIQXQ",
+    "title": "La couleur des vitres teintées",
+    "channelId": "",
+    "artists": [
+      "BEN_plg"
+    ],
+    "slug": "benplg-la-couleur-des-vitres-teintees",
+    "thumbnail": "https://i.ytimg.com/vi/1QOFUaQIQXQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "hN0ZdYXHRa4",
+    "title": "invincible",
+    "channelId": "",
+    "artists": [
+      "M4THIAS"
+    ],
+    "slug": "m4thias-invincible",
+    "thumbnail": "https://i.ytimg.com/vi/hN0ZdYXHRa4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "N8RPZWU_yeY",
+    "title": "Vongole",
+    "channelId": "",
+    "artists": [
+      "JEANJASS"
+    ],
+    "slug": "jeanjass-vongole",
+    "thumbnail": "https://i.ytimg.com/vi/N8RPZWU_yeY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "HnmHmFv-vuE",
+    "title": "06 Guizmo Prod Zeyn",
+    "channelId": "",
+    "artists": [
+      "JOAQM"
+    ],
+    "slug": "joaqm-06-guizmo-prod-zeyn",
+    "thumbnail": "https://i.ytimg.com/vi/HnmHmFv-vuE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "nUJ0QapVdEU",
+    "title": "Jazzy Bazz - Albiceleste feat. Josman (audio)",
+    "channelId": "",
+    "artists": [
+      "JAZZY BAZZ · JOSMAN"
+    ],
+    "slug": "jazzy-bazz-josman-jazzy-bazz-albiceleste-feat-josman-audio",
+    "thumbnail": "https://i.ytimg.com/vi/nUJ0QapVdEU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "MBfc-R0KrA8",
+    "title": "Si rien n'a de sens",
+    "channelId": "",
+    "artists": [
+      "ROXAANE"
+    ],
+    "slug": "roxaane-si-rien-na-de-sens",
+    "thumbnail": "https://i.ytimg.com/vi/MBfc-R0KrA8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "9oOw52XTqxk",
+    "title": "murmur! x Noah Naas - L'auto-stoppeur",
+    "channelId": "",
+    "artists": [
+      "MURMUR! · NOAH NAAS"
+    ],
+    "slug": "murmur-noah-naas-murmur-x-noah-naas-lauto-stoppeur",
+    "thumbnail": "https://i.ytimg.com/vi/9oOw52XTqxk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "DF3-qULJyHU",
+    "title": "Achile - Faux sourire (Visualizer)",
+    "channelId": "",
+    "artists": [
+      "ACHILE"
+    ],
+    "slug": "achile-faux-sourire-visualizer",
+    "thumbnail": "https://i.ytimg.com/vi/DF3-qULJyHU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "JTuvaGU70xg",
+    "title": "Achim - vienjetedisunsecret [visualizer]",
+    "channelId": "",
+    "artists": [
+      "ACHIM"
+    ],
+    "slug": "achim-vienjetedisunsecret-visualizer",
+    "thumbnail": "https://i.ytimg.com/vi/JTuvaGU70xg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "BUAwHHWfA-0",
+    "title": "2.12 - INCENDIE (visualizer)",
+    "channelId": "",
+    "artists": [
+      "2.12"
+    ],
+    "slug": "212-incendie-visualizer",
+    "thumbnail": "https://i.ytimg.com/vi/BUAwHHWfA-0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "PeYa3NHGB7I",
+    "title": "Vivant",
+    "channelId": "",
+    "artists": [
+      "VOLODIA"
+    ],
+    "slug": "volodia-vivant",
+    "thumbnail": "https://i.ytimg.com/vi/PeYa3NHGB7I/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "NDH270R5L5w",
+    "title": "Fréquence",
+    "channelId": "",
+    "artists": [
+      "SONBEST"
+    ],
+    "slug": "sonbest-frequence",
+    "thumbnail": "https://i.ytimg.com/vi/NDH270R5L5w/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "_ghQM60gwVY",
+    "title": "aplusetdims - Obsédés (Official Video)",
+    "channelId": "",
+    "artists": [
+      "APLUSETDIMS"
+    ],
+    "slug": "aplusetdims-obsedes-official-video",
+    "thumbnail": "https://i.ytimg.com/vi/_ghQM60gwVY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "AA3IYEx9eTs",
+    "title": "Introspection",
+    "channelId": "",
+    "artists": [
+      "RIZLA"
+    ],
+    "slug": "rizla-introspection",
+    "thumbnail": "https://i.ytimg.com/vi/AA3IYEx9eTs/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "c3oTADygwNo",
+    "title": "Peet - Rêves ft. Zwangere Guy",
+    "channelId": "",
+    "artists": [
+      "PEET - Zwangere Guy"
+    ],
+    "slug": "peet-zwangere-guy-peet-reves-ft-zwangere-guy",
+    "thumbnail": "https://i.ytimg.com/vi/c3oTADygwNo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "iT7O81mwUZA",
+    "title": "Vendou // MILLÉNIUM // Panthère rose Ft. Peet [Audio Officiel]",
+    "channelId": "",
+    "artists": [
+      "PEET - VENDOU"
+    ],
+    "slug": "peet-vendou-vendou-millenium-panthere-rose-ft-peet-audio-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/iT7O81mwUZA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Eb5fHp-gAiY",
+    "title": "Miroir",
+    "channelId": "",
+    "artists": [
+      "ICHON"
+    ],
+    "slug": "ichon-miroir",
+    "thumbnail": "https://i.ytimg.com/vi/Eb5fHp-gAiY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "zVEwG20OS0E",
+    "title": "Dinos ft. Nekfeu - Moins Un [CLIP VIDEO]",
+    "channelId": "",
+    "artists": [
+      "DINOS - NEKFEU"
+    ],
+    "slug": "dinos-nekfeu-dinos-ft-nekfeu-moins-un-clip-video",
+    "thumbnail": "https://i.ytimg.com/vi/zVEwG20OS0E/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "_6PEnhPCkVo",
+    "title": "Loveni - Le Piège",
+    "channelId": "",
+    "artists": [
+      "LOVENI"
+    ],
+    "slug": "loveni-le-piege",
+    "thumbnail": "https://i.ytimg.com/vi/_6PEnhPCkVo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Uq2hqtLGtKE",
+    "title": "Richesse",
+    "channelId": "",
+    "artists": [
+      "SWING"
+    ],
+    "slug": "swing-richesse",
+    "thumbnail": "https://i.ytimg.com/vi/Uq2hqtLGtKE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "KN25H0gpQpE",
+    "title": "Swing - Pas besoin de raison (lyrics video)",
+    "channelId": "",
+    "artists": [
+      "SWING"
+    ],
+    "slug": "swing-pas-besoin-de-raison-lyrics-video",
+    "thumbnail": "https://i.ytimg.com/vi/KN25H0gpQpE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "B3GbDHVr9lU",
+    "title": "ROXY ROSE - ORANGE (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "ROXY ROSE"
+    ],
+    "slug": "roxy-rose-orange-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/B3GbDHVr9lU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "a2YnM_d7JkI",
+    "title": "Port-réal",
+    "channelId": "",
+    "artists": [
+      "BLAIZ"
+    ],
+    "slug": "blaiz-port-real",
+    "thumbnail": "https://i.ytimg.com/vi/a2YnM_d7JkI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "M_90lmrK4uw",
+    "title": "☂️ Volodia - Humain [Official Audio]",
+    "channelId": "",
+    "artists": [
+      "VOLODIA"
+    ],
+    "slug": "volodia-humain-official-audio",
+    "thumbnail": "https://i.ytimg.com/vi/M_90lmrK4uw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "kblhN5LgnuY",
+    "title": "Remords",
+    "channelId": "",
+    "artists": [
+      "PEET - MORGAN"
+    ],
+    "slug": "peet-morgan-remords",
+    "thumbnail": "https://i.ytimg.com/vi/kblhN5LgnuY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "_jNVuW9R6Bk",
+    "title": "Vie ordinaire",
+    "channelId": "",
+    "artists": [
+      "Caballero - JeanJass - O",
+      "mo Puccino - Swing"
+    ],
+    "slug": "caballero-jeanjass-o-vie-ordinaire",
+    "thumbnail": "https://i.ytimg.com/vi/_jNVuW9R6Bk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "bbeXyVUrcDE",
+    "title": "Cassé",
+    "channelId": "",
+    "artists": [
+      "L'OR DU COMMUN"
+    ],
+    "slug": "lor-du-commun-casse",
+    "thumbnail": "https://i.ytimg.com/vi/bbeXyVUrcDE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "7JfZifSAU2w",
+    "title": "Magenta Club - Monogramme [Clip Officiel]",
+    "channelId": "",
+    "artists": [
+      "MAGENTA CLUB"
+    ],
+    "slug": "magenta-club-monogramme-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/7JfZifSAU2w/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "S3yXti7Ef-Y",
+    "title": "manteau blanc",
+    "channelId": "",
+    "artists": [
+      "MARCEAU"
+    ],
+    "slug": "marceau-manteau-blanc",
+    "thumbnail": "https://i.ytimg.com/vi/S3yXti7Ef-Y/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "3GcY9JtBVVw",
+    "title": "LA VOIX - DOCTEUR",
+    "channelId": "",
+    "artists": [
+      "LA VOIX"
+    ],
+    "slug": "la-voix-docteur",
+    "thumbnail": "https://i.ytimg.com/vi/3GcY9JtBVVw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "GPlcVlvsI9o",
+    "title": "Domino",
+    "channelId": "",
+    "artists": [
+      "ICHON"
+    ],
+    "slug": "ichon-domino",
+    "thumbnail": "https://i.ytimg.com/vi/GPlcVlvsI9o/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "RFYTQI4_4jU",
+    "title": "Autre monde",
+    "channelId": "",
+    "artists": [
+      "ZTATIK - VACRA"
+    ],
+    "slug": "ztatik-vacra-autre-monde",
+    "thumbnail": "https://i.ytimg.com/vi/RFYTQI4_4jU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ufI5h0fcoG8",
+    "title": "Swing - Corbeaux (Prod. Le Motel)",
+    "channelId": "",
+    "artists": [
+      "SWING - LE MOTEL"
+    ],
+    "slug": "swing-le-motel-swing-corbeaux-prod-le-motel",
+    "thumbnail": "https://i.ytimg.com/vi/ufI5h0fcoG8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ihGfXa-sicU",
+    "title": "IGOR - Soupir (Lyrics video)",
+    "channelId": "",
+    "artists": [
+      "IGOR"
+    ],
+    "slug": "igor-soupir-lyrics-video",
+    "thumbnail": "https://i.ytimg.com/vi/ihGfXa-sicU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "b4fIf45XnZc",
+    "title": "Indélébile",
+    "channelId": "",
+    "artists": [
+      "SWING - NEMIR"
+    ],
+    "slug": "swing-nemir-indelebile",
+    "thumbnail": "https://i.ytimg.com/vi/b4fIf45XnZc/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "_wLXdLFGEhE",
+    "title": "Ichon - Elle pleure en hiver (film officiel)",
+    "channelId": "",
+    "artists": [
+      "ICHON"
+    ],
+    "slug": "ichon-elle-pleure-en-hiver-film-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/_wLXdLFGEhE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "CyFlIY7tFqE",
+    "title": "BOHEMIAN CLUB - Pilule 5",
+    "channelId": "",
+    "artists": [
+      "BOHEMIAN CLUB"
+    ],
+    "slug": "bohemian-club-pilule-5",
+    "thumbnail": "https://i.ytimg.com/vi/CyFlIY7tFqE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "pQWS730XBh8",
+    "title": "SCYLLA & Sofiane Pamart - Le monde est à mes pieds [Clip Officiel]",
+    "channelId": "",
+    "artists": [
+      "SCYLLA - SOFIANE PAMART"
+    ],
+    "slug": "scylla-sofiane-pamart-le-monde-est-a-mes-pieds-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/pQWS730XBh8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "wjb8pqoA6us",
+    "title": "Peet - Passer",
+    "channelId": "",
+    "artists": [
+      "PEET"
+    ],
+    "slug": "peet-passer",
+    "thumbnail": "https://i.ytimg.com/vi/wjb8pqoA6us/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Bw9GHk4cN88",
+    "title": "Sheldon - Spectre",
+    "channelId": "",
+    "artists": [
+      "SHELDON"
+    ],
+    "slug": "sheldon-spectre",
+    "thumbnail": "https://i.ytimg.com/vi/Bw9GHk4cN88/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "x8MSFpC3fM4",
+    "title": "The Hop - Berline noire feat. Jazzy Bazz & Krisy (Official Video)",
+    "channelId": "",
+    "artists": [
+      "THE HOP - JAZZY BAZZ - KRISY"
+    ],
+    "slug": "the-hop-jazzy-bazz-krisy-the-hop-berline-noire-feat-jazzy-bazz-krisy-official-video",
+    "thumbnail": "https://i.ytimg.com/vi/x8MSFpC3fM4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "2tiWNebQi30",
+    "title": "Lala &ce - Toxic",
+    "channelId": "",
+    "artists": [
+      "LALA",
+      "ce"
+    ],
+    "slug": "lala-ce-toxic",
+    "thumbnail": "https://i.ytimg.com/vi/2tiWNebQi30/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "XcF5VGFj8lQ",
+    "title": "LA TOILE",
+    "channelId": "",
+    "artists": [
+      "KHALI"
+    ],
+    "slug": "khali-la-toile",
+    "thumbnail": "https://i.ytimg.com/vi/XcF5VGFj8lQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "XiO7Zp0PyM4",
+    "title": "Younès - ENTRE NOUS (Lyrics video)",
+    "channelId": "",
+    "artists": [
+      "Younès"
+    ],
+    "slug": "younes-entre-nous-lyrics-video",
+    "thumbnail": "https://i.ytimg.com/vi/XiO7Zp0PyM4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "-4UQkkV2-ZU",
+    "title": "NELICK - CADILLAC",
+    "channelId": "",
+    "artists": [
+      "NELICK"
+    ],
+    "slug": "nelick-cadillac",
+    "thumbnail": "https://i.ytimg.com/vi/-4UQkkV2-ZU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "xMhuITOT9pM",
+    "title": "Fanées",
+    "channelId": "",
+    "artists": [
+      "RIZLA"
+    ],
+    "slug": "rizla-fanees",
+    "thumbnail": "https://i.ytimg.com/vi/xMhuITOT9pM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "iCNUuUqx958",
+    "title": "Youri - Vendetta (Prod by DaRealright)",
+    "channelId": "",
+    "artists": [
+      "YOURI"
+    ],
+    "slug": "youri-vendetta-prod-by-darealright",
+    "thumbnail": "https://i.ytimg.com/vi/iCNUuUqx958/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "VtSesMJGgmc",
+    "title": "Soleil De Minuit",
+    "channelId": "",
+    "artists": [
+      "LOVENI"
+    ],
+    "slug": "loveni-soleil-de-minuit",
+    "thumbnail": "https://i.ytimg.com/vi/VtSesMJGgmc/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "J-9OsWJvULk",
+    "title": "Après l'Hiver",
+    "channelId": "",
+    "artists": [
+      "BEEBY"
+    ],
+    "slug": "beeby-apres-lhiver",
+    "thumbnail": "https://i.ytimg.com/vi/J-9OsWJvULk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "vpiU5XUASD8",
+    "title": "Jazzy Bazz - Benny Blanco (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "JAZZY BAZZ"
+    ],
+    "slug": "jazzy-bazz-benny-blanco-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/vpiU5XUASD8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "KiqK7yMITxw",
+    "title": "Gros Mo - Avoue - Prod En'Zoo",
+    "channelId": "",
+    "artists": [
+      "GROS MO"
+    ],
+    "slug": "gros-mo-avoue-prod-enzoo",
+    "thumbnail": "https://i.ytimg.com/vi/KiqK7yMITxw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Br-EoriLXj0",
+    "title": "BEEBY - 5EME NIVEAU",
+    "channelId": "",
+    "artists": [
+      "BEEBY"
+    ],
+    "slug": "beeby-5eme-niveau",
+    "thumbnail": "https://i.ytimg.com/vi/Br-EoriLXj0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Gx-KL7v8ZyE",
+    "title": "Lord Esperanza - Drapeau Noir (prod. Itzama)",
+    "channelId": "",
+    "artists": [
+      "LORD ESPERANZA"
+    ],
+    "slug": "lord-esperanza-drapeau-noir-prod-itzama",
+    "thumbnail": "https://i.ytimg.com/vi/Gx-KL7v8ZyE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "uA5mTe7SBEo",
+    "title": "#Spliff",
+    "channelId": "",
+    "artists": [
+      "GROS MO - RATU$"
+    ],
+    "slug": "gros-mo-ratu-spliff",
+    "thumbnail": "https://i.ytimg.com/vi/uA5mTe7SBEo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "_af2ZAzqLug",
+    "title": "Josman - MOONROCK",
+    "channelId": "",
+    "artists": [
+      "JOSMAN"
+    ],
+    "slug": "josman-moonrock",
+    "thumbnail": "https://i.ytimg.com/vi/_af2ZAzqLug/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "g5E-WoIzMNo",
+    "title": "MadeInParis - Quelques Millions",
+    "channelId": "",
+    "artists": [
+      "MADEINPARIS"
+    ],
+    "slug": "madeinparis-quelques-millions",
+    "thumbnail": "https://i.ytimg.com/vi/g5E-WoIzMNo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "-niCu9LaZg4",
+    "title": "Jewel Usain - T'es qu'une merde (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "JEWEL USAIN"
+    ],
+    "slug": "jewel-usain-tes-quune-merde-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/-niCu9LaZg4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Ss_PQzQn9Vo",
+    "title": "LePhar & Raij'n & Bag'z - Vie Sûre (Ft. Pablo)",
+    "channelId": "",
+    "artists": [
+      "LePhar - Raij'n - Bag'z"
+    ],
+    "slug": "lephar-raijn-bagz-vie-sure-ft-pablo",
+    "thumbnail": "https://i.ytimg.com/vi/Ss_PQzQn9Vo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "x4p9X8EEwzU",
+    "title": "Josman - High Life",
+    "channelId": "",
+    "artists": [
+      "JOSMAN"
+    ],
+    "slug": "josman-high-life",
+    "thumbnail": "https://i.ytimg.com/vi/x4p9X8EEwzU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "-Z--pz6joEs",
+    "title": "Brouillard",
+    "channelId": "",
+    "artists": [
+      "GROS MO"
+    ],
+    "slug": "gros-mo-brouillard",
+    "thumbnail": "https://i.ytimg.com/vi/-Z--pz6joEs/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "hkexH8uruT4",
+    "title": "JeanJass - Inconvénients (audio officiel)",
+    "channelId": "",
+    "artists": [
+      "JEANJASS"
+    ],
+    "slug": "jeanjass-inconvenients-audio-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/hkexH8uruT4/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ag6Mp1RGRzM",
+    "title": "1TEMPS",
+    "channelId": "",
+    "artists": [
+      "LIL YAN"
+    ],
+    "slug": "lil-yan-1temps",
+    "thumbnail": "https://i.ytimg.com/vi/ag6Mp1RGRzM/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ey32LHKb1uI",
+    "title": "Dans mon navire",
+    "channelId": "",
+    "artists": [
+      "DIEGO"
+    ],
+    "slug": "diego-dans-mon-navire",
+    "thumbnail": "https://i.ytimg.com/vi/ey32LHKb1uI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "B3fNuEpsl2U",
+    "title": "Matin de juin",
+    "channelId": "",
+    "artists": [
+      "CIELBLEU"
+    ],
+    "slug": "cielbleu-matin-de-juin",
+    "thumbnail": "https://i.ytimg.com/vi/B3fNuEpsl2U/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ER4f0rJ3a8s",
+    "title": "DIEGO - BAD TRIP ft. Namski, O'farrell (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "DIEGO - Namski - O'farrell"
+    ],
+    "slug": "diego-namski-ofarrell-diego-bad-trip-ft-namski-ofarrell-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/ER4f0rJ3a8s/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "LmVHOH89a2E",
+    "title": "Vampire",
+    "channelId": "",
+    "artists": [
+      "TSEW THE KID"
+    ],
+    "slug": "tsew-the-kid-vampire",
+    "thumbnail": "https://i.ytimg.com/vi/LmVHOH89a2E/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Rn32u3M3BVk",
+    "title": "JTM QUAND MÊME",
+    "channelId": "",
+    "artists": [
+      "CIELBLEU"
+    ],
+    "slug": "cielbleu-jtm-quand-meme",
+    "thumbnail": "https://i.ytimg.com/vi/Rn32u3M3BVk/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "MO76szUXPE8",
+    "title": "FLEURS ET DOLIPRANES",
+    "channelId": "",
+    "artists": [
+      "CIELBLEU"
+    ],
+    "slug": "cielbleu-fleurs-et-dolipranes",
+    "thumbnail": "https://i.ytimg.com/vi/MO76szUXPE8/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "U5neAwSCG08",
+    "title": "Tsew The Kid - On finira peut-être heureux (clip officiel)",
+    "channelId": "",
+    "artists": [
+      "TSEW THE KID"
+    ],
+    "slug": "tsew-the-kid-on-finira-peut-etre-heureux-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/U5neAwSCG08/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "qVCMI84JHLY",
+    "title": "Catastrophe - Yurz (Vidéo officielle)",
+    "channelId": "",
+    "artists": [
+      "YURZ"
+    ],
+    "slug": "yurz-catastrophe-yurz-video-officielle",
+    "thumbnail": "https://i.ytimg.com/vi/qVCMI84JHLY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "fS7KjkKn_14",
+    "title": "putain d'époque",
+    "channelId": "",
+    "artists": [
+      "LORD ESPERANZA"
+    ],
+    "slug": "lord-esperanza-putain-depoque",
+    "thumbnail": "https://i.ytimg.com/vi/fS7KjkKn_14/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "SoFab5s9vPQ",
+    "title": "Lord Esperanza - Apprends moi à voler (Clip officiel)",
+    "channelId": "",
+    "artists": [
+      "LORD ESPERANZA"
+    ],
+    "slug": "lord-esperanza-apprends-moi-a-voler-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/SoFab5s9vPQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Hu4rKBglocQ",
+    "title": "Suna",
+    "channelId": "",
+    "artists": [
+      "CER"
+    ],
+    "slug": "cer-suna",
+    "thumbnail": "https://i.ytimg.com/vi/Hu4rKBglocQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "5UmRQJMG8bQ",
+    "title": "6 Hours",
+    "channelId": "",
+    "artists": [
+      "BEKAR"
+    ],
+    "slug": "bekar-6-hours",
+    "thumbnail": "https://i.ytimg.com/vi/5UmRQJMG8bQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "FQMBmm-7u8o",
+    "title": "MON GARÇON",
+    "channelId": "",
+    "artists": [
+      "Ucyll"
+    ],
+    "slug": "ucyll-mon-garcon",
+    "thumbnail": "https://i.ytimg.com/vi/FQMBmm-7u8o/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "3ZGxznPccmQ",
+    "title": "Vieto - Souverain (Clip officiel)",
+    "channelId": "",
+    "artists": [
+      "Vieto"
+    ],
+    "slug": "vieto-souverain-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/3ZGxznPccmQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ixTMWaqV1xI",
+    "title": "Vieto - Sans mérite (Clip officiel)",
+    "channelId": "",
+    "artists": [
+      "Vieto"
+    ],
+    "slug": "vieto-sans-merite-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/ixTMWaqV1xI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Oy3Gfqj1STA",
+    "title": "Tout prendre",
+    "channelId": "",
+    "artists": [
+      "NES"
+    ],
+    "slug": "nes-tout-prendre",
+    "thumbnail": "https://i.ytimg.com/vi/Oy3Gfqj1STA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Wkua5UO2tas",
+    "title": "Hautes herbes",
+    "channelId": "",
+    "artists": [
+      "NES"
+    ],
+    "slug": "nes-hautes-herbes",
+    "thumbnail": "https://i.ytimg.com/vi/Wkua5UO2tas/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "40Py1k6KqCg",
+    "title": "SSL",
+    "channelId": "",
+    "artists": [
+      "NES"
+    ],
+    "slug": "nes-ssl",
+    "thumbnail": "https://i.ytimg.com/vi/40Py1k6KqCg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "uuwX1PSR9oo",
+    "title": "U13",
+    "channelId": "",
+    "artists": [
+      "N3MS"
+    ],
+    "slug": "n3ms-u13",
+    "thumbnail": "https://i.ytimg.com/vi/uuwX1PSR9oo/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Dd9zU9lJhfc",
+    "title": "Irko - Sept (Prod. amne)",
+    "channelId": "",
+    "artists": [
+      "Irko"
+    ],
+    "slug": "irko-sept-prod-amne",
+    "thumbnail": "https://i.ytimg.com/vi/Dd9zU9lJhfc/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "z06qwt3-gBc",
+    "title": "34murphy - l'amour et la haine",
+    "channelId": "",
+    "artists": [
+      "34murphy"
+    ],
+    "slug": "34murphy-lamour-et-la-haine",
+    "thumbnail": "https://i.ytimg.com/vi/z06qwt3-gBc/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "iBiwG5VJA_Y",
+    "title": "Anacho - Alive (prod Anacho)",
+    "channelId": "",
+    "artists": [
+      "Anacho"
+    ],
+    "slug": "anacho-alive-prod-anacho",
+    "thumbnail": "https://i.ytimg.com/vi/iBiwG5VJA_Y/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ZnOmyGJRn9c",
+    "title": "paulvitesse! - choses simples",
+    "channelId": "",
+    "artists": [
+      "paulvitesse!"
+    ],
+    "slug": "paulvitesse-choses-simples",
+    "thumbnail": "https://i.ytimg.com/vi/ZnOmyGJRn9c/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "WbXFJM0Xhrg",
+    "title": "GRANDES AFFAIRES",
+    "channelId": "",
+    "artists": [
+      "HOUDI"
+    ],
+    "slug": "houdi-grandes-affaires",
+    "thumbnail": "https://i.ytimg.com/vi/WbXFJM0Xhrg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Zy5aSSQJYs0",
+    "title": "MC Max - Mille Problèmes - Clip Officiel",
+    "channelId": "",
+    "artists": [
+      "MC Ma"
+    ],
+    "slug": "mc-max-mille-problemes-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/Zy5aSSQJYs0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ppfddRV6ckU",
+    "title": "Lake x ‪OJEEZ‬ x RACH  - Patient (Clip Officiel)",
+    "channelId": "",
+    "artists": [
+      "Lake",
+      "OJEEZ",
+      "RACH"
+    ],
+    "slug": "lake-x-ojeez-x-rach-patient-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/ppfddRV6ckU/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "jfNoL2WlOoI",
+    "title": "Pas si loin",
+    "channelId": "",
+    "artists": [
+      "DIEGO"
+    ],
+    "slug": "diego-pas-si-loin",
+    "thumbnail": "https://i.ytimg.com/vi/jfNoL2WlOoI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "LBWzikigdPw",
+    "title": "VERSIONBETA7 - Survie",
+    "channelId": "",
+    "artists": [
+      "VERSIONBETA7"
+    ],
+    "slug": "versionbeta7-survie",
+    "thumbnail": "https://i.ytimg.com/vi/LBWzikigdPw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "naBe1xZ1cIY",
+    "title": "BRARDA - JE VOUS EMMERDE",
+    "channelId": "",
+    "artists": [
+      "BRARDA"
+    ],
+    "slug": "brarda-je-vous-emmerde",
+    "thumbnail": "https://i.ytimg.com/vi/naBe1xZ1cIY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "QRbdqP-vWlw",
+    "title": "WOW",
+    "channelId": "",
+    "artists": [
+      "WOW"
+    ],
+    "slug": "wow",
+    "thumbnail": "https://i.ytimg.com/vi/QRbdqP-vWlw/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "3Cvjlvy3liI",
+    "title": "Keroué - Roses Blanches (Visualizer)",
+    "channelId": "",
+    "artists": [
+      "Keroué"
+    ],
+    "slug": "keroue-roses-blanches-visualizer",
+    "thumbnail": "https://i.ytimg.com/vi/3Cvjlvy3liI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "xdYPl_6WtTQ",
+    "title": "Keroué - Les Nuages Dessinent un Trèfle (Visualizer)",
+    "channelId": "",
+    "artists": [
+      "Keroué"
+    ],
+    "slug": "keroue-les-nuages-dessinent-un-trefle-visualizer",
+    "thumbnail": "https://i.ytimg.com/vi/xdYPl_6WtTQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "ddU-fUAgYmE",
+    "title": "Keroué - Wu-Tang feat @nesgoat @deemax94 (Visualizer)",
+    "channelId": "",
+    "artists": [
+      "Keroué"
+    ],
+    "slug": "keroue-wu-tang-feat-nesgoat-deemax94-visualizer",
+    "thumbnail": "https://i.ytimg.com/vi/ddU-fUAgYmE/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "T7BnsABhn-g",
+    "title": "Keroué - Flashbacks feat @wallacecleaver8110 (Visualizer)",
+    "channelId": "",
+    "artists": [
+      "Keroué"
+    ],
+    "slug": "keroue-flashbacks-feat-wallacecleaver8110-visualizer",
+    "thumbnail": "https://i.ytimg.com/vi/T7BnsABhn-g/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "cn8ROvNOWxg",
+    "title": "Le bruit des glaçons",
+    "channelId": "",
+    "artists": [
+      "SENTIN'L"
+    ],
+    "slug": "sentinl-le-bruit-des-glacons",
+    "thumbnail": "https://i.ytimg.com/vi/cn8ROvNOWxg/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "2DdoWY6-zs0",
+    "title": "Cielbleu - Caresse du sun (Video Lyrics)",
+    "channelId": "",
+    "artists": [
+      "Cielbleu"
+    ],
+    "slug": "cielbleu-caresse-du-sun-video-lyrics",
+    "thumbnail": "https://i.ytimg.com/vi/2DdoWY6-zs0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "FvqLdOuafjY",
+    "title": "Voies sur berges",
+    "channelId": "",
+    "artists": [
+      "MARTIN GAL"
+    ],
+    "slug": "martin-gal-voies-sur-berges",
+    "thumbnail": "https://i.ytimg.com/vi/FvqLdOuafjY/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "T7CH5LmBKCs",
+    "title": "Sauf erreur de notre part",
+    "channelId": "",
+    "artists": [
+      "MARTIN GAL"
+    ],
+    "slug": "martin-gal-sauf-erreur-de-notre-part",
+    "thumbnail": "https://i.ytimg.com/vi/T7CH5LmBKCs/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "hxfEPk3NzRA",
+    "title": "Felhur X Andro - Non merci (Lyric video)",
+    "channelId": "",
+    "artists": [
+      "Felhur X Andro"
+    ],
+    "slug": "felhur-x-andro-non-merci-lyric-video",
+    "thumbnail": "https://i.ytimg.com/vi/hxfEPk3NzRA/mqdefault.jpg"
+  }
 ]

@@ -6,13 +6,15 @@
 
 function createPlayer() {
   // ---- État réactif ----
-  let currentTrack = $state(null);   // { id, title, artist, src, thumbnail }
+  let currentTrack = $state(null);   // { id, title, artist, src, thumbnail, isRadio?, meta? }
   let playlist     = $state([]);
   let playing      = $state(false);
   let volume       = $state(0.7);
   let progress     = $state(0);      // 0–100
   let duration     = $state(0);
   let currentTime  = $state(0);
+  let isRadio      = $state(false);  // true si le flux actuel est une webradio
+  let hasError     = $state(false);  // true si le flux a échoué
 
   /** @type {HTMLAudioElement | null} */
   let audio = null;
@@ -35,13 +37,15 @@ function createPlayer() {
     });
 
     audio.addEventListener('ended', () => {
-      next();
+      // Les flux radio sont continus — ne pas passer à la piste suivante
+      if (!isRadio) next();
     });
 
     audio.addEventListener('play',  () => { playing = true; });
     audio.addEventListener('pause', () => { playing = false; });
     audio.addEventListener('error', () => {
       playing = false;
+      hasError = true;
       console.warn('[Player] Erreur de lecture audio');
     });
   }
@@ -49,14 +53,16 @@ function createPlayer() {
   // ---- API publique ----
 
   /**
-   * Charge et joue une piste.
-   * @param {{ id: string, title: string, artist: string, src: string, thumbnail?: string }} track
+   * Charge et joue une piste ou un flux radio.
+   * @param {{ id: string, title: string, artist: string, src: string, thumbnail?: string, isRadio?: boolean, meta?: object }} track
    * @param {Array}  [newPlaylist]
    */
   function play(track, newPlaylist = null) {
     init();
     if (!audio) return;
 
+    hasError = false;
+    isRadio  = !!track.isRadio;
     if (newPlaylist) playlist = newPlaylist;
 
     currentTrack = track;
@@ -78,9 +84,12 @@ function createPlayer() {
     if (!audio) return;
     audio.pause();
     audio.currentTime = 0;
-    playing = false;
-    progress = 0;
+    playing     = false;
+    progress    = 0;
     currentTime = 0;
+    isRadio     = false;
+    hasError    = false;
+    currentTrack = null;
   }
 
   /** Piste suivante */
@@ -126,6 +135,8 @@ function createPlayer() {
     get duration()     { return duration; },
     get currentTime()  { return currentTime; },
     get playlist()     { return playlist; },
+    get isRadio()      { return isRadio; },
+    get hasError()     { return hasError; },
     play, toggle, stop, next, prev, seek, setVolume, init,
   };
 }
