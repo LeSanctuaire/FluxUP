@@ -1,13 +1,10 @@
 <script>
   import { surpriseStore } from '../core/surpriseStore.svelte.js';
   import { radioSearchStore } from '../core/radioSearchStore.svelte.js';
-  import { getRandomStation } from '../services/radioAPI.js';
-  import { player } from '../core/player.svelte.js';
 
   /** @type {{ currentRoute: string }} */
   let { currentRoute = '#/' } = $props();
 
-  // Structure du menu (inchangée)
   const menuItems = [
     {
       label: 'Accueil',
@@ -24,7 +21,7 @@
           links: [
             { label: 'Tous les clips', href: '#/clips' },
             { label: 'Radar des sorties', href: '#/clips' },
-            { label: 'Classement - Votes', href: '#/clips' },
+            { label: 'Classement - Votes', href: '#/classement' },
           ],
         },
       ],
@@ -65,9 +62,8 @@
     },
   ];
 
-  let sidebarOpen  = $state(false);
-  let activeMenu   = $state(null);
-  let radioLoading = $state(false);
+  let sidebarOpen = $state(false);
+  let activeMenu  = $state(null);
 
   function toggleSidebar() {
     sidebarOpen = !sidebarOpen;
@@ -103,29 +99,6 @@
   function openDiceSurprise() {
     closeAll();
     surpriseStore.trigger();
-  }
-
-  /** Lance une radio aléatoire dans le player global */
-  async function playRandomRadio() {
-    closeAll();
-    if (radioLoading) return;
-    radioLoading = true;
-    try {
-      const currentId = player.isRadio ? player.currentTrack?.id : null;
-      const station = await getRandomStation(currentId);
-      if (!station) return;
-      player.play({
-        id:        station.stationuuid,
-        title:     station.name,
-        artist:    [station.country, station.tags].filter(Boolean).join(' · '),
-        src:       station.url_resolved,
-        thumbnail: station.favicon || null,
-        isRadio:   true,
-        meta:      station,
-      });
-    } finally {
-      radioLoading = false;
-    }
   }
 </script>
 
@@ -167,7 +140,7 @@
     <em>Flux<span class="neon">UP</span></em>
   </a>
 
-  <!-- Droite : dé 3D + bouton Écouter -->
+  <!-- Droite : dé 3D -->
   <div class="top-bar-right">
 
     <!-- Dé 3D "Me Surprendre" -->
@@ -187,22 +160,6 @@
           <span class="ndice-face ndice-bottom">⚁</span>
         </span>
       </span>
-    </button>
-
-    <!-- Bouton Écouter / ON AIR -->
-    <button
-      class="top-listen"
-      class:loading={radioLoading}
-      class:on-air={player.isRadio && player.playing}
-      onclick={playRandomRadio}
-      aria-label={player.isRadio && player.playing ? 'Radio en cours' : 'Écouter une radio aléatoire'}
-      disabled={radioLoading}
-    >
-      {#if player.isRadio && player.playing}
-        <span class="onair-dot" aria-hidden="true"></span> ON AIR
-      {:else}
-        <span class="listen-icon">{radioLoading ? '…' : '▶'}</span> Écouter
-      {/if}
     </button>
 
   </div>
@@ -303,26 +260,6 @@
     {/each}
   </ul>
 
-  <!-- Actions CTA en bas de sidebar -->
-  <div class="sidebar-actions">
-
-    <!-- Bouton Écouter / ON AIR selon l'état radio -->
-    <button
-      class="btn-listen"
-      class:loading={radioLoading}
-      class:on-air={player.isRadio && player.playing}
-      onclick={playRandomRadio}
-      aria-label={player.isRadio && player.playing ? 'Radio en cours' : 'Écouter une radio aléatoire'}
-      disabled={radioLoading}
-    >
-      {#if player.isRadio && player.playing}
-        <span class="onair-dot" aria-hidden="true"></span> ON AIR
-      {:else}
-        <span>{radioLoading ? '…' : '▶'}</span> Écouter
-      {/if}
-    </button>
-
-  </div>
 </nav>
 
 <style>
@@ -349,7 +286,6 @@
     background: rgba(4, 4, 10, 0.96);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    /* Trait néon dégradé en bas */
     border-bottom: 1px solid transparent;
     background-clip: padding-box;
     box-shadow:
@@ -467,19 +403,6 @@
   }
   @media (max-width: 480px) { .back-label { display: none; } }
 
-  /* ── Modifications mobile uniquement ─────────────────────────────────────*/
-  @media (max-width: 768px) {
-    /* Masquer le dé 3D */
-    .top-dice { display: none; }
-
-    /* Réduire le bouton Écouter */
-    .top-listen {
-      height: 32px;
-      padding: 0 var(--space-sm);
-      font-size: var(--text-xs);
-    }
-  }
-
   /* ── Backdrop ─────────────────────────────────────────────────────────────*/
   .sidebar-backdrop {
     position: fixed;
@@ -539,69 +462,24 @@
   .top-dice {
     display: flex;
     align-items: center;
-    gap: 7px;
     height: 40px;
-    padding: 0 12px 0 10px;
+    padding: 0 10px;
     background: rgba(255, 107, 43, 0.06);
     border: 1px solid rgba(255, 107, 43, 0.25);
     border-radius: var(--radius-md);
     cursor: pointer;
-    color: var(--text-secondary);
-    font-family: var(--font-base);
-    font-size: var(--text-xs);
-    font-weight: 600;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    white-space: nowrap;
     transition:
       background var(--transition-fast),
       border-color var(--transition-fast),
-      box-shadow var(--transition-fast),
-      color var(--transition-fast);
+      box-shadow var(--transition-fast);
   }
   .top-dice:hover {
     background: rgba(255, 107, 43, 0.14);
     border-color: var(--accent-orange);
     box-shadow: 0 0 16px var(--accent-orange-glow);
-    color: var(--accent-orange);
   }
 
-  /* ── Bouton Écouter / ON AIR (dans la barre) ─────────────────────────────*/
-  .top-listen {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    height: 40px;
-    padding: 0 var(--space-md);
-    background: var(--accent-neon);
-    color: var(--bg-primary);
-    font-family: var(--font-base);
-    font-size: var(--text-sm);
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    border: none;
-    border-radius: var(--radius-md);
-    cursor: pointer;
-    white-space: nowrap;
-    transition:
-      background var(--transition-fast),
-      box-shadow var(--transition-fast),
-      opacity var(--transition-fast);
-  }
-  .top-listen:hover:not(:disabled) {
-    background: var(--accent-orange);
-    box-shadow: 0 0 18px var(--accent-orange-glow);
-  }
-  .top-listen:disabled,
-  .top-listen.loading { opacity: 0.6; cursor: wait; }
-  .top-listen.on-air {
-    background: #ff3333;
-    box-shadow: 0 0 14px rgba(255, 51, 51, 0.5);
-    animation: onair-pulse 2s ease-in-out infinite;
-  }
-
-  /* ── En-tête ──────────────────────────────────────────────────────────────*/
+  /* ── En-tête sidebar ──────────────────────────────────────────────────────*/
   .sidebar-header {
     display: flex;
     align-items: center;
@@ -613,7 +491,6 @@
   }
 
   .logo {
-    /* décalage pour éviter le chevauchement avec le bouton toggle */
     padding-left: 44px;
     font-size: var(--text-lg);
     font-weight: 900;
@@ -768,69 +645,6 @@
     opacity: 0.7;
   }
 
-  /* ── Actions CTA (bas de sidebar) ────────────────────────────────────────*/
-  .sidebar-actions {
-    padding: var(--space-lg) var(--space-xl);
-    border-top: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-    flex-shrink: 0;
-  }
-
-  /* Bouton Écouter / ON AIR */
-  .btn-listen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-xs);
-    width: 100%;
-    padding: 10px var(--space-lg);
-    background: var(--accent-neon);
-    color: var(--bg-primary);
-    font-size: var(--text-sm);
-    font-weight: 700;
-    border: none;
-    border-radius: var(--radius-md);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    font-family: var(--font-base);
-    cursor: pointer;
-    transition:
-      background var(--transition-fast),
-      box-shadow var(--transition-fast),
-      opacity var(--transition-fast);
-  }
-  .btn-listen:hover:not(:disabled) {
-    background: var(--accent-orange);
-    box-shadow: 0 0 18px var(--accent-orange-glow);
-  }
-  .btn-listen:disabled,
-  .btn-listen.loading { opacity: 0.6; cursor: wait; }
-  .btn-listen.on-air {
-    background: #ff3333;
-    box-shadow: 0 0 14px rgba(255, 51, 51, 0.45);
-    animation: onair-pulse 2s ease-in-out infinite;
-  }
-  @keyframes onair-pulse {
-    0%, 100% { box-shadow: 0 0 8px rgba(255, 51, 51, 0.45); }
-    50%       { box-shadow: 0 0 24px rgba(255, 51, 51, 0.7); }
-  }
-
-  .onair-dot {
-    display: inline-block;
-    width: 7px;
-    height: 7px;
-    background: #fff;
-    border-radius: 50%;
-    flex-shrink: 0;
-    animation: onair-blink 1s ease-in-out infinite;
-  }
-  @keyframes onair-blink {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.15; }
-  }
-
   /* ── Dé 3D miniature ─────────────────────────────────────────────────────*/
   .ndice-wrap {
     perspective: 44px;
@@ -883,7 +697,7 @@
   .top-logo {
     display: flex;
     align-items: center;
-    font-size: var(--text-2xl);
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
     font-weight: 900;
     letter-spacing: 0.08em;
     text-transform: uppercase;

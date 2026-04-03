@@ -10,9 +10,11 @@
   import RadioFlux from './pages/RadioFlux.svelte';
   import LaCrypte from './pages/LaCrypte.svelte';
   import ReggaeDub from './pages/ReggaeDub.svelte';
+  import Classement from './pages/Classement.svelte';
   import { surpriseStore } from './core/surpriseStore.svelte.js';
   import { radioSearchStore } from './core/radioSearchStore.svelte.js';
   import RadioSearchModal from './components/RadioSearchModal.svelte';
+  import { postVote, hasVotedLocally } from './services/votesAPI.js';
 
   // ----- Routeur hash simple -----
   let currentRoute = $state(window.location.hash || '#/');
@@ -49,6 +51,35 @@
     return () => window.removeEventListener('hashchange', onHashChange);
   });
 
+  // ── État vote dans la modal surprise ────────────────────────────────────────
+  let sVoted   = $state(false);
+  let sVoting  = $state(false);
+  let sPlusOne = $state(false);
+
+  // Réinitialise quand le clip change (bouton "Un autre clip")
+  $effect(() => {
+    const yId = surpriseStore.currentClip?.youtubeId;
+    if (yId) {
+      sVoted  = hasVotedLocally(yId);
+      sVoting = false;
+    }
+  });
+
+  async function handleSurpriseVote() {
+    const yId = surpriseStore.currentClip?.youtubeId;
+    if (!yId || sVoted || sVoting) return;
+    sVoting = true;
+    const result = await postVote(yId);
+    if (result.success) {
+      sVoted   = true;
+      sPlusOne = true;
+      setTimeout(() => { sPlusOne = false; }, 900);
+    } else if (result.error === 'already_voted') {
+      sVoted = true;
+    }
+    sVoting = false;
+  }
+
   /** Ferme les modals sur Échap */
   function onKeydown(/** @type {KeyboardEvent} */ e) {
     if (e.key === 'Escape') {
@@ -82,6 +113,8 @@
     <LaCrypte />
   {:else if currentRoute === '#/reggae-dub'}
     <ReggaeDub />
+  {:else if currentRoute === '#/classement'}
+    <Classement />
   {:else}
     <div class="page container fade-in" style="text-align:center; padding-top:5rem;">
       <h2 style="font-size:var(--text-3xl); color:var(--accent-orange);">404</h2>
@@ -141,6 +174,38 @@
 
       <!-- Actions -->
       <div class="surprise-actions">
+        <!-- Ligne 1 : voter + classement -->
+        <div class="surprise-vote-row">
+          <div class="svote-wrap">
+            <button
+              class="sbtn sbtn--vote"
+              class:sbtn--voted={sVoted}
+              onclick={handleSurpriseVote}
+              disabled={sVoted || sVoting}
+              aria-label={sVoted ? 'Déjà voté' : 'Voter pour ce clip'}
+            >
+              {#if sVoting}
+                <span class="svote-spinner" aria-hidden="true"></span>Envoi…
+              {:else if sVoted}
+                ✓ Voté
+              {:else}
+                ▲ Voter
+              {/if}
+            </button>
+            {#if sPlusOne}
+              <span class="splus-one" aria-hidden="true">+1</span>
+            {/if}
+          </div>
+          <a
+            href="#/classement"
+            class="sbtn sbtn--gold"
+            onclick={() => surpriseStore.close()}
+          >
+            Voir le classement
+          </a>
+        </div>
+
+        <!-- Ligne 2 : abonner / autre clip / fermer -->
         {#if surpriseStore.currentClip.channelId}
           <a
             class="sbtn sbtn--secondary"
@@ -302,6 +367,82 @@
   .sbtn--orange:hover {
     background: #ff8c45;
     box-shadow: 0 0 20px var(--accent-orange-glow);
+  }
+
+  /* Ligne vote + classement */
+  .surprise-vote-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    width: 100%;
+    justify-content: center;
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .svote-wrap {
+    position: relative;
+    display: inline-flex;
+  }
+
+  /* Bouton voter (dans la modal) */
+  .sbtn--vote {
+    background: transparent;
+    color: var(--accent-neon);
+    border: 1px solid var(--accent-neon);
+  }
+  .sbtn--vote:hover:not(:disabled) {
+    background: rgba(0, 229, 204, 0.12);
+    box-shadow: 0 0 14px var(--accent-neon-glow);
+  }
+  .sbtn--voted {
+    opacity: 0.7;
+    cursor: default;
+  }
+
+  /* Spinner inline */
+  .svote-spinner {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border: 1.5px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: sspin 0.6s linear infinite;
+    margin-right: 6px;
+    flex-shrink: 0;
+  }
+  @keyframes sspin { to { transform: rotate(360deg); } }
+
+  /* +1 flottant */
+  .splus-one {
+    position: absolute;
+    top: -4px;
+    right: -10px;
+    font-size: var(--text-sm);
+    font-weight: 800;
+    color: var(--accent-neon);
+    pointer-events: none;
+    animation: sfloat 0.85s ease forwards;
+    text-shadow: 0 0 8px var(--accent-neon-glow);
+  }
+  @keyframes sfloat {
+    0%   { opacity: 1; transform: translateY(0) scale(1); }
+    60%  { opacity: 1; transform: translateY(-16px) scale(1.15); }
+    100% { opacity: 0; transform: translateY(-28px) scale(0.9); }
+  }
+
+  /* Bouton "Voir le classement" — orange/or */
+  .sbtn--gold {
+    background: transparent;
+    color: var(--accent-orange);
+    border: 1px solid var(--accent-orange);
+    text-shadow: 0 0 8px rgba(255, 107, 43, 0.3);
+  }
+  .sbtn--gold:hover {
+    background: rgba(255, 107, 43, 0.1);
+    box-shadow: 0 0 18px var(--accent-orange-glow);
   }
 
   .sbtn--ghost {

@@ -1,13 +1,27 @@
 <script>
   import CardClip from '../components/CardClip.svelte';
   import Button from '../components/Button.svelte';
-  import { getFeaturedClips, getRecentClips } from '../services/localClips.js';
+  import { getFeaturedClips, getRecentClips, allClips } from '../services/localClips.js';
+  import { getTop } from '../services/votesAPI.js';
   import { surpriseStore } from '../core/surpriseStore.svelte.js';
   import { getFeaturedRadios } from '../services/radioAPI.js';
   import { player } from '../core/player.svelte.js';
 
-  const featured = getFeaturedClips(12);
   const recentClips = getRecentClips(12);
+
+  // ── En Vedette : clips les plus votés (fallback → featured si pas encore de votes) ──
+  let featuredClips = $state(getFeaturedClips(12));
+
+  $effect(() => {
+    getTop(12).then(apiScores => {
+      if (!apiScores.length) return; // pas encore de votes → garder les featured
+      const scoreMap = new Map(apiScores.map(s => [s.youtube_id, s.vote_count]));
+      featuredClips = allClips
+        .map(c => ({ ...c, votes: scoreMap.get(c.youtubeId) ?? 0 }))
+        .sort((a, b) => b.votes - a.votes)
+        .slice(0, 12);
+    });
+  });
 
   /* ── Radios vedette (bloc home) ─────────────────────────────────────── */
   /** @type {import('../services/radioAPI.js').Station[]} */
@@ -136,7 +150,7 @@
   </section>
 
   <!-- ======= RADAR DES SORTIES ======= -->
-  <section class="container section-radar">
+  <section class="container container--wide section-radar">
     <span class="badge radar-badge">Nouveau · FluxUP</span>
     <div class="section-header">
       <div>
@@ -149,7 +163,6 @@
       </div>
     </div>
 
-    <!-- Slider horizontal scroll-snap — pause au survol/touch -->
     <div class="slider" bind:this={sliderEl} role="region" aria-label="Slider clips récents"
       onmouseenter={() => isPaused = true}
       onmouseleave={() => isPaused = false}
@@ -165,7 +178,7 @@
   </section>
 
   <!-- ======= CLIPS EN VEDETTE ======= -->
-  <section class="container section-clips">
+  <section class="container container--wide section-clips">
     <div class="section-header">
       <div>
         <h2 class="section-title">En <span class="neon">Vedette</span></h2>
@@ -174,7 +187,7 @@
       <div class="slider-nav">
         <button class="slider-btn" onclick={() => slideByFeatured(-1)} aria-label="Précédent">‹</button>
         <button class="slider-btn" onclick={() => slideByFeatured(1)}  aria-label="Suivant">›</button>
-        <Button variant="ghost" size="sm" href="#/clips">Voir tout →</Button>
+        <Button variant="ghost" size="sm" href="#/classement">Voir tout →</Button>
       </div>
     </div>
 
@@ -184,7 +197,7 @@
       ontouchstart={() => isPausedFeatured = true}
       ontouchend={() => { isPausedFeatured = false; }}
     >
-      {#each featured as clip}
+      {#each featuredClips as clip}
         <div class="slider-item">
           <CardClip {clip} />
         </div>
@@ -440,6 +453,9 @@
   /* ---- Radar des Sorties ---- */
   .section-radar { margin-bottom: var(--space-2xl); }
 
+  /* Container élargi pour les sliders */
+  .container--wide { max-width: 1600px; }
+
   .section-sub {
     font-size: var(--text-sm);
     color: var(--text-muted);
@@ -471,23 +487,21 @@
     color: var(--accent-neon);
   }
 
-  /* Slider horizontal */
+  /* Slider horizontal — pleine largeur */
   .slider {
     display: flex;
     align-items: flex-start; /* chaque card garde sa hauteur naturelle */
     gap: var(--space-md);
     overflow-x: auto;
-    /* scroll-snap retiré : incompatible avec le scroll RAF pixel par pixel */
     scroll-padding-left: 0;
     padding-bottom: var(--space-sm);  /* espace pour la scrollbar */
-    /* Masque la scrollbar tout en gardant le scroll fonctionnel */
+    /* Padding latéral aligné sur le container pour un départ propre */
     scrollbar-width: none;
   }
   .slider::-webkit-scrollbar { display: none; }
 
   .slider-item {
     flex: 0 0 280px;
-    /* scroll-snap-align retiré avec scroll-snap-type */
   }
 
   /* ---- Section clips ---- */
@@ -636,5 +650,6 @@
     .hero-actions  { flex-wrap: wrap; }
     /* Cards plus étroites sur mobile pour voir le suivant */
     .slider-item   { flex: 0 0 240px; }
+    .slider        { padding-left: var(--space-md); padding-right: var(--space-md); }
   }
 </style>
