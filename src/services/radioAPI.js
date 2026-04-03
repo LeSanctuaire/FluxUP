@@ -11,15 +11,21 @@ export { CURATED_STATIONS };
 
 const BASE_URL = 'https://de1.api.radio-browser.info/json';
 
-/** Force une URL vers HTTPS pour éviter le contenu mixte. @param {string} url */
-function toHttps(url) {
+/**
+ * Passe une URL de favicon via wsrv.nl pour la redimensionner à 53×53 WebP.
+ * Évite de télécharger des images 500–1024px pour les afficher en 53px.
+ * @param {string} url
+ */
+function optimizeFavicon(url) {
   if (!url) return url;
-  return url.startsWith('http://') ? 'https://' + url.slice(7) : url;
+  // Force HTTPS d'abord
+  const https = url.startsWith('http://') ? 'https://' + url.slice(7) : url;
+  return `https://wsrv.nl/?url=${encodeURIComponent(https)}&w=53&h=53&fit=cover&output=webp`;
 }
 
-/** Normalise les champs d'une station (favicon en HTTPS). @param {any} s */
+/** Normalise les champs d'une station (favicon optimisée). @param {any} s */
 function normalizeStation(s) {
-  return s.favicon ? { ...s, favicon: toHttps(s.favicon) } : s;
+  return s.favicon ? { ...s, favicon: optimizeFavicon(s.favicon) } : s;
 }
 
 /** Headers communs */
