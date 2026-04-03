@@ -260,6 +260,7 @@
   /* ── Bloc vote ────────────────────────────────────────────────────────────*/
   .vote-block {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md) 0;
