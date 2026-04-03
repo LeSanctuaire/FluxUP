@@ -103,7 +103,6 @@
   <section class="hero">
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="container hero-content">
-      <span class="badge hero-badge">Nouveau · FluxUP</span>
       <h1 class="hero-title">
         Découvrez la <span class="neon">musique</span><br />
         autrement.
@@ -138,6 +137,7 @@
 
   <!-- ======= RADAR DES SORTIES ======= -->
   <section class="container section-radar">
+    <span class="badge radar-badge">Nouveau · FluxUP</span>
     <div class="section-header">
       <div>
         <h2 class="section-title">Radar des <span class="neon">Sorties</span></h2>
@@ -277,11 +277,14 @@
     padding: var(--space-2xl) 0;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: var(--space-lg);
     max-width: 640px;
+    margin: 0 auto;
   }
 
-  .hero-badge { align-self: flex-start; }
+  .radar-badge { margin-bottom: var(--space-sm); }
 
   .hero-title {
     font-size: clamp(var(--text-2xl), 5vw, var(--text-3xl));
@@ -290,7 +293,43 @@
     letter-spacing: -0.02em;
     color: var(--text-primary);
   }
-  .hero-title .neon { color: var(--accent-neon); }
+  .hero-title .neon {
+    color: var(--accent-orange);
+    display: inline-block; /* nécessaire pour que transform fonctionne sur inline */
+    animation: glitch-word 6s ease-in-out infinite;
+    animation-delay: -3s; /* décalage de 3s pour ne pas se superposer au glitch du logo */
+  }
+
+  @keyframes glitch-word {
+    0%, 85%, 100% {
+      text-shadow: none;
+      transform: skewX(0deg);
+    }
+    86% {
+      text-shadow: -2px 0 var(--accent-neon), 2px 0 rgba(255,255,255,0.6);
+      transform: translateX(2px) skewX(-1deg);
+    }
+    87% {
+      text-shadow: 2px 0 var(--accent-neon), -2px 0 rgba(255,255,255,0.6);
+      transform: translateX(-2px) skewX(1deg);
+    }
+    88% {
+      text-shadow: -1px 0 rgba(255,255,255,0.4), 1px 0 var(--accent-neon);
+      transform: skewX(0deg);
+    }
+    89% {
+      text-shadow: none;
+      transform: skewX(0);
+    }
+    92% {
+      text-shadow: 3px 0 var(--accent-neon), -3px 0 rgba(255,255,255,0.4);
+      transform: translateX(1px) skewX(-0.5deg);
+    }
+    93% {
+      text-shadow: none;
+      transform: skewX(0);
+    }
+  }
 
   .hero-sub {
     font-size: var(--text-md);
@@ -303,6 +342,12 @@
     align-items: center;
     gap: var(--space-md);
     flex-wrap: nowrap;
+  }
+  @media (max-width: 768px) {
+    .hero-actions {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
   }
 
   /* ── Bouton "Me Surprendre" (natif, harmonisé avec Button.svelte) ── */

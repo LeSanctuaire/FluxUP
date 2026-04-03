@@ -1,10 +1,10 @@
 <script>
   import { debounce } from '../core/utils.js';
-  import { searchRadios, getFeaturedRadios, getFrenchIndieRadios, PAGE_SIZE } from '../services/radioAPI.js';
+  import { searchRadios, getFeaturedRadios, getFrenchIndieRadios, CURATED_STATIONS, PAGE_SIZE } from '../services/radioAPI.js';
   import { player } from '../core/player.svelte.js';
 
-  // Mode : 'fr' = radios françaises indépendantes, 'world' = top mondial
-  let mode = $state('fr');
+  // Mode : 'curated' = sélection FluxUP, 'fr' = radios françaises indé, 'world' = top mondial
+  let mode = $state('curated');
 
   // État pagination
   let currentPage = $state(1);
@@ -33,6 +33,14 @@
 
   /** @param {number} page @param {string} m */
   async function loadDefault(page, m) {
+    // Mode curation : données locales, pas d'appel API
+    if (m === 'curated') {
+      featured    = CURATED_STATIONS;
+      hasMore     = false;
+      currentPage = 1;
+      scrollToTop();
+      return;
+    }
     loading = true;
     const offset = (page - 1) * PAGE_SIZE;
     const results = m === 'fr'
@@ -128,9 +136,11 @@
   let subtitle = $derived(
     query.trim()
       ? 'résultats de recherche'
-      : mode === 'fr'
-        ? 'radios françaises indépendantes'
-        : 'top votes mondial'
+      : mode === 'curated'
+        ? 'sélection éditoriale FluxUP'
+        : mode === 'fr'
+          ? 'radios Françaises'
+          : 'top votes mondial'
   );
 </script>
 
@@ -161,18 +171,23 @@
       </div>
     {/if}
 
-    <!-- Toggle France / Monde -->
+    <!-- Toggle Curation / France / Monde -->
     <div class="mode-toggle" role="group" aria-label="Sélection du mode">
+      <button
+        class="mode-btn mode-btn--curated"
+        class:active={mode === 'curated'}
+        onclick={() => switchMode('curated')}
+      >✦ Sélection FluxUP</button>
       <button
         class="mode-btn"
         class:active={mode === 'fr'}
         onclick={() => switchMode('fr')}
-      >🇫🇷 France</button>
+      ><span class="flag-fr" aria-hidden="true"></span> France</button>
       <button
         class="mode-btn"
         class:active={mode === 'world'}
         onclick={() => switchMode('world')}
-      >🌍 Top mondial</button>
+      ><span class="flag-world" aria-hidden="true">◉</span> Top mondial</button>
     </div>
 
     <!-- Recherche + infos page -->
@@ -229,33 +244,35 @@
         {/each}
       </div>
 
-      <!-- Pagination -->
-      <nav class="pagination" aria-label="Navigation des pages">
-        <button
-          class="page-btn"
-          onclick={() => goToPage(currentPage - 1)}
-          disabled={currentPage === 1 || loading}
-          aria-label="Page précédente"
-        >‹ Préc.</button>
-
-        {#each pageNumbers() as p}
+      <!-- Pagination — masquée en mode curation (liste locale fixe) -->
+      {#if mode !== 'curated' && !query.trim()}
+        <nav class="pagination" aria-label="Navigation des pages">
           <button
             class="page-btn"
-            class:current={p === currentPage}
-            onclick={() => goToPage(p)}
-            disabled={loading}
-            aria-label={`Page ${p}`}
-            aria-current={p === currentPage ? 'page' : undefined}
-          >{p}</button>
-        {/each}
+            onclick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 1 || loading}
+            aria-label="Page précédente"
+          >‹ Préc.</button>
 
-        <button
-          class="page-btn"
-          onclick={() => goToPage(currentPage + 1)}
-          disabled={!hasMore || loading}
-          aria-label="Page suivante"
-        >Suiv. ›</button>
-      </nav>
+          {#each pageNumbers() as p}
+            <button
+              class="page-btn"
+              class:current={p === currentPage}
+              onclick={() => goToPage(p)}
+              disabled={loading}
+              aria-label={`Page ${p}`}
+              aria-current={p === currentPage ? 'page' : undefined}
+            >{p}</button>
+          {/each}
+
+          <button
+            class="page-btn"
+            onclick={() => goToPage(currentPage + 1)}
+            disabled={!hasMore || loading}
+            aria-label="Page suivante"
+          >Suiv. ›</button>
+        </nav>
+      {/if}
 
     {:else if !loading}
       <p class="empty-state">
@@ -362,6 +379,35 @@
     border-color: var(--accent-orange);
     color: #000;
     font-weight: 700;
+  }
+
+  /* Bouton curation FluxUP — accent neon distinct */
+  .mode-btn--curated:hover { border-color: var(--accent-neon); color: var(--accent-neon); }
+  .mode-btn--curated.active {
+    background: var(--accent-neon);
+    border-color: var(--accent-neon);
+    box-shadow: 0 0 12px var(--accent-neon-glow);
+  }
+
+  /* Mini drapeau français CSS tricolore */
+  .flag-fr {
+    display: inline-block;
+    width: 18px;
+    height: 12px;
+    border-radius: 2px;
+    overflow: hidden;
+    vertical-align: middle;
+    position: relative;
+    background: linear-gradient(to right, #002395 33.3%, #fff 33.3% 66.6%, #ed2939 66.6%);
+    border: 1px solid rgba(255,255,255,0.15);
+    flex-shrink: 0;
+    margin-right: 2px;
+    transform: translateX(-3px);
+  }
+
+  .flag-world {
+    font-size: 0.85em;
+    vertical-align: middle;
   }
 
   /* Recherche */

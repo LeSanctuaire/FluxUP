@@ -1,5 +1,6 @@
 <script>
   import { findClip } from '../services/localClips.js';
+  import SharePanel from '../components/SharePanel.svelte';
 
   /** @type {{ id: string | null }} */
   let { id } = $props();
@@ -40,6 +41,10 @@
             <p class="clip-title">Clip YouTube</p>
             <p class="clip-artist">ID : {id}</p>
           {/if}
+
+          <div class="clip-share">
+            <SharePanel {id} title={meta?.title ?? 'Clip'} />
+          </div>
         </div>
       </div>
     {:else}
@@ -130,6 +135,12 @@
     cursor: pointer;
   }
   .tag:hover { color: var(--accent-neon); border-color: var(--border-accent); }
+
+  .clip-share {
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-sm);
+  }
 
   .empty-state {
     text-align: center;

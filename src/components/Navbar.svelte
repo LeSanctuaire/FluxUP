@@ -38,7 +38,7 @@
           title: 'Selections',
           links: [
             { label: 'La Crypte', href: '#/crypte' },
-            { label: 'Reggae - Dub - Roots', href: '#' },
+            { label: 'Reggae - Dub - Roots', href: '#/reggae-dub' },
           ],
         },
       ],

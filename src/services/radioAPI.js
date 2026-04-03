@@ -4,6 +4,11 @@
  * Docs : https://api.radio-browser.info/
  */
 
+import { autoFilter, applyExclusions, CURATED_STATIONS } from './radioCuration.js';
+
+// Ré-export pour que les composants n'aient qu'un seul point d'import radio
+export { CURATED_STATIONS };
+
 const BASE_URL = 'https://de1.api.radio-browser.info/json';
 
 /** Headers communs */
@@ -32,7 +37,8 @@ export async function getFeaturedRadios(limit = PAGE_SIZE, offset = 0) {
     });
     const res = await fetch(`${BASE_URL}/stations/search?${params}`, { headers: HEADERS });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
+    const data = await res.json();
+    return applyExclusions(autoFilter(data));
   } catch (err) {
     console.warn('[radioAPI] getFeaturedRadios:', err);
     return offset === 0 ? FALLBACK_STATIONS : [];
@@ -59,7 +65,8 @@ export async function searchRadios(query, limit = PAGE_SIZE, offset = 0) {
     });
     const res = await fetch(`${BASE_URL}/stations/search?${params}`, { headers: HEADERS });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
+    const data = await res.json();
+    return applyExclusions(autoFilter(data));
   } catch (err) {
     console.warn('[radioAPI] searchRadios:', err);
     return [];
@@ -113,7 +120,7 @@ export async function getFrenchIndieRadios(limit = PAGE_SIZE, offset = 0) {
     const res = await fetch(`${BASE_URL}/stations/search?${params}`, { headers: HEADERS });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    return filterMainstream(data).slice(0, limit);
+    return applyExclusions(autoFilter(filterMainstream(data))).slice(0, limit);
   } catch (err) {
     console.warn('[radioAPI] getFrenchIndieRadios:', err);
     return offset === 0 ? FALLBACK_STATIONS.filter(s => s.country === 'France') : [];
