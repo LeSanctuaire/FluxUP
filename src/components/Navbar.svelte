@@ -179,7 +179,6 @@
       title="Me Surprendre"
     >
       <span class="ndice-wrap" aria-hidden="true">
-        <span class="ndice-orbit"></span>
         <span class="ndice-cube">
           <span class="ndice-face ndice-front">⚀</span>
           <span class="ndice-face ndice-back">⚅</span>
@@ -189,7 +188,6 @@
           <span class="ndice-face ndice-bottom">⚁</span>
         </span>
       </span>
-      <span class="dice-label">Surprise</span>
     </button>
 
     <!-- Bouton Écouter / ON AIR -->
@@ -548,10 +546,6 @@
     box-shadow: 0 0 16px var(--accent-orange-glow);
     color: var(--accent-orange);
   }
-  .dice-label {
-    line-height: 1;
-  }
-  @media (max-width: 560px) { .dice-label { display: none; } }
 
   /* ── Bouton Écouter / ON AIR (dans la barre) ─────────────────────────────*/
   .top-listen {
@@ -828,7 +822,7 @@
     backface-visibility: visible;
     animation: ndice-color 3s ease-in-out infinite;
   }
-  .ndice-front  { transform: translateZ(9px);           animation: none; filter: invert(1) drop-shadow(0 0 4px rgba(255,255,255,0.95)); }
+  .ndice-front  { transform: translateZ(9px); animation: none; filter: invert(1) drop-shadow(0 0 4px rgba(255,255,255,0.95)); }
   .ndice-back   { transform: rotateY(180deg)  translateZ(9px); }
   .ndice-right  { transform: rotateY(90deg)   translateZ(9px); }
   .ndice-left   { transform: rotateY(-90deg)  translateZ(9px); }

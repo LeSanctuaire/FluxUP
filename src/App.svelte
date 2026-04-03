@@ -8,6 +8,7 @@
   import Explorer from './pages/Explorer.svelte';
   import ClipDetail from './pages/ClipDetail.svelte';
   import RadioFlux from './pages/RadioFlux.svelte';
+  import LaCrypte from './pages/LaCrypte.svelte';
   import { surpriseStore } from './core/surpriseStore.svelte.js';
 
   // ----- Routeur hash simple -----
@@ -71,6 +72,8 @@
     <ClipDetail id={clipId} />
   {:else if currentRoute === '#/radio'}
     <RadioFlux />
+  {:else if currentRoute === '#/crypte'}
+    <LaCrypte />
   {:else}
     <div class="page container fade-in" style="text-align:center; padding-top:5rem;">
       <h2 style="font-size:var(--text-3xl); color:var(--accent-orange);">404</h2>
