@@ -358,9 +358,17 @@
   }
   @media (max-width: 768px) {
     .hero-actions {
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+      max-width: 280px;
+      margin-left: auto;
+      margin-right: auto;
     }
+    /* Boutons Button.svelte (rendus en <a> ou <button> scoped) */
+    .hero-actions :global(.btn) { width: 100%; }
+    /* Bouton natif "Me Surprendre" */
+    .hero-actions .btn { width: 100%; }
   }
 
   /* ── Bouton "Me Surprendre" (natif, harmonisé avec Button.svelte) ── */
