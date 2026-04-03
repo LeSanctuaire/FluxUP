@@ -654,5 +654,8 @@
     /* Cards plus étroites sur mobile pour voir le suivant */
     .slider-item   { flex: 0 0 160px; }
     .slider        { padding-left: var(--space-md); padding-right: var(--space-md); }
+    /* Empêche le section-header de dépasser la largeur du viewport */
+    .section-header { flex-wrap: wrap; gap: var(--space-sm); }
+    .section-sub    { white-space: normal; }
   }
 </style>
