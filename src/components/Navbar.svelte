@@ -35,7 +35,7 @@
           title: 'Selections',
           links: [
             { label: 'La Crypte', href: '#/crypte' },
-            { label: 'Reggae - Dub - Roots', href: '#/reggae-dub' },
+            { label: 'Le Temple du Roots', href: '#/reggae-dub' },
           ],
         },
       ],
@@ -682,10 +682,11 @@
     justify-content: center;
     font-size: 14px;
     line-height: 1;
+    color: white;
     backface-visibility: visible;
     animation: ndice-color 3s ease-in-out infinite;
   }
-  .ndice-front  { transform: translateZ(9px); animation: none; filter: invert(1) drop-shadow(0 0 4px rgba(255,255,255,0.95)); }
+  .ndice-front  { transform: translateZ(9px); animation: none; filter: drop-shadow(0 0 4px rgba(255,255,255,0.95)); }
   .ndice-back   { transform: rotateY(180deg)  translateZ(9px); }
   .ndice-right  { transform: rotateY(90deg)   translateZ(9px); }
   .ndice-left   { transform: rotateY(-90deg)  translateZ(9px); }
@@ -700,9 +701,9 @@
     100% { transform: rotateX(360deg) rotateY(-360deg); }
   }
   @keyframes ndice-color {
-    0%   { filter: invert(1) drop-shadow(0 0 4px rgba(124,58,237,1)); }
-    50%  { filter: invert(1) drop-shadow(0 0 4px rgba(0,229,204,1)); }
-    100% { filter: invert(1) drop-shadow(0 0 4px rgba(124,58,237,1)); }
+    0%   { filter: drop-shadow(0 0 4px rgba(124,58,237,1)); }
+    50%  { filter: drop-shadow(0 0 4px rgba(0,229,204,1)); }
+    100% { filter: drop-shadow(0 0 4px rgba(124,58,237,1)); }
   }
 
   /* ── Logo FLUXUP centré dans la barre ───────────────────────────────────*/

@@ -72,6 +72,7 @@ img, video {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   margin-bottom: var(--space-lg);
+  white-space: nowrap;
 }
 .section-title span {
   color: var(--accent-neon);

@@ -70,6 +70,11 @@
     initPlayer();
   }
 
+  function stopPlayer() {
+    if (ytPlayer) { try { ytPlayer.stopVideo(); ytPlayer.destroy(); } catch(_) {} ytPlayer = null; }
+    launched = false;
+  }
+
   function nextVideo() {
     if (ytPlayer) ytPlayer.nextVideo();
   }
@@ -117,9 +122,9 @@
           Lancer la sélection
         </button>
       {:else}
-        <button class="btn-launch btn-launch--active" onclick={launchPlayer}>
-          <span class="btn-icon" aria-hidden="true">▶</span>
-          Relancer
+        <button class="btn-stop" onclick={stopPlayer}>
+          <span class="btn-icon" aria-hidden="true">■</span>
+          STOP
         </button>
       {/if}
 
@@ -305,15 +310,29 @@
   }
   .btn-launch:active { transform: scale(0.97); }
 
-  .btn-launch--active {
-    background: rgba(0, 229, 204, 0.15);
-    color: var(--accent-neon);
-    border: 1px solid var(--accent-neon);
+  .btn-stop {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 12px var(--space-2xl, 2rem);
+    background: transparent;
+    color: #ff3b3b;
+    font-family: var(--font-base);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid #ff3b3b;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255,59,59,0.4), inset 0 0 10px rgba(255,59,59,0.05);
+    transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+    white-space: nowrap;
   }
-  .btn-launch--active:hover {
-    background: rgba(0, 229, 204, 0.25);
-    box-shadow: 0 0 14px var(--accent-neon-glow);
+  .btn-stop:hover {
+    box-shadow: 0 0 20px rgba(255,59,59,0.7), inset 0 0 14px rgba(255,59,59,0.1);
   }
+  .btn-stop:active { transform: scale(0.97); }
 
   .btn-icon { font-size: 0.8em; }
 

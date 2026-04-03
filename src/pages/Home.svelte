@@ -460,6 +460,7 @@
     font-size: var(--text-sm);
     color: var(--text-muted);
     margin-top: 4px;
+    white-space: nowrap;
   }
 
   /* Boutons nav slider */
