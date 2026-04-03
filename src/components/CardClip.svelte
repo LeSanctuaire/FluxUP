@@ -3,8 +3,8 @@
    * @typedef {{ id: string, title: string, artist: string, thumbnail: string, duration?: string, genre?: string, views?: string }} Clip
    */
 
-  /** @type {{ clip: Clip, onclick?: (clip: Clip) => void }} */
-  let { clip, onclick = null } = $props();
+  /** @type {{ clip: Clip, onclick?: (clip: Clip) => void, eager?: boolean }} */
+  let { clip, onclick = null, eager = false } = $props();
 
   function handleClick() {
     if (onclick) onclick(clip);
@@ -22,7 +22,8 @@
     <img
       src={clip.thumbnail}
       alt={clip.title}
-      loading="lazy"
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : 'auto'}
       width="320" height="180"
     />
     {#if clip.duration}

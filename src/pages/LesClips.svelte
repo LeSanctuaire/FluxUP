@@ -135,7 +135,7 @@
       <div class="grid-clips">
         {#each sorted as clip, i}
           <div style="animation-delay: {i * 30}ms" class="fade-in">
-            <CardClip {clip} />
+            <CardClip {clip} eager={i === 0} />
           </div>
         {/each}
       </div>

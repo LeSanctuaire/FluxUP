@@ -169,9 +169,9 @@
       ontouchstart={() => isPaused = true}
       ontouchend={() => { isPaused = false; }}
     >
-      {#each recentClips as clip}
+      {#each recentClips as clip, i}
         <div class="slider-item">
-          <CardClip {clip} />
+          <CardClip {clip} eager={i === 0} />
         </div>
       {/each}
     </div>

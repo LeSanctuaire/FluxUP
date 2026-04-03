@@ -90,7 +90,7 @@
           </div>
 
           <!-- Card clip standard -->
-          <CardClip {clip} />
+          <CardClip {clip} eager={i === 0} />
 
           <!-- Barre de votes -->
           <div class="votes-row">
