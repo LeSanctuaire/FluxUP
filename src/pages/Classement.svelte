@@ -150,7 +150,7 @@
 
   <!-- ── CTA bas de page ────────────────────────────────────────────────────── -->
   <div class="cta-block">
-    <p class="cta-text">Découvrez tous les clips de la sélection Sanctum</p>
+    <p class="cta-text">Découvrez tous les clips de la sélection FluxUP</p>
     <a href="#/clips" class="cta-btn">Voir tous les clips</a>
   </div>
 

@@ -46,13 +46,13 @@ export const CURATED_STATIONS = [
     favicon:      'https://kingdubfamily.com/favicon.ico',
   },
   {
-    stationuuid: 'fluxup-lofi247-262329',
-    name:         '24/7 Lofi Radio',
-    country:      'International',
-    tags:         'lofi, chillout, relax, study',
-    bitrate:      128,
-    url_resolved: 'https://stream.rcast.net/262329',
-    favicon:      'https://www.247lofiradio.com/favicon.ico',
+    stationuuid: 'fluxup-labelleaventure',
+    name:         'Radio La Belle Aventure',
+    country:      'France',
+    tags:         'variété, chanson française, sans pub',
+    bitrate:      192,
+    url_resolved: 'https://flux.radiolabelleaventure.com/listen/radio_la_belle_aventure/radio.mp3',
+    favicon:      'https://www.radiolabelleaventure.com/favicon.ico',
   },
 ];
 

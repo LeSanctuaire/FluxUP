@@ -63,6 +63,7 @@
       border-color var(--transition-base),
       box-shadow var(--transition-base);
     outline: none;
+    width: 100%; /* force la card à rester dans les 200px du slider-item */
   }
 
   .card-clip:hover,
@@ -72,10 +73,12 @@
     box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 12px var(--accent-neon-glow);
   }
 
-  /* Thumbnail */
+  /* Thumbnail — hauteur fixe pour garantir l'uniformité quelle que soit la source */
   .card-thumb {
     position: relative;
-    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: 112px; /* 200px card × 9/16 ≈ 112px — même hauteur pour toutes les vignettes */
+    flex-shrink: 0;
     overflow: hidden;
     background: var(--bg-secondary);
   }
@@ -117,12 +120,15 @@
 
   .card-clip:hover .play-overlay { opacity: 1; }
 
-  /* Info */
+  /* Info — hauteur min fixe pour que toutes les cards aient la même taille totale */
   .card-info {
     padding: var(--space-md);
     display: flex;
     flex-direction: column;
     gap: 4px;
+    min-height: 82px;
+    min-width: 0;    /* propagate la contrainte de largeur vers les enfants */
+    overflow: hidden;
   }
 
   .card-title {

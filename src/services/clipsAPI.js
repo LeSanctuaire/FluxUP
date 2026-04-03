@@ -103,6 +103,43 @@ export async function getTopClips(limit = 10) {
   return searchClips('top music clips', limit);
 }
 
+/**
+ * Récupère les statistiques (viewCount) pour une liste d'IDs YouTube.
+ * Batché par 50 (limite API). Retourne une Map<youtubeId, viewCount>.
+ * @param {string[]} ids
+ * @returns {Promise<Map<string, number>>}
+ */
+export async function getVideosStats(ids) {
+  const result = new Map();
+  if (!API_KEY || !ids.length) return result;
+
+  // Découper en lots de 50
+  const batches = [];
+  for (let i = 0; i < ids.length; i += 50) {
+    batches.push(ids.slice(i, i + 50));
+  }
+
+  await Promise.all(batches.map(async batch => {
+    try {
+      const params = new URLSearchParams({
+        part: 'statistics',
+        id: batch.join(','),
+        key: API_KEY,
+      });
+      const res = await fetch(`${YT_BASE}/videos?${params}`);
+      if (!res.ok) return;
+      const data = await res.json();
+      for (const item of data.items ?? []) {
+        result.set(item.id, Number(item.statistics?.viewCount ?? 0));
+      }
+    } catch (err) {
+      console.warn('[clipsAPI] getVideosStats batch error:', err);
+    }
+  }));
+
+  return result;
+}
+
 // ----- Données mock (quand pas de clé API) -----
 /** @type {Clip[]} */
 const MOCK_CLIPS = [

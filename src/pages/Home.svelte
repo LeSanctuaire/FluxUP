@@ -46,7 +46,7 @@
 
   let activeStationId = $derived(player.isRadio ? player.currentTrack?.id : null);
 
-  const CARD_STEP = 296;   // 280px card + ~16px gap
+  const CARD_STEP = 216;   // 200px card + ~16px gap
   const SPEED    = 0.6;    // px/frame → ~36px/s à 60fps
 
   /* ── Slider "Radar des Sorties" ─────────────────────────────────────── */
@@ -150,7 +150,7 @@
   </section>
 
   <!-- ======= RADAR DES SORTIES ======= -->
-  <section class="container container--wide section-radar">
+  <section id="radar-sorties" class="container container--wide section-radar">
     <span class="badge radar-badge">Nouveau · FluxUP</span>
     <div class="section-header">
       <div>
@@ -490,7 +490,7 @@
   /* Slider horizontal — pleine largeur */
   .slider {
     display: flex;
-    align-items: flex-start; /* chaque card garde sa hauteur naturelle */
+    align-items: flex-start;
     gap: var(--space-md);
     overflow-x: auto;
     scroll-padding-left: 0;
@@ -501,7 +501,9 @@
   .slider::-webkit-scrollbar { display: none; }
 
   .slider-item {
-    flex: 0 0 280px;
+    flex: 0 0 200px;
+    min-width: 0; /* empêche le flex item de dépasser 200px à cause du contenu long */
+    max-width: 200px;
   }
 
   /* ---- Section clips ---- */
@@ -649,7 +651,7 @@
     .radio-card    { flex-direction: column; padding: var(--space-xl); }
     .hero-actions  { flex-wrap: wrap; }
     /* Cards plus étroites sur mobile pour voir le suivant */
-    .slider-item   { flex: 0 0 240px; }
+    .slider-item   { flex: 0 0 160px; }
     .slider        { padding-left: var(--space-md); padding-right: var(--space-md); }
   }
 </style>

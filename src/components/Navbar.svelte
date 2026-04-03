@@ -20,7 +20,7 @@
           title: 'TENDANCE',
           links: [
             { label: 'Tous les clips', href: '#/clips' },
-            { label: 'Radar des sorties', href: '#/clips' },
+            { label: 'Radar des sorties', href: '#/', action: 'scrollToRadar' },
             { label: 'Classement - Votes', href: '#/classement' },
           ],
         },
@@ -119,7 +119,7 @@
       <span></span><span></span><span></span>
     </button>
 
-    {#if currentRoute !== '#/' && currentRoute !== '#/home'}
+    {#if currentRoute !== '#/' && currentRoute !== '#/home' && currentRoute !== '#/clip'}
       <button
         class="top-back"
         onclick={() => history.back()}
@@ -234,6 +234,18 @@
                       e.preventDefault();
                       if (link.inactive) return;
                       if (link.action === 'openRadioSearch') { closeAll(); radioSearchStore.open(); }
+                      else if (link.action === 'scrollToRadar') {
+                        closeAll();
+                        window.location.hash = '/';
+                        // Attend le rendu de la page Home avant de scroller
+                        setTimeout(() => {
+                          const el = document.getElementById('radar-sorties');
+                          if (el) {
+                            const top = el.getBoundingClientRect().top + window.scrollY - 80;
+                            window.scrollTo({ top, behavior: 'smooth' });
+                          }
+                        }, 120);
+                      }
                       else navTo(link.href);
                     }}
                   >

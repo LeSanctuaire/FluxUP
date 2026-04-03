@@ -11,7 +11,7 @@
   let shareUrl = $derived(
     `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}#/clip/${id}`
   );
-  let shareText = $derived(`${title} — Découvrez ce clip sur Sanctum Music`);
+  let shareText = $derived(`${title} — Découvrez ce clip sur FluxUP`);
   let thumbUrl  = $derived(`https://img.youtube.com/vi/${id}/maxresdefault.jpg`);
 
   /* ── État ── */

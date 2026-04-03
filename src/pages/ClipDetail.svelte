@@ -78,6 +78,22 @@
             <p class="clip-artist">ID : {id}</p>
           {/if}
 
+          <!-- ── Bouton S'abonner ──────────────────────────────────────────── -->
+          {#if meta?.channelId}
+            <a
+              class="btn-subscribe"
+              href="https://www.youtube.com/channel/{meta.channelId}?sub_confirmation=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="S'abonner à la chaîne YouTube"
+            >
+              <svg class="yt-logo" viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              S'abonner
+            </a>
+          {/if}
+
           <!-- ── Bloc vote ──────────────────────────────────────────────────── -->
           <div class="vote-block">
             <div class="vote-btn-wrap">
@@ -211,6 +227,35 @@
     cursor: pointer;
   }
   .tag:hover { color: var(--accent-neon); border-color: var(--border-accent); }
+
+  /* ── Bouton S'abonner (YouTube rouge) ────────────────────────────────────*/
+  .btn-subscribe {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px var(--space-lg);
+    background: #FF0000;
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-base);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background var(--transition-fast),
+      box-shadow var(--transition-fast),
+      transform var(--transition-fast);
+    align-self: flex-start;
+  }
+  .btn-subscribe:hover {
+    background: #CC0000;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.45);
+  }
+  .btn-subscribe:active { transform: scale(0.97); }
 
   /* ── Bloc vote ────────────────────────────────────────────────────────────*/
   .vote-block {
