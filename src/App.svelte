@@ -201,7 +201,7 @@
             class="sbtn sbtn--gold"
             onclick={() => surpriseStore.close()}
           >
-            Voir le classement
+            Classement
           </a>
         </div>
 
@@ -458,6 +458,7 @@
   @media (max-width: 600px) {
     .surprise-actions { flex-direction: column; align-items: stretch; }
     .surprise-actions .sbtn { text-align: center; }
+    .surprise-vote-row { flex-wrap: nowrap; justify-content: center; }
   }
 
   /* ── Bouton scroll-to-top ─────────────────────────────────────────────────*/
