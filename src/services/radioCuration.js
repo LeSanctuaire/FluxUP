@@ -43,7 +43,7 @@ export const CURATED_STATIONS = [
     tags:         'reggae, dub, roots, soundsystem',
     bitrate:      128,
     url_resolved: 'https://stream.rcast.net/66555',
-    favicon:      'https://artwork.rcast.net/66555',
+    favicon:      'https://kingdubfamily.com/favicon.ico',
   },
   {
     stationuuid: 'fluxup-lofi247-262329',
@@ -52,7 +52,7 @@ export const CURATED_STATIONS = [
     tags:         'lofi, chillout, relax, study',
     bitrate:      128,
     url_resolved: 'https://stream.rcast.net/262329',
-    favicon:      'https://artwork.rcast.net/262329',
+    favicon:      'https://www.247lofiradio.com/favicon.ico',
   },
 ];
 
