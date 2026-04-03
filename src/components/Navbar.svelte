@@ -36,7 +36,7 @@
         {
           title: 'Selections',
           links: [
-            { label: 'La Crypte', href: '#' },
+            { label: 'La Crypte', href: '#/crypte' },
             { label: 'Reggae - Dub - Roots', href: '#' },
           ],
         },
@@ -84,6 +84,17 @@
     activeMenu  = null;
   }
 
+  /**
+   * Navigation explicite : nécessaire en Svelte 5 car les mises à jour $state
+   * sont synchrones — le <a> est retiré du DOM avant que le navigateur suive
+   * son href. On impose le hash manuellement avant de fermer le menu.
+   * @param {string} href  ex: '#/crypte'
+   */
+  function navTo(href) {
+    window.location.hash = href.replace(/^#/, '');
+    closeAll();
+  }
+
   function handleOutsideClick(/** @type {MouseEvent} */ event) {
     const t = /** @type {Element} */ (event.target);
     if (!t.closest('.sidebar') && !t.closest('.sidebar-toggle')) closeAll();
@@ -121,72 +132,84 @@
 
 <svelte:window onclick={handleOutsideClick} />
 
-<!-- ── Bouton toggle (toujours visible, flottant haut-gauche) ─────────────── -->
-<button
-  class="sidebar-toggle"
-  class:is-open={sidebarOpen}
-  onclick={(e) => { e.stopPropagation(); toggleSidebar(); }}
-  aria-label={sidebarOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
-  aria-expanded={sidebarOpen}
->
-  <span></span><span></span><span></span>
-</button>
+<!-- ══════════════════════════ BANDE SUPÉRIEURE ══════════════════════════ -->
+<header class="top-bar">
 
-<!-- ── Dé 3D flottant "Me Surprendre" (à gauche du bouton Écouter) ────────────── -->
-<button
-  class="top-dice"
-  onclick={openDiceSurprise}
-  aria-label="Clip surprise aléatoire"
-  title="Me Surprendre"
->
-  <span class="ndice-wrap" aria-hidden="true">
-    <span class="ndice-cube">
-      <span class="ndice-face ndice-front">⚀</span>
-      <span class="ndice-face ndice-back">⚅</span>
-      <span class="ndice-face ndice-right">⚂</span>
-      <span class="ndice-face ndice-left">⚃</span>
-      <span class="ndice-face ndice-top">⚄</span>
-      <span class="ndice-face ndice-bottom">⚁</span>
-    </span>
-  </span>
-</button>
+  <!-- Gauche : burger + retour -->
+  <div class="top-bar-left">
+    <button
+      class="sidebar-toggle"
+      class:is-open={sidebarOpen}
+      onclick={(e) => { e.stopPropagation(); toggleSidebar(); }}
+      aria-label={sidebarOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+      aria-expanded={sidebarOpen}
+    >
+      <span></span><span></span><span></span>
+    </button>
 
-<!-- ── Bouton Retour (visible sur toutes les pages sauf accueil) ─────────── -->
-{#if currentRoute !== '#/' && currentRoute !== '#/home'}
-  <button
-    class="top-back"
-    onclick={() => history.back()}
-    aria-label="Page précédente"
-    title="Retour"
-  >
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8"
-        stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span>Retour</span>
-  </button>
-{/if}
+    {#if currentRoute !== '#/' && currentRoute !== '#/home'}
+      <button
+        class="top-back"
+        onclick={() => history.back()}
+        aria-label="Page précédente"
+        title="Retour"
+      >
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M10 3L5 8l5 5" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="back-label">Retour</span>
+      </button>
+    {/if}
+  </div>
 
-<!-- ── Bouton Écouter / ON AIR (toujours visible, flottant haut-gauche) ──────── -->
-<button
-  class="top-listen"
-  class:loading={radioLoading}
-  class:on-air={player.isRadio && player.playing}
-  onclick={playRandomRadio}
-  aria-label={player.isRadio && player.playing ? 'Radio en cours' : 'Écouter une radio aléatoire'}
-  disabled={radioLoading}
->
-  {#if player.isRadio && player.playing}
-    <span class="onair-dot" aria-hidden="true"></span> ON AIR
-  {:else}
-    <span>{radioLoading ? '…' : '▶'}</span> Écouter
-  {/if}
-</button>
+  <!-- Centre : logo FLUXUP -->
+  <a class="top-logo" href="#/" aria-label="FluxUP — Retour à l'accueil">
+    <em>Flux<span class="neon">UP</span></em>
+  </a>
 
-<!-- ── Logo FLUXUP fixe centré (accueil) ──────────────────────────────────── -->
-<a class="top-logo" href="#/" aria-label="FluxUP — Retour à l'accueil">
-  <em>Flux<span class="neon">UP</span></em>
-</a>
+  <!-- Droite : dé 3D + bouton Écouter -->
+  <div class="top-bar-right">
+
+    <!-- Dé 3D "Me Surprendre" -->
+    <button
+      class="top-dice"
+      onclick={openDiceSurprise}
+      aria-label="Clip surprise aléatoire"
+      title="Me Surprendre"
+    >
+      <span class="ndice-wrap" aria-hidden="true">
+        <span class="ndice-orbit"></span>
+        <span class="ndice-cube">
+          <span class="ndice-face ndice-front">⚀</span>
+          <span class="ndice-face ndice-back">⚅</span>
+          <span class="ndice-face ndice-right">⚂</span>
+          <span class="ndice-face ndice-left">⚃</span>
+          <span class="ndice-face ndice-top">⚄</span>
+          <span class="ndice-face ndice-bottom">⚁</span>
+        </span>
+      </span>
+      <span class="dice-label">Surprise</span>
+    </button>
+
+    <!-- Bouton Écouter / ON AIR -->
+    <button
+      class="top-listen"
+      class:loading={radioLoading}
+      class:on-air={player.isRadio && player.playing}
+      onclick={playRandomRadio}
+      aria-label={player.isRadio && player.playing ? 'Radio en cours' : 'Écouter une radio aléatoire'}
+      disabled={radioLoading}
+    >
+      {#if player.isRadio && player.playing}
+        <span class="onair-dot" aria-hidden="true"></span> ON AIR
+      {:else}
+        <span class="listen-icon">{radioLoading ? '…' : '▶'}</span> Écouter
+      {/if}
+    </button>
+
+  </div>
+</header>
 
 <!-- ── Backdrop semi-transparent (ferme la sidebar au clic) ───────────────── -->
 {#if sidebarOpen}
@@ -247,7 +270,12 @@
               {#each item.sections as section}
                 <p class="sub-title">{section.title}</p>
                 {#each section.links as link}
-                  <a href={link.href} role="menuitem" class="sub-link" onclick={closeAll}>
+                  <a
+                    href={link.href}
+                    role="menuitem"
+                    class="sub-link"
+                    onclick={(e) => { e.preventDefault(); navTo(link.href); }}
+                  >
                     <span class="link-arrow">›</span>{link.label}
                   </a>
                 {/each}
@@ -294,17 +322,75 @@
 </nav>
 
 <style>
-  /* ── Supprime le padding-top de l'ancienne top-navbar ────────────────────*/
+  /* ── Décalage du contenu sous la barre ───────────────────────────────────*/
   :global(body) {
     padding-top: 0;
   }
+  :global(#main-content) {
+    padding-top: 62px;
+  }
 
-  /* ── Toggle burger (toujours visible, fixé haut-gauche) ──────────────────*/
-  .sidebar-toggle {
+  /* ══════════════ BANDE SUPÉRIEURE ══════════════════════════════════════════*/
+  .top-bar {
     position: fixed;
-    top: 14px;
-    left: 14px;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 62px;
     z-index: calc(var(--z-navbar) + 2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--space-md);
+    background: rgba(4, 4, 10, 0.96);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    /* Trait néon dégradé en bas */
+    border-bottom: 1px solid transparent;
+    background-clip: padding-box;
+    box-shadow:
+      0 1px 0 0 rgba(0, 229, 204, 0.18),
+      0 4px 24px rgba(0, 0, 0, 0.55);
+  }
+  /* Ligne dégradée orange→neon sous la barre */
+  .top-bar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--accent-orange) 20%,
+      var(--accent-neon) 50%,
+      var(--accent-orange) 80%,
+      transparent 100%
+    );
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* Gauche */
+  .top-bar-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex: 1;
+  }
+
+  /* Droite */
+  .top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  /* ── Toggle burger (dans la barre) ───────────────────────────────────────*/
+  .sidebar-toggle {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -312,10 +398,11 @@
     width: 40px;
     height: 40px;
     padding: 10px;
-    background: rgba(10, 10, 15, 0.92);
+    background: rgba(255, 255, 255, 0.04);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     cursor: pointer;
+    flex-shrink: 0;
     transition:
       background var(--transition-fast),
       border-color var(--transition-fast),
@@ -335,23 +422,18 @@
     transition: all var(--transition-base);
     transform-origin: center;
   }
-  /* Transformation en X quand la sidebar est ouverte */
   .sidebar-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .sidebar-toggle.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .sidebar-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* ── Bouton Retour (flottant, visible hors accueil) ─────────────────────*/
+  /* ── Bouton Retour (dans la barre) ───────────────────────────────────────*/
   .top-back {
-    position: fixed;
-    top: 14px;
-    left: 62px;
-    z-index: calc(var(--z-navbar) + 2);
     display: flex;
     align-items: center;
     gap: 5px;
-    height: 40px;
-    padding: 0 12px;
-    background: rgba(10, 10, 15, 0.92);
+    height: 36px;
+    padding: 0 10px;
+    background: rgba(255, 255, 255, 0.04);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     color: var(--text-secondary);
@@ -362,12 +444,12 @@
     text-transform: uppercase;
     cursor: pointer;
     white-space: nowrap;
+    animation: backFadeIn var(--transition-base) ease both;
     transition:
       background var(--transition-fast),
       color var(--transition-fast),
       border-color var(--transition-fast),
       box-shadow var(--transition-fast);
-    animation: backFadeIn var(--transition-base) ease both;
   }
   @keyframes backFadeIn {
     from { opacity: 0; transform: translateX(-6px); }
@@ -379,6 +461,7 @@
     color: var(--accent-neon);
     box-shadow: 0 0 10px var(--accent-neon-glow);
   }
+  @media (max-width: 480px) { .back-label { display: none; } }
 
   /* ── Backdrop ─────────────────────────────────────────────────────────────*/
   .sidebar-backdrop {
@@ -435,39 +518,43 @@
     pointer-events: none;
   }
 
-  /* ── Dé 3D flottant (haut, juste à gauche du bouton Écouter) ────────────*/
+  /* ── Dé 3D (dans la barre, à droite) ────────────────────────────────────*/
   .top-dice {
-    position: fixed;
-    top: 14px;
-    left: calc(65% - 48px);
-    z-index: calc(var(--z-navbar) + 2);
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 40px;
+    gap: 7px;
     height: 40px;
-    background: rgba(10, 10, 15, 0.92);
-    border: 1px solid var(--border);
+    padding: 0 12px 0 10px;
+    background: rgba(255, 107, 43, 0.06);
+    border: 1px solid rgba(255, 107, 43, 0.25);
     border-radius: var(--radius-md);
     cursor: pointer;
-    padding: 0;
+    color: var(--text-secondary);
+    font-family: var(--font-base);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    white-space: nowrap;
     transition:
       background var(--transition-fast),
       border-color var(--transition-fast),
-      box-shadow var(--transition-fast);
+      box-shadow var(--transition-fast),
+      color var(--transition-fast);
   }
   .top-dice:hover {
-    background: rgba(255, 107, 43, 0.12);
+    background: rgba(255, 107, 43, 0.14);
     border-color: var(--accent-orange);
-    box-shadow: 0 0 12px var(--accent-orange-glow);
+    box-shadow: 0 0 16px var(--accent-orange-glow);
+    color: var(--accent-orange);
   }
+  .dice-label {
+    line-height: 1;
+  }
+  @media (max-width: 560px) { .dice-label { display: none; } }
 
-  /* ── Bouton Écouter / ON AIR flottant (haut, à côté du burger) ───────────*/
+  /* ── Bouton Écouter / ON AIR (dans la barre) ─────────────────────────────*/
   .top-listen {
-    position: fixed;
-    top: 14px;
-    left: 65%;
-    z-index: calc(var(--z-navbar) + 2);
     display: flex;
     align-items: center;
     gap: 6px;
@@ -761,13 +848,8 @@
     100% { filter: invert(1) drop-shadow(0 0 4px rgba(124,58,237,1)); }
   }
 
-  /* ── Logo FLUXUP fixe centré ─────────────────────────────────────────────*/
+  /* ── Logo FLUXUP centré dans la barre ───────────────────────────────────*/
   .top-logo {
-    position: fixed;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: calc(var(--z-navbar) + 2);
     display: flex;
     align-items: center;
     font-size: var(--text-2xl);
@@ -780,6 +862,10 @@
     pointer-events: auto;
     transition: opacity var(--transition-fast);
     animation: glitch 6s ease-in-out infinite;
+    /* Centre absolu dans la barre */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .top-logo:hover { opacity: 0.75; }
   .top-logo .neon { color: var(--accent-neon); }
