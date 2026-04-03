@@ -1,5 +1,6 @@
 <script>
   import { surpriseStore } from '../core/surpriseStore.svelte.js';
+  import { radioSearchStore } from '../core/radioSearchStore.svelte.js';
   import { getRandomStation } from '../services/radioAPI.js';
   import { player } from '../core/player.svelte.js';
 
@@ -51,15 +52,13 @@
           title: 'En direct',
           links: [
             { label: 'Webradios sélectionnées', href: '#/radio' },
-            { label: 'Flux en cours', href: '#/radio' },
+            { label: 'Rechercher une radio', href: '#', action: 'openRadioSearch' },
           ],
         },
         {
-          title: 'Recherche',
+          title: 'Streams 24/7',
           links: [
-            { label: 'Toutes les radios', href: '#/radio' },
-            { label: 'Par pays', href: '#/radio' },
-            { label: 'Par genre musical', href: '#/radio' },
+            { label: 'Découvrir les lives Radios', href: '#', inactive: true },
           ],
         },
       ],
@@ -272,9 +271,16 @@
                     href={link.href}
                     role="menuitem"
                     class="sub-link"
-                    onclick={(e) => { e.preventDefault(); navTo(link.href); }}
+                    class:sub-link--inactive={link.inactive}
+                    aria-disabled={link.inactive || undefined}
+                    onclick={(e) => {
+                      e.preventDefault();
+                      if (link.inactive) return;
+                      if (link.action === 'openRadioSearch') { closeAll(); radioSearchStore.open(); }
+                      else navTo(link.href);
+                    }}
                   >
-                    <span class="link-arrow">›</span>{link.label}
+                    <span class="link-arrow">›</span>{link.label}{#if link.inactive}<span class="link-soon">bientôt</span>{/if}
                   </a>
                 {/each}
               {/each}
@@ -460,6 +466,19 @@
     box-shadow: 0 0 10px var(--accent-neon-glow);
   }
   @media (max-width: 480px) { .back-label { display: none; } }
+
+  /* ── Modifications mobile uniquement ─────────────────────────────────────*/
+  @media (max-width: 768px) {
+    /* Masquer le dé 3D */
+    .top-dice { display: none; }
+
+    /* Réduire le bouton Écouter */
+    .top-listen {
+      height: 32px;
+      padding: 0 var(--space-sm);
+      font-size: var(--text-xs);
+    }
+  }
 
   /* ── Backdrop ─────────────────────────────────────────────────────────────*/
   .sidebar-backdrop {
@@ -730,6 +749,24 @@
     padding-left: var(--space-md);
   }
   .link-arrow { color: var(--accent-neon); font-size: 1rem; line-height: 1; }
+
+  .sub-link--inactive {
+    opacity: 0.38;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .link-soon {
+    margin-left: auto;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-orange);
+    border: 1px solid currentColor;
+    border-radius: 3px;
+    padding: 1px 5px;
+    opacity: 0.7;
+  }
 
   /* ── Actions CTA (bas de sidebar) ────────────────────────────────────────*/
   .sidebar-actions {

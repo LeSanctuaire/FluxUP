@@ -10,6 +10,8 @@
   import RadioFlux from './pages/RadioFlux.svelte';
   import LaCrypte from './pages/LaCrypte.svelte';
   import { surpriseStore } from './core/surpriseStore.svelte.js';
+  import { radioSearchStore } from './core/radioSearchStore.svelte.js';
+  import RadioSearchModal from './components/RadioSearchModal.svelte';
 
   // ----- Routeur hash simple -----
   let currentRoute = $state(window.location.hash || '#/');
@@ -46,9 +48,12 @@
     return () => window.removeEventListener('hashchange', onHashChange);
   });
 
-  /** Ferme la modal surprise sur Échap */
+  /** Ferme les modals sur Échap */
   function onKeydown(/** @type {KeyboardEvent} */ e) {
-    if (e.key === 'Escape' && surpriseStore.showModal) surpriseStore.close();
+    if (e.key === 'Escape') {
+      if (radioSearchStore.show) radioSearchStore.close();
+      else if (surpriseStore.showModal) surpriseStore.close();
+    }
   }
 
   /** Ferme sur clic du backdrop */
@@ -85,6 +90,7 @@
 
 <PlayerAudio />
 <Footer />
+<RadioSearchModal />
 
 <!-- ── Bouton scroll-to-top ──────────────────────────────────────────────── -->
 {#if showScrollTop}
