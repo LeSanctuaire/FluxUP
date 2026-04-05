@@ -12,6 +12,8 @@
   import ReggaeDub from './pages/ReggaeDub.svelte';
   import Classement from './pages/Classement.svelte';
   import BeatsOnly from './pages/BeatsOnly.svelte';
+  import FAQ from './pages/FAQ.svelte';
+  import MentionsLegales from './pages/MentionsLegales.svelte';
   import { surpriseStore } from './core/surpriseStore.svelte.js';
   import { radioSearchStore } from './core/radioSearchStore.svelte.js';
   import RadioSearchModal from './components/RadioSearchModal.svelte';
@@ -118,6 +120,10 @@
     <Classement />
   {:else if currentRoute === '#/beats'}
     <BeatsOnly autoPlayId={beatId} />
+  {:else if currentRoute === '#/faq'}
+    <FAQ />
+  {:else if currentRoute === '#/mentions-legales'}
+    <MentionsLegales />
   {:else}
     <div class="page container fade-in" style="text-align:center; padding-top:5rem;">
       <h2 style="font-size:var(--text-3xl); color:var(--accent-orange);">404</h2>

@@ -387,7 +387,7 @@
     color: var(--text-primary);
   }
   .hero-title .neon {
-    color: var(--accent-orange);
+    color: #F5C400;
     display: inline-block;
     animation: glitch-multicolor 7s linear infinite;
     animation-delay: -3s;
@@ -395,86 +395,86 @@
 
   @keyframes glitch-multicolor {
 
-    /* ── REPOS : orange pur ── */
+    /* ── REPOS : jaune pur ── */
     0%, 71% {
-      color: var(--accent-orange);
+      color: #F5C400;
       text-shadow: none;
       transform: none;
     }
 
-    /* ── RAFALE 1 ~72% — flash jaune / vert ── */
+    /* ── RAFALE 1 ~72% — flash orange dominant ── */
     72% {
-      color: #F5C400;
-      text-shadow: -2px 0 #F5C400, 2px 0 rgba(245,196,0,0.25);
+      color: var(--accent-orange);
+      text-shadow: -2px 0 var(--accent-orange), 2px 0 rgba(255,85,0,0.30);
       transform: translateX(2px) skewX(-1deg);
     }
     72.5% {
-      color: var(--accent-orange);
-      text-shadow: 2px 0 #00E676, -1px 0 rgba(0,230,118,0.20);
+      color: #F5C400;
+      text-shadow: 2px 0 var(--accent-orange), -1px 0 rgba(255,85,0,0.20);
       transform: translateX(-1px) skewX(0.5deg);
     }
     73% {
-      color: var(--accent-orange);
+      color: #F5C400;
       text-shadow: none;
       transform: none;
     }
 
     /* ── REPOS ── */
     84% {
-      color: var(--accent-orange);
+      color: #F5C400;
       text-shadow: none;
       transform: none;
     }
 
-    /* ── RAFALE 2 ~85% — flash violet / cyan ── */
+    /* ── RAFALE 2 ~85% — flash orange / cyan ── */
     85% {
-      color: #9D00FF;
-      text-shadow: 3px 0 #9D00FF, -2px 0 rgba(157,0,255,0.20);
+      color: var(--accent-orange);
+      text-shadow: 3px 0 var(--accent-orange), -2px 0 rgba(255,85,0,0.25);
       transform: translateX(-2px) skewX(1deg);
     }
     85.5% {
-      color: var(--accent-orange);
-      text-shadow: -3px 0 var(--accent-neon), 1px 0 rgba(0,229,204,0.25);
+      color: #F5C400;
+      text-shadow: -3px 0 var(--accent-neon), 1px 0 rgba(0,229,204,0.20);
       transform: translateX(1px);
     }
     86% {
-      color: var(--accent-orange);
+      color: #F5C400;
       text-shadow: none;
       transform: none;
     }
 
     /* ── REPOS ── */
     93% {
-      color: var(--accent-orange);
+      color: #F5C400;
       text-shadow: none;
       transform: none;
     }
 
-    /* ── RAFALE 3 ~94% — triplet blanc / cyan / violet ── */
+    /* ── RAFALE 3 ~94% — triplet orange / blanc / orange ── */
     94% {
-      color: rgba(255,255,255,0.90);
-      text-shadow: -1px 0 var(--accent-neon), 2px 0 rgba(255,255,255,0.30);
+      color: var(--accent-orange);
+      text-shadow: -1px 0 rgba(255,255,255,0.6), 2px 0 var(--accent-orange);
       transform: translateX(1px) skewX(-0.5deg);
     }
     94.4% {
-      color: var(--accent-orange);
-      text-shadow: 2px 0 rgba(255,255,255,0.20);
+      color: #F5C400;
+      text-shadow: 2px 0 var(--accent-orange);
       transform: translateX(-1px);
     }
     94.8% {
-      color: #9D00FF;
-      text-shadow: -2px 0 #9D00FF;
+      color: var(--accent-orange);
+      text-shadow: -2px 0 var(--accent-orange);
       transform: none;
     }
     95.2% {
-      color: var(--accent-orange);
+      color: #F5C400;
       text-shadow: none;
       transform: none;
     }
 
     /* ── Retour repos jusqu'à la fin ── */
     100% {
-      color: var(--accent-orange);
+      color: #F5C400;
       text-shadow: none;
       transform: none;
     }
@@ -486,23 +486,19 @@
     line-height: 1.7;
   }
 
-  .hero-actions {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-    width: 100%;
-  }
-
-  /* ── Grille 3 colonnes : alignement garanti entre les 2 lignes ── */
+  /* ── Grille 3 colonnes centrée sous le texte ── */
   .hero-actions {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 172px));
     gap: var(--space-md);
-    width: 100%;
+    justify-content: center;
   }
 
-  /* Bouton Radio → colonne 2 (ligne 2 auto) */
-  .hero-actions > .btn--radio { grid-column: 2; }
+  /* Bouton Radio → colonne 2, centré */
+  .hero-actions > .btn--radio {
+    grid-column: 2;
+    justify-self: stretch;
+  }
 
   /* Texte blanc au survol pour le bouton primary (Explorer les clips) */
   .hero-actions :global(.btn--primary:hover) { color: #fff; }
@@ -514,7 +510,7 @@
       margin-left: auto;
       margin-right: auto;
     }
-    .hero-actions > .btn--radio { grid-column: 1; }
+    .hero-actions > .btn--radio { grid-column: 1; justify-self: stretch; }
   }
 
   /* ── Boutons natifs (beats, surprise) harmonisés avec Button.svelte ── */
