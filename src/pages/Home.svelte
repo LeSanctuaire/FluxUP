@@ -415,14 +415,15 @@
     cursor: pointer;
     text-decoration: none;
     transition:
-      background var(--transition-fast),
-      color var(--transition-fast),
-      box-shadow var(--transition-fast),
-      transform var(--transition-fast);
+      background       200ms cubic-bezier(0.4, 0, 0.2, 1),
+      color            200ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow       200ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform        200ms cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
     user-select: none;
   }
-  .btn:active { transform: scale(0.97); }
+  .btn:hover  { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0) scale(0.97); }
   .btn--lg {
     font-size: var(--text-md);
     padding: var(--space-md) var(--space-2xl);
@@ -437,7 +438,9 @@
   }
   .btn--beats:hover {
     background: #ffd32a;
-    box-shadow: 0 0 24px rgba(245, 196, 0, 0.35);
+    box-shadow:
+      0 4px 26px rgba(245, 196, 0, 0.50),
+      0 0 0 1px  rgba(245, 196, 0, 0.20);
   }
 
   .btn--surprise {
@@ -445,8 +448,10 @@
     color: var(--bg-primary);
   }
   .btn--surprise:hover {
-    background: #ff7722;
-    box-shadow: 0 0 24px var(--accent-orange-glow);
+    background: #ff6a1a;
+    box-shadow:
+      0 4px 26px rgba(255, 85, 0, 0.50),
+      0 0 0 1px  rgba(255, 85, 0, 0.20);
   }
 
   /* ── Dé 3D animé ─────────────────────────────────────────────────────── */

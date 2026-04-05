@@ -379,15 +379,18 @@
     cursor: pointer;
     white-space: nowrap;
     transition:
-      background var(--transition-fast),
-      box-shadow var(--transition-fast),
-      transform var(--transition-fast);
+      background  200ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow  200ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform   200ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   .btn-launch:hover {
     background: #ffd32a;
-    box-shadow: 0 0 22px var(--accent-beats-glow);
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 26px rgba(245, 196, 0, 0.52),
+      0 0 0 1px  rgba(245, 196, 0, 0.22);
   }
-  .btn-launch:active { transform: scale(0.97); }
+  .btn-launch:active { transform: translateY(0) scale(0.97); }
 
   .btn-launch--big {
     padding: 14px var(--space-2xl, 2rem);
@@ -681,15 +684,18 @@
     cursor: pointer;
     white-space: nowrap;
     transition:
-      background var(--transition-fast),
-      box-shadow var(--transition-fast),
-      transform var(--transition-fast);
+      background  200ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow  200ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform   200ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   .btn-next:hover {
     background: #ffd32a;
-    box-shadow: 0 0 20px var(--accent-beats-glow);
+    transform: translateY(-2px);
+    box-shadow:
+      0 4px 24px rgba(245, 196, 0, 0.50),
+      0 0 0 1px  rgba(245, 196, 0, 0.20);
   }
-  .btn-next:active { transform: scale(0.97); }
+  .btn-next:active { transform: translateY(0) scale(0.97); }
 
   .btn-stop {
     display: inline-flex;
@@ -707,13 +713,21 @@
     border-radius: var(--radius-md);
     cursor: pointer;
     white-space: nowrap;
-    box-shadow: 0 0 10px rgba(255,59,59,0.35), inset 0 0 10px rgba(255,59,59,0.05);
-    transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+    box-shadow: 0 0 8px rgba(255,59,59,0.20);
+    transition:
+      background  200ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow  200ms cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform   200ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   .btn-stop:hover {
-    box-shadow: 0 0 22px rgba(255,59,59,0.7), inset 0 0 14px rgba(255,59,59,0.1);
+    transform: translateY(-2px);
+    border-color: #ff5555;
+    box-shadow:
+      0 4px 22px rgba(255, 59, 59, 0.50),
+      0 0 0 1px  rgba(255, 59, 59, 0.18);
   }
-  .btn-stop:active { transform: scale(0.97); }
+  .btn-stop:active { transform: translateY(0) scale(0.97); }
 
   /* ── Responsive ──────────────────────────────────────────────────────────── */
   @media (max-width: 600px) {
