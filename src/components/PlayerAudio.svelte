@@ -53,7 +53,7 @@
   }
 </script>
 
-<div class="player" aria-label="Lecteur audio global" role="region">
+<div class="player" class:player--idle={!track} aria-label="Lecteur audio global" role="region">
   <!-- Track info -->
   <div class="player-track">
     {#if track?.thumbnail}
@@ -176,6 +176,22 @@
     align-items: center;
     gap: var(--space-lg);
     padding: 0 var(--space-xl);
+    transition: height 0.3s ease, opacity 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* État idle : aucun flux en lecture */
+  .player--idle {
+    height: 40px;
+    opacity: 0.55;
+    border-top-color: var(--border);
+  }
+  .player--idle:hover {
+    opacity: 1;
+    height: var(--player-height);
+  }
+  .player--idle .player-track,
+  .player--idle .player-right {
+    display: none;
   }
 
   .player-track {

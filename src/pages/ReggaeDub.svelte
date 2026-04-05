@@ -399,5 +399,14 @@
       justify-content: center;
       width: 100%;
     }
+
+    /* Lisibilité mobile — vert plus clair sur fond noir */
+    .player-title {
+      color: #66FFB8;
+    }
+    .rdr-green {
+      color: #66FFB8;
+      text-shadow: 0 0 12px rgba(102, 255, 184, 0.55);
+    }
   }
 </style>
