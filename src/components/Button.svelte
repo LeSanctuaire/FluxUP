@@ -41,10 +41,12 @@
     justify-content: center;
     gap: var(--space-sm);
     font-family: var(--font-base);
+    font-size: var(--text-sm); /* taille de base explicite */
     font-weight: 600;
+    line-height: 1;             /* neutralise le line-height hérité du body */
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    border: none;
+    border: 1px solid transparent; /* garde la même boîte quel que soit le variant */
     border-radius: var(--radius-md);
     cursor: pointer;
     text-decoration: none;

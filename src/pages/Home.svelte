@@ -133,7 +133,7 @@
           <a class="btn btn--beats btn--lg" href="#/beats">Beats Only</a>
 
           <!-- Bouton Me Surprendre → accent orange + dé 3D animé -->
-          <button class="btn btn--surprise btn--lg btn--compact" type="button"
+          <button class="btn btn--surprise btn--lg" type="button"
             onclick={() => surpriseStore.trigger()}>
             <span class="dice-wrap" aria-hidden="true">
               <span class="dice-cube">
@@ -362,55 +362,59 @@
   .hero-actions {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: var(--space-md);
     width: 100%;
   }
 
   .hero-actions-row {
     display: flex;
-    align-items: center;
+    width: 100%;
     gap: var(--space-md);
-    flex-wrap: nowrap;
   }
+
+  /* Tous les boutons de la ligne = largeur égale (flex:1) */
+  .hero-actions-row :global(.btn) { flex: 1; }
+  .hero-actions-row .btn           { flex: 1; }
 
   .hero-actions-secondary {
     display: flex;
     justify-content: center;
+    width: 100%;
+  }
+
+  /* Radios : même largeur qu'un bouton de la ligne (1/3 - gaps) */
+  .hero-actions-secondary :global(.btn) {
+    width: calc((100% - 2 * var(--space-md)) / 3);
   }
 
   @media (max-width: 768px) {
     .hero-actions {
-      width: 100%;
       max-width: 280px;
       margin-left: auto;
       margin-right: auto;
     }
     .hero-actions-row {
       flex-direction: column;
-      align-items: stretch;
-      width: 100%;
     }
-    .hero-actions-secondary {
-      width: 100%;
-    }
-    /* Boutons Button.svelte */
-    .hero-actions :global(.btn) { width: 100%; }
-    /* Boutons natifs */
-    .hero-actions .btn { width: 100%; }
+    /* Tous les boutons pleine largeur sur mobile */
+    .hero-actions-row :global(.btn),
+    .hero-actions-row .btn           { flex: none; width: 100%; }
+    .hero-actions-secondary :global(.btn) { width: 100%; }
   }
 
-  /* ── Bouton "Me Surprendre" (natif, harmonisé avec Button.svelte) ── */
+  /* ── Boutons natifs (beats, surprise) harmonisés avec Button.svelte ── */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-sm);
     font-family: var(--font-base);
+    font-size: var(--text-sm);
     font-weight: 600;
+    line-height: 1;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    border: none;
+    border: 1px solid transparent;
     border-radius: var(--radius-md);
     cursor: pointer;
     text-decoration: none;
@@ -426,10 +430,9 @@
   .btn:active { transform: translateY(0) scale(0.97); }
   .btn--lg {
     font-size: var(--text-md);
-    padding: var(--space-md) var(--space-2xl);
+    padding: var(--space-md) var(--space-xl);
     border-radius: var(--radius-lg);
   }
-  .btn--compact { padding-left: var(--space-lg); padding-right: var(--space-lg); }
 
   .btn--beats {
     background: #F5C400;
