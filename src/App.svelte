@@ -19,7 +19,8 @@
 
   // ----- Routeur hash simple -----
   let currentRoute = $state(window.location.hash || '#/');
-  let clipId = $state(null);
+  let clipId  = $state(null);
+  let beatId  = $state(null);
 
   // ----- Bouton scroll-to-top -----
   let showScrollTop = $state(false);
@@ -33,12 +34,11 @@
   }
 
   function parseHash(hash) {
-    const match = hash.match(/^#\/clip\/(.+)$/);
-    if (match) {
-      clipId = match[1];
-      return '#/clip';
-    }
-    clipId = null;
+    const clipMatch = hash.match(/^#\/clip\/(.+)$/);
+    if (clipMatch) { clipId = clipMatch[1]; beatId = null; return '#/clip'; }
+    const beatMatch = hash.match(/^#\/beats\/(.+)$/);
+    if (beatMatch) { beatId = beatMatch[1]; clipId = null; return '#/beats'; }
+    clipId = null; beatId = null;
     return hash || '#/';
   }
 
@@ -117,7 +117,7 @@
   {:else if currentRoute === '#/classement'}
     <Classement />
   {:else if currentRoute === '#/beats'}
-    <BeatsOnly />
+    <BeatsOnly autoPlayId={beatId} />
   {:else}
     <div class="page container fade-in" style="text-align:center; padding-top:5rem;">
       <h2 style="font-size:var(--text-3xl); color:var(--accent-orange);">404</h2>

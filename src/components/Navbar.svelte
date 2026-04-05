@@ -362,15 +362,15 @@
       box-shadow var(--transition-fast);
   }
   .sidebar-toggle:hover {
-    background: rgba(0, 229, 204, 0.08);
-    border-color: var(--border-accent);
-    box-shadow: 0 0 10px var(--accent-neon-glow);
+    background: rgba(245, 196, 0, 0.08);
+    border-color: rgba(245, 196, 0, 0.50);
+    box-shadow: 0 0 10px rgba(245, 196, 0, 0.20);
   }
   .sidebar-toggle span {
     display: block;
     width: 100%;
     height: 2px;
-    background: var(--accent-orange);
+    background: #F5C400;
     border-radius: var(--radius-full);
     transition: all var(--transition-base);
     transform-origin: center;
@@ -512,7 +512,7 @@
     text-transform: uppercase;
     text-decoration: none;
   }
-  .logo .neon { color: var(--accent-neon); }
+  .logo .neon { color: #F5C400; }
 
   /* Bouton replier (flèche ‹ dans le header) */
   .sidebar-collapse {
@@ -578,13 +578,13 @@
   }
   .sidebar-btn:hover,
   .sidebar-link:hover {
-    color: var(--accent-orange);
-    background: rgba(255, 255, 255, 0.04);
+    color: #F5C400;
+    background: rgba(245, 196, 0, 0.05);
   }
   .sidebar-btn.active,
   .sidebar-link.active {
-    color: var(--accent-orange);
-    background: rgba(255, 140, 0, 0.08);
+    color: #F5C400;
+    background: rgba(245, 196, 0, 0.08);
   }
 
   .chevron {
@@ -634,11 +634,11 @@
       padding-left var(--transition-fast);
   }
   .sub-link:hover {
-    color: var(--accent-orange);
-    background: rgba(255, 140, 0, 0.06);
+    color: #F5C400;
+    background: rgba(245, 196, 0, 0.06);
     padding-left: var(--space-md);
   }
-  .link-arrow { color: var(--accent-orange); font-size: 1rem; line-height: 1; }
+  .link-arrow { color: #F5C400; font-size: 1rem; line-height: 1; }
 
   .sub-link--inactive {
     opacity: 0.38;
@@ -727,7 +727,7 @@
     transform: translateX(-50%);
   }
   .top-logo:hover { opacity: 0.75; }
-  .top-logo .neon { color: var(--accent-neon); }
+  .top-logo .neon { color: #F5C400; }
 
   @keyframes glitch {
     0%, 85%, 100% {

@@ -59,6 +59,9 @@
     <p class="intro-disclaimer">
       Votes de la communauté · Mis à jour en temps réel
     </p>
+    <p class="intro-note">
+      Les contenus présentés reflètent les dynamiques de la plateforme et l'engagement de sa communauté.
+    </p>
   </div>
 
   <!-- ── Chargement ───────────────────────────────────────────────────────────── -->
@@ -241,8 +244,8 @@
   }
 
   .accent-word {
-    color: var(--accent-orange);
-    text-shadow: 0 0 24px var(--accent-orange-glow, rgba(255,107,0,0.4));
+    color: #F5C400;
+    text-shadow: 0 0 24px rgba(245, 196, 0, 0.45);
   }
 
   .intro-body {
@@ -256,10 +259,16 @@
 
   .intro-disclaimer {
     font-size: var(--text-xs);
-    color: var(--text-muted, #555);
+    color: var(--text-secondary);
     letter-spacing: 0.04em;
     margin: 0;
-    opacity: 0.65;
+  }
+
+  .intro-note {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    font-style: italic;
+    margin: var(--space-md) 0 0;
   }
 
   /* ── Section header ──────────────────────────────────────────────────────── */

@@ -3,6 +3,7 @@
   import { allBeats } from '../services/localBeats.js';
   import { createSmartPlaylist } from '../core/smartPlaylist.js';
   import SharePanel from '../components/SharePanel.svelte';
+  import speakerVideoUrl from '../../assets/video/Bass-Speak1 (Compressé).mp4?url';
 
   /** @type {{ autoPlayId?: string | null }} */
   let { autoPlayId = null } = $props();
@@ -160,14 +161,30 @@
 <div class="page fade-in">
   <div class="container">
 
-    <!-- ── Header ──────────────────────────────────────────────────────────── -->
-    <div class="page-header">
-      <h1 class="section-title">Beats <span class="accent-beats">Only</span></h1>
-      <p class="page-sub">Écoute. Vibre. Rejoue.</p>
-    </div>
+    <!-- ══ Speaker Stage ════════════════════════════════════════════════════ -->
+    <div class="speaker-stage">
+      <!-- Enceinte gauche -->
+      <div class="speaker speaker-left" aria-hidden="true">
+        <video
+          src={speakerVideoUrl}
+          autoplay
+          loop
+          muted
+          playsinline
+          disablepictureinpicture
+          class="speaker-video"
+        ></video>
+        <div class="speaker-glow speaker-glow--left"></div>
+      </div>
 
-    <!-- ── Toolbar : recherche + bouton lancer ──────────────────────────────── -->
-    <div class="toolbar">
+      <!-- Contenu central : header + toolbar -->
+      <div class="speaker-center">
+        <div class="page-header">
+          <h1 class="section-title">Beats <span class="accent-beats">Only</span></h1>
+          <p class="page-sub">Écoute. Vibre. Rejoue.</p>
+        </div>
+
+        <div class="toolbar">
       <input
         class="search-input"
         type="search"
@@ -183,6 +200,22 @@
         Lancer la sélection
       </button>
     </div>
+      </div><!-- /speaker-center -->
+
+      <!-- Enceinte droite (miroir) -->
+      <div class="speaker speaker-right" aria-hidden="true">
+        <video
+          src={speakerVideoUrl}
+          autoplay
+          loop
+          muted
+          playsinline
+          disablepictureinpicture
+          class="speaker-video video-mirror"
+        ></video>
+        <div class="speaker-glow speaker-glow--right"></div>
+      </div>
+    </div><!-- /speaker-stage -->
 
     <!-- ── Grille des beats ─────────────────────────────────────────────────── -->
     {#if filtered.length > 0}
@@ -251,6 +284,18 @@
     onclick={onBackdropClick}
     onkeydown={null}
   >
+    <div class="modal-scene">
+
+    <!-- Enceinte gauche (modal) -->
+    <div class="modal-spk modal-spk--left" aria-hidden="true">
+      <video
+        src={speakerVideoUrl}
+        autoplay loop muted playsinline disablepictureinpicture
+        class="modal-spk-video"
+      ></video>
+      <div class="modal-spk-glow modal-spk-glow--left"></div>
+    </div>
+
     <div class="modal-box">
 
       <!-- En-tête modal -->
@@ -312,8 +357,20 @@
         {/if}
       </div>
 
+    </div><!-- /modal-box -->
+
+    <!-- Enceinte droite (modal) -->
+    <div class="modal-spk modal-spk--right" aria-hidden="true">
+      <video
+        src={speakerVideoUrl}
+        autoplay loop muted playsinline disablepictureinpicture
+        class="modal-spk-video video-mirror"
+      ></video>
+      <div class="modal-spk-glow modal-spk-glow--right"></div>
     </div>
-  </div>
+
+    </div><!-- /modal-scene -->
+  </div><!-- /modal-backdrop -->
 {/if}
 
 <style>
@@ -729,6 +786,125 @@
   }
   .btn-stop:active { transform: translateY(0) scale(0.97); }
 
+  /* ══ Speaker Stage ══════════════════════════════════════════════════════════ */
+  .speaker-stage {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: var(--space-xl);
+  }
+
+  /* Zone centrale (header + toolbar) */
+  .speaker-center {
+    flex: 1;
+    min-width: 0;
+  }
+  .speaker-center .page-header { margin-bottom: var(--space-xl); }
+  .speaker-center .toolbar     { margin-bottom: 0; }
+
+  /* Enceinte commune */
+  .speaker {
+    position: relative;
+    flex-shrink: 0;
+    width: 220px;
+    padding-top: 4px;
+    overflow: hidden;
+    pointer-events: none; /* purement décoratif, ne bloque pas les clics */
+  }
+
+  .speaker-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0.42;
+    pointer-events: none;
+  }
+  .speaker-left .speaker-video {
+    -webkit-mask-image: linear-gradient(to right, black 20%, transparent 100%);
+    mask-image:         linear-gradient(to right, black 20%, transparent 100%);
+  }
+  .speaker-right .speaker-video {
+    -webkit-mask-image: linear-gradient(to left,  black 20%, transparent 100%);
+    mask-image:         linear-gradient(to left,  black 20%, transparent 100%);
+  }
+
+  /* Miroir horizontal sur l'enceinte droite */
+  .video-mirror { transform: scaleX(-1); }
+
+  /* Halo doré derrière chaque enceinte */
+  .speaker-glow {
+    position: absolute;
+    top: 10%;
+    width: 80px;
+    height: 60%;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(28px);
+    background: radial-gradient(ellipse, rgba(245,196,0,0.18) 0%, transparent 70%);
+  }
+  .speaker-glow--left  { right: 0; }
+  .speaker-glow--right { left: 0;  }
+
+  /* ══ Modal — Speaker Stage ══════════════════════════════════════════════════ */
+  .modal-scene {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1160px; /* modal-box (720) + 2× speaker (210) */
+  }
+
+  .modal-box {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Enceintes modal */
+  .modal-spk {
+    flex-shrink: 0;
+    width: 210px;
+    position: relative;
+    /* cache le dépassement vertical éventuel */
+    overflow: hidden;
+    /* hauteur max = celle de la modal-box, centrée */
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+  }
+
+  .modal-spk-video {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: 0.50;
+  }
+  .modal-spk--left .modal-spk-video {
+    -webkit-mask-image: linear-gradient(to right, black 10%, transparent 100%);
+    mask-image:         linear-gradient(to right, black 10%, transparent 100%);
+  }
+  .modal-spk--right .modal-spk-video {
+    -webkit-mask-image: linear-gradient(to left,  black 10%, transparent 100%);
+    mask-image:         linear-gradient(to left,  black 10%, transparent 100%);
+  }
+
+  /* Halo */
+  .modal-spk-glow {
+    position: absolute;
+    top: 20%;
+    width: 90px;
+    height: 50%;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(32px);
+    background: radial-gradient(ellipse, rgba(245,196,0,0.22) 0%, transparent 70%);
+  }
+  .modal-spk-glow--left  { right: 0; }
+  .modal-spk-glow--right { left: 0;  }
+
+  /* Desktop only — masquer sur mobile */
+  @media (max-width: 1100px) {
+    .modal-spk { display: none; }
+  }
+
   /* ── Responsive ──────────────────────────────────────────────────────────── */
   @media (max-width: 600px) {
     .toolbar { flex-direction: column; align-items: stretch; }
@@ -737,5 +913,9 @@
     .modal-actions { flex-direction: column; align-items: stretch; }
     .btn-next, .btn-stop { justify-content: center; }
     .grid-beats { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    /* masque les enceintes page sur très petit écran */
+    .speaker { display: none; }
+    .speaker-center .page-header,
+    .speaker-center .toolbar { margin-bottom: var(--space-xl); }
   }
 </style>

@@ -54,6 +54,33 @@ export const CURATED_STATIONS = [
     url_resolved: 'https://flux.radiolabelleaventure.com/listen/radio_la_belle_aventure/radio.mp3',
     favicon:      'https://www.radiolabelleaventure.com/favicon.ico',
   },
+  {
+    stationuuid: 'fluxup-paradise-mellow',
+    name:         'Radio Paradise — Mellow Mix',
+    country:      'USA',
+    tags:         'mellow, eclectic, indie, chill',
+    bitrate:      128,
+    url_resolved: 'http://stream.radioparadise.com/mellow-128',
+    favicon:      'https://www.radioparadise.com/graphics/apple-touch-icon.png',
+  },
+  {
+    stationuuid: 'fluxup-90s90s-hiphop',
+    name:         '90s90s HipHop & Rap',
+    country:      'Germany',
+    tags:         'hiphop, rap',
+    bitrate:      192,
+    url_resolved: 'https://stream.90s90s.de/hiphop/mp3-192/',
+    favicon:      'https://www.90s90s.de/favicon.ico',
+  },
+  {
+    stationuuid: 'f7afd469-77b0-4950-b17e-ff82eaa291d8',
+    name:         'ICI 100% Chanson française',
+    country:      'France',
+    tags:         "variété française 80's 90's & 2000's",
+    bitrate:      192,
+    url_resolved: 'https://icecast.radiofrance.fr/fbchansonfrancaise-hifi.aac',
+    favicon:      'https://www.francebleu.fr/favicons/apple-touch-icon-180x180.png',
+  },
 ];
 
 // ---------------------------------------------------------------------------

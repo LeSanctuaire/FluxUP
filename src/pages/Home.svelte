@@ -388,39 +388,95 @@
   }
   .hero-title .neon {
     color: var(--accent-orange);
-    display: inline-block; /* nécessaire pour que transform fonctionne sur inline */
-    animation: glitch-word 6s ease-in-out infinite;
-    animation-delay: -3s; /* décalage de 3s pour ne pas se superposer au glitch du logo */
+    display: inline-block;
+    animation: glitch-multicolor 7s linear infinite;
+    animation-delay: -3s;
   }
 
-  @keyframes glitch-word {
-    0%, 85%, 100% {
+  @keyframes glitch-multicolor {
+
+    /* ── REPOS : orange pur ── */
+    0%, 71% {
+      color: var(--accent-orange);
       text-shadow: none;
-      transform: skewX(0deg);
+      transform: none;
     }
-    86% {
-      text-shadow: -2px 0 var(--accent-neon), 2px 0 rgba(255,255,255,0.6);
+
+    /* ── RAFALE 1 ~72% — flash jaune / vert ── */
+    72% {
+      color: #F5C400;
+      text-shadow: -2px 0 #F5C400, 2px 0 rgba(245,196,0,0.25);
       transform: translateX(2px) skewX(-1deg);
     }
-    87% {
-      text-shadow: 2px 0 var(--accent-neon), -2px 0 rgba(255,255,255,0.6);
+    72.5% {
+      color: var(--accent-orange);
+      text-shadow: 2px 0 #00E676, -1px 0 rgba(0,230,118,0.20);
+      transform: translateX(-1px) skewX(0.5deg);
+    }
+    73% {
+      color: var(--accent-orange);
+      text-shadow: none;
+      transform: none;
+    }
+
+    /* ── REPOS ── */
+    84% {
+      color: var(--accent-orange);
+      text-shadow: none;
+      transform: none;
+    }
+
+    /* ── RAFALE 2 ~85% — flash violet / cyan ── */
+    85% {
+      color: #9D00FF;
+      text-shadow: 3px 0 #9D00FF, -2px 0 rgba(157,0,255,0.20);
       transform: translateX(-2px) skewX(1deg);
     }
-    88% {
-      text-shadow: -1px 0 rgba(255,255,255,0.4), 1px 0 var(--accent-neon);
-      transform: skewX(0deg);
+    85.5% {
+      color: var(--accent-orange);
+      text-shadow: -3px 0 var(--accent-neon), 1px 0 rgba(0,229,204,0.25);
+      transform: translateX(1px);
     }
-    89% {
+    86% {
+      color: var(--accent-orange);
       text-shadow: none;
-      transform: skewX(0);
+      transform: none;
     }
-    92% {
-      text-shadow: 3px 0 var(--accent-neon), -3px 0 rgba(255,255,255,0.4);
+
+    /* ── REPOS ── */
+    93% {
+      color: var(--accent-orange);
+      text-shadow: none;
+      transform: none;
+    }
+
+    /* ── RAFALE 3 ~94% — triplet blanc / cyan / violet ── */
+    94% {
+      color: rgba(255,255,255,0.90);
+      text-shadow: -1px 0 var(--accent-neon), 2px 0 rgba(255,255,255,0.30);
       transform: translateX(1px) skewX(-0.5deg);
     }
-    93% {
+    94.4% {
+      color: var(--accent-orange);
+      text-shadow: 2px 0 rgba(255,255,255,0.20);
+      transform: translateX(-1px);
+    }
+    94.8% {
+      color: #9D00FF;
+      text-shadow: -2px 0 #9D00FF;
+      transform: none;
+    }
+    95.2% {
+      color: var(--accent-orange);
       text-shadow: none;
-      transform: skewX(0);
+      transform: none;
+    }
+
+    /* ── Retour repos jusqu'à la fin ── */
+    100% {
+      color: var(--accent-orange);
+      text-shadow: none;
+      transform: none;
     }
   }
 

@@ -4,10 +4,7 @@
  * Docs : https://api.radio-browser.info/
  */
 
-import { autoFilter, applyExclusions, CURATED_STATIONS } from './radioCuration.js';
-
-// Ré-export pour que les composants n'aient qu'un seul point d'import radio
-export { CURATED_STATIONS };
+import { autoFilter, applyExclusions, CURATED_STATIONS as _CURATED_STATIONS } from './radioCuration.js';
 
 const BASE_URL = 'https://de1.api.radio-browser.info/json';
 
@@ -27,6 +24,9 @@ function optimizeFavicon(url) {
 function normalizeStation(s) {
   return s.favicon ? { ...s, favicon: optimizeFavicon(s.favicon) } : s;
 }
+
+// Ré-export normalisé : favicons passées via wsrv.nl comme les stations API
+export const CURATED_STATIONS = _CURATED_STATIONS.map(normalizeStation);
 
 /** Headers communs */
 const HEADERS = {
@@ -182,15 +182,34 @@ const FALLBACK_STATIONS = [
   { stationuuid: 'fallback-4', name: 'KEXP 90.3 FM',       country: 'USA',    tags: 'indie, alternative',    bitrate: 128, url_resolved: 'https://live-aacplus-64.kexp.org/kexp64.aac',      favicon: '' },
 ];
 
-/** Cache interne pour éviter de re-fetcher à chaque clic "radio aléatoire". */
+/** Cache interne pour éviter de re-fetcher à chaque clic "radio aléatoire".
+ * @type {Station[] | null}
+ */
 let _radioCache = null;
 
 /**
- * Retourne une station aléatoire parmi les vedettes.
+ * Retourne une station aléatoire.
+ * Priorité : sélection FluxUP (CURATED_STATIONS), Radio 50/50 en premier lancement.
+ * Fallback : top votes API si toutes les stations curées ont déjà été jouées.
  * @param {string} [excludeId]
  * @returns {Promise<Station | null>}
  */
-export async function getRandomStation(excludeId = null) {
+export async function getRandomStation(excludeId) {
+  // Premier lancement (pas de station en cours) → Radio 50/50 en priorité
+  if (!excludeId) {
+    const radio5050 = CURATED_STATIONS.find(s => s.stationuuid === '0efe7505-f1e6-11e9-a96c-52543be04c81');
+    if (radio5050) return radio5050;
+  }
+
+  // Shuffle suivant → piocher dans CURATED_STATIONS en excluant la station courante
+  const curatedPool = excludeId
+    ? CURATED_STATIONS.filter(s => s.stationuuid !== excludeId)
+    : CURATED_STATIONS;
+  if (curatedPool.length > 0) {
+    return curatedPool[Math.floor(Math.random() * curatedPool.length)];
+  }
+
+  // Fallback : top votes API
   if (!_radioCache) _radioCache = await getFeaturedRadios(50, 0);
   const pool = excludeId
     ? _radioCache.filter(/** @param {Station} s */ s => s.stationuuid !== excludeId)

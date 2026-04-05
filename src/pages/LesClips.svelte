@@ -3,6 +3,7 @@
   import { allClips } from '../services/localClips.js';
   import { getTop } from '../services/votesAPI.js';
   import { getVideosStats } from '../services/clipsAPI.js';
+  import { playlistStore } from '../core/playlistStore.svelte.js';
 
   // ── État ─────────────────────────────────────────────────────────────────────
   let search   = $state('');
@@ -85,6 +86,18 @@
     { id: 'votes', label: 'Votes',    icon: '🔥' },
     { id: 'views', label: 'Vues',     icon: '👁' },
   ];
+
+  /** Emoji du bouton selon le filtre actif */
+  let launchIcon = $derived(SORT_OPTIONS.find(o => o.id === sortBy)?.icon ?? '▶');
+
+  /** Lance la sélection triée : stocke la playlist et navigue vers le 1er clip */
+  function launchSelection() {
+    if (!sorted.length) return;
+    playlistStore.launch(
+      sorted.map(c => ({ youtubeId: c.youtubeId, title: c.title, artist: c.artist }))
+    );
+    window.location.hash = `#/clip/${sorted[0].youtubeId}`;
+  }
 </script>
 
 <div class="page fade-in">
@@ -128,6 +141,19 @@
           </button>
         {/each}
       </div>
+
+      <button
+        class="btn-launch"
+        onclick={launchSelection}
+        disabled={sorted.length === 0}
+        aria-label="Lancer la sélection en lecture"
+      >
+        <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M3 2l9 5-9 5z" fill="currentColor"/>
+        </svg>
+        Lancer la sélection
+        <span aria-hidden="true">{launchIcon}</span>
+      </button>
     </div>
 
     <!-- Résultats -->
@@ -256,6 +282,34 @@
   @keyframes spin {
     to { transform: rotate(360deg); }
   }
+
+  /* ── Bouton Lancer la sélection ─────────────────────────────────────────── */
+  .btn-launch {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px var(--space-xl);
+    background: transparent;
+    color: var(--accent-orange);
+    border: 1px solid var(--accent-orange);
+    border-radius: var(--radius-md);
+    font-family: var(--font-base);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 0 10px var(--accent-orange-glow), inset 0 0 8px rgba(255,107,43,0.04);
+    transition:
+      box-shadow var(--transition-fast),
+      transform var(--transition-fast);
+  }
+  .btn-launch:hover {
+    box-shadow: 0 0 22px var(--accent-orange-glow), inset 0 0 14px rgba(255,107,43,0.1);
+  }
+  .btn-launch:active { transform: scale(0.97); }
+  .btn-launch:disabled { opacity: 0.35; cursor: not-allowed; box-shadow: none; }
 
   /* ── Empty state ─────────────────────────────────────────────────────────── */
   .empty-state {

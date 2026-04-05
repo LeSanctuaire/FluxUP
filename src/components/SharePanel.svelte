@@ -5,13 +5,19 @@
    *   id    : YouTube video ID (URL + thumbnail)
    *   title : titre du clip
    */
-  let { id = '', title = 'Clip' } = $props();
+  /**
+   * id       : YouTube video ID (URL + thumbnail)
+   * title    : titre affiché
+   * url      : URL de partage personnalisée (optionnel, écrase l'URL auto #/clip/{id})
+   * text     : texte de partage personnalisé (optionnel)
+   */
+  let { id = '', title = 'Clip', url: customUrl = null, text: customText = null } = $props();
 
   /* ── URL de partage ── */
   let shareUrl = $derived(
-    `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}#/clip/${id}`
+    customUrl ?? `${window.location.origin}${window.location.pathname.replace(/\/$/, '')}#/clip/${id}`
   );
-  let shareText = $derived(`${title} — Découvrez ce clip sur FluxUP`);
+  let shareText = $derived(customText ?? `${title} — Découvrez ce clip sur FluxUP`);
   let thumbUrl  = $derived(`https://img.youtube.com/vi/${id}/maxresdefault.jpg`);
 
   /* ── État ── */

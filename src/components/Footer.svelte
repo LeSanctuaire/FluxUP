@@ -31,7 +31,7 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
   }
-  .brand .accent { color: var(--accent-neon); }
+  .brand .accent { color: #F5C400; }
 
   .copy {
     font-size: var(--text-sm);

@@ -1,7 +1,9 @@
 <script>
+  import { onMount } from 'svelte';
   import SharePanel from '../components/SharePanel.svelte';
   import { findClip } from '../services/localClips.js';
   import { postVote, getVotes, hasVotedLocally } from '../services/votesAPI.js';
+  import { playlistStore } from '../core/playlistStore.svelte.js';
 
   /** @type {{ id: string | null }} */
   let { id } = $props();
@@ -10,17 +12,77 @@
   let embedUrl = $derived(id ? `https://www.youtube.com/embed/${id}?autoplay=1&rel=0` : null);
 
   // ── État du vote ────────────────────────────────────────────────────────────
-  let votes      = $state(0);
-  let hasVoted   = $state(false);
-  let voting     = $state(false);
+  let votes       = $state(0);
+  let hasVoted    = $state(false);
+  let voting      = $state(false);
   let showPlusOne = $state(false);
 
-  // Charge le score et l'état local au montage / changement de clip
+  // ── Player YT (mode playlist) ─────────────────────────────────────────────
+  /** @type {any} */
+  let ytPlayer = null;
+
+  onMount(() => {
+    // Charge le SDK YouTube une seule fois
+    if (!document.getElementById('yt-iframe-api')) {
+      const tag = document.createElement('script');
+      tag.id  = 'yt-iframe-api';
+      tag.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(tag);
+    }
+    // Lance le player si on arrive directement en mode playlist
+    if (id && playlistStore.isActive) {
+      setTimeout(() => initPlayer(id), 60);
+    }
+    return () => {
+      if (ytPlayer) { try { ytPlayer.destroy(); } catch(_) {} ytPlayer = null; }
+    };
+  });
+
+  /** @param {string} videoId */
+  function initPlayer(videoId) {
+    /** @type {any} */
+    const w = window;
+    const create = () => {
+      if (ytPlayer) { try { ytPlayer.destroy(); } catch(_) {} ytPlayer = null; }
+      ytPlayer = new w.YT.Player('clip-yt-player', {
+        width: '100%', height: '100%',
+        videoId,
+        playerVars: { autoplay: 1, rel: 0, modestbranding: 1 },
+        events: {
+          onStateChange(/** @type {any} */ e) {
+            // Fin de vidéo → clip suivant automatiquement
+            if (e.data === 0) goToNext();
+          },
+        },
+      });
+    };
+    if (w.YT?.Player) {
+      create();
+    } else {
+      const prev = w.onYouTubeIframeAPIReady;
+      w.onYouTubeIframeAPIReady = () => { if (prev) prev(); create(); };
+    }
+  }
+
+  // Charge le score/vote et gère le player quand l'id change
   $effect(() => {
     if (!id) return;
     hasVoted = hasVotedLocally(id);
     getVotes(id).then(n => { votes = n; });
+
+    if (playlistStore.isActive) {
+      playlistStore.syncId(id);
+      // Si le player existe déjà, change juste la vidéo ; sinon l'initialise
+      if (ytPlayer) {
+        ytPlayer.loadVideoById(id);
+      }
+    }
   });
+
+  function goToNext() {
+    const next = playlistStore.advance();
+    if (next) window.location.hash = `#/clip/${next.youtubeId}`;
+  }
 
   async function handleVote() {
     if (!id || hasVoted || voting) return;
@@ -54,14 +116,19 @@
       <div class="clip-layout">
         <!-- Lecteur YouTube -->
         <div class="video-wrap">
-          <iframe
-            src={embedUrl}
-            title={meta?.title ?? 'Clip vidéo'}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            loading="lazy"
-            frameborder="0"
-          ></iframe>
+          {#if playlistStore.isActive}
+            <!-- Mode playlist : YT IFrame API pour détecter la fin et enchaîner -->
+            <div id="clip-yt-player"></div>
+          {:else}
+            <iframe
+              src={embedUrl}
+              title={meta?.title ?? 'Clip vidéo'}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+              frameborder="0"
+            ></iframe>
+          {/if}
         </div>
 
         <!-- Infos + vote -->
@@ -135,6 +202,22 @@
           </div>
           <!-- ─────────────────────────────────────────────────────────────── -->
 
+          <!-- ── Playlist : clip suivant ──────────────────────────────────── -->
+          {#if playlistStore.isActive && playlistStore.hasNext}
+            <div class="playlist-nav">
+              <span class="playlist-pos">
+                {playlistStore.position} / {playlistStore.total}
+              </span>
+              <button class="btn-next-clip" onclick={goToNext}>
+                Clip suivant
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M4 3l7 5-7 5V3z" fill="currentColor"/>
+                  <rect x="12" y="3" width="2" height="10" rx="1" fill="currentColor"/>
+                </svg>
+              </button>
+            </div>
+          {/if}
+
           <div class="clip-share">
             <SharePanel {id} title={meta?.title ?? 'Clip'} />
           </div>
@@ -178,7 +261,9 @@
     overflow: hidden;
     border: 1px solid var(--border);
   }
-  .video-wrap iframe {
+  .video-wrap iframe,
+  .video-wrap :global(#clip-yt-player),
+  .video-wrap :global(#clip-yt-player iframe) {
     position: absolute;
     inset: 0;
     width: 100%; height: 100%;
@@ -349,8 +434,8 @@
     gap: 5px;
     padding: 9px var(--space-lg);
     background: transparent;
-    color: var(--accent-orange);
-    border: 1px solid var(--accent-orange);
+    color: #F5C400;
+    border: 1px solid #F5C400;
     border-radius: var(--radius-md);
     font-family: var(--font-base);
     font-size: var(--text-sm);
@@ -359,15 +444,16 @@
     text-transform: uppercase;
     text-decoration: none;
     white-space: nowrap;
-    text-shadow: 0 0 8px rgba(255, 107, 43, 0.3);
+    text-shadow: 0 0 8px rgba(245, 196, 0, 0.35);
+    box-shadow: 0 0 10px rgba(245, 196, 0, 0.2);
     transition:
       background var(--transition-fast),
       box-shadow var(--transition-fast),
       transform var(--transition-fast);
   }
   .btn-classement:hover {
-    background: rgba(255, 107, 43, 0.1);
-    box-shadow: 0 0 18px var(--accent-orange-glow);
+    background: rgba(245, 196, 0, 0.1);
+    box-shadow: 0 0 20px rgba(245, 196, 0, 0.45);
   }
   .btn-classement:active { transform: scale(0.97); }
 
@@ -396,6 +482,49 @@
     60%  { opacity: 1; transform: translateY(-18px) scale(1.15); }
     100% { opacity: 0; transform: translateY(-32px) scale(0.9); }
   }
+
+  /* ── Playlist nav ────────────────────────────────────────────────────────*/
+  .playlist-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .playlist-pos {
+    font-size: var(--text-xs);
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .btn-next-clip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px var(--space-lg);
+    background: transparent;
+    color: var(--accent-orange);
+    border: 1px solid var(--accent-orange);
+    border-radius: var(--radius-md);
+    font-family: var(--font-base);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 0 10px var(--accent-orange-glow), inset 0 0 8px rgba(255,107,43,0.04);
+    transition:
+      box-shadow var(--transition-fast),
+      transform var(--transition-fast);
+  }
+  .btn-next-clip:hover {
+    box-shadow: 0 0 22px var(--accent-orange-glow), inset 0 0 14px rgba(255,107,43,0.1);
+  }
+  .btn-next-clip:active { transform: scale(0.97); }
 
   /* ── Share panel ──────────────────────────────────────────────────────────*/
   .clip-share {
