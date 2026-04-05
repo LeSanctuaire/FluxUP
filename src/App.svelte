@@ -11,6 +11,7 @@
   import LaCrypte from './pages/LaCrypte.svelte';
   import ReggaeDub from './pages/ReggaeDub.svelte';
   import Classement from './pages/Classement.svelte';
+  import BeatsOnly from './pages/BeatsOnly.svelte';
   import { surpriseStore } from './core/surpriseStore.svelte.js';
   import { radioSearchStore } from './core/radioSearchStore.svelte.js';
   import RadioSearchModal from './components/RadioSearchModal.svelte';
@@ -115,6 +116,8 @@
     <ReggaeDub />
   {:else if currentRoute === '#/classement'}
     <Classement />
+  {:else if currentRoute === '#/beats'}
+    <BeatsOnly />
   {:else}
     <div class="page container fade-in" style="text-align:center; padding-top:5rem;">
       <h2 style="font-size:var(--text-3xl); color:var(--accent-orange);">404</h2>

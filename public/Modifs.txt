@@ -1,0 +1,11 @@
+selection radio france : 法国国际广播电台    !!!!!!!!!!!!!
+
+Affichage mode aléatoire de la section "tous les clips"
+
+
+
+lorsque on est sur la page "tous les clips", j'aimerais ajouter un bouton "lancer la sélection" juste a coté des boutons "récents / votes / vues", suivant le bouton qu'on selectionne, par exemple "votes", ca classe les clips suivant le nombre de votes, je voudrais que le bouton "lancer la selection" ouvre une page modale simple (meme format format / options / boutons que la page modale "me surprendre" ou dé 3d") et lancer les clips par rapprt au bouton selectionné (récents / votes / vues") (suivant la selection, les clips affichés sont différents), exemple : je selectionne le bouton "votes", je clique sur "lancer la selection", la page modale qui s'ouvre lance les clips ayant recus le plus de votes, suivant l'ordre des clips. si je selectionne "recents" et ensuite clique sur "lancer la selection", la page modale qui s'ouvre lance en lecture tous les clips recemment ajoutés, etc.. ) (appliquer la lecture avec enchainement automatique de la selection choisie) la taille du bouton "lancer la sélection" doit etre de la meme taille (largeur) que la barre de recherche (rechercher un titre, un artiste...), bouton stylisé en orange effet néon comme deja present sur certains boutons du site. Suivant la selection choisie, il faut ajouter l'emoji correspondant a la selection, dans le bouton "lancer la selection", par exemple, l'utilisateur choisi "(émoji flamme)votes" le bouton "lancer la sélection doit devenir : "(émoji flamme) lancer la sélection), si bouton "récents" est choisi, le bouton doit etre "(émoji) Lancer la sélection"
+
+
+Découvrez la musique
+autrement.    (italique sur le mot "musique")

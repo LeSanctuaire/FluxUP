@@ -36,6 +36,7 @@
           links: [
             { label: 'La Crypte', href: '#/crypte' },
             { label: 'Le Temple du Roots', href: '#/reggae-dub' },
+            { label: 'Beats Only', href: '#/beats' },
           ],
         },
       ],
