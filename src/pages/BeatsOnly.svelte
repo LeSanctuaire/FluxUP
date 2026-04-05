@@ -1,6 +1,10 @@
 <script>
   import { onMount } from 'svelte';
   import { allBeats } from '../services/localBeats.js';
+  import SharePanel from '../components/SharePanel.svelte';
+
+  /** @type {{ autoPlayId?: string | null }} */
+  let { autoPlayId = null } = $props();
 
   // ── Shuffle Fisher-Yates ──────────────────────────────────────────────────
   /** @param {typeof allBeats} arr */
@@ -21,13 +25,13 @@
   let modalOpen  = $state(false);
   let launched   = $state(false);
 
-  // Playlist courante du player + position
+  // Playlist courante du player + position (réactifs car utilisés dans le template)
   /** @type {typeof allBeats} */
-  let playlist   = [];
-  let currentIdx = 0;
+  let playlist   = $state([]);
+  let currentIdx = $state(0);
 
   /** Beat en cours de lecture (affiché dans le header modal) */
-  /** @type {{ title: string, artist: string } | null} */
+  /** @type {{ title: string, artist: string, channelId?: string } | null} */
   let currentBeat = $state(null);
 
   /** @type {any} instance YT.Player */
@@ -51,6 +55,13 @@
       tag.src = 'https://www.youtube.com/iframe_api';
       document.head.appendChild(tag);
     }
+
+    // Auto-launch si on arrive via une URL partagée (#/beats/{id})
+    if (autoPlayId) {
+      const beat = allBeats.find(/** @param {(typeof allBeats)[0]} b */ b => b.youtubeId === autoPlayId);
+      if (beat) launchFrom(beat);
+    }
+
     return () => {
       if (ytPlayer) { try { ytPlayer.destroy(); } catch(_) {} ytPlayer = null; }
     };
@@ -91,19 +102,19 @@
   function advance() {
     currentIdx = (currentIdx + 1) % playlist.length;
     const next = playlist[currentIdx];
-    currentBeat = { title: next.title, artist: next.artist };
+    currentBeat = { title: next.title, artist: next.artist, channelId: next.channelId };
     if (ytPlayer) ytPlayer.loadVideoById(next.youtubeId);
   }
 
   /** Clic sur une card → lance depuis ce beat, puis enchaîne aléatoirement */
-  /** @param {{ youtubeId: string, title: string, artist: string }} beat */
+  /** @param {{ youtubeId: string, title: string, artist: string, channelId?: string }} beat */
   function launchFrom(beat) {
     playlist = shuffle(allBeats);
     // Place le beat cliqué en tête
-    const idx = playlist.findIndex(b => b.youtubeId === beat.youtubeId);
+    const idx = playlist.findIndex(/** @param {(typeof allBeats)[0]} b */ b => b.youtubeId === beat.youtubeId);
     if (idx > 0) { playlist.splice(idx, 1); playlist.unshift(beat); }
     currentIdx  = 0;
-    currentBeat = { title: beat.title, artist: beat.artist };
+    currentBeat = { title: beat.title, artist: beat.artist, channelId: beat.channelId };
     modalOpen   = true;
     launched    = false;
     setTimeout(() => { launched = true; initPlayer(beat.youtubeId); }, 60);
@@ -113,10 +124,22 @@
   function launchRandom() {
     playlist    = shuffle(allBeats);
     currentIdx  = 0;
-    currentBeat = { title: playlist[0].title, artist: playlist[0].artist };
+    currentBeat = { title: playlist[0].title, artist: playlist[0].artist, channelId: playlist[0].channelId };
     modalOpen   = true;
     launched    = false;
     setTimeout(() => { launched = true; initPlayer(playlist[0].youtubeId); }, 60);
+  }
+
+  /**
+   * URL de la chaîne YouTube du producteur.
+   * Si channelId connu → page chaîne avec pop-up abonnement.
+   * Sinon → recherche YouTube sur le nom du producteur.
+   * @param {string} artist
+   * @param {string | undefined} channelId
+   */
+  function artistChannelUrl(artist, channelId) {
+    if (channelId) return `https://www.youtube.com/channel/${channelId}?sub_confirmation=1`;
+    return `https://www.youtube.com/results?search_query=${encodeURIComponent(artist)}`;
   }
 
   function nextBeat() { advance(); }
@@ -243,7 +266,13 @@
           {#if currentBeat}
             <span class="modal-current-title">{currentBeat.title}</span>
             {#if currentBeat.artist}
-              <span class="modal-current-artist">{currentBeat.artist}</span>
+              <a
+                class="modal-current-artist"
+                href={artistChannelUrl(currentBeat.artist, currentBeat.channelId)}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Voir la chaîne YouTube"
+              >{currentBeat.artist}</a>
             {/if}
           {:else}
             <span class="modal-hint">Mode aléatoire · Enchaînement automatique</span>
@@ -274,9 +303,19 @@
             <rect x="12" y="3" width="2" height="10" rx="1" fill="currentColor"/>
           </svg>
         </button>
+
         <button class="btn-stop" onclick={closeModal}>
           <span aria-hidden="true">■</span> Fermer
         </button>
+
+        {#if currentBeat}
+          <SharePanel
+            id={playlist[currentIdx]?.youtubeId ?? ''}
+            title={currentBeat.title}
+            url="{window.location.origin}{window.location.pathname.replace(/\/$/, '')}#/beats/{playlist[currentIdx]?.youtubeId ?? ''}"
+            text="{currentBeat.title} — Beat sur FluxUP"
+          />
+        {/if}
       </div>
 
     </div>
@@ -566,6 +605,13 @@
     color: var(--accent-beats);
     opacity: 0.8;
     white-space: nowrap;
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(245, 196, 0, 0.4);
+    transition: opacity var(--transition-fast), border-color var(--transition-fast);
+  }
+  .modal-current-artist:hover {
+    opacity: 1;
+    border-bottom-color: var(--accent-beats);
   }
   .modal-close {
     background: none;
@@ -657,25 +703,21 @@
     gap: var(--space-sm);
     padding: 11px var(--space-xl);
     background: transparent;
-    color: var(--text-secondary);
+    color: #ff3b3b;
     font-family: var(--font-base);
     font-size: var(--text-sm);
-    font-weight: 600;
-    letter-spacing: 0.06em;
+    font-weight: 700;
+    letter-spacing: 0.10em;
     text-transform: uppercase;
-    border: 1px solid var(--border);
+    border: 1px solid #ff3b3b;
     border-radius: var(--radius-md);
     cursor: pointer;
     white-space: nowrap;
-    transition:
-      color var(--transition-fast),
-      border-color var(--transition-fast),
-      background var(--transition-fast);
+    box-shadow: 0 0 10px rgba(255,59,59,0.35), inset 0 0 10px rgba(255,59,59,0.05);
+    transition: box-shadow var(--transition-fast), transform var(--transition-fast);
   }
   .btn-stop:hover {
-    color: var(--text-primary);
-    border-color: var(--border-accent);
-    background: rgba(255,255,255,0.04);
+    box-shadow: 0 0 22px rgba(255,59,59,0.7), inset 0 0 14px rgba(255,59,59,0.1);
   }
   .btn-stop:active { transform: scale(0.97); }
 
