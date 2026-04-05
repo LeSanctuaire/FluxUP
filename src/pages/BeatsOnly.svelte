@@ -1,12 +1,13 @@
 <script>
   import { onMount } from 'svelte';
   import { allBeats } from '../services/localBeats.js';
+  import { createSmartPlaylist } from '../core/smartPlaylist.js';
   import SharePanel from '../components/SharePanel.svelte';
 
   /** @type {{ autoPlayId?: string | null }} */
   let { autoPlayId = null } = $props();
 
-  // ── Shuffle Fisher-Yates ──────────────────────────────────────────────────
+  // ── Shuffle Fisher-Yates (pour l'affichage visuel de la grille uniquement) ─
   /** @param {typeof allBeats} arr */
   function shuffle(arr) {
     const a = [...arr];
@@ -17,21 +18,19 @@
     return a;
   }
 
-  // ── Ordre aléatoire à chaque affichage ───────────────────────────────────
+  // ── Ordre aléatoire à chaque affichage de la grille ──────────────────────
   let displayedBeats = $state(shuffle(allBeats));
+
+  // ── Smart playlist : évite les répétitions avant 80 % des titres entendus ─
+  const smartPlaylist = createSmartPlaylist(allBeats, b => b.youtubeId);
 
   // ── État ──────────────────────────────────────────────────────────────────
   let search    = $state('');
   let modalOpen  = $state(false);
   let launched   = $state(false);
 
-  // Playlist courante du player + position (réactifs car utilisés dans le template)
-  /** @type {typeof allBeats} */
-  let playlist   = $state([]);
-  let currentIdx = $state(0);
-
   /** Beat en cours de lecture (affiché dans le header modal) */
-  /** @type {{ title: string, artist: string, channelId?: string } | null} */
+  /** @type {{ title: string, artist: string, channelId?: string, youtubeId: string } | null} */
   let currentBeat = $state(null);
 
   /** @type {any} instance YT.Player */
@@ -98,36 +97,30 @@
     }
   }
 
-  /** Passe au beat suivant dans la playlist */
+  /** Passe au beat suivant via le smart playlist */
   function advance() {
-    currentIdx = (currentIdx + 1) % playlist.length;
-    const next = playlist[currentIdx];
-    currentBeat = { title: next.title, artist: next.artist, channelId: next.channelId };
+    const next = smartPlaylist.next();
+    currentBeat = { title: next.title, artist: next.artist, channelId: next.channelId, youtubeId: next.youtubeId };
     if (ytPlayer) ytPlayer.loadVideoById(next.youtubeId);
   }
 
-  /** Clic sur une card → lance depuis ce beat, puis enchaîne aléatoirement */
+  /** Clic sur une card → enregistre le choix manuel et lance le player */
   /** @param {{ youtubeId: string, title: string, artist: string, channelId?: string }} beat */
   function launchFrom(beat) {
-    playlist = shuffle(allBeats);
-    // Place le beat cliqué en tête
-    const idx = playlist.findIndex(/** @param {(typeof allBeats)[0]} b */ b => b.youtubeId === beat.youtubeId);
-    if (idx > 0) { playlist.splice(idx, 1); playlist.unshift(beat); }
-    currentIdx  = 0;
-    currentBeat = { title: beat.title, artist: beat.artist, channelId: beat.channelId };
+    smartPlaylist.playNow(beat);
+    currentBeat = { title: beat.title, artist: beat.artist, channelId: beat.channelId, youtubeId: beat.youtubeId };
     modalOpen   = true;
     launched    = false;
     setTimeout(() => { launched = true; initPlayer(beat.youtubeId); }, 60);
   }
 
-  /** Bouton "Lancer la sélection" → démarre sur un beat aléatoire */
+  /** Bouton "Lancer la sélection" → premier titre aléatoire via smart playlist */
   function launchRandom() {
-    playlist    = shuffle(allBeats);
-    currentIdx  = 0;
-    currentBeat = { title: playlist[0].title, artist: playlist[0].artist, channelId: playlist[0].channelId };
+    const beat  = smartPlaylist.next();
+    currentBeat = { title: beat.title, artist: beat.artist, channelId: beat.channelId, youtubeId: beat.youtubeId };
     modalOpen   = true;
     launched    = false;
-    setTimeout(() => { launched = true; initPlayer(playlist[0].youtubeId); }, 60);
+    setTimeout(() => { launched = true; initPlayer(beat.youtubeId); }, 60);
   }
 
   /**
@@ -146,6 +139,7 @@
 
   function closeModal() {
     if (ytPlayer) { try { ytPlayer.stopVideo(); ytPlayer.destroy(); } catch(_) {} ytPlayer = null; }
+    smartPlaylist.reset();
     modalOpen   = false;
     launched    = false;
     currentBeat = null;
@@ -310,9 +304,9 @@
 
         {#if currentBeat}
           <SharePanel
-            id={playlist[currentIdx]?.youtubeId ?? ''}
+            id={currentBeat.youtubeId}
             title={currentBeat.title}
-            url="{window.location.origin}{window.location.pathname.replace(/\/$/, '')}#/beats/{playlist[currentIdx]?.youtubeId ?? ''}"
+            url="{window.location.origin}{window.location.pathname.replace(/\/$/, '')}#/beats/{currentBeat.youtubeId}"
             text="{currentBeat.title} — Beat sur FluxUP"
           />
         {/if}
