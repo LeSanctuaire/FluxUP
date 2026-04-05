@@ -447,16 +447,17 @@
     100% { opacity: 0; transform: translateY(-28px) scale(0.9); }
   }
 
-  /* Bouton "Voir le classement" — orange/or */
+  /* Bouton "Voir le classement" — jaune/or (même style que ClipDetail) */
   .sbtn--gold {
     background: transparent;
-    color: var(--accent-orange);
-    border: 1px solid var(--accent-orange);
-    text-shadow: 0 0 8px rgba(255, 107, 43, 0.3);
+    color: #F5C400;
+    border: 1px solid #F5C400;
+    text-shadow: 0 0 8px rgba(245, 196, 0, 0.35);
+    box-shadow: 0 0 10px rgba(245, 196, 0, 0.2);
   }
   .sbtn--gold:hover {
-    background: rgba(255, 107, 43, 0.1);
-    box-shadow: 0 0 18px var(--accent-orange-glow);
+    background: rgba(245, 196, 0, 0.1);
+    box-shadow: 0 0 20px rgba(245, 196, 0, 0.45);
   }
 
   .sbtn--ghost {
