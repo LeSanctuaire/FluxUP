@@ -163,36 +163,39 @@
 
           <!-- ── Bloc vote ──────────────────────────────────────────────────── -->
           <div class="vote-block">
-            <div class="vote-btn-wrap">
-              <button
-                class="vote-btn"
-                class:voted={hasVoted}
-                class:loading={voting}
-                onclick={handleVote}
-                disabled={hasVoted || voting}
-                aria-label={hasVoted ? 'Vous avez déjà voté' : 'Voter pour ce clip'}
-              >
-                {#if voting}
-                  <span class="vote-spinner" aria-hidden="true"></span>
-                  Envoi…
-                {:else if hasVoted}
-                  <span class="vote-icon" aria-hidden="true">✓</span>
-                  Voté
-                {:else}
-                  <span class="vote-icon" aria-hidden="true">▲</span>
-                  Voter
+            <!-- Voter + Classement toujours côte à côte -->
+            <div class="vote-actions">
+              <div class="vote-btn-wrap">
+                <button
+                  class="vote-btn"
+                  class:voted={hasVoted}
+                  class:loading={voting}
+                  onclick={handleVote}
+                  disabled={hasVoted || voting}
+                  aria-label={hasVoted ? 'Vous avez déjà voté' : 'Voter pour ce clip'}
+                >
+                  {#if voting}
+                    <span class="vote-spinner" aria-hidden="true"></span>
+                    Envoi…
+                  {:else if hasVoted}
+                    <span class="vote-icon" aria-hidden="true">✓</span>
+                    Voté
+                  {:else}
+                    <span class="vote-icon" aria-hidden="true">▲</span>
+                    Voter
+                  {/if}
+                </button>
+
+                <!-- Animation +1 flottante -->
+                {#if showPlusOne}
+                  <span class="plus-one" aria-hidden="true">+1</span>
                 {/if}
-              </button>
+              </div>
 
-              <!-- Animation +1 flottante -->
-              {#if showPlusOne}
-                <span class="plus-one" aria-hidden="true">+1</span>
-              {/if}
+              <a href="#/classement" class="btn-classement">
+                Classement
+              </a>
             </div>
-
-            <a href="#/classement" class="btn-classement">
-              Classement
-            </a>
 
             {#if votes > 0}
               <span class="vote-count">
@@ -351,6 +354,13 @@
     padding: var(--space-md) 0;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
+  }
+
+  .vote-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-shrink: 0;
   }
 
   .vote-btn-wrap {
