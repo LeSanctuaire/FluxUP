@@ -125,25 +125,34 @@
         Clips, radios et playlists en un seul endroit.
       </p>
       <div class="hero-actions">
-        <Button size="lg" variant="primary" href="#/clips">Explorer les clips</Button>
+        <!-- Ligne principale : 3 boutons -->
+        <div class="hero-actions-row">
+          <Button size="lg" variant="primary" href="#/clips">Explorer les clips</Button>
 
-        <!-- Bouton Me Surprendre → accent orange + dé 3D animé -->
-        <button class="btn btn--surprise btn--lg btn--compact" type="button"
-          onclick={() => surpriseStore.trigger()}>
-          <span class="dice-wrap" aria-hidden="true">
-            <span class="dice-cube">
-              <span class="dice-face dice-front">⚀</span>
-              <span class="dice-face dice-back">⚅</span>
-              <span class="dice-face dice-right">⚂</span>
-              <span class="dice-face dice-left">⚃</span>
-              <span class="dice-face dice-top">⚄</span>
-              <span class="dice-face dice-bottom">⚁</span>
+          <!-- Bouton Beats Only → jaune beats -->
+          <a class="btn btn--beats btn--lg" href="#/beats">Beats Only</a>
+
+          <!-- Bouton Me Surprendre → accent orange + dé 3D animé -->
+          <button class="btn btn--surprise btn--lg btn--compact" type="button"
+            onclick={() => surpriseStore.trigger()}>
+            <span class="dice-wrap" aria-hidden="true">
+              <span class="dice-cube">
+                <span class="dice-face dice-front">⚀</span>
+                <span class="dice-face dice-back">⚅</span>
+                <span class="dice-face dice-right">⚂</span>
+                <span class="dice-face dice-left">⚃</span>
+                <span class="dice-face dice-top">⚄</span>
+                <span class="dice-face dice-bottom">⚁</span>
+              </span>
             </span>
-          </span>
-          Me Surprendre
-        </button>
+            Me Surprendre
+          </button>
+        </div>
 
-        <Button size="lg" variant="secondary" href="#/radio">Radios en direct</Button>
+        <!-- Ligne secondaire : Radio (centré) -->
+        <div class="hero-actions-secondary">
+          <Button size="lg" variant="secondary" href="#/radio">Radios en direct</Button>
+        </div>
       </div>
     </div>
     <div class="hero-glow" aria-hidden="true"></div>
@@ -352,22 +361,42 @@
 
   .hero-actions {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    width: 100%;
+  }
+
+  .hero-actions-row {
+    display: flex;
     align-items: center;
     gap: var(--space-md);
     flex-wrap: nowrap;
   }
+
+  .hero-actions-secondary {
+    display: flex;
+    justify-content: center;
+  }
+
   @media (max-width: 768px) {
     .hero-actions {
-      flex-direction: column;
-      align-items: stretch;
       width: 100%;
       max-width: 280px;
       margin-left: auto;
       margin-right: auto;
     }
-    /* Boutons Button.svelte (rendus en <a> ou <button> scoped) */
+    .hero-actions-row {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+    }
+    .hero-actions-secondary {
+      width: 100%;
+    }
+    /* Boutons Button.svelte */
     .hero-actions :global(.btn) { width: 100%; }
-    /* Bouton natif "Me Surprendre" */
+    /* Boutons natifs */
     .hero-actions .btn { width: 100%; }
   }
 
@@ -400,6 +429,16 @@
     border-radius: var(--radius-lg);
   }
   .btn--compact { padding-left: var(--space-lg); padding-right: var(--space-lg); }
+
+  .btn--beats {
+    background: #F5C400;
+    color: #0a0a0f;
+    text-decoration: none;
+  }
+  .btn--beats:hover {
+    background: #ffd32a;
+    box-shadow: 0 0 24px rgba(245, 196, 0, 0.35);
+  }
 
   .btn--surprise {
     background: var(--accent-orange);
