@@ -138,12 +138,13 @@
 </div>
 
 <style>
-  /* Palette locale Reggae / Dub — variante subtile du site */
+  /* Palette locale — Vert néon vibrant */
   .reggae-page {
-    --accent-roots:      #e8b84b;
-    --accent-roots-glow: rgba(232, 184, 75, 0.35);
-    --accent-dub:        #4cc98a;
-    --accent-dub-glow:   rgba(76, 201, 138, 0.28);
+    --accent-roots:      #00E676;
+    --accent-roots-glow: rgba(0, 230, 118, 0.35);
+    --accent-dub:        #00E676;
+    --accent-dub-glow:   rgba(0, 230, 118, 0.30);
+    --accent-dub-light:  #33FF99;
   }
 
   /* ── Page ───────────────────────────────────────────────────────────────── */
@@ -168,10 +169,12 @@
     text-align: center;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    box-shadow:
+      0 0 40px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(0, 230, 118, 0.08);
   }
 
-  /* Ligne décorative — dégradé amber → vert roots */
+  /* Ligne décorative — néon vert */
   .reggae-intro-card::before {
     content: '';
     position: absolute;
@@ -179,8 +182,8 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent-roots) 40%, var(--accent-dub) 60%, transparent);
-    opacity: 0.55;
+    background: linear-gradient(90deg, transparent, var(--accent-dub) 35%, var(--accent-dub-light) 65%, transparent);
+    opacity: 0.70;
   }
 
   .intro-lines {
@@ -192,7 +195,7 @@
     text-transform: uppercase;
   }
 
-  .rdr-green  { color: #3cb85a; }
+  .rdr-green  { color: #00E676; text-shadow: 0 0 10px rgba(0, 230, 118, 0.50); }
   .rdr-yellow { color: #f5c518; }
   .rdr-red    { color: #e03030; }
 
@@ -203,7 +206,7 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     margin: 0;
-    text-shadow: 0 0 18px rgba(76, 201, 138, 0.22);
+    text-shadow: 0 0 24px rgba(0, 230, 118, 0.35);
   }
 
   /* ── Section player ──────────────────────────────────────────────────────*/
@@ -249,7 +252,8 @@
     overflow: hidden;
     border: 1px solid var(--border);
     box-shadow:
-      0 0 0 1px rgba(76, 201, 138, 0.06),
+      0 0 0 1px rgba(0, 230, 118, 0.10),
+      0 0 30px rgba(0, 230, 118, 0.06),
       0 8px 48px rgba(0, 0, 0, 0.7);
   }
 
@@ -295,7 +299,7 @@
     gap: var(--space-sm);
     padding: 12px var(--space-2xl, 2rem);
     background: var(--accent-dub);
-    color: var(--bg-primary);
+    color: #020d07;
     font-family: var(--font-base);
     font-size: var(--text-sm);
     font-weight: 700;
@@ -304,6 +308,7 @@
     border: none;
     border-radius: var(--radius-md);
     cursor: pointer;
+    box-shadow: 0 0 18px rgba(0, 230, 118, 0.35);
     transition:
       background var(--transition-fast),
       box-shadow var(--transition-fast),
@@ -311,8 +316,9 @@
     white-space: nowrap;
   }
   .btn-launch:hover {
-    background: var(--accent-roots);
-    box-shadow: 0 0 20px var(--accent-roots-glow);
+    background: var(--accent-dub-light);
+    box-shadow: 0 0 32px rgba(0, 230, 118, 0.55);
+    transform: translateY(-2px);
   }
   .btn-launch:active { transform: scale(0.97); }
 
@@ -365,10 +371,10 @@
     white-space: nowrap;
   }
   .btn-next:hover {
-    color: var(--text-primary);
+    color: var(--accent-dub);
     border-color: var(--accent-dub);
-    background: rgba(255, 255, 255, 0.04);
-    box-shadow: 0 0 10px var(--accent-dub-glow);
+    background: rgba(0, 230, 118, 0.06);
+    box-shadow: 0 0 14px var(--accent-dub-glow);
   }
   .btn-next:active { transform: scale(0.97); }
 

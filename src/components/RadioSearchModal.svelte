@@ -221,6 +221,13 @@
 {/if}
 
 <style>
+  /* ── Thème violet — surcharge locale des variables neon pour la modal radio ── */
+  .rsm-backdrop {
+    --accent-neon:       #9D00FF;
+    --accent-neon-glow:  rgba(157, 0, 255, 0.25);
+    --border-accent:     rgba(157, 0, 255, 0.35);
+  }
+
   /* ── Backdrop ──────────────────────────────────────────────────────────────*/
   .rsm-backdrop {
     position: fixed;
@@ -251,7 +258,7 @@
     border: 1px solid var(--border-accent);
     border-radius: var(--radius-xl);
     box-shadow:
-      0 0 0 1px rgba(0, 229, 204, 0.08),
+      0 0 0 1px rgba(157, 0, 255, 0.10),
       0 32px 80px rgba(0, 0, 0, 0.7),
       0 0 60px var(--accent-neon-glow);
     overflow: hidden;
@@ -338,7 +345,7 @@
   .rsm-input::placeholder { color: var(--text-muted); }
   .rsm-input:focus {
     border-color: var(--border-accent);
-    box-shadow: 0 0 0 2px rgba(0, 229, 204, 0.12);
+    box-shadow: 0 0 0 2px rgba(157, 0, 255, 0.15);
   }
   /* Masquer le X natif de <input type="search"> */
   .rsm-input::-webkit-search-cancel-button { display: none; }
@@ -382,8 +389,8 @@
 
   .rsm-chip {
     padding: 4px 12px;
-    background: rgba(0, 229, 204, 0.07);
-    border: 1px solid rgba(0, 229, 204, 0.22);
+    background: rgba(157, 0, 255, 0.07);
+    border: 1px solid rgba(157, 0, 255, 0.22);
     border-radius: var(--radius-full);
     color: var(--text-secondary);
     font-family: var(--font-base);
@@ -397,7 +404,7 @@
       color var(--transition-fast);
   }
   .rsm-chip:hover {
-    background: rgba(0, 229, 204, 0.16);
+    background: rgba(157, 0, 255, 0.16);
     border-color: var(--accent-neon);
     color: var(--accent-neon);
   }
@@ -429,10 +436,10 @@
     background: rgba(255, 255, 255, 0.04);
   }
   .rsm-station--active {
-    background: rgba(0, 229, 204, 0.06);
+    background: rgba(157, 0, 255, 0.08);
   }
   .rsm-station--active:hover {
-    background: rgba(0, 229, 204, 0.10);
+    background: rgba(157, 0, 255, 0.14);
   }
 
   /* Favicon */

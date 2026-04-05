@@ -285,6 +285,13 @@
 </div>
 
 <style>
+  /* ── Thème violet — surcharge locale des variables neon pour la page radio ── */
+  .page {
+    --accent-neon:       #9D00FF;
+    --accent-neon-glow:  rgba(157, 0, 255, 0.25);
+    --border-accent:     rgba(157, 0, 255, 0.35);
+  }
+
   .page-header { margin-bottom: var(--space-lg); }
   .page-sub { color: var(--text-secondary); font-size: var(--text-sm); margin-top: var(--space-xs); }
 
@@ -373,12 +380,13 @@
     font-family: var(--font-base);
     transition: all var(--transition-fast);
   }
-  .mode-btn:hover { border-color: var(--accent-orange); color: var(--accent-orange); }
+  .mode-btn:hover { border-color: #9D00FF; color: #B540FF; }
   .mode-btn.active {
-    background: var(--accent-orange);
-    border-color: var(--accent-orange);
-    color: #000;
+    background: #9D00FF;
+    border-color: #9D00FF;
+    color: #fff;
     font-weight: 700;
+    box-shadow: 0 0 12px rgba(157, 0, 255, 0.35);
   }
 
   /* Bouton curation FluxUP — accent neon distinct */
@@ -544,7 +552,7 @@
   .page-btn.current {
     background: var(--accent-neon);
     border-color: var(--accent-neon);
-    color: #000;
+    color: #fff;
     font-weight: 700;
   }
   .page-btn:disabled {

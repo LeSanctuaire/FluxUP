@@ -6,6 +6,7 @@
   import { surpriseStore } from '../core/surpriseStore.svelte.js';
   import { getFeaturedRadios } from '../services/radioAPI.js';
   import { player } from '../core/player.svelte.js';
+  import { allBeats } from '../services/localBeats.js';
 
   const recentClips = getRecentClips(12);
 
@@ -80,6 +81,40 @@
     return () => cancelAnimationFrame(rafId);
   });
 
+  /* ── Slider "Beats Only" ────────────────────────────────────────────── */
+  // Sélection aléatoire de 12 beats pour la vitrine home
+  const homeBeats = [...allBeats].sort(() => Math.random() - 0.5).slice(0, 12);
+
+  /** @type {HTMLElement | null} */
+  let beatsSliderEl = $state(null);
+  let isPausedBeats = $state(false);
+  let rafIdBeats = 0;
+  let manualScrollingBeats = false;
+
+  function tickBeats() {
+    if (beatsSliderEl && !isPausedBeats && !manualScrollingBeats) {
+      const max = beatsSliderEl.scrollWidth - beatsSliderEl.clientWidth;
+      if (beatsSliderEl.scrollLeft >= max - 1) beatsSliderEl.scrollLeft = 0;
+      else beatsSliderEl.scrollLeft += SPEED;
+    }
+    rafIdBeats = requestAnimationFrame(tickBeats);
+  }
+
+  function slideByBeats(/** @type {number} */ direction) {
+    if (!beatsSliderEl) return;
+    manualScrollingBeats = true;
+    const max    = beatsSliderEl.scrollWidth - beatsSliderEl.clientWidth;
+    const target = Math.max(0, Math.min(beatsSliderEl.scrollLeft + direction * CARD_STEP * 3, max));
+    beatsSliderEl.scrollTo({ left: target, behavior: 'smooth' });
+    setTimeout(() => { manualScrollingBeats = false; }, 650);
+  }
+
+  $effect(() => {
+    if (!beatsSliderEl) return;
+    rafIdBeats = requestAnimationFrame(tickBeats);
+    return () => cancelAnimationFrame(rafIdBeats);
+  });
+
   /* ── Slider "En Vedette" ─────────────────────────────────────────────── */
   /** @type {HTMLElement | null} */
   let featuredSliderEl = $state(null);
@@ -125,34 +160,29 @@
         Clips, radios et playlists en un seul endroit.
       </p>
       <div class="hero-actions">
-        <!-- Ligne principale : 3 boutons -->
-        <div class="hero-actions-row">
-          <Button size="lg" variant="primary" href="#/clips">Explorer les clips</Button>
+        <Button size="lg" variant="primary" href="#/clips">Explorer les clips</Button>
 
-          <!-- Bouton Beats Only → jaune beats -->
-          <a class="btn btn--beats btn--lg" href="#/beats">Beats Only</a>
+        <!-- Bouton Beats Only → jaune beats -->
+        <a class="btn btn--beats btn--lg" href="#/beats">Beats Only</a>
 
-          <!-- Bouton Me Surprendre → accent orange + dé 3D animé -->
-          <button class="btn btn--surprise btn--lg" type="button"
-            onclick={() => surpriseStore.trigger()}>
-            <span class="dice-wrap" aria-hidden="true">
-              <span class="dice-cube">
-                <span class="dice-face dice-front">⚀</span>
-                <span class="dice-face dice-back">⚅</span>
-                <span class="dice-face dice-right">⚂</span>
-                <span class="dice-face dice-left">⚃</span>
-                <span class="dice-face dice-top">⚄</span>
-                <span class="dice-face dice-bottom">⚁</span>
-              </span>
+        <!-- Bouton Me Surprendre → accent orange + dé 3D animé -->
+        <button class="btn btn--surprise btn--lg" type="button"
+          onclick={() => surpriseStore.trigger()}>
+          <span class="dice-wrap" aria-hidden="true">
+            <span class="dice-cube">
+              <span class="dice-face dice-front">⚀</span>
+              <span class="dice-face dice-back">⚅</span>
+              <span class="dice-face dice-right">⚂</span>
+              <span class="dice-face dice-left">⚃</span>
+              <span class="dice-face dice-top">⚄</span>
+              <span class="dice-face dice-bottom">⚁</span>
             </span>
-            Me Surprendre
-          </button>
-        </div>
+          </span>
+          Me Surprendre
+        </button>
 
-        <!-- Ligne secondaire : Radio (centré) -->
-        <div class="hero-actions-secondary">
-          <Button size="lg" variant="secondary" href="#/radio">Radios en direct</Button>
-        </div>
+        <!-- Bouton Radio → colonne centrale, ligne 2 -->
+        <a class="btn btn--radio btn--lg" href="#/radio">Radios en direct</a>
       </div>
     </div>
     <div class="hero-glow" aria-hidden="true"></div>
@@ -209,6 +239,46 @@
       {#each featuredClips as clip}
         <div class="slider-item">
           <CardClip {clip} />
+        </div>
+      {/each}
+    </div>
+  </section>
+
+  <!-- ======= BEATS ONLY ======= -->
+  <section class="container container--wide section-beats">
+    <span class="badge beats-badge">Beats Only</span>
+    <div class="section-header">
+      <div>
+        <h2 class="section-title beats-title">Beats – <span class="beats-neon">Instrumentales</span></h2>
+        <p class="section-sub">Les instrumentaux incontournables pour votre prochaine session</p>
+      </div>
+      <div class="slider-nav">
+        <button class="slider-btn beats-slider-btn" onclick={() => slideByBeats(-1)} aria-label="Précédent">‹</button>
+        <button class="slider-btn beats-slider-btn" onclick={() => slideByBeats(1)}  aria-label="Suivant">›</button>
+        <a class="btn btn--beats-ghost btn--sm" href="#/beats">Voir tout →</a>
+      </div>
+    </div>
+
+    <div class="slider" bind:this={beatsSliderEl} role="region" aria-label="Slider beats"
+      onmouseenter={() => isPausedBeats = true}
+      onmouseleave={() => isPausedBeats = false}
+      ontouchstart={() => isPausedBeats = true}
+      ontouchend={() => { isPausedBeats = false; }}
+    >
+      {#each homeBeats as beat}
+        <div class="slider-item">
+          <a class="beat-card" href="#/beats/{beat.youtubeId}" aria-label="Écouter {beat.title}">
+            <div class="beat-card__thumb">
+              <img src={beat.thumbnail} alt={beat.title} loading="lazy" />
+              <span class="beat-card__play" aria-hidden="true">▶</span>
+            </div>
+            <div class="beat-card__info">
+              <p class="beat-card__title">{beat.title}</p>
+              {#if beat.artist}
+                <p class="beat-card__artist">{beat.artist}</p>
+              {/if}
+            </div>
+          </a>
         </div>
       {/each}
     </div>
@@ -302,6 +372,7 @@
     align-items: center;
     text-align: center;
     gap: var(--space-lg);
+    width: 100%;
     max-width: 640px;
     margin: 0 auto;
   }
@@ -366,40 +437,28 @@
     width: 100%;
   }
 
-  .hero-actions-row {
-    display: flex;
-    width: 100%;
+  /* ── Grille 3 colonnes : alignement garanti entre les 2 lignes ── */
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: var(--space-md);
-  }
-
-  /* Tous les boutons de la ligne = largeur égale (flex:1) */
-  .hero-actions-row :global(.btn) { flex: 1; }
-  .hero-actions-row .btn           { flex: 1; }
-
-  .hero-actions-secondary {
-    display: flex;
-    justify-content: center;
     width: 100%;
   }
 
-  /* Radios : même largeur qu'un bouton de la ligne (1/3 - gaps) */
-  .hero-actions-secondary :global(.btn) {
-    width: calc((100% - 2 * var(--space-md)) / 3);
-  }
+  /* Bouton Radio → colonne 2 (ligne 2 auto) */
+  .hero-actions > .btn--radio { grid-column: 2; }
+
+  /* Texte blanc au survol pour le bouton primary (Explorer les clips) */
+  .hero-actions :global(.btn--primary:hover) { color: #fff; }
 
   @media (max-width: 768px) {
     .hero-actions {
+      grid-template-columns: 1fr;
       max-width: 280px;
       margin-left: auto;
       margin-right: auto;
     }
-    .hero-actions-row {
-      flex-direction: column;
-    }
-    /* Tous les boutons pleine largeur sur mobile */
-    .hero-actions-row :global(.btn),
-    .hero-actions-row .btn           { flex: none; width: 100%; }
-    .hero-actions-secondary :global(.btn) { width: 100%; }
+    .hero-actions > .btn--radio { grid-column: 1; }
   }
 
   /* ── Boutons natifs (beats, surprise) harmonisés avec Button.svelte ── */
@@ -430,8 +489,24 @@
   .btn:active { transform: translateY(0) scale(0.97); }
   .btn--lg {
     font-size: var(--text-md);
-    padding: var(--space-md) var(--space-xl);
+    padding: var(--space-md) var(--space-2xl);
     border-radius: var(--radius-lg);
+  }
+
+  .btn--radio {
+    background: rgba(157, 0, 255, 0.08);
+    color: #fff;
+    border: 1px solid rgba(157, 0, 255, 0.55);
+    text-decoration: none;
+    box-shadow: 0 0 12px rgba(157, 0, 255, 0.18);
+  }
+  .btn--radio:hover {
+    background: rgba(157, 0, 255, 0.10);
+    border-color: #B540FF;
+    color: #B540FF;
+    box-shadow:
+      0 4px 22px rgba(157, 0, 255, 0.40),
+      0 0 0 1px  rgba(157, 0, 255, 0.18);
   }
 
   .btn--beats {
@@ -441,6 +516,7 @@
   }
   .btn--beats:hover {
     background: #ffd32a;
+    color: #fff;
     box-shadow:
       0 4px 26px rgba(245, 196, 0, 0.50),
       0 0 0 1px  rgba(245, 196, 0, 0.20);
@@ -452,6 +528,7 @@
   }
   .btn--surprise:hover {
     background: #ff6a1a;
+    color: #fff;
     box-shadow:
       0 4px 26px rgba(255, 85, 0, 0.50),
       0 0 0 1px  rgba(255, 85, 0, 0.20);
@@ -570,6 +647,126 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: var(--space-lg);
+  }
+
+  /* ---- Section Beats Only ---- */
+  .section-beats { margin-bottom: var(--space-2xl); }
+
+  .beats-badge {
+    background: rgba(245, 196, 0, 0.12);
+    color: #F5C400;
+    border: 1px solid rgba(245, 196, 0, 0.30);
+    margin-bottom: var(--space-sm);
+  }
+
+  .beats-title { color: var(--text-primary); }
+  .beats-neon {
+    color: #F5C400;
+    text-shadow: 0 0 18px rgba(245, 196, 0, 0.55);
+  }
+
+  .beats-slider-btn:hover {
+    background: rgba(245, 196, 0, 0.10);
+    border-color: #F5C400;
+    color: #F5C400;
+  }
+
+  /* Bouton "Voir tout" ghost jaune */
+  .btn--beats-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-base);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(245, 196, 0, 0.35);
+    color: #F5C400;
+    background: transparent;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+  .btn--beats-ghost:hover {
+    background: rgba(245, 196, 0, 0.10);
+    border-color: #F5C400;
+    box-shadow: 0 0 12px rgba(245, 196, 0, 0.20);
+  }
+
+  /* Cards beats */
+  .beat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg-card);
+    border: 1px solid rgba(245, 196, 0, 0.12);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  }
+  .beat-card:hover {
+    border-color: rgba(245, 196, 0, 0.45);
+    box-shadow: 0 0 20px rgba(245, 196, 0, 0.18);
+    transform: translateY(-3px);
+  }
+
+  .beat-card__thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: #111;
+  }
+  .beat-card__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 300ms ease;
+  }
+  .beat-card:hover .beat-card__thumb img { transform: scale(1.05); }
+
+  .beat-card__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: #F5C400;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.45);
+    transition: opacity 200ms ease;
+  }
+  .beat-card:hover .beat-card__play { opacity: 1; }
+
+  .beat-card__info {
+    padding: 8px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .beat-card__title {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+  }
+  .beat-card__artist {
+    font-size: var(--text-xs);
+    color: #F5C400;
+    opacity: 0.75;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
   }
 
   /* ---- Bloc radio ---- */
