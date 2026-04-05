@@ -34,9 +34,9 @@
         {
           title: 'Selections',
           links: [
+            { label: 'Beats Only', href: '#/beats' },
             { label: 'La Crypte', href: '#/crypte' },
             { label: 'Le Temple du Roots', href: '#/reggae-dub' },
-            { label: 'Beats Only', href: '#/beats' },
           ],
         },
       ],
@@ -234,7 +234,7 @@
                     onclick={(e) => {
                       e.preventDefault();
                       if (link.inactive) return;
-                      if (link.action === 'openRadioSearch') { closeAll(); radioSearchStore.open(); }
+                      if (link.action === 'openRadioSearch') { closeAll(); window.location.hash = '/radio'; radioSearchStore.open(); }
                       else if (link.action === 'scrollToRadar') {
                         closeAll();
                         window.location.hash = '/';
@@ -370,7 +370,7 @@
     display: block;
     width: 100%;
     height: 2px;
-    background: var(--text-primary);
+    background: var(--accent-orange);
     border-radius: var(--radius-full);
     transition: all var(--transition-base);
     transform-origin: center;
@@ -578,13 +578,13 @@
   }
   .sidebar-btn:hover,
   .sidebar-link:hover {
-    color: var(--text-primary);
+    color: var(--accent-orange);
     background: rgba(255, 255, 255, 0.04);
   }
   .sidebar-btn.active,
   .sidebar-link.active {
-    color: var(--accent-neon);
-    background: rgba(0, 229, 204, 0.05);
+    color: var(--accent-orange);
+    background: rgba(255, 140, 0, 0.08);
   }
 
   .chevron {
@@ -634,11 +634,11 @@
       padding-left var(--transition-fast);
   }
   .sub-link:hover {
-    color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.05);
+    color: var(--accent-orange);
+    background: rgba(255, 140, 0, 0.06);
     padding-left: var(--space-md);
   }
-  .link-arrow { color: var(--accent-neon); font-size: 1rem; line-height: 1; }
+  .link-arrow { color: var(--accent-orange); font-size: 1rem; line-height: 1; }
 
   .sub-link--inactive {
     opacity: 0.38;
