@@ -23,7 +23,10 @@ export async function fetchClassiquesRapFR(limit = 25) {
     + `&key=${API_KEY}`;
 
   const res = await fetch(url);
-  if (!res.ok) throw new Error(`YouTube API error: ${res.status}`);
+  if (!res.ok) {
+    const body = await res.text().catch(() => '');
+    throw new Error(`YouTube API error ${res.status}: ${body}`);
+  }
 
   const data = await res.json();
 
