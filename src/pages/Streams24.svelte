@@ -43,6 +43,9 @@
     update();
     const ro = new ResizeObserver(update);
     ro.observe(node.parentElement ?? node);
+    // Observe aussi la card parente pour détecter l'apparition de card-video-data
+    const card = node.closest('.stream-card');
+    if (card) ro.observe(card);
     return { destroy() { ro.disconnect(); } };
   }
 </script>
@@ -297,7 +300,8 @@
     align-items: center;
     gap: var(--space-md);
     cursor: pointer;
-    min-width: 0; /* empêche le grid item de dépasser 1fr sur mobile */
+    min-width: 0;        /* empêche le grid item de dépasser 1fr sur mobile */
+    overflow: hidden;    /* bloque tout débordement interne (texte nowrap) */
     transition:
       border-color var(--transition-base),
       box-shadow   var(--transition-base),
@@ -523,8 +527,9 @@
     align-items: center;
     gap: var(--space-sm);
     width: 100%;
-    min-width: 0; /* bloque l'expansion par le texte nowrap */
+    min-width: 0;
     overflow: hidden;
+    align-self: stretch; /* force width:100% à se résoudre depuis la card */
     padding: var(--space-sm) var(--space-md);
     background: rgba(255,255,255,0.03);
     border: 1px solid var(--border);
