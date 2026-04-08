@@ -529,12 +529,13 @@
   .live-badge {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: var(--text-xs);
-    font-weight: 700;
-    letter-spacing: 0.08em;
+    gap: 5px;
+    font-size: 0.6rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
     color: #ff3333;
     padding: 2px 0;
+    white-space: nowrap;
   }
 
   .live-dot {
