@@ -9,6 +9,9 @@
   /** @type {any} instance YT.Player */
   let ytPlayer = null;
 
+  /** true dès qu'une playlist est chargée dans le player (mode ≠ single video) */
+  let inPlaylistMode = false;
+
   onMount(() => {
     // Charge le SDK IFrame YouTube une seule fois
     if (!document.getElementById('yt-iframe-api')) {
@@ -52,6 +55,8 @@
             playerVars: { listType: 'playlist', list: PLAYLIST_ID, autoplay: 1, rel: 0, modestbranding: 1 },
           };
 
+      inPlaylistMode = !videoId;
+
       ytPlayer = new w.YT.Player('yt-rap-player-inner', {
         width: '100%',
         height: '100%',
@@ -69,7 +74,8 @@
                 // Clip terminé → bascule sur la playlist en shuffle
                 e.target.loadPlaylist({ listType: 'playlist', list: PLAYLIST_ID });
                 e.target.setShuffle(true);
-                videoId = null; // mode playlist désormais
+                videoId = null;
+                inPlaylistMode = true;
               } else {
                 e.target.nextVideo();
               }
@@ -93,12 +99,23 @@
   }
 
   function stopPlayer() {
-    if (ytPlayer) { try { ytPlayer.stopVideo(); ytPlayer.destroy(); } catch(_) {} ytPlayer = null; }
+    // pauseVideo() au lieu de stopVideo() : évite de déclencher onStateChange(0)
+    // qui appellerait nextVideo() et relancerait la lecture avant destroy()
+    if (ytPlayer) { try { ytPlayer.pauseVideo(); ytPlayer.destroy(); } catch(_) {} ytPlayer = null; }
+    inPlaylistMode = false;
     launched = false;
   }
 
   function nextVideo() {
-    if (ytPlayer) ytPlayer.nextVideo();
+    if (!ytPlayer) return;
+    if (!inPlaylistMode) {
+      // Mode single-video : charge la playlist complète en shuffle
+      ytPlayer.loadPlaylist({ listType: 'playlist', list: PLAYLIST_ID });
+      ytPlayer.setShuffle(true);
+      inPlaylistMode = true;
+    } else {
+      ytPlayer.nextVideo();
+    }
   }
 </script>
 

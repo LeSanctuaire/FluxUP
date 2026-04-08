@@ -631,15 +631,24 @@
 
   .btn--radio {
     background: transparent;
-    color: var(--text-secondary);
+    color: #ff4444;
     border: 1px solid var(--border);
     text-decoration: none;
   }
   .btn--radio:hover {
     background: rgba(255, 40, 40, 0.08);
     border-color: rgba(255, 40, 40, 0.55);
-    color: #ff4444;
+    color: #fff;
     box-shadow: 0 4px 20px rgba(255, 40, 40, 0.25);
+  }
+
+  @media (max-width: 600px) {
+    .btn--radio {
+      background: rgba(255, 40, 40, 0.08);
+      border-color: rgba(255, 40, 40, 0.55);
+      color: #ff4444;
+      box-shadow: 0 4px 20px rgba(255, 40, 40, 0.25);
+    }
   }
 
   .btn--beats {
@@ -976,6 +985,7 @@
   .classique-card {
     display: flex;
     flex-direction: column;
+    width: 100%; /* requis : le button ne prend pas la largeur du flex parent sans ça */
     gap: 8px;
     text-decoration: none;
     font-family: inherit;

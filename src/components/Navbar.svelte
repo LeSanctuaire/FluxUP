@@ -48,9 +48,9 @@
       mega: true,
       sections: [
         {
-          title: 'En direct',
+          title: 'Webradios',
           links: [
-            { label: 'Webradios sélectionnées', href: '#/radio' },
+            { label: 'La sélection FluxUP', href: '#/radio' },
             { label: 'Rechercher une radio', href: '#', action: 'openRadioSearch' },
           ],
         },

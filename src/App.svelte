@@ -147,8 +147,8 @@
 <!-- ── Bouton scroll-to-top ──────────────────────────────────────────────── -->
 {#if showScrollTop}
   <button class="scroll-top" onclick={scrollToTop} aria-label="Remonter en haut">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M8 12V4M4 7l4-4 4 4" stroke="currentColor" stroke-width="1.8"
+    <svg width="26" height="26" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M8 12V4M4 7l4-4 4 4" stroke="currentColor" stroke-width="2.2"
         stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </button>
@@ -488,17 +488,18 @@
   /* ── Bouton scroll-to-top ─────────────────────────────────────────────────*/
   .scroll-top {
     position: fixed;
-    bottom: 100px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 110px;
+    right: var(--space-xl);
+    left: auto;
+    transform: none;
     z-index: 500;
-    width: 38px;
-    height: 38px;
+    width: 56px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(10, 10, 15, 0.92);
-    border: 1px solid var(--border);
+    background: rgba(10, 10, 15, 0.95);
+    border: 1px solid var(--border-accent);
     border-radius: var(--radius-full);
     color: var(--text-secondary);
     cursor: pointer;
