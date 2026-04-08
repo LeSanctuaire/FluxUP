@@ -290,6 +290,22 @@
     {:else}
       <p class="empty-state loading-dot">Chargement…</p>
     {/if}
+
+    <!-- Lien vers Streams YouTube 24/7 -->
+    <div class="streams-cta">
+      <span class="streams-cta__sep" aria-hidden="true"></span>
+      <a class="streams-cta__btn" href="#/streams">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M10 8l6 4-6 4V8z" fill="currentColor"/>
+        </svg>
+        <span class="cta-highlight">Streams</span> <span class="cta-highlight">YouTube</span> <span class="cta-highlight">24/7</span>
+        <svg class="arrow" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
   </div>
 </div>
 
@@ -611,5 +627,62 @@
     padding: var(--space-2xl) 0;
     color: var(--text-muted);
     font-size: var(--text-md);
+  }
+
+  /* ── CTA Streams 24/7 ─────────────────────────────────────────────────── */
+  .streams-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+    margin-top: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+  }
+
+  .streams-cta__sep {
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 40, 40, 0.4), transparent);
+  }
+
+  .streams-cta__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px var(--space-xl);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-base);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      color var(--transition-fast),
+      border-color var(--transition-fast),
+      background var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+  .streams-cta__btn:hover {
+    color: #ff4444;
+    border-color: rgba(255, 40, 40, 0.5);
+    background: rgba(255, 40, 40, 0.06);
+    box-shadow: 0 0 14px rgba(255, 40, 40, 0.2);
+  }
+  .streams-cta__btn:hover .arrow {
+    transform: translateX(3px);
+  }
+  .streams-cta__btn .arrow {
+    transition: transform var(--transition-fast);
+  }
+  .streams-cta__btn .cta-highlight {
+    transition: color var(--transition-fast);
+  }
+  .streams-cta__btn:hover .cta-highlight {
+    color: #fff;
   }
 </style>

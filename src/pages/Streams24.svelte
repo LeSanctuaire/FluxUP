@@ -195,6 +195,22 @@
     {/each}
   </section>
 
+  <!-- CTA vers Radio Flux ──────────────────────────────────────────── -->
+  <div class="radio-cta">
+    <span class="radio-cta__sep" aria-hidden="true"></span>
+    <a class="radio-cta__btn" href="#/radio">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0z" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M12 2v2M12 20v2M2 12h2M20 12h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      Écouter les Webradios
+      <svg class="arrow" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
   <!-- Note bas de page ─────────────────────────────────────────────── -->
   <p class="streams-note">
     Les streams YouTube 24/7 peuvent être instables. FluxUP tente une reconnexion automatique en cas de coupure.
@@ -472,6 +488,7 @@
     background: color-mix(in srgb, var(--card-color) 12%, transparent);
     box-shadow: 0 0 16px var(--card-glow, var(--accent-neon-glow));
     transform: scale(1.08);
+    color: #fff;
   }
 
   .btn-play--active {
@@ -611,6 +628,51 @@
     box-shadow: 0 0 20px rgba(255,0,0,0.45);
   }
   .btn-subscribe:active { transform: scale(0.97); }
+
+  /* ── CTA Radio Flux ──────────────────────────────────────────────────── */
+  .radio-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+    margin: var(--space-xl) 0;
+  }
+
+  .radio-cta__sep {
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(157, 0, 255, 0.4), transparent);
+  }
+
+  .radio-cta__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px var(--space-xl);
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-base);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border: 1px solid #9D00FF;
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition:
+      color var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+  .radio-cta__btn:hover {
+    color: #fff;
+    box-shadow: 0 0 18px rgba(157, 0, 255, 0.55), 0 0 40px rgba(157, 0, 255, 0.2);
+  }
+  .radio-cta__btn:hover .arrow {
+    transform: translateX(3px);
+  }
+  .radio-cta__btn .arrow {
+    transition: transform var(--transition-fast);
+  }
 
   /* ── Note bas de page ─────────────────────────────────────────────────── */
   .streams-note {
