@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import SharePanel from '../components/SharePanel.svelte';
 
   const PLAYLIST_ID = 'PLnV2rehNHJEW5Jwo4MLYcs4xbS37g9tHr';
 
@@ -133,13 +134,16 @@
         </button>
       {/if}
 
-      <button class="btn-next" onclick={nextVideo} title="Passer au titre suivant">
-        Titre suivant
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M4 3l7 5-7 5V3z" fill="currentColor"/>
-          <rect x="12" y="3" width="2" height="10" rx="1" fill="currentColor"/>
-        </svg>
-      </button>
+      <div class="next-share-group">
+        <button class="btn-next" onclick={nextVideo} title="Passer au titre suivant">
+          Titre suivant
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 3l7 5-7 5V3z" fill="currentColor"/>
+            <rect x="12" y="3" width="2" height="10" rx="1" fill="currentColor"/>
+          </svg>
+        </button>
+        <SharePanel url={window.location.href} title="La Crypte – Bass Music · Electronic" />
+      </div>
     </div>
 
   </section>
@@ -432,12 +436,18 @@
     white-space: nowrap;
   }
   .btn-next:hover {
-    color: var(--text-primary);
-    border-color: var(--border-accent);
-    background: rgba(255, 255, 255, 0.04);
-    box-shadow: 0 0 10px var(--accent-neon-glow);
+    color: #00e5cc;
+    border-color: #00e5cc;
+    background: rgba(0, 229, 204, 0.06);
+    box-shadow: 0 0 10px rgba(0, 229, 204, 0.30);
   }
   .btn-next:active { transform: scale(0.97); }
+
+  .next-share-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
 
   /* ── Responsive ──────────────────────────────────────────────────────────*/
   @media (max-width: 600px) {
@@ -456,9 +466,12 @@
       align-items: stretch;
     }
     .btn-launch,
-    .btn-next {
+    .btn-stop {
       justify-content: center;
       width: 100%;
+    }
+    .next-share-group {
+      justify-content: center;
     }
   }
 </style>

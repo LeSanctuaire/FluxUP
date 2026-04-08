@@ -236,7 +236,11 @@
 
   /* ── Panneau ────────────────────────────────────────────────────────── */
   .share-panel {
-    margin-top: var(--space-sm);
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: 100;
+    min-width: 280px;
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);

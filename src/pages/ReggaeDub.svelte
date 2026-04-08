@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import SharePanel from '../components/SharePanel.svelte';
 
   const PLAYLIST_ID = 'PLnV2rehNHJEVWyOvE_CpdLYPBJunX5zpy';
 
@@ -129,13 +130,16 @@
         </button>
       {/if}
 
-      <button class="btn-next" onclick={nextVideo} title="Passer au titre suivant">
-        Titre suivant
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path d="M4 3l7 5-7 5V3z" fill="currentColor"/>
-          <rect x="12" y="3" width="2" height="10" rx="1" fill="currentColor"/>
-        </svg>
-      </button>
+      <div class="next-share-group">
+        <button class="btn-next" onclick={nextVideo} title="Passer au titre suivant">
+          Titre suivant
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M4 3l7 5-7 5V3z" fill="currentColor"/>
+            <rect x="12" y="3" width="2" height="10" rx="1" fill="currentColor"/>
+          </svg>
+        </button>
+        <SharePanel url={window.location.href} title="Temple du Roots – Reggae · Dub · Roots" />
+      </div>
     </div>
 
   </section>
@@ -448,6 +452,12 @@
   }
   .btn-next:active { transform: scale(0.97); }
 
+  .next-share-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
   /* ── Responsive ──────────────────────────────────────────────────────────*/
   @media (max-width: 600px) {
     .reggae-page {
@@ -465,9 +475,12 @@
       align-items: stretch;
     }
     .btn-launch,
-    .btn-next {
+    .btn-stop {
       justify-content: center;
       width: 100%;
+    }
+    .next-share-group {
+      justify-content: center;
     }
 
     /* Lisibilité mobile — vert plus clair sur fond noir */
