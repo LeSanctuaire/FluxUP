@@ -35,6 +35,33 @@ export const STREAMS = [
     color:   '#C8631A',
     glow:    'rgba(200,99,26,0.28)',
   },
+  {
+    id:      'beats-sleep',
+    videoId: 'rPjez8z61rI',
+    label:   'Beats to Sleep',
+    genre:   'Sleep · Study · Relax',
+    emoji:   '🌙',
+    color:   '#6C63FF',
+    glow:    'rgba(108,99,255,0.25)',
+  },
+  {
+    id:      'chillhop',
+    videoId: '5yx6BWlEVcY',
+    label:   'Chillhop Radio',
+    genre:   'Jazzy · Lofi Hip-Hop',
+    emoji:   '☕',
+    color:   '#FF9A3C',
+    glow:    'rgba(255,154,60,0.25)',
+  },
+  {
+    id:      'dreamgaze',
+    videoId: 'P25UFyozJDA',
+    label:   'Dreamgaze FM',
+    genre:   'Dream Pop · Indie Rock',
+    emoji:   '🌌',
+    color:   '#E040FB',
+    glow:    'rgba(224,64,251,0.25)',
+  },
 ];
 
 // ── Constantes watchdog ────────────────────────────────────────────────────
