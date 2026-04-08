@@ -21,6 +21,30 @@
     e.stopPropagation();
     ytLiveStore.stop();
   }
+
+  /**
+   * Action Svelte : défile doucement si le texte dépasse la largeur du parent.
+   * Doit être posé sur un <span> inline-block à l'intérieur du <p> clip.
+   * @param {HTMLElement} node
+   */
+  function marquee(node) {
+    function update() {
+      const parent = node.parentElement;
+      if (!parent) return;
+      const overflow = node.scrollWidth - parent.clientWidth;
+      if (overflow > 4) {
+        node.style.setProperty('--marquee-dist', `-${overflow}px`);
+        node.setAttribute('data-marquee', '');
+      } else {
+        node.style.removeProperty('--marquee-dist');
+        node.removeAttribute('data-marquee');
+      }
+    }
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(node.parentElement ?? node);
+    return { destroy() { ro.disconnect(); } };
+  }
 </script>
 
 <!-- ══════════════════════════ STREAMS 24/7 ══════════════════════════ -->
@@ -28,7 +52,10 @@
 
   <!-- En-tête ──────────────────────────────────────────────────────── -->
   <header class="streams-header">
-    <div class="header-tag">Lives Radios Youtube</div>
+    <span class="badge badge--live">
+      <span class="live-dot-badge" aria-hidden="true"></span>
+      Lives Radios Youtube
+    </span>
     <h1 class="streams-title">
       <span class="live-dot-lg" aria-hidden="true"></span>
       Streams 24/7
@@ -141,10 +168,10 @@
               <img class="vd-thumb" src={videoData.thumbnail} alt="thumbnail" width="80" height="45" />
             {/if}
             {#if videoData.title}
-              <p class="vd-title">{videoData.title}</p>
+              <p class="vd-title"><span use:marquee>{videoData.title}</span></p>
             {/if}
             {#if videoData.author}
-              <p class="vd-author">par {videoData.author}</p>
+              <p class="vd-author"><span use:marquee>par {videoData.author}</span></p>
             {/if}
             <a
               class="btn-subscribe"
@@ -186,18 +213,31 @@
     margin-bottom: var(--space-2xl);
   }
 
-  .header-tag {
-    display: inline-block;
-    font-size: var(--text-xs);
-    font-weight: 400;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #ff3333;
-    border: 1px solid #ff3333;
+  /* Badge "Lives Radios Youtube" — même style que badge Live de Home */
+  .badge--live {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 40, 40, 0.18);
+    color: #ff4444;
+    border: 1px solid rgba(255, 40, 40, 0.35);
     border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     padding: 3px 12px;
     margin-bottom: var(--space-md);
-    box-shadow: 0 0 8px rgba(255, 51, 51, 0.25);
+  }
+
+  .live-dot-badge {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ff4444;
+    box-shadow: 0 0 5px rgba(255, 68, 68, 0.7);
+    flex-shrink: 0;
+    animation: pulseDot 1.4s ease-in-out infinite;
   }
 
   .streams-title {
@@ -503,21 +543,35 @@
     border: 1px solid var(--border);
   }
 
-  .vd-title {
-    font-size: var(--text-xs);
-    font-weight: 600;
-    color: var(--text-primary);
+  /* <p> = clip container, hauteur fixe, jamais agrandie */
+  .vd-title,
+  .vd-author {
     margin: 0;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 100%;
+    width: 100%;
   }
 
-  .vd-author {
-    font-size: var(--text-xs);
-    color: var(--text-secondary);
-    margin: 0;
+  .vd-title { font-size: var(--text-xs); font-weight: 600; color: var(--text-primary); }
+  .vd-author { font-size: var(--text-xs); color: var(--text-secondary); }
+
+  /* <span> = texte en ligne, défile quand data-marquee est posé par l'action */
+  .vd-title span,
+  .vd-author span {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  :global(.vd-title span[data-marquee]) {
+    animation: marqueeSlide 12s 1.5s ease-in-out infinite alternate;
+  }
+
+  :global(.vd-author span[data-marquee]) {
+    animation: marqueeSlide 10s 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes marqueeSlide {
+    0%, 10%   { transform: translateX(0); }
+    90%, 100% { transform: translateX(var(--marquee-dist, 0)); }
   }
 
   /* Même style que ClipDetail */

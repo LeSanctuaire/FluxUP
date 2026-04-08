@@ -223,6 +223,8 @@ function createYtLiveStore() {
             isLoading = false;
             isPlaying = true;
             hasError  = false;
+            // Synchronise le volume YT avec le volume du player central (0–1 → 0–100)
+            try { ytPlayer.setVolume(Math.round(player.volume * 100)); } catch (_) {}
             startWatchdog();
             fetchVideoData(videoId);
           },
@@ -312,6 +314,15 @@ function createYtLiveStore() {
     } catch (_) {}
   }
 
+  /**
+   * Applique un volume au player YT (appelé depuis le player central).
+   * @param {number} val — 0 à 1
+   */
+  function setVolume(val) {
+    if (!ytPlayer) return;
+    try { ytPlayer.setVolume(Math.round(Math.max(0, Math.min(1, val)) * 100)); } catch (_) {}
+  }
+
   /** Reconnexion manuelle (recharge le stream depuis zéro) */
   function reconnect() {
     if (!currentStream) return;
@@ -329,7 +340,7 @@ function createYtLiveStore() {
     get retryCount()    { return retryCount; },
     get videoData()     { return videoData; },
     get streams()       { return STREAMS; },
-    playLive, stop, toggle, reconnect,
+    playLive, stop, toggle, reconnect, setVolume,
   };
 }
 

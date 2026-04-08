@@ -148,6 +148,10 @@
   <div class="container">
     <!-- En-tête -->
     <div class="page-header">
+      <span class="badge badge--live">
+        <span class="live-dot" aria-hidden="true"></span>
+        Webradio en direct
+      </span>
       <h1 class="section-title">Radio <span>Flux</span></h1>
       <p class="page-sub">Webradios en direct — {subtitle}</p>
     </div>
@@ -306,6 +310,32 @@
     background: rgba(157, 0, 255, 0.12);
     color: #b84dff;
     border-color: rgba(157, 0, 255, 0.30);
+  }
+
+  /* Badge "Webradio en direct" — rouge live, dot pulsant */
+  .badge--live {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 40, 40, 0.18) !important;
+    color: #ff4444 !important;
+    border-color: rgba(255, 40, 40, 0.35) !important;
+    margin-bottom: var(--space-sm);
+  }
+
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ff4444;
+    box-shadow: 0 0 5px rgba(255, 68, 68, 0.7);
+    flex-shrink: 0;
+    animation: pulseDot 1.4s ease-in-out infinite;
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.4; transform: scale(0.65); }
   }
 
   .page-header { margin-bottom: var(--space-lg); }

@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte';
+  import { classiquesStore } from '../core/classiquesStore.svelte.js';
 
   const PLAYLIST_ID = 'PLnV2rehNHJEVhwoOadKlmYYXvqHGhw9vD';
 
@@ -17,40 +18,62 @@
       document.head.appendChild(tag);
     }
 
+    // Si un clip a été demandé depuis le slider Home → lancement auto
+    if (classiquesStore.requestedVideoId) {
+      launched = true;
+      initPlayer(classiquesStore.requestedVideoId);
+      classiquesStore.requestedVideoId = null;
+    }
+
     return () => {
       // Nettoyage si on quitte la page
       if (ytPlayer) { try { ytPlayer.destroy(); } catch(_) {} ytPlayer = null; }
     };
   });
 
-  /** Crée (ou recrée) le player YouTube avec shuffle activé */
-  function initPlayer() {
+  /**
+   * Crée (ou recrée) le player YouTube.
+   * @param {string|null} [videoId] - si fourni, joue ce clip puis continue la playlist
+   */
+  function initPlayer(videoId = null) {
     /** @type {any} */
     const w = window;
 
     const create = () => {
-      // Détruit l'instance précédente si elle existe
       if (ytPlayer) { try { ytPlayer.destroy(); } catch(_) {} ytPlayer = null; }
 
-      // #yt-rap-player-inner est toujours dans le DOM (pas de {#if})
+      // videoId est un param de premier niveau, pas dans playerVars
+      const ctorOpts = videoId
+        ? {
+            videoId,
+            playerVars: { autoplay: 1, rel: 0, modestbranding: 1 },
+          }
+        : {
+            playerVars: { listType: 'playlist', list: PLAYLIST_ID, autoplay: 1, rel: 0, modestbranding: 1 },
+          };
+
       ytPlayer = new w.YT.Player('yt-rap-player-inner', {
         width: '100%',
         height: '100%',
-        playerVars: {
-          listType:       'playlist',
-          list:           PLAYLIST_ID,
-          autoplay:       1,
-          rel:            0,
-          modestbranding: 1,
-        },
+        ...ctorOpts,
         events: {
           onReady(/** @type {any} */ e) {
-            e.target.setShuffle(true);
-            e.target.nextVideo();
+            if (!videoId) {
+              e.target.setShuffle(true);
+              e.target.nextVideo();
+            }
           },
           onStateChange(/** @type {any} */ e) {
-            // État 0 = fin de vidéo → passe au suivant automatiquement
-            if (e.data === 0) e.target.nextVideo();
+            if (e.data === 0) {
+              if (videoId) {
+                // Clip terminé → bascule sur la playlist en shuffle
+                e.target.loadPlaylist({ listType: 'playlist', list: PLAYLIST_ID });
+                e.target.setShuffle(true);
+                videoId = null; // mode playlist désormais
+              } else {
+                e.target.nextVideo();
+              }
+            }
           },
         },
       });
@@ -66,7 +89,6 @@
 
   function launchPlayer() {
     launched = true;
-    // Appel direct — conserver le geste utilisateur pour que l'autoplay fonctionne
     initPlayer();
   }
 

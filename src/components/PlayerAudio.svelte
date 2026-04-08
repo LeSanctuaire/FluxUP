@@ -43,7 +43,9 @@
   }
 
   function handleVolume(/** @type {Event} */ e) {
-    player.setVolume(Number(/** @type {HTMLInputElement} */ (e.target).value) / 100);
+    const val = Number(/** @type {HTMLInputElement} */ (e.target).value) / 100;
+    player.setVolume(val);
+    if (ytMode) ytLiveStore.setVolume(val);
   }
 
   /** Change pour une autre station radio aléatoire (exclut la station en cours) */
@@ -239,7 +241,7 @@
   <!-- Volume -->
   <div class="player-right">
     <button class="ctrl-btn" aria-label={volume === 0 ? 'Activer le son' : 'Couper le son'}
-      onclick={() => player.setVolume(volume > 0 ? 0 : 0.7)}>
+      onclick={() => { const val = volume > 0 ? 0 : 0.7; player.setVolume(val); if (ytMode) ytLiveStore.setVolume(val); }}>
       {volume === 0 ? '🔇' : volume < 0.5 ? '🔉' : '🔊'}
     </button>
     <input

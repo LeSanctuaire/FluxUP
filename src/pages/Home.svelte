@@ -7,8 +7,15 @@
   import { CURATED_STATIONS } from '../services/radioAPI.js';
   import { player } from '../core/player.svelte.js';
   import { allBeats } from '../services/localBeats.js';
+  import { fetchClassiquesRapFR } from '../services/localClassiques.js';
+  import { classiquesStore } from '../core/classiquesStore.svelte.js';
 
   const recentClips = getRecentClips(12);
+
+  // ── Classiques Rap FR — chargés depuis la playlist YouTube ──────────────
+  /** @type {import('../services/localClassiques.js').ClassiqueClip[]} */
+  let classiquesRapFR = $state([]);
+  fetchClassiquesRapFR(25).then(clips => { classiquesRapFR = clips; }).catch(() => {});
 
   // ── En Vedette : clips les plus votés (fallback → featured si pas encore de votes) ──
   let featuredClips = $state(getFeaturedClips(12));
@@ -140,6 +147,37 @@
     rafIdFeatured = requestAnimationFrame(tickFeatured);
     return () => cancelAnimationFrame(rafIdFeatured);
   });
+
+  /* ── Slider "Classiques Rap FR" ─────────────────────────────────────── */
+  /** @type {HTMLElement | null} */
+  let classiquesSliderEl = $state(null);
+  let isPausedClassiques = $state(false);
+  let rafIdClassiques = 0;
+  let manualScrollingClassiques = false;
+
+  function tickClassiques() {
+    if (classiquesSliderEl && !isPausedClassiques && !manualScrollingClassiques) {
+      const max = classiquesSliderEl.scrollWidth - classiquesSliderEl.clientWidth;
+      if (classiquesSliderEl.scrollLeft >= max - 1) classiquesSliderEl.scrollLeft = 0;
+      else classiquesSliderEl.scrollLeft += SPEED;
+    }
+    rafIdClassiques = requestAnimationFrame(tickClassiques);
+  }
+
+  function slideByClassiques(/** @type {number} */ direction) {
+    if (!classiquesSliderEl) return;
+    manualScrollingClassiques = true;
+    const max    = classiquesSliderEl.scrollWidth - classiquesSliderEl.clientWidth;
+    const target = Math.max(0, Math.min(classiquesSliderEl.scrollLeft + direction * CARD_STEP * 3, max));
+    classiquesSliderEl.scrollTo({ left: target, behavior: 'smooth' });
+    setTimeout(() => { manualScrollingClassiques = false; }, 650);
+  }
+
+  $effect(() => {
+    if (!classiquesSliderEl) return;
+    rafIdClassiques = requestAnimationFrame(tickClassiques);
+    return () => cancelAnimationFrame(rafIdClassiques);
+  });
 </script>
 
 <div class="page fade-in">
@@ -214,6 +252,7 @@
 
   <!-- ======= CLIPS EN VEDETTE ======= -->
   <section class="container container--wide section-clips">
+    <span class="badge vedette-badge">Top Votes · FluxUP</span>
     <div class="section-header">
       <div>
         <h2 class="section-title">En <span class="neon">Vedette</span></h2>
@@ -280,6 +319,50 @@
               {/if}
             </div>
           </a>
+        </div>
+      {/each}
+    </div>
+  </section>
+
+  <!-- ======= CLASSIQUES RAP FRANÇAIS ======= -->
+  <section class="container container--wide section-classiques">
+    <span class="badge classiques-badge">Classiques · Rap FR</span>
+    <div class="section-header">
+      <div>
+        <h2 class="section-title classiques-title">Classiques <span class="classiques-neon">Rap Français</span></h2>
+        <p class="section-sub">Les sons qui ont marqué plus d'une génération</p>
+      </div>
+      <div class="slider-nav">
+        <button class="slider-btn classiques-slider-btn" onclick={() => slideByClassiques(-1)} aria-label="Précédent">‹</button>
+        <button class="slider-btn classiques-slider-btn" onclick={() => slideByClassiques(1)}  aria-label="Suivant">›</button>
+        <a class="btn btn--classiques-ghost btn--sm" href="#/classiques-rap-fr">Voir tout →</a>
+      </div>
+    </div>
+
+    <div class="slider" bind:this={classiquesSliderEl} role="region" aria-label="Slider classiques rap français"
+      onmouseenter={() => isPausedClassiques = true}
+      onmouseleave={() => isPausedClassiques = false}
+      ontouchstart={() => isPausedClassiques = true}
+      ontouchend={() => { isPausedClassiques = false; }}
+    >
+      {#each classiquesRapFR as clip}
+        <div class="slider-item">
+          <button class="classique-card" aria-label="Écouter {clip.title}"
+            onclick={() => { classiquesStore.requestedVideoId = clip.youtubeId; location.hash = '/classiques-rap-fr'; }}>
+            <div class="classique-card__thumb">
+              <img src={clip.thumbnail} alt={clip.title} loading="lazy" />
+              <span class="classique-card__play" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <circle cx="16" cy="16" r="15" stroke="#1e6fff" stroke-width="1.5" fill="rgba(0,0,0,0.6)"/>
+                  <path d="M13 10.5l10 5.5-10 5.5z" fill="#00b4ff"/>
+                </svg>
+              </span>
+            </div>
+            <div class="classique-card__info">
+              <p class="classique-card__title">{clip.title}</p>
+              <p class="classique-card__artist">{clip.artist}</p>
+            </div>
+          </button>
         </div>
       {/each}
     </div>
@@ -709,6 +792,13 @@
   /* ---- Section clips ---- */
   .section-clips { margin-bottom: var(--space-2xl); }
 
+  .vedette-badge {
+    background: rgba(0, 200, 180, 0.10);
+    color: var(--accent-teal);
+    border: 1px solid rgba(0, 200, 180, 0.28);
+    margin-bottom: var(--space-sm);
+  }
+
   .section-header {
     display: flex;
     align-items: center;
@@ -828,6 +918,129 @@
     font-size: var(--text-xs);
     color: #F5C400;
     opacity: 0.75;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+  }
+
+  /* ---- Section Classiques Rap FR ---- */
+  .section-classiques { margin-bottom: var(--space-2xl); }
+
+  .classiques-badge {
+    background: rgba(0, 100, 255, 0.12);
+    color: #00b4ff;
+    border: 1px solid rgba(0, 100, 255, 0.30);
+    margin-bottom: var(--space-sm);
+  }
+
+  .classiques-title { color: var(--text-primary); }
+  .classiques-neon {
+    color: #00b4ff;
+    text-shadow: 0 0 18px rgba(0, 180, 255, 0.55);
+  }
+
+  .classiques-slider-btn:hover {
+    background: rgba(0, 100, 255, 0.10);
+    border-color: #1e6fff;
+    color: #00b4ff;
+  }
+
+  /* Bouton "Voir tout" ghost bleu */
+  .btn--classiques-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-base);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(0, 100, 255, 0.35);
+    color: #00b4ff;
+    background: transparent;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+  .btn--classiques-ghost:hover {
+    background: rgba(0, 100, 255, 0.10);
+    border-color: #1e6fff;
+    color: #fff;
+    box-shadow: 0 0 18px rgba(0, 180, 255, 0.35);
+  }
+
+  /* Cards classiques */
+  .classique-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-decoration: none;
+    font-family: inherit;
+    padding: 0;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--bg-card);
+    border: 1px solid rgba(0, 100, 255, 0.14);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  }
+  .classique-card:hover {
+    border-color: rgba(0, 180, 255, 0.50);
+    box-shadow: 0 0 20px rgba(0, 180, 255, 0.18);
+    transform: translateY(-3px);
+  }
+
+  .classique-card__thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: #050d20;
+  }
+  .classique-card__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 300ms ease;
+  }
+  .classique-card:hover .classique-card__thumb img { transform: scale(1.05); }
+
+  .classique-card__play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 200ms ease;
+  }
+  .classique-card:hover .classique-card__play { opacity: 1; }
+
+  .classique-card__info {
+    padding: 8px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .classique-card__title {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+  }
+  .classique-card__artist {
+    font-size: var(--text-xs);
+    color: #00b4ff;
+    opacity: 0.80;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

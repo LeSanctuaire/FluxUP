@@ -84,7 +84,7 @@ Tu es un développeur front-end expert spécialisé en JavaScript, performance e
 
 CONTEXTE :
 Je développe une web app musicale appelée FLUXUP.
-Elle contient une section "radio 24/7" basée sur des lives YouTube (souvent instables, peu connus, underground).
+je souhaite créer une section "STREAMS YOUTUBE 24/7" basée sur des lives YouTube (souvent instables, peu connus, underground).
 
 OBJECTIF :
 Créer un player YouTube robuste capable de gérer les coupures, freezes et redémarrages automatiquement.
@@ -138,7 +138,7 @@ CONTEXTE :
 Je développe une web app musicale appelée FLUXUP avec :
 - une section "clips" existante utilisant des iframes YouTube simples
 - une section webradio avec lecture dans un player central
-- une nouvelle section "radio 24/7" basée sur des lives YouTube (souvent instables, peu connus)
+- une nouvelle section "STEAM YOUTUBE 24/7" basée sur des lives YouTube (souvent instables, peu connus)
 
 OBJECTIF :
 Mettre en place un système hybride propre et performant :
@@ -278,3 +278,18 @@ Toute démarche formelle, contentieuse ou juridique à l'encontre de l'éditeur 
 Les présentes mentions légales peuvent être modifiées à tout moment afin de s'adapter à l'évolution du site ou de la réglementation. Les utilisateurs sont invités à consulter cette page périodiquement.
 
 Dernière mise à jour : avril 2026
+
+
+--------------------------------------- PETITES MODIFS ---------------- 
+
+
+Page radio : ajouter bagde "WEBRADIO EN DIRECT" (meme style que le badge "live" sur la card "radio flux" (page d'accueil)
+
+---
+
+Page Radio Live Youtube : le badge "lives radios youtube" doit etre meme style que badge "live" sur page page accueil (card radioflux)
+
+Le volume du player central doit etre lié aux radios lives youtube lors de leurs lecture (page streams 24/7)s
+--- 
+
+Sur desktop, la fleche qui apparait quand on scroll (fleche pour remonter en haut de page), il faut qu'elle soit un peu plus grosse, visible et sur la droite en bas au lieu du centre.
