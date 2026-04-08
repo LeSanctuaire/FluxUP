@@ -63,7 +63,7 @@
   }
 
   // Recherche avec debounce — réinitialise la page à 1 si la query change
-  const doSearch = debounce(async (q) => {
+  const doSearch = debounce(async (/** @type {string} */ q) => {
     if (!q.trim()) { searchResults = []; hasMore = true; return; }
     loading = true;
     if (q !== prevQuery) {
@@ -222,7 +222,12 @@
             <div class="radio-favicon">
               {#if station.favicon}
                 <img src={station.favicon} alt="" width="40" height="40" loading="lazy"
-                  onerror={(e) => { /** @type {HTMLImageElement} */ (e.target).style.display='none'; }} />
+                  onerror={(e) => {
+                    const img = /** @type {HTMLImageElement} */ (e.target);
+                    img.style.display = 'none';
+                    /** @type {HTMLElement|null} */ (img.nextElementSibling)?.removeAttribute('hidden');
+                  }} />
+                <span aria-hidden="true" hidden>📻</span>
               {:else}
                 <span aria-hidden="true">📻</span>
               {/if}
@@ -290,6 +295,17 @@
     --accent-neon:       #9D00FF;
     --accent-neon-glow:  rgba(157, 0, 255, 0.25);
     --border-accent:     rgba(157, 0, 255, 0.35);
+  }
+
+  .page :global(.section-title span) {
+    color: #9D00FF;
+    text-shadow: 0 0 12px rgba(157, 0, 255, 0.5);
+  }
+
+  .page :global(.badge) {
+    background: rgba(157, 0, 255, 0.12);
+    color: #b84dff;
+    border-color: rgba(157, 0, 255, 0.30);
   }
 
   .page-header { margin-bottom: var(--space-lg); }

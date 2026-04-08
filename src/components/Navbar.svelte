@@ -37,6 +37,7 @@
             { label: 'Beats Only', href: '#/beats' },
             { label: 'La Crypte', href: '#/crypte' },
             { label: 'Le Temple du Roots', href: '#/reggae-dub' },
+            { label: 'Classiques Rap FR', href: '#/classiques-rap-fr' },
           ],
         },
       ],
@@ -56,7 +57,7 @@
         {
           title: 'Streams 24/7',
           links: [
-            { label: 'Découvrir les lives Radios', href: '#', inactive: true },
+            { label: 'Streams YouTube 24/7', href: '#/streams' },
           ],
         },
       ],
@@ -119,7 +120,7 @@
     >
       <span></span><span></span><span></span>
     </button>
-    <span class="menu-label">MENU</span>
+    <a class="menu-label" href="#/" aria-label="Accueil">MENU</a>
 
     {#if currentRoute !== '#/' && currentRoute !== '#/home' && currentRoute !== '#/clip'}
       <button
@@ -350,8 +351,12 @@
     letter-spacing: 0.12em;
     color: var(--text-secondary);
     text-transform: uppercase;
-    pointer-events: none;
+    text-decoration: none;
     user-select: none;
+    transition: color var(--transition-fast);
+  }
+  .menu-label:hover {
+    color: #F5C400;
   }
 
   /* ── Toggle burger (dans la barre) ───────────────────────────────────────*/

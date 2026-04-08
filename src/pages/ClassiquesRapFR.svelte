@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
 
-  const PLAYLIST_ID = 'PLnV2rehNHJEVWyOvE_CpdLYPBJunX5zpy';
+  const PLAYLIST_ID = 'PLnV2rehNHJEVhwoOadKlmYYXvqHGhw9vD';
 
   let launched = $state(false);
 
@@ -18,6 +18,7 @@
     }
 
     return () => {
+      // Nettoyage si on quitte la page
       if (ytPlayer) { try { ytPlayer.destroy(); } catch(_) {} ytPlayer = null; }
     };
   });
@@ -28,9 +29,11 @@
     const w = window;
 
     const create = () => {
+      // Détruit l'instance précédente si elle existe
       if (ytPlayer) { try { ytPlayer.destroy(); } catch(_) {} ytPlayer = null; }
 
-      ytPlayer = new w.YT.Player('yt-player-reggae', {
+      // #yt-rap-player-inner est toujours dans le DOM (pas de {#if})
+      ytPlayer = new w.YT.Player('yt-rap-player-inner', {
         width: '100%',
         height: '100%',
         playerVars: {
@@ -63,6 +66,7 @@
 
   function launchPlayer() {
     launched = true;
+    // Appel direct — conserver le geste utilisateur pour que l'autoplay fonctionne
     initPlayer();
   }
 
@@ -76,38 +80,38 @@
   }
 </script>
 
-<!-- ══════════════════════════ REGGAE · DUB · ROOTS ══════════════════════════ -->
-<div class="reggae-page page fade-in">
+<!-- ══════════════════════════ CLASSIQUES RAP FR ══════════════════════════ -->
+<div class="rap-page page fade-in">
 
   <!-- ── Card immersive intro ─────────────────────────────────────────────── -->
-  <div class="reggae-intro-card">
+  <div class="rap-intro-card">
     <p class="intro-lines">
-      <span class="rdr-green">Reggae.</span> <span class="rdr-yellow">DUB.</span> <span class="rdr-red">Roots.</span><br />
-      Pas de bruit — Que du son.
+      Des classiques intemporels.<br />
+      Une époque. Une énergie.
     </p>
-    <p class="intro-welcome">Bienvenue dans Le <span class="accent-green">Temple du Roots</span></p>
+    <p class="intro-welcome">Les sons qui ont <span class="accent-blue">marqué</span> plus d'une <span class="accent-blue">génération.</span></p>
   </div>
 
   <!-- ── Section player ───────────────────────────────────────────────────── -->
-  <section class="reggae-player-section" aria-label="Sélection Reggae Dub Roots">
+  <section class="rap-player-section" aria-label="Classiques Rap FR">
 
     <div class="player-header">
-      <h2 class="player-title">Playlist Reggae · Dub · Roots</h2>
+      <h2 class="player-title">Classiques Rap FR</h2>
       <span class="player-options">Mode aléatoire&nbsp;·&nbsp;Enchaînement automatique</span>
     </div>
 
-    <!-- Wrapper 16/9 — le SDK YT injecte l'iframe dans #yt-player-reggae -->
+    <!-- Wrapper 16/9 — le SDK YT injecte l'iframe dans #yt-rap-player-inner -->
     <div class="player-wrap">
       <div class="player-inner">
         <!-- Toujours présent dans le DOM — le SDK YT cible cet élément -->
-        <div id="yt-player-reggae"></div>
+        <div id="yt-rap-player-inner"></div>
         <!-- Placeholder par-dessus, masqué dès le lancement -->
         {#if !launched}
           <div class="player-placeholder" aria-hidden="true">
             <div class="placeholder-content">
-              <span class="placeholder-genre">Reggae · Roots · Dub</span>
-              <span class="placeholder-title">Temple du Roots</span>
-              <span class="placeholder-sub">Vibrations authentiques. Rythmes profonds.</span>
+              <span class="placeholder-genre">RAP FRANÇAIS</span>
+              <span class="placeholder-title">Classiques</span>
+              <span class="placeholder-sub">Une époque. Une énergie.</span>
               <span class="placeholder-play">▶</span>
             </div>
           </div>
@@ -143,17 +147,8 @@
 </div>
 
 <style>
-  /* Palette locale — Vert néon vibrant */
-  .reggae-page {
-    --accent-roots:      #00E676;
-    --accent-roots-glow: rgba(0, 230, 118, 0.35);
-    --accent-dub:        #00E676;
-    --accent-dub-glow:   rgba(0, 230, 118, 0.30);
-    --accent-dub-light:  #33FF99;
-  }
-
   /* ── Page ───────────────────────────────────────────────────────────────── */
-  .reggae-page {
+  .rap-page {
     min-height: 100vh;
     padding: 6rem var(--space-lg) 5rem;
     display: flex;
@@ -165,7 +160,7 @@
   }
 
   /* ── Card intro ──────────────────────────────────────────────────────────*/
-  .reggae-intro-card {
+  .rap-intro-card {
     width: 100%;
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -174,21 +169,19 @@
     text-align: center;
     position: relative;
     overflow: hidden;
-    box-shadow:
-      0 0 40px rgba(0, 0, 0, 0.5),
-      0 0 0 1px rgba(0, 230, 118, 0.08);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
   }
 
-  /* Ligne décorative — néon vert */
-  .reggae-intro-card::before {
+  /* Ligne décorative en haut de la card — bleu néon profond */
+  .rap-intro-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent-dub) 35%, var(--accent-dub-light) 65%, transparent);
-    opacity: 0.70;
+    background: linear-gradient(90deg, transparent, #1e6fff 40%, #00b4ff 60%, transparent);
+    opacity: 0.6;
   }
 
   .intro-lines {
@@ -200,10 +193,6 @@
     text-transform: uppercase;
   }
 
-  .rdr-green  { color: #00E676; text-shadow: 0 0 10px rgba(0, 230, 118, 0.50); }
-  .rdr-yellow { color: #f5c518; }
-  .rdr-red    { color: #e03030; }
-
   .intro-welcome {
     font-size: clamp(var(--text-lg), 4vw, var(--text-2xl));
     font-weight: 800;
@@ -211,16 +200,16 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     margin: 0;
-    text-shadow: 0 0 24px rgba(0, 230, 118, 0.15);
+    text-shadow: 0 0 18px rgba(0, 180, 255, 0.25);
   }
 
-  .intro-welcome .accent-green {
-    color: #00e676;
-    text-shadow: 0 0 14px rgba(0, 230, 118, 0.5);
+  .intro-welcome .accent-blue {
+    color: #00b4ff;
+    text-shadow: 0 0 14px rgba(0, 180, 255, 0.45);
   }
 
   /* ── Section player ──────────────────────────────────────────────────────*/
-  .reggae-player-section {
+  .rap-player-section {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -238,7 +227,7 @@
   .player-title {
     font-size: var(--text-xs);
     font-weight: 600;
-    color: var(--accent-roots);
+    color: #00b4ff;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin: 0;
@@ -262,11 +251,11 @@
     overflow: hidden;
     border: 1px solid var(--border);
     box-shadow:
-      0 0 0 1px rgba(0, 230, 118, 0.10),
-      0 0 30px rgba(0, 230, 118, 0.06),
+      0 0 0 1px rgba(0, 180, 255, 0.08),
       0 8px 48px rgba(0, 0, 0, 0.7);
   }
 
+  /* Le SDK YT injecte lui-même l'iframe — on la cible via :global */
   .player-wrap :global(iframe) {
     position: absolute;
     inset: 0;
@@ -287,10 +276,10 @@
     align-items: center;
     justify-content: center;
     background:
-      linear-gradient(160deg, #030d06 0%, #061209 40%, #040d07 70%, #020604 100%);
+      linear-gradient(160deg, #050a1a 0%, #0a0f2e 40%, #080d20 70%, #020508 100%);
   }
 
-  /* Grain subtil */
+  /* Grain subtil via SVG data URI */
   .player-placeholder::before {
     content: '';
     position: absolute;
@@ -300,12 +289,12 @@
     pointer-events: none;
   }
 
-  /* Lueur verte centrale */
+  /* Lueur bleue centrale */
   .player-placeholder::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 60% 50% at 50% 55%, rgba(0, 230, 118, 0.10) 0%, transparent 70%);
+    background: radial-gradient(ellipse 60% 50% at 50% 55%, rgba(30, 111, 255, 0.12) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -324,7 +313,7 @@
     font-size: var(--text-xs);
     font-weight: 700;
     letter-spacing: 0.2em;
-    color: #00e676;
+    color: #00b4ff;
     text-transform: uppercase;
     opacity: 0.7;
   }
@@ -336,7 +325,7 @@
     text-transform: uppercase;
     color: var(--text-primary);
     line-height: 1;
-    text-shadow: 0 0 40px rgba(0, 230, 118, 0.25);
+    text-shadow: 0 0 40px rgba(30, 111, 255, 0.3);
   }
 
   .placeholder-sub {
@@ -351,7 +340,7 @@
   .placeholder-play {
     margin-top: 1.5rem;
     font-size: 2rem;
-    color: rgba(0, 230, 118, 0.2);
+    color: rgba(30, 111, 255, 0.25);
   }
 
   /* ── Actions ─────────────────────────────────────────────────────────────*/
@@ -368,8 +357,8 @@
     align-items: center;
     gap: var(--space-sm);
     padding: 12px var(--space-2xl, 2rem);
-    background: var(--accent-dub);
-    color: #020d07;
+    background: #1e6fff;
+    color: #fff;
     font-family: var(--font-base);
     font-size: var(--text-sm);
     font-weight: 700;
@@ -378,7 +367,6 @@
     border: none;
     border-radius: var(--radius-md);
     cursor: pointer;
-    box-shadow: 0 0 18px rgba(0, 230, 118, 0.35);
     transition:
       background var(--transition-fast),
       box-shadow var(--transition-fast),
@@ -386,9 +374,8 @@
     white-space: nowrap;
   }
   .btn-launch:hover {
-    background: var(--accent-dub-light);
-    box-shadow: 0 0 32px rgba(0, 230, 118, 0.55);
-    transform: translateY(-2px);
+    background: #00b4ff;
+    box-shadow: 0 0 20px rgba(0, 180, 255, 0.45);
   }
   .btn-launch:active { transform: scale(0.97); }
 
@@ -441,19 +428,19 @@
     white-space: nowrap;
   }
   .btn-next:hover {
-    color: var(--accent-dub);
-    border-color: var(--accent-dub);
-    background: rgba(0, 230, 118, 0.06);
-    box-shadow: 0 0 14px var(--accent-dub-glow);
+    color: var(--text-primary);
+    border-color: #1e6fff;
+    background: rgba(30, 111, 255, 0.07);
+    box-shadow: 0 0 10px rgba(0, 180, 255, 0.2);
   }
   .btn-next:active { transform: scale(0.97); }
 
   /* ── Responsive ──────────────────────────────────────────────────────────*/
   @media (max-width: 600px) {
-    .reggae-page {
+    .rap-page {
       padding: 5rem var(--space-md) 4rem;
     }
-    .reggae-intro-card {
+    .rap-intro-card {
       padding: var(--space-lg) var(--space-lg);
     }
     .player-header {
@@ -468,15 +455,6 @@
     .btn-next {
       justify-content: center;
       width: 100%;
-    }
-
-    /* Lisibilité mobile — vert plus clair sur fond noir */
-    .player-title {
-      color: #66FFB8;
-    }
-    .rdr-green {
-      color: #66FFB8;
-      text-shadow: 0 0 12px rgba(102, 255, 184, 0.55);
     }
   }
 </style>

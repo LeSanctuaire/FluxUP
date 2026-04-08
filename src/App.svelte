@@ -14,6 +14,8 @@
   import BeatsOnly from './pages/BeatsOnly.svelte';
   import FAQ from './pages/FAQ.svelte';
   import MentionsLegales from './pages/MentionsLegales.svelte';
+  import Streams24 from './pages/Streams24.svelte';
+  import ClassiquesRapFR from './pages/ClassiquesRapFR.svelte';
   import { surpriseStore } from './core/surpriseStore.svelte.js';
   import { radioSearchStore } from './core/radioSearchStore.svelte.js';
   import RadioSearchModal from './components/RadioSearchModal.svelte';
@@ -124,6 +126,10 @@
     <FAQ />
   {:else if currentRoute === '#/mentions-legales'}
     <MentionsLegales />
+  {:else if currentRoute === '#/streams'}
+    <Streams24 />
+  {:else if currentRoute === '#/classiques-rap-fr'}
+    <ClassiquesRapFR />
   {:else}
     <div class="page container fade-in" style="text-align:center; padding-top:5rem;">
       <h2 style="font-size:var(--text-3xl); color:var(--accent-gold);">404</h2>

@@ -89,7 +89,7 @@
       Fréquences profondes.<br />
       Pression constante.
     </p>
-    <p class="intro-welcome">Bienvenue dans la Crypte</p>
+    <p class="intro-welcome">Bienvenue dans <span class="accent-teal">la Crypte</span></p>
   </div>
 
   <!-- ── Section player ───────────────────────────────────────────────────── -->
@@ -108,7 +108,12 @@
         <!-- Placeholder par-dessus, masqué dès le lancement -->
         {#if !launched}
           <div class="player-placeholder" aria-hidden="true">
-            <span class="placeholder-icon">▶</span>
+            <div class="placeholder-content">
+              <span class="placeholder-genre">Bass Music · Electronic</span>
+              <span class="placeholder-title">La Crypte</span>
+              <span class="placeholder-sub">Fréquences profondes. Pression constante.</span>
+              <span class="placeholder-play">▶</span>
+            </div>
           </div>
         {/if}
       </div>
@@ -196,7 +201,12 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     margin: 0;
-    text-shadow: 0 0 18px rgba(245, 196, 0, 0.18);
+    text-shadow: 0 0 18px rgba(0, 229, 204, 0.15);
+  }
+
+  .intro-welcome .accent-teal {
+    color: #00e5cc;
+    text-shadow: 0 0 14px rgba(0, 229, 204, 0.45);
   }
 
   /* ── Section player ──────────────────────────────────────────────────────*/
@@ -218,7 +228,7 @@
   .player-title {
     font-size: var(--text-xs);
     font-weight: 600;
-    color: var(--accent-orange);
+    color: #00e5cc;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin: 0;
@@ -266,12 +276,72 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #000;
+    background:
+      linear-gradient(160deg, #030d0b 0%, #060f0e 40%, #050a09 70%, #020505 100%);
   }
 
-  .placeholder-icon {
-    font-size: 3rem;
-    color: rgba(255,255,255,0.08);
+  /* Grain subtil via SVG data URI */
+  .player-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+  }
+
+  /* Lueur néon centrale */
+  .player-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 55%, rgba(0, 229, 204, 0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .placeholder-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .placeholder-genre {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--accent-neon);
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .placeholder-title {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    line-height: 1;
+    text-shadow: 0 0 40px rgba(0, 229, 204, 0.25);
+  }
+
+  .placeholder-sub {
+    font-size: var(--text-xs);
+    color: var(--text-secondary);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.45;
+    margin-top: 0.25rem;
+  }
+
+  .placeholder-play {
+    margin-top: 1.5rem;
+    font-size: 2rem;
+    color: rgba(0, 229, 204, 0.2);
   }
 
   /* ── Actions ─────────────────────────────────────────────────────────────*/
@@ -288,25 +358,28 @@
     align-items: center;
     gap: var(--space-sm);
     padding: 12px var(--space-2xl, 2rem);
-    background: var(--accent-neon);
-    color: var(--bg-primary);
+    background: transparent;
+    color: #00e5cc;
     font-family: var(--font-base);
     font-size: var(--text-sm);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    border: none;
+    border: 1px solid #00e5cc;
     border-radius: var(--radius-md);
     cursor: pointer;
+    box-shadow: 0 0 12px rgba(0, 229, 204, 0.25), inset 0 0 10px rgba(0, 229, 204, 0.05);
     transition:
       background var(--transition-fast),
+      color var(--transition-fast),
       box-shadow var(--transition-fast),
       transform var(--transition-fast);
     white-space: nowrap;
   }
   .btn-launch:hover {
-    background: var(--accent-orange);
-    box-shadow: 0 0 20px var(--accent-orange-glow);
+    background: rgba(0, 229, 204, 0.08);
+    color: #fff;
+    box-shadow: 0 0 24px rgba(0, 229, 204, 0.45), inset 0 0 14px rgba(0, 229, 204, 0.08);
   }
   .btn-launch:active { transform: scale(0.97); }
 

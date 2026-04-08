@@ -1,285 +1,8 @@
 selection radio france : 法国国际广播电台    !!!!!!!!!!!!!
 
-------------------------------  BOUTON "LANCER LA SELCTION" / PAGE "tous les clips" ---------------------------------------------
 
 
-lorsque on est sur la page "tous les clips", j'aimerais ajouter un bouton "lancer la sélection" juste a coté des boutons "récents / votes / vues", suivant le bouton qu'on selectionne, par exemple "votes", ca classe les clips suivant le nombre de votes, je voudrais que le bouton "lancer la selection" ouvre une page modale simple (meme format format / options / boutons que la page modale "me surprendre" ou dé 3d") et lancer les clips par rapprt au bouton selectionné (récents / votes / vues") (suivant la selection, les clips affichés sont différents), exemple : je selectionne le bouton "votes", je clique sur "lancer la selection", la page modale qui s'ouvre lance les clips ayant recus le plus de votes, suivant l'ordre des clips. si je selectionne "recents" et ensuite clique sur "lancer la selection", la page modale qui s'ouvre lance en lecture tous les clips recemment ajoutés, etc.. ) (appliquer la lecture avec enchainement automatique de la selection choisie) la taille du bouton "lancer la sélection" doit etre de la meme taille (largeur) que la barre de recherche (rechercher un titre, un artiste...), bouton stylisé en orange effet néon comme deja present sur certains boutons du site. Suivant la selection choisie, il faut ajouter l'emoji correspondant a la selection, dans le bouton "lancer la selection", par exemple, l'utilisateur choisi "(émoji flamme)votes" le bouton "lancer la sélection doit devenir : "(émoji flamme) lancer la sélection), si bouton "récents" est choisi, le bouton doit etre "(émoji) Lancer la sélection"
 
-
-Découvrez la musique
-autrement.    (italique sur le mot "musique")
-
-
--------------------------------- PAGE LABO BEATS INSTRU ---------------------------- 
-
-# 🎛️ FluxUP — Le Labo (Beats Instrumentales)
-
-## 🎯 Objectif global
-
-Créer une nouvelle section **"Le Labo"**, dédiée aux **beats instrumentales**, avec une approche immersive, interactive et orientée création.
-
-Le Labo n’est pas une simple playlist, mais un **outil de découverte et d’inspiration**, pensé pour :
-
-* rappeurs
-* créateurs
-* amateurs de vibes instrumentales
-
----
-
-## 🧠 Vision produit
-
-Le Labo doit offrir une expérience :
-
-* fluide
-* rapide
-* immersive
-* orientée “session”
-
-👉 Objectif :
-Permettre à un utilisateur de **trouver une vibe et lancer une session instantanément**
-
----
-
-## 🎨 Identité visuelle
-
-* Fond : noir profond / dark mode
-* Couleur principale : **jaune vibrant (inspiration KRK speaker)**
-* Accent UI : glow léger, contraste fort
-* Ambiance : studio / production / minimaliste
-* design animation : Vidéo mp4 (mute) 4sec loop (a mettre en place plus tard)
----
-
-## 🧱 Structure de la page
-
-### 1. Header
-
-* Titre : **Le Labo**
-* Sous-texte :
-
-  > Trouve. Écoute. Crée.
-
----
-
-### 2. Système de filtres (élément clé)
-
-Filtres dynamiques permettant de trier les beats :
-
-#### 🎛️ Filtres principaux :
-
-* BPM (ex : 80-100 / 100-120 / 120-140)
-* Mood :
-
-  * dark
-  * mélancolique
-  * chill
-  * agressif
-* Style :
-
-  * trap
-  * boom bap
-* Instruments :
-
-  * piano
-  * guitare
-  * synthé
-  * autre
-
----
-
-### 3. Liste des beats
-
-* Cards similaires à `CardClip`
-* Infos affichées :
-
-  * thumbnail YouTube
-  * titre
-  * tags (BPM / mood / style)
-
-👉 Pas de lecture directe ici
-
----
-
-### 4. Bouton principal
-
-**"Lancer la sélection"** (le bouton "Lancer la sélection" doit être flottant (sticky) pour rester accessible.)
-
-👉 Fonction :
-
-* Lance une playlist dynamique basée sur les filtres actifs
-* Ouvre une **modal avec player YouTube**
-* Lecture automatique
-* Enchaînement automatique aléatoire
-
----
-
-## ▶️ Player (Modal)
-
-### Comportement :
-
-* Player YouTube intégré (iframe)
-* Lecture du premier beat de la sélection
-* Enchaînement automatique
-
----
-
-### Contrôles :
-
-* ✖️ Fermer
-* ⏭️ Beat suivant
-
----
-
-## 🔁 Logique de playlist dynamique
-
-Le système doit permettre :
-
-* filtrer les beats selon critères d'aprés meme modele page "tous les clips"
-* générer une playlist dynamique
-* lancer cette playlist dans la modal
-
----
-
-### Exemples UX :
-
-#### Cas 1 :
-
-Utilisateur sélectionne :
-
-* BPM : 110–120
-
-👉 Clique sur “Lancer la sélection”
-👉 Lecture automatique de tous les beats entre 110–120 BPM
-
----
-
-#### Cas 2 :
-
-Utilisateur sélectionne :
-
-* Instrument : guitare
-
-👉 Playlist uniquement avec beats guitare
-👉 Lecture en continu
-
----
-
-## 📦 Source des données
-
-### Playlist YouTube
-
-* Une playlist unique contenant tous les beats
-* Les données seront récupérées via API YouTube
-
----
-
-### Traitement des données
-
-À partir de la playlist :
-
-* récupération automatique :
-
-  * titre
-  * thumbnail
-  * youtubeId
-
-* enrichissement manuel ou semi-auto :
-
-  * BPM
-  * mood
-  * style
-  * instruments (piano, guitare etc...)
-
----
-
-### Fichier cible
-
-Création d’un fichier type :
-
-`beats.json`
-
-Structure similaire à `clips.json`, avec champs supplémentaires pour filtres
-
----
-
-## 🧠 Fonctionnalités futures
-
-* 🔀 Mode aléatoire (freestyle)
-* ❤️ Favoris utilisateur
-* 🔁 Loop d’un beat
-* ⏱️ Timer session
-* 🧠 Suggestions intelligentes
-
----
-
-## ⚠️ Contraintes techniques
-
-* Utiliser iframe YouTube (pas de player audio natif)
-* Ne pas mélanger avec PlayerAudio (réservé radios)
-* Une seule instance du player actif
-* Lazy loading du player
-
----
-
-## 🧩 Intégration dans l’app
-
-* Nouvelle page : `/src/pages/Labo.svelte`
-* Route : `#/labo`
-* Ajout dans le menu principal
-
----
-
-## 🚀 Objectif final
-
-Créer un espace :
-
-* unique
-* utile
-* immersif
-
-👉 Le Labo doit devenir :
-
-> un outil de création + une expérience musicale
-
----
-
-## 🔥 Résumé
-
-Le Labo =
-
-* Beats instrumentales
-* Filtres intelligents
-* Playlist dynamique
-* Player modal immersif
-* UX pensée pour la création
-
----
-
-⚠️ Important :
-
-Commencer simple :
-
-1. Page + liste beats
-2. Player modal
-3. Filtres basiques
-
-Puis évoluer progressivement vers système avancé.
-
-
-exemple de logique pour "beats.json" ( à amélioré / optimisé ): 
-
-[
-  {
-    "id": "yt_id_123",
-    "title": "Midnight Rain",
-    "producer": "FluxProducer",
-    "bpm": 95,
-    "mood": ["dark", "melancholic"],
-    "style": "boom bap",
-    "instruments": ["piano"],
-    "youtubeId": "dQw4w9WgXcQ",
-    "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg"
-  }
-]
 
 
 
@@ -421,8 +144,8 @@ OBJECTIF :
 Mettre en place un système hybride propre et performant :
 
 1. Garder la section clips actuelle (iframe simple, inchangé)
-2. Créer une section radio 24/7 utilisant YouTube IFrame API
-3. Intégrer la radio dans le PLAYER CENTRAL du site
+2. Créer une section Streams Youtube 24/7 utilisant YouTube IFrame API
+3. Intégrer la lecture des videos youtube dans le PLAYER CENTRAL du site
 4. Assurer une expérience fluide sans conflit audio
 
 ---
@@ -431,14 +154,15 @@ EXIGENCES TECHNIQUES :
 
 ### 🎬 CLIPS (inchangé)
 - Continuer d’utiliser des iframes YouTube classiques
-- Aucun contrôle JS avancé requis
 - Lecture simple et rapide (api youtube)
 
 ---
 
-### 📡 RADIO 24/7 (nouveau système)
+### 📡 RADIO 24/7 (Nouvelle page à créer : "STREAMS YOUTUBE 24/7" (nouveau système)
+- Créer des cards par genres musicaux, exemple : Rap Francais, Rap US, Reggae/DUB, etc..) (commencer par 3 cards)
+- chaque cards lance un flux prédefini (recup datas via Youtube Iframe API) 
 - Utiliser YouTube IFrame API (YT.Player)
-- Intégrer dans un player central unique (#player-central)
+- Intégrer dans le player central unique (#player-central) 
 - Le player doit pouvoir :
   - charger un live via videoId
   - détecter erreurs (onError)
@@ -491,7 +215,7 @@ Le player radio doit :
 
 ---
 
-### 🎛️ UX
+### 🎛️ UX (optionnel)
 
 - Indicateur 🔴 LIVE
 - Bouton "Reconnect"
@@ -510,8 +234,8 @@ Le player radio doit :
 
 OBJECTIF FINAL :
 Créer un système hybride robuste :
-- clips simples et performants
-- radio 24/7 stable malgré YouTube
+- clips simples et performants (deja ok, ne pas toucher)
+- Streams Youtube 24/7 stable malgré YouTube (page a créer dans menu "Streams 24/7")
 - aucun conflit audio
 - expérience fluide et professionnelle
 
@@ -523,8 +247,14 @@ OUTPUT ATTENDU :
 - Facile à intégrer dans une SPA existante
 - Explications rapides des choix techniques
 
+---
 
+LIENS : 
 
+Card 1 : "Rap Fr 90's" : https://youtu.be/3uzJeBBBI1E
+Card 2 : "Reggae / Dub" : https://youtu.be/NQsQbq1JAIY
+Card 3 : "HipHop Chill Us" : https://youtu.be/L8cb7j-ojPA
+ 
 ------------------ Section mentions légales ---------------- 
 
 

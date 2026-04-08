@@ -182,40 +182,62 @@ const FALLBACK_STATIONS = [
   { stationuuid: 'fallback-4', name: 'KEXP 90.3 FM',       country: 'USA',    tags: 'indie, alternative',    bitrate: 128, url_resolved: 'https://live-aacplus-64.kexp.org/kexp64.aac',      favicon: '' },
 ];
 
-/** Cache interne pour éviter de re-fetcher à chaque clic "radio aléatoire".
- * @type {Station[] | null}
+/**
+ * File de shuffle FluxUP : contient les stations pas encore jouées dans le cycle en cours.
+ * Se réinitialise (re-shuffle) quand toutes les stations ont été jouées.
+ * @type {Station[]}
  */
-let _radioCache = null;
+let _shuffleQueue = [];
 
 /**
- * Retourne une station aléatoire.
- * Priorité : sélection FluxUP (CURATED_STATIONS), Radio 50/50 en premier lancement.
- * Fallback : top votes API si toutes les stations curées ont déjà été jouées.
- * @param {string} [excludeId]
+ * Fisher-Yates shuffle in-place.
+ * @param {Station[]} arr
+ * @returns {Station[]}
+ */
+function _shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+/**
+ * Recharge la file avec toutes les stations FluxUP melangees.
+ * @param {string|null} excludeId
+ */
+function _refillQueue(excludeId) {
+  const all = CURATED_STATIONS.filter(s => s.stationuuid !== excludeId);
+  _shuffleQueue = _shuffle([...all]);
+}
+
+/**
+ * Retourne la prochaine station de la selection FluxUP.
+ * - Premier appel (pas de station en cours) -> toujours Radio 50/50.
+ * - Appels suivants -> parcourt toutes les stations en ordre aleatoire,
+ *   sans repetition, avant de recommencer un nouveau cycle.
+ * @param {string} [excludeId] UUID de la station actuellement jouee
  * @returns {Promise<Station | null>}
  */
 export async function getRandomStation(excludeId) {
-  // Premier lancement (pas de station en cours) → Radio 50/50 en priorité
+  // Premier lancement → Radio 50/50 en priorité
   if (!excludeId) {
     const radio5050 = CURATED_STATIONS.find(s => s.stationuuid === '0efe7505-f1e6-11e9-a96c-52543be04c81');
     if (radio5050) return radio5050;
   }
 
-  // Shuffle suivant → piocher dans CURATED_STATIONS en excluant la station courante
-  const curatedPool = excludeId
-    ? CURATED_STATIONS.filter(s => s.stationuuid !== excludeId)
-    : CURATED_STATIONS;
-  if (curatedPool.length > 0) {
-    return curatedPool[Math.floor(Math.random() * curatedPool.length)];
-  }
+  // Si la file est vide, on recharge un nouveau cycle mélangé
+  if (_shuffleQueue.length === 0) _refillQueue(excludeId ?? null);
 
-  // Fallback : top votes API
-  if (!_radioCache) _radioCache = await getFeaturedRadios(50, 0);
-  const pool = excludeId
-    ? _radioCache.filter(/** @param {Station} s */ s => s.stationuuid !== excludeId)
-    : _radioCache;
-  if (!pool.length) return null;
-  return pool[Math.floor(Math.random() * pool.length)];
+  // Dépiler la prochaine station (en s'assurant qu'elle diffère de la courante)
+  const idx = _shuffleQueue.findIndex(s => s.stationuuid !== excludeId);
+  if (idx === -1) {
+    // Edge case : toutes les stations restantes == station courante (1 seule station)
+    _refillQueue(null);
+    return _shuffleQueue.pop() ?? null;
+  }
+  const [station] = _shuffleQueue.splice(idx, 1);
+  return station;
 }
 
 /**

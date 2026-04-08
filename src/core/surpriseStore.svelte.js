@@ -4,6 +4,7 @@
  * Peut être déclenché depuis n'importe quel composant (Navbar, Home…).
  */
 import clipsData from '../data/clips.json';
+import { ytLiveStore } from './ytLiveStore.svelte.js';
 
 // ── État réactif (singleton Svelte 5) ────────────────────────────────────────
 let showModal   = $state(false);
@@ -29,12 +30,14 @@ export const surpriseStore = {
 
   /** Ouvre la modal avec un clip aléatoire */
   trigger() {
+    ytLiveStore.stop();
     currentClip = getRandomClip();
     showModal   = true;
   },
 
   /** Passe au clip suivant sans fermer */
   next() {
+    ytLiveStore.stop();
     currentClip = getRandomClip();
   },
 

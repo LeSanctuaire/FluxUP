@@ -4,6 +4,7 @@
   import { findClip } from '../services/localClips.js';
   import { postVote, getVotes, hasVotedLocally } from '../services/votesAPI.js';
   import { playlistStore } from '../core/playlistStore.svelte.js';
+  import { ytLiveStore } from '../core/ytLiveStore.svelte.js';
 
   /** @type {{ id: string | null }} */
   let { id } = $props();
@@ -22,6 +23,9 @@
   let ytPlayer = null;
 
   onMount(() => {
+    // Coupe le stream YT 24/7 si actif
+    ytLiveStore.stop();
+
     // Charge le SDK YouTube une seule fois
     if (!document.getElementById('yt-iframe-api')) {
       const tag = document.createElement('script');

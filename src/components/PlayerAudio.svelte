@@ -1,5 +1,6 @@
 <script>
   import { player } from '../core/player.svelte.js';
+  import { ytLiveStore } from '../core/ytLiveStore.svelte.js';
   import { getRandomStation } from '../services/radioAPI.js';
 
   let track       = $derived(player.currentTrack);
@@ -10,6 +11,21 @@
   let currentTime = $derived(player.currentTime);
   let isRadio     = $derived(player.isRadio);
   let hasError    = $derived(player.hasError);
+
+  // ── Mode YouTube Live ────────────────────────────────────────────────────
+  let ytMode      = $derived(!!ytLiveStore.currentStream);
+  let ytStream    = $derived(ytLiveStore.currentStream);
+  let ytPlaying   = $derived(ytLiveStore.isPlaying);
+  let ytLoading   = $derived(ytLiveStore.isLoading);
+  let ytError     = $derived(ytLiveStore.hasError);
+  let ytVideoData = $derived(ytLiveStore.videoData);
+
+  // Quand le player audio reprend une piste, on coupe le YT live
+  $effect(() => {
+    if (player.currentTrack && ytLiveStore.currentStream) {
+      ytLiveStore.stop();
+    }
+  });
 
   /** En cours de chargement d'une station aléatoire */
   let radioShuffle = $state(false);
@@ -53,28 +69,102 @@
   }
 </script>
 
-<div class="player" class:player--idle={!track} aria-label="Lecteur audio global" role="region">
+<div class="player" class:player--idle={!track && !ytMode} aria-label="Lecteur audio global" role="region">
   <!-- Track info -->
   <div class="player-track">
-    {#if track?.thumbnail}
-      <img src={track.thumbnail} alt={track.title} class="track-thumb" width="48" height="48" />
-    {:else}
+    {#if ytMode}
+      <!-- Mode YouTube Live -->
+      <div class="track-thumb-placeholder" aria-hidden="true">{ytStream?.emoji ?? '📡'}</div>
+      <div class="track-meta">
+        <span class="track-title">
+          {ytVideoData?.title || ytStream?.label || 'Stream 24/7'}
+        </span>
+        {#if ytError}
+          <span class="track-error">Stream instable</span>
+        {:else}
+          <span class="track-artist" style="color:var(--accent-teal)">
+            {ytVideoData?.author || ytStream?.genre || ''}
+          </span>
+        {/if}
+      </div>
+    {:else if track?.thumbnail}
+      <img src={track.thumbnail} alt={track.title} class="track-thumb" width="48" height="48"
+        onerror={(e) => { /** @type {HTMLImageElement} */ (e.target).style.display='none'; }} />
+      <div class="track-meta">
+        <span class="track-title">{track.title}</span>
+        {#if hasError}
+          <span class="track-error">Flux indisponible</span>
+        {:else}
+          <span class="track-artist">{track.artist ?? '—'}</span>
+        {/if}
+      </div>
+    {:else if track}
       <div class="track-thumb-placeholder" aria-hidden="true">{isRadio ? '📻' : '♪'}</div>
+      <div class="track-meta">
+        <span class="track-title">{track.title}</span>
+        {#if hasError}
+          <span class="track-error">Flux indisponible</span>
+        {:else}
+          <span class="track-artist">{track.artist ?? '—'}</span>
+        {/if}
+      </div>
+    {:else}
+      <div class="track-thumb-placeholder" aria-hidden="true">♪</div>
+      <div class="track-meta">
+        <span class="track-title">Aucune piste</span>
+        <span class="track-artist">—</span>
+      </div>
     {/if}
-    <div class="track-meta">
-      <span class="track-title">{track?.title ?? 'Aucune piste'}</span>
-      {#if hasError}
-        <span class="track-error">Flux indisponible</span>
-      {:else}
-        <span class="track-artist">{track?.artist ?? '—'}</span>
-      {/if}
-    </div>
   </div>
 
   <!-- Contrôles centraux -->
   <div class="player-center">
-    {#if track}
-      <!-- Contrôles actifs (flux en cours) -->
+    {#if ytMode}
+      <!-- ── Mode YouTube Live ────────────────────────────────────────── -->
+      <div class="controls">
+        <button
+          class="ctrl-btn play-btn"
+          aria-label={ytPlaying ? 'Pause' : 'Reprendre'}
+          onclick={() => ytLiveStore.toggle()}
+        >
+          {#if ytLoading}
+            <span class="yt-spinner" aria-hidden="true"></span>
+          {:else if ytPlaying}
+            ⏸
+          {:else}
+            ▶
+          {/if}
+        </button>
+
+        {#if ytError}
+          <button
+            class="ctrl-btn"
+            aria-label="Reconnecter le stream"
+            title="Reconnecter"
+            onclick={() => ytLiveStore.reconnect()}
+            style="font-size:0.75rem; color:#ff6b6b; border:1px solid rgba(255,107,107,0.35); border-radius:var(--radius-sm); padding:2px 8px;"
+          >
+            ↺ Reconnecter
+          </button>
+        {/if}
+
+        <button
+          class="ctrl-btn stop-btn"
+          aria-label="Arrêter le stream"
+          title="Stop"
+          onclick={() => ytLiveStore.stop()}
+        >
+          ⏹
+        </button>
+      </div>
+
+      <div class="live-badge" aria-label="Stream en direct">
+        <span class="live-dot" aria-hidden="true"></span>
+        STREAM 24/7
+      </div>
+
+    {:else if track}
+      <!-- ── Mode audio classique ─────────────────────────────────────── -->
       <div class="controls">
         {#if !isRadio}
           <button class="ctrl-btn" aria-label="Précédent" onclick={() => player.prev()}>⏮</button>
@@ -465,6 +555,18 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+
+  /* ── Spinner YouTube Live ─────────────────────────────────────────────── */
+  .yt-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--accent-neon);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: ytSpin 0.65s linear infinite;
+  }
+  @keyframes ytSpin { to { transform: rotate(360deg); } }
 
   @media (max-width: 600px) {
     .player-track { flex: 0 0 120px; }
