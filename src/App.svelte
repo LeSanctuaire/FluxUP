@@ -375,12 +375,12 @@
   }
 
   .sbtn--orange {
-    background: var(--accent-orange);
-    color: #f0f0f5;
+    background: #FF6B00;
+    color: #080808;
   }
   .sbtn--orange:hover {
-    background: #D97B2A;
-    box-shadow: 0 0 20px var(--accent-orange-glow);
+    background: #2a2a2a;
+    color: var(--accent-orange);
   }
 
   /* Ligne vote + classement */
@@ -403,12 +403,13 @@
   /* Bouton voter (dans la modal) */
   .sbtn--vote {
     background: transparent;
-    color: var(--accent-neon);
-    border: 1px solid var(--accent-neon);
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
   }
   .sbtn--vote:hover:not(:disabled) {
-    background: rgba(245, 196, 0, 0.10);
-    box-shadow: 0 0 14px var(--accent-neon-glow);
+    background: rgba(76, 175, 80, 0.10);
+    color: #fff;
+    box-shadow: 0 0 14px rgba(76, 175, 80, 0.30);
   }
   .sbtn--voted {
     opacity: 0.7;
@@ -457,6 +458,7 @@
   }
   .sbtn--gold:hover {
     background: rgba(245, 196, 0, 0.1);
+    color: #fff;
     box-shadow: 0 0 20px rgba(245, 196, 0, 0.45);
   }
 

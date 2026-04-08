@@ -306,6 +306,7 @@
       transform var(--transition-fast);
   }
   .btn-launch:hover {
+    color: #fff;
     box-shadow: 0 0 22px var(--accent-orange-glow), inset 0 0 14px rgba(255,107,43,0.1);
   }
   .btn-launch:active { transform: scale(0.97); }

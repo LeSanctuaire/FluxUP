@@ -441,11 +441,12 @@
       transform   200ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   .btn-launch:hover {
-    background: #ffd32a;
+    background: #2a2a2a;
+    color: #F5C400;
     transform: translateY(-2px);
     box-shadow:
-      0 4px 26px rgba(245, 196, 0, 0.52),
-      0 0 0 1px  rgba(245, 196, 0, 0.22);
+      0 4px 26px rgba(245, 196, 0, 0.35),
+      0 0 0 1px  rgba(245, 196, 0, 0.18);
   }
   .btn-launch:active { transform: translateY(0) scale(0.97); }
 
@@ -746,11 +747,12 @@
       transform   200ms cubic-bezier(0.4, 0, 0.2, 1);
   }
   .btn-next:hover {
-    background: #ffd32a;
+    background: #2a2a2a;
+    color: #F5C400;
     transform: translateY(-2px);
     box-shadow:
-      0 4px 24px rgba(245, 196, 0, 0.50),
-      0 0 0 1px  rgba(245, 196, 0, 0.20);
+      0 4px 24px rgba(245, 196, 0, 0.35),
+      0 0 0 1px  rgba(245, 196, 0, 0.18);
   }
   .btn-next:active { transform: translateY(0) scale(0.97); }
 

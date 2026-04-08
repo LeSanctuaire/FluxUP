@@ -327,3 +327,224 @@ Des outils digitaux intuitifs permettent de structurer l’expérience, fluidifi
 Optimiser la découverte : des systèmes de sélection et de vote mettent en avant les contenus les plus marquants, facilitant l’émergence des meilleurs clips.
 
 Les contenus présentés reflètent les dynamiques de la plateforme et l’engagement de sa communauté.
+
+
+
+
+-------------------------- SECTIONS -----------------
+Afiicher "mise a jour en tempsr réel" sur page "les clips" 
+
+- EXPLORER
+BEATS ONLY
+LA CRYPTE
+CLASSIQUE 90s (nouvelle page avec players integration (hearthis.at) (nouveau design pour cette page, style "ancien" 90's, reférence hiphop a l'anciennes, cassettes, platines, vynils, graff, mp3 player portable 2002, etc..) 
+LE TEMPLE DU ROOTS
+
+-- RADIO FLUX
+- EN DIRECT
+WEBRADIO EN DIRECT
+RECHERCHER UNE RADIO
+
+- STREAMS 24/7
+Les Moods Streams (nouvelle page avec flux radio 24/7 ,source youtube) (création de plusieurs cards (moods) : ((Rap Francais), (Rap US), (Chill) (Riddims), (Drums & Bass), (Future ??), (...))
+
+
+
+------------------------- PROMPT NEW PAGE YOUTUBE STREAM 24/7 ------------------
+
+
+
+
+---
+
+Tu es un développeur front-end expert spécialisé en JavaScript, performance et UX audio.
+
+CONTEXTE :
+Je développe une web app musicale appelée FLUXUP.
+Elle contient une section "radio 24/7" basée sur des lives YouTube (souvent instables, peu connus, underground).
+
+OBJECTIF :
+Créer un player YouTube robuste capable de gérer les coupures, freezes et redémarrages automatiquement.
+
+EXIGENCES TECHNIQUES :
+
+1. Utiliser YouTube IFrame API (pas iframe simple)
+
+2. Implémenter :
+- détection du state player (playing, paused, ended, unstarted)
+- vérification du currentTime (détection freeze)
+- auto-reload intelligent
+
+3. Ajouter :
+- retry avec limite
+- délai anti-refresh (3–5 secondes)
+- fallback possible (liste de plusieurs videoId)
+
+4. UX :
+- bouton reconnect
+- indicateur LIVE
+- message en cas de problème
+- loading fluide
+
+5. Code :
+- HTML + CSS + JS pur (pas de framework)
+- propre, structuré, commenté
+- facilement intégrable dans une SPA
+
+6. Bonus :
+- prévoir fonction destroy + reinit player
+- optimiser pour mobile
+
+STYLE :
+Minimaliste, dark mode, musique underground, style "ancien" 90's, reférence hiphop a l'anciennes, cassettes, platines, vynils, graff, mp3 player portable 2002, etc..
+
+IMPORTANT :
+Le player doit être stable même si le live YouTube coupe ou freeze.
+
+OUTPUT :
+Code complet prêt à intégrer + explications rapides.
+
+
+--- AUTRE PROMPT MM SECTION 
+
+
+
+Tu es un développeur front-end expert spécialisé en JavaScript, UX audio et intégration YouTube.
+
+CONTEXTE :
+Je développe une web app musicale appelée FLUXUP avec :
+- une section "clips" existante utilisant des iframes YouTube simples
+- une section webradio avec lecture dans un player central
+- une nouvelle section "radio 24/7" basée sur des lives YouTube (souvent instables, peu connus)
+
+OBJECTIF :
+Mettre en place un système hybride propre et performant :
+
+1. Garder la section clips actuelle (iframe simple, inchangé)
+2. Créer une section radio 24/7 utilisant YouTube IFrame API
+3. Intégrer la radio dans le PLAYER CENTRAL du site
+4. Assurer une expérience fluide sans conflit audio
+
+---
+
+EXIGENCES TECHNIQUES :
+
+### 🎬 CLIPS (inchangé)
+- Continuer d’utiliser des iframes YouTube classiques
+- Aucun contrôle JS avancé requis
+- Lecture simple et rapide (api youtube)
+
+---
+
+### 📡 RADIO 24/7 (nouveau système)
+- Utiliser YouTube IFrame API (YT.Player)
+- Intégrer dans un player central unique (#player-central)
+- Le player doit pouvoir :
+  - charger un live via videoId
+  - détecter erreurs (onError)
+  - détecter états (onStateChange)
+  - reload automatiquement si le live coupe
+  - gérer les freezes (currentTime qui n’avance plus)
+
+---
+
+### 🔁 GESTION DES CONFLITS AUDIO
+
+Implémenter une logique globale :
+
+- Quand un utilisateur lance une RADIO :
+  → stopper tous les iframes (clips)
+  → afficher et activer le player central
+
+- Quand un utilisateur lance un CLIP :
+  → stopper le player central (radio)
+  → laisser fonctionner les iframes
+
+IMPORTANT :
+Les iframes ne sont pas contrôlables directement → utiliser un hack propre :
+→ recharger leur src pour les stopper
+
+---
+
+### 🧠 LOGIQUE À IMPLÉMENTER
+
+Créer des fonctions :
+
+- playRadio(videoId)
+- stopCentralPlayer()
+- stopAllClips()
+
+Exemple attendu :
+- stopAllClips() → reload des iframes
+- playRadio() → initialise YT.Player + lance live
+- stopCentralPlayer() → destroy player
+
+---
+
+### ⚠️ GESTION DES LIVES INSTABLES
+
+Le player radio doit :
+- vérifier régulièrement le state (PLAYING, PAUSED, ENDED)
+- détecter freeze via currentTime
+- tenter un reload automatique (avec délai 3–5 secondes)
+- limiter les retries (éviter boucle infinie)
+
+---
+
+### 🎛️ UX
+
+- Indicateur 🔴 LIVE
+- Bouton "Reconnect"
+- Message discret si stream instable
+
+
+---
+
+### 🎨 STYLE
+
+- Dark mode
+- UI minimaliste
+- ambiance futuriste / musique underground
+
+---
+
+OBJECTIF FINAL :
+Créer un système hybride robuste :
+- clips simples et performants
+- radio 24/7 stable malgré YouTube
+- aucun conflit audio
+- expérience fluide et professionnelle
+
+---
+
+OUTPUT ATTENDU :
+- Code HTML + CSS + JS complet
+- Structure claire et modulaire
+- Facile à intégrer dans une SPA existante
+- Explications rapides des choix techniques
+
+
+
+------------------ Section mentions légales ---------------- 
+
+
+rajout : actuellement : "Informations légales" modifier par : "Informations légales & droit privé"
+
+
+--- Mettre a jour la page : 
+
+Droit applicable
+
+Les présentes mentions légales sont régies par le droit français, conformément à la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN).
+
+En cas de litige, et à défaut de résolution amiable, les tribunaux français compétents seront seuls habilités à statuer.
+
+Réserve de droits privés
+
+Toute démarche formelle, contentieuse ou juridique à l'encontre de l'éditeur de ce site devra être adressée par courrier recommandé avec accusé de réception (LRAR), et émaner d'une personne physique identifiable par ses prénom et nom. L'éditeur se réserve le droit de se prévaloir de sa qualité de personne physique de droit privé, et d'engager la responsabilité individuelle — morale et commerciale — de tout intervenant agissant en dehors de ce cadre, y compris à titre personnel sur son patrimoine propre.
+
+Évolution des mentions
+
+Les présentes mentions légales peuvent être modifiées à tout moment afin de s'adapter à l'évolution du site ou de la réglementation. Les utilisateurs sont invités à consulter cette page périodiquement.
+
+Dernière mise à jour : avril 2026
