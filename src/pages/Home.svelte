@@ -186,7 +186,7 @@
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="container hero-content">
       <h1 class="hero-title">
-        Découvrez la <span class="neon"><em>musique</em></span><br />
+        Découvrez la <span class="neon neon-musique"><em>musique</em></span><br />
         autrement.
       </h1>
       <p class="hero-sub">
@@ -476,6 +476,47 @@
     animation: glitch-multicolor 7s linear infinite;
     animation-delay: -3s;
   }
+  /* Scintillement néon rouge sur "musique" toutes les 19s */
+  .hero-title .neon.neon-musique {
+    color: #888;
+    animation: glitch-multicolor 7s linear infinite, musique-flicker 19s ease-in-out infinite;
+    animation-delay: -3s, 4s;
+  }
+  @keyframes musique-flicker {
+    0%, 88%, 100% {
+      color: #888;
+      text-shadow: none;
+      opacity: 1;
+    }
+    /* Flash 1 — coupure sèche */
+    88.3% {
+      color: #ff2020;
+      text-shadow: 0 0 14px rgba(255, 30, 30, 1), 0 0 28px rgba(255, 30, 30, 0.5);
+      opacity: 0.15;
+    }
+    88.6% {
+      color: #ff2020;
+      text-shadow: 0 0 12px rgba(255, 30, 30, 0.9);
+      opacity: 1;
+    }
+    /* Flash 2 — coupure sèche */
+    88.9% {
+      color: #ff2020;
+      text-shadow: none;
+      opacity: 0.1;
+    }
+    89.2% {
+      color: #ff2020;
+      text-shadow: 0 0 16px rgba(255, 30, 30, 1), 0 0 32px rgba(255, 30, 30, 0.6);
+      opacity: 1;
+    }
+    /* Retour gris */
+    89.8% {
+      color: #888;
+      text-shadow: none;
+      opacity: 1;
+    }
+  }
 
   @keyframes glitch-multicolor {
 
@@ -634,12 +675,43 @@
     color: #ff4444;
     border: 1px solid var(--border);
     text-decoration: none;
+    box-shadow: 0 0 7px rgba(255, 40, 40, 0.30), 0 0 2px rgba(255, 40, 40, 0.15);
+    animation: radio-neon-flicker 8s ease-in-out infinite;
   }
   .btn--radio:hover {
     background: rgba(255, 40, 40, 0.08);
     border-color: rgba(255, 40, 40, 0.55);
     color: #fff;
     box-shadow: 0 4px 20px rgba(255, 40, 40, 0.25);
+    animation: none;
+  }
+
+  @keyframes radio-neon-flicker {
+    /* Pendant 80% du temps : lueur stable */
+    0%, 79%, 100% {
+      box-shadow: 0 0 7px rgba(255, 40, 40, 0.30), 0 0 2px rgba(255, 40, 40, 0.15);
+      opacity: 1;
+    }
+    /* Premier saut : extinction rapide */
+    80% {
+      box-shadow: none;
+      opacity: 0.35;
+    }
+    /* Retour */
+    81.5% {
+      box-shadow: 0 0 9px rgba(255, 40, 40, 0.55), 0 0 2px rgba(255, 40, 40, 0.2);
+      opacity: 1;
+    }
+    /* Deuxième saut plus court */
+    83% {
+      box-shadow: none;
+      opacity: 0.25;
+    }
+    /* Retour final */
+    84.5% {
+      box-shadow: 0 0 7px rgba(255, 40, 40, 0.30), 0 0 2px rgba(255, 40, 40, 0.15);
+      opacity: 1;
+    }
   }
 
   @media (max-width: 600px) {

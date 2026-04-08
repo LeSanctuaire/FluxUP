@@ -522,6 +522,8 @@
     align-items: center;
     gap: var(--space-sm);
     width: 100%;
+    min-width: 0; /* bloque l'expansion par le texte nowrap */
+    overflow: hidden;
     padding: var(--space-sm) var(--space-md);
     background: rgba(255,255,255,0.03);
     border: 1px solid var(--border);
@@ -549,6 +551,8 @@
     margin: 0;
     overflow: hidden;
     width: 100%;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .vd-title { font-size: var(--text-xs); font-weight: 600; color: var(--text-primary); }
