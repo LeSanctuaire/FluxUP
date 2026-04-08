@@ -153,14 +153,14 @@
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="container hero-content">
       <h1 class="hero-title">
-        Découvrez la <span class="neon">musique</span><br />
+        Découvrez la <span class="neon"><em>musique</em></span><br />
         autrement.
       </h1>
       <p class="hero-sub">
         Clips, radios et playlists en un seul endroit.
       </p>
       <div class="hero-actions">
-        <Button size="lg" variant="primary" href="#/clips">Explorer les clips</Button>
+        <Button size="lg" variant="teal" href="#/clips">Explorer les clips</Button>
 
         <!-- Bouton Beats Only → jaune beats -->
         <a class="btn btn--beats btn--lg" href="#/beats">Beats Only</a>
@@ -226,7 +226,7 @@
       <div class="slider-nav">
         <button class="slider-btn" onclick={() => slideByFeatured(-1)} aria-label="Précédent">‹</button>
         <button class="slider-btn" onclick={() => slideByFeatured(1)}  aria-label="Suivant">›</button>
-        <Button variant="ghost" size="sm" href="#/classement">Voir tout →</Button>
+        <Button variant="teal-ghost" size="sm" href="#/clips">Voir tout →</Button>
       </div>
     </div>
 
@@ -351,8 +351,8 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(0,229,204,0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(255,107,43,0.05) 0%, transparent 70%);
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(245,196,0,0.04) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(200,99,26,0.03) 0%, transparent 70%);
   }
 
   .hero-glow {
@@ -360,7 +360,7 @@
     top: -80px; right: -80px;
     width: 400px; height: 400px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,229,204,0.10) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(245,196,0,0.07) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -434,7 +434,7 @@
     }
     85.5% {
       color: #F5C400;
-      text-shadow: -3px 0 var(--accent-neon), 1px 0 rgba(0,229,204,0.20);
+      text-shadow: -3px 0 var(--accent-orange), 1px 0 var(--accent-orange-glow);
       transform: translateX(1px);
     }
     86% {
@@ -546,19 +546,16 @@
   }
 
   .btn--radio {
-    background: rgba(157, 0, 255, 0.08);
-    color: #fff;
-    border: 1px solid rgba(157, 0, 255, 0.55);
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
     text-decoration: none;
-    box-shadow: 0 0 12px rgba(157, 0, 255, 0.18);
   }
   .btn--radio:hover {
-    background: rgba(157, 0, 255, 0.10);
-    border-color: #B540FF;
-    color: #B540FF;
-    box-shadow:
-      0 4px 22px rgba(157, 0, 255, 0.40),
-      0 0 0 1px  rgba(157, 0, 255, 0.18);
+    background: rgba(255, 40, 40, 0.08);
+    border-color: rgba(255, 40, 40, 0.55);
+    color: #ff4444;
+    box-shadow: 0 4px 20px rgba(255, 40, 40, 0.25);
   }
 
   .btn--beats {
@@ -567,23 +564,19 @@
     text-decoration: none;
   }
   .btn--beats:hover {
-    background: #ffd32a;
-    color: #fff;
-    box-shadow:
-      0 4px 26px rgba(245, 196, 0, 0.50),
-      0 0 0 1px  rgba(245, 196, 0, 0.20);
+    background: #2a2a2a;
+    color: #F5C400;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.40);
   }
 
   .btn--surprise {
-    background: var(--accent-orange);
-    color: var(--bg-primary);
+    background: #FF6B00;
+    color: #080808;
   }
   .btn--surprise:hover {
-    background: #ff6a1a;
-    color: #fff;
-    box-shadow:
-      0 4px 26px rgba(255, 85, 0, 0.50),
-      0 0 0 1px  rgba(255, 85, 0, 0.20);
+    background: #2a2a2a;
+    color: var(--accent-orange);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.40);
   }
 
   /* ── Dé 3D animé ─────────────────────────────────────────────────────── */
@@ -629,13 +622,17 @@
     100% { transform: rotateX(360deg) rotateY(-360deg); }
   }
   @keyframes dice-color {
-    0%   { filter: invert(1) drop-shadow(0 0 5px rgba(124,58,237,1)); }
-    50%  { filter: invert(1) drop-shadow(0 0 5px rgba(0,229,204,1)); }
-    100% { filter: invert(1) drop-shadow(0 0 5px rgba(124,58,237,1)); }
+    0%   { filter: invert(1) drop-shadow(0 0 5px rgba(245,196,0,0.8)); }
+    50%  { filter: invert(1) drop-shadow(0 0 7px rgba(245,196,0,1)); }
+    100% { filter: invert(1) drop-shadow(0 0 5px rgba(245,196,0,0.8)); }
   }
 
   /* ---- Radar des Sorties ---- */
   .section-radar { margin-bottom: var(--space-2xl); }
+  .section-radar :global(.card-artist) { color: var(--accent-teal); }
+
+  /* ---- Clips en Vedette ---- */
+  .section-clips :global(.card-artist) { color: var(--accent-teal); }
 
   /* Container élargi pour les sliders */
   .container--wide { max-width: 1600px; }
@@ -667,7 +664,7 @@
     padding: 0;
   }
   .slider-btn:hover {
-    background: rgba(0,229,204,0.08);
+    background: rgba(245,196,0,0.08);
     border-color: var(--accent-neon);
     color: var(--accent-neon);
   }
@@ -745,7 +742,8 @@
   .btn--beats-ghost:hover {
     background: rgba(245, 196, 0, 0.10);
     border-color: #F5C400;
-    box-shadow: 0 0 12px rgba(245, 196, 0, 0.20);
+    color: #fff;
+    box-shadow: 0 0 18px rgba(245, 196, 0, 0.35);
   }
 
   /* Cards beats */

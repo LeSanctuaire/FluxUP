@@ -119,6 +119,7 @@
     >
       <span></span><span></span><span></span>
     </button>
+    <span class="menu-label">MENU</span>
 
     {#if currentRoute !== '#/' && currentRoute !== '#/home' && currentRoute !== '#/clip'}
       <button
@@ -302,7 +303,7 @@
     border-bottom: 1px solid transparent;
     background-clip: padding-box;
     box-shadow:
-      0 1px 0 0 rgba(0, 229, 204, 0.18),
+      0 1px 0 0 rgba(245, 196, 0, 0.15),
       0 4px 24px rgba(0, 0, 0, 0.55);
   }
   /* Ligne dégradée orange→neon sous la barre */
@@ -340,6 +341,17 @@
     gap: var(--space-sm);
     flex: 1;
     justify-content: flex-end;
+  }
+
+  /* ── Label MENU ──────────────────────────────────────────────────────────*/
+  .menu-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    pointer-events: none;
+    user-select: none;
   }
 
   /* ── Toggle burger (dans la barre) ───────────────────────────────────────*/
@@ -409,7 +421,7 @@
     to   { opacity: 1; transform: translateX(0); }
   }
   .top-back:hover {
-    background: rgba(0, 229, 204, 0.08);
+    background: rgba(245, 196, 0, 0.08);
     border-color: var(--border-accent);
     color: var(--accent-neon);
     box-shadow: 0 0 10px var(--accent-neon-glow);
@@ -534,7 +546,7 @@
       box-shadow var(--transition-fast);
   }
   .sidebar-collapse:hover {
-    background: rgba(0, 229, 204, 0.08);
+    background: rgba(245, 196, 0, 0.08);
     border-color: var(--border-accent);
     color: var(--accent-neon);
     box-shadow: 0 0 8px var(--accent-neon-glow);
@@ -583,8 +595,8 @@
   }
   .sidebar-btn.active,
   .sidebar-link.active {
-    color: #F5C400;
-    background: rgba(245, 196, 0, 0.08);
+    color: var(--accent-teal);
+    background: rgba(10, 191, 163, 0.08);
   }
 
   .chevron {
@@ -611,7 +623,7 @@
   .sub-title {
     font-size: var(--text-xs);
     font-weight: 700;
-    color: var(--accent-neon);
+    color: var(--accent-teal);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     padding: var(--space-sm) 0 var(--space-xs);
@@ -702,9 +714,9 @@
     100% { transform: rotateX(360deg) rotateY(-360deg); }
   }
   @keyframes ndice-color {
-    0%   { filter: drop-shadow(0 0 4px rgba(124,58,237,1)); }
-    50%  { filter: drop-shadow(0 0 4px rgba(0,229,204,1)); }
-    100% { filter: drop-shadow(0 0 4px rgba(124,58,237,1)); }
+    0%   { filter: drop-shadow(0 0 4px rgba(245,196,0,0.8)); }
+    50%  { filter: drop-shadow(0 0 6px rgba(245,196,0,1)); }
+    100% { filter: drop-shadow(0 0 4px rgba(245,196,0,0.8)); }
   }
 
   /* ── Logo FLUXUP centré dans la barre ───────────────────────────────────*/

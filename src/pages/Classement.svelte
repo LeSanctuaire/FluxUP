@@ -408,7 +408,7 @@
   .rank-row:hover {
     border-color: var(--border-accent);
     background: rgba(255,255,255,0.02);
-    box-shadow: 0 0 16px rgba(0,229,204,0.06);
+    box-shadow: 0 0 16px rgba(245,196,0,0.06);
   }
 
   .rank-num-sm {
@@ -550,7 +550,7 @@
   }
 
   .cta-btn:hover {
-    background: rgba(0,229,204,0.1);
+    background: rgba(245,196,0,0.08);
     box-shadow: 0 0 18px var(--accent-neon-glow);
   }
 

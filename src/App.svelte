@@ -126,7 +126,7 @@
     <MentionsLegales />
   {:else}
     <div class="page container fade-in" style="text-align:center; padding-top:5rem;">
-      <h2 style="font-size:var(--text-3xl); color:var(--accent-orange);">404</h2>
+      <h2 style="font-size:var(--text-3xl); color:var(--accent-gold);">404</h2>
       <p style="color:var(--text-secondary); margin-top:1rem;">Page introuvable</p>
       <a href="#/" style="margin-top:2rem; display:inline-block;" class="badge">Retour à l'accueil</a>
     </div>
@@ -376,10 +376,10 @@
 
   .sbtn--orange {
     background: var(--accent-orange);
-    color: var(--bg-primary);
+    color: #f0f0f5;
   }
   .sbtn--orange:hover {
-    background: #ff8c45;
+    background: #D97B2A;
     box-shadow: 0 0 20px var(--accent-orange-glow);
   }
 
@@ -407,7 +407,7 @@
     border: 1px solid var(--accent-neon);
   }
   .sbtn--vote:hover:not(:disabled) {
-    background: rgba(0, 229, 204, 0.12);
+    background: rgba(245, 196, 0, 0.10);
     box-shadow: 0 0 14px var(--accent-neon-glow);
   }
   .sbtn--voted {

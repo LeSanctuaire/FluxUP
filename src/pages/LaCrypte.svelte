@@ -196,7 +196,7 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     margin: 0;
-    text-shadow: 0 0 18px rgba(0, 229, 204, 0.25);
+    text-shadow: 0 0 18px rgba(245, 196, 0, 0.18);
   }
 
   /* ── Section player ──────────────────────────────────────────────────────*/

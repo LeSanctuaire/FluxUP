@@ -1,6 +1,6 @@
 <script>
   /**
-   * @typedef {'primary' | 'secondary' | 'ghost' | 'danger'} ButtonVariant
+   * @typedef {'primary' | 'secondary' | 'ghost' | 'danger' | 'teal' | 'teal-ghost'} ButtonVariant
    * @typedef {'sm' | 'md' | 'lg'} ButtonSize
    */
 
@@ -72,31 +72,31 @@
 
   /* ---- Variantes ---- */
 
-  /* Primary — neon teal plein */
+  /* Primary — jaune/or plein */
   .btn--primary {
-    background: var(--accent-neon);
-    color: var(--bg-primary);
+    background: var(--accent-gold);
+    color: #080808;
   }
   .btn--primary:hover:not(:disabled) {
-    background: #00ffe8;
+    background: #FFD600;
     box-shadow:
-      0 4px 24px rgba(0, 229, 204, 0.55),
-      0 0 0 1px  rgba(0, 229, 204, 0.25);
+      0 4px 24px rgba(245, 196, 0, 0.50),
+      0 0 0 1px  rgba(245, 196, 0, 0.22);
   }
 
-  /* Secondary — contour neon */
+  /* Secondary — contour or */
   .btn--secondary {
     background: transparent;
-    color: var(--accent-neon);
-    border: 1px solid var(--accent-neon);
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
   }
   .btn--secondary:hover:not(:disabled) {
-    background: rgba(0, 229, 204, 0.10);
-    border-color: #00ffe8;
+    background: rgba(245, 196, 0, 0.08);
+    border-color: #FFD600;
     color: #fff;
     box-shadow:
-      0 4px 22px rgba(0, 229, 204, 0.38),
-      0 0 0 1px  rgba(0, 229, 204, 0.18);
+      0 4px 22px rgba(245, 196, 0, 0.32),
+      0 0 0 1px  rgba(245, 196, 0, 0.16);
   }
 
   /* Ghost — neutre discret */
@@ -110,6 +110,30 @@
     border-color: rgba(255, 255, 255, 0.18);
     color: var(--text-primary);
     box-shadow: 0 4px 16px rgba(255, 255, 255, 0.07);
+  }
+
+  /* Teal — vert-bleuté profond (CTA clips) */
+  .btn--teal {
+    background: var(--accent-teal);
+    color: #080808;
+  }
+  .btn--teal:hover:not(:disabled) {
+    background: #2a2a2a;
+    color: var(--accent-teal);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.40);
+  }
+
+  /* Teal ghost — contour vert-bleuté discret */
+  .btn--teal-ghost {
+    background: transparent;
+    color: var(--accent-teal);
+    border: 1px solid rgba(10, 191, 163, 0.35);
+  }
+  .btn--teal-ghost:hover:not(:disabled) {
+    background: rgba(10, 191, 163, 0.10);
+    border-color: var(--accent-teal);
+    color: #fff;
+    box-shadow: 0 0 18px rgba(10, 191, 163, 0.35);
   }
 
   /* Danger — rouge */

@@ -223,7 +223,7 @@
     color: var(--accent-neon);
     border-color: var(--border-accent);
     box-shadow: 0 0 10px var(--accent-neon-glow);
-    background: rgba(0, 229, 204, 0.04);
+    background: rgba(245, 196, 0, 0.04);
   }
   .share-toggle:active { transform: scale(0.97); }
 
@@ -338,7 +338,7 @@
   .sbtn--copy.copied {
     color: var(--accent-neon);
     border-color: var(--border-accent);
-    background: rgba(0, 229, 204, 0.08);
+    background: rgba(245, 196, 0, 0.08);
     box-shadow: 0 0 10px var(--accent-neon-glow);
   }
 

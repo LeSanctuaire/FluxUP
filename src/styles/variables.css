@@ -4,25 +4,29 @@
 
 :root {
   /* Couleurs de fond */
-  --bg-primary:    #0a0a0f;
-  --bg-secondary:  #10101a;
-  --bg-card:       #14141f;
-  --bg-hover:      #1a1a2e;
+  --bg-primary:    #080808;
+  --bg-secondary:  #0e0e0e;
+  --bg-card:       #131313;
+  --bg-hover:      #1c1c1c;
 
-  /* Accents */
-  --accent-orange: #ff5500;
-  --accent-neon:   #00e5cc;
-  --accent-orange-glow: rgba(255, 85, 0, 0.35);
-  --accent-neon-glow:   rgba(0, 229, 204, 0.20);
+  /* Accents — Jaune/or = couleur principale, orange = secondaire atténué */
+  --accent-gold:        #F5C400;
+  --accent-gold-glow:   rgba(245, 196, 0, 0.22);
+  --accent-neon:        #F5C400;        /* alias → utilisé partout dans le code */
+  --accent-neon-glow:   rgba(245, 196, 0, 0.20);
+  --accent-teal:        #0ABFA3;        /* vert-bleuté profond — CTA principal clips */
+  --accent-teal-glow:   rgba(10, 191, 163, 0.22);
+  --accent-orange:      #C8631A;        /* orange atténué — usage très limité */
+  --accent-orange-glow: rgba(200, 99, 26, 0.28);
 
   /* Texte */
   --text-primary:   #f0f0f5;
-  --text-secondary: #9090a8;
-  --text-muted:     #50506a;
+  --text-secondary: #8a8a9a;
+  --text-muted:     #4a4a5a;
 
   /* Bordures */
   --border:        rgba(255, 255, 255, 0.07);
-  --border-accent: rgba(0, 229, 204, 0.30);
+  --border-accent: rgba(245, 196, 0, 0.22);
 
   /* Typographie */
   --font-base:  'Inter', 'Segoe UI', system-ui, sans-serif;

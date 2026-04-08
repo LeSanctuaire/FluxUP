@@ -287,7 +287,7 @@
   .ml-nav-btn:hover {
     color: var(--accent-neon);
     border-color: var(--border-accent);
-    background: rgba(0, 229, 204, 0.06);
+    background: rgba(245, 196, 0, 0.06);
   }
 
   /* ══ SECTIONS ══════════════════════════════════════════════════════════════*/

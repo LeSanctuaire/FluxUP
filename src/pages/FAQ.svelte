@@ -51,9 +51,8 @@
     <div class="container">
       <span class="faq-eyebrow">À propos & FAQ</span>
       <h1 class="faq-title">
-        La plateforme.<br/>
-        <span class="accent-neon">L'énergie.</span>
-        <span class="accent-orange"> La vibe.</span>
+        Écouter autrement.<br/>
+        <span class="accent-neon">Découvrir vraiment.</span>
       </h1>
       <p class="faq-subtitle">
         Tout ce que tu dois savoir sur FluxUP — en clair, sans jargon.
@@ -245,8 +244,7 @@
     margin: 0 0 var(--space-md);
   }
 
-  .accent-neon  { color: var(--accent-neon); }
-  .accent-orange { color: var(--accent-orange); }
+  .accent-neon  { color: var(--accent-teal); }
 
   .faq-subtitle {
     font-size: var(--text-lg);
@@ -456,7 +454,7 @@
       box-shadow var(--transition-fast);
   }
   .cta-btn:hover {
-    background: rgba(0, 229, 204, 0.10);
+    background: rgba(245, 196, 0, 0.08);
     box-shadow: 0 0 20px var(--accent-neon-glow);
   }
 

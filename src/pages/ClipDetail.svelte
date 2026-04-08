@@ -393,7 +393,7 @@
   }
 
   .vote-btn:hover:not(:disabled) {
-    background: rgba(0, 229, 204, 0.12);
+    background: rgba(245, 196, 0, 0.10);
     box-shadow: 0 0 16px var(--accent-neon-glow);
   }
 
@@ -401,7 +401,7 @@
 
   /* État : déjà voté */
   .vote-btn.voted {
-    background: rgba(0, 229, 204, 0.08);
+    background: rgba(245, 196, 0, 0.08);
     color: var(--accent-neon);
     border-color: var(--accent-neon);
     cursor: default;

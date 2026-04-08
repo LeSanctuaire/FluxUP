@@ -76,7 +76,7 @@ img, video {
   white-space: nowrap;
 }
 .section-title span {
-  color: var(--accent-neon);
+  color: var(--accent-teal);
 }
 
 /* Grille clips */
@@ -101,9 +101,9 @@ img, video {
   border-radius: var(--radius-full);
   font-size: var(--text-xs);
   font-weight: 600;
-  background: var(--accent-neon-glow);
-  color: var(--accent-neon);
-  border: 1px solid var(--border-accent);
+  background: var(--accent-teal-glow);
+  color: var(--accent-teal);
+  border: 1px solid rgba(10, 191, 163, 0.30);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
