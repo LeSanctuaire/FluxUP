@@ -31,8 +31,8 @@
     {/if}
     <div class="play-overlay" aria-hidden="true">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <circle cx="16" cy="16" r="15" stroke="var(--accent-neon)" stroke-width="1.5" fill="rgba(0,0,0,0.6)"/>
-        <path d="M13 10.5l10 5.5-10 5.5z" fill="var(--accent-neon)"/>
+        <circle cx="16" cy="16" r="15" stroke="var(--card-play-color, var(--accent-neon))" stroke-width="1.5" fill="rgba(0,0,0,0.6)"/>
+        <path d="M13 10.5l10 5.5-10 5.5z" fill="var(--card-play-color, var(--accent-neon))"/>
       </svg>
     </div>
   </div>

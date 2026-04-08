@@ -70,6 +70,14 @@ export function getRecentClips(limit = 12) {
 }
 
 /**
+ * Clips marqués `radar: true` — sélection manuelle pour le slider Radar des Sorties.
+ * @returns {EnrichedClip[]}
+ */
+export function getRadarClips() {
+  return allClips.filter(c => c.radar);
+}
+
+/**
  * Cherche un clip par youtubeId ou slug.
  * @param {string} idOrSlug
  * @returns {EnrichedClip | undefined}
@@ -97,6 +105,6 @@ export function getArtistList() {
 
 /**
  * @typedef {{ youtubeId: string, title: string, channelId: string,
- *   artists: string[], featured?: boolean,
+ *   artists: string[], featured?: boolean, radar?: boolean,
  *   thumbnail: string, slug: string, id: string, artist: string }} EnrichedClip
  */

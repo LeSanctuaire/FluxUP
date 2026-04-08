@@ -3794,6 +3794,46 @@
     "thumbnail": "https://i.ytimg.com/vi/3Cvjlvy3liI/maxresdefault.jpg"
   },
   {
+    "youtubeId": "iOFF1a4tGZ0",
+    "title": "H JeuneCrack - Kaboul Kitchen",
+    "channelId": "UC-UYBmNwdh-2y2YaIF6mTRg",
+    "artists": [
+      "H JeuneCrack"
+    ],
+    "slug": "h-jeunecrack-kaboul-kitchen",
+    "thumbnail": "https://i.ytimg.com/vi/iOFF1a4tGZ0/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Q7ZIZY_vdCQ",
+    "title": "Stanislas - No tube",
+    "channelId": "UCAgE0jnp9lLm1HUel7QCPTQ",
+    "artists": [
+      "Stanislas"
+    ],
+    "slug": "stanislas-no-tube",
+    "thumbnail": "https://i.ytimg.com/vi/Q7ZIZY_vdCQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "nvJ6pEIWgiQ",
+    "title": "ART NO - LA FAIM & LE FROID",
+    "channelId": "UCura1QdNObNidMS8T8-UqmQ",
+    "artists": [
+      "ART NO"
+    ],
+    "slug": "art-no-la-faim-le-froid",
+    "thumbnail": "https://i.ytimg.com/vi/nvJ6pEIWgiQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "Jm9pf-PK4Do",
+    "title": "NeS - CHEVALIER CITADIN",
+    "channelId": "UCn2H5lRbGUUC9Rn1HdqmrcQ",
+    "artists": [
+      "NeS"
+    ],
+    "slug": "nes-chevalier-citadin",
+    "thumbnail": "https://i.ytimg.com/vi/Jm9pf-PK4Do/mqdefault.jpg"
+  },
+  {
     "youtubeId": "xdYPl_6WtTQ",
     "title": "Keroué - Les Nuages Dessinent un Trèfle (Visualizer)",
     "channelId": "UChF_2y7rP6BKKdEhQ_SJPKA",
@@ -3872,5 +3912,47 @@
     ],
     "slug": "felhur-x-andro-non-merci-lyric-video",
     "thumbnail": "https://i.ytimg.com/vi/hxfEPk3NzRA/maxresdefault.jpg"
+  },
+  {
+    "youtubeId": "LNRzTIXskcQ",
+    "title": "SCYLLA & FURAX BARBAROSSA - ATLAS (Clip Officiel)",
+    "channelId": "UCz3KCKF7Fi32FWOOfhLdnUg",
+    "artists": [
+      "SCYLLA",
+      "FURAX BARBAROSSA"
+    ],
+    "slug": "scylla-atlas-clip-officiel",
+    "thumbnail": "https://i.ytimg.com/vi/LNRzTIXskcQ/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "sqoLC-nj_QI",
+    "title": "issho - PLAQUETTE DE FREIN",
+    "channelId": "UCB3FAklAsrtiGP6-VNk7uMg",
+    "artists": [
+      "issho"
+    ],
+    "slug": "issho-plaquette-de-frein",
+    "thumbnail": "https://i.ytimg.com/vi/sqoLC-nj_QI/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "2P-ClDfPmXA",
+    "title": "Vulax - Ashitaka ft. Lushe",
+    "channelId": "UC30OTEkghdYbjghm5VY1qMA",
+    "artists": [
+      "Vulax",
+      "Lushe"
+    ],
+    "slug": "vulax-ashitaka-ft-lushe",
+    "thumbnail": "https://i.ytimg.com/vi/2P-ClDfPmXA/mqdefault.jpg"
+  },
+  {
+    "youtubeId": "X2XGHm_WRY8",
+    "title": "VERSIONBETA7 - HS",
+    "channelId": "UC0_010dbS-XKQ9mOsPU1v-g",
+    "artists": [
+      "VERSIONBETA7"
+    ],
+    "slug": "versionbeta7-hs",
+    "thumbnail": "https://i.ytimg.com/vi/X2XGHm_WRY8/mqdefault.jpg"
   }
 ]

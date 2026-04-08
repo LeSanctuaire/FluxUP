@@ -38,12 +38,13 @@
   }
 
   function parseHash(hash) {
-    const clipMatch = hash.match(/^#\/clip\/(.+)$/);
+    const path = hash.split('?')[0]; // ignore query params pour le routage
+    const clipMatch = path.match(/^#\/clip\/(.+)$/);
     if (clipMatch) { clipId = clipMatch[1]; beatId = null; return '#/clip'; }
-    const beatMatch = hash.match(/^#\/beats\/(.+)$/);
+    const beatMatch = path.match(/^#\/beats\/(.+)$/);
     if (beatMatch) { beatId = beatMatch[1]; clipId = null; return '#/beats'; }
     clipId = null; beatId = null;
-    return hash || '#/';
+    return path || '#/';
   }
 
   onMount(() => {

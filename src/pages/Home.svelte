@@ -4,7 +4,7 @@
   import { getFeaturedClips, getRecentClips, allClips } from '../services/localClips.js';
   import { getTop } from '../services/votesAPI.js';
   import { surpriseStore } from '../core/surpriseStore.svelte.js';
-  import { getFeaturedRadios } from '../services/radioAPI.js';
+  import { CURATED_STATIONS } from '../services/radioAPI.js';
   import { player } from '../core/player.svelte.js';
   import { allBeats } from '../services/localBeats.js';
 
@@ -24,13 +24,8 @@
     });
   });
 
-  /* ── Radios vedette (bloc home) ─────────────────────────────────────── */
-  /** @type {import('../services/radioAPI.js').Station[]} */
-  let homeRadios = $state([]);
-
-  $effect(() => {
-    getFeaturedRadios(9).then(r => (homeRadios = r));
-  });
+  /* ── Radios vedette (bloc home) — sélection curation FluxUP ─────────── */
+  const homeRadios = CURATED_STATIONS.slice(0, 9);
 
   /** Joue une station dans le player global */
   function playStation(/** @type {import('../services/radioAPI.js').Station} */ station) {
@@ -199,6 +194,7 @@
       <div class="slider-nav">
         <button class="slider-btn" onclick={() => slideBy(-1)} aria-label="Précédent">‹</button>
         <button class="slider-btn" onclick={() => slideBy(1)}  aria-label="Suivant">›</button>
+        <Button variant="teal-ghost" size="sm" href="#/clips">Voir tout →</Button>
       </div>
     </div>
 
@@ -226,7 +222,7 @@
       <div class="slider-nav">
         <button class="slider-btn" onclick={() => slideByFeatured(-1)} aria-label="Précédent">‹</button>
         <button class="slider-btn" onclick={() => slideByFeatured(1)}  aria-label="Suivant">›</button>
-        <Button variant="teal-ghost" size="sm" href="#/clips">Voir tout →</Button>
+        <Button variant="teal-ghost" size="sm" href="#/clips?sort=votes">Voir tout →</Button>
       </div>
     </div>
 
@@ -270,7 +266,12 @@
           <a class="beat-card" href="#/beats/{beat.youtubeId}" aria-label="Écouter {beat.title}">
             <div class="beat-card__thumb">
               <img src={beat.thumbnail} alt={beat.title} loading="lazy" />
-              <span class="beat-card__play" aria-hidden="true">▶</span>
+              <span class="beat-card__play" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <circle cx="16" cy="16" r="15" stroke="#F5C400" stroke-width="1.5" fill="rgba(0,0,0,0.6)"/>
+                  <path d="M13 10.5l10 5.5-10 5.5z" fill="#F5C400"/>
+                </svg>
+              </span>
             </div>
             <div class="beat-card__info">
               <p class="beat-card__title">{beat.title}</p>
@@ -292,7 +293,7 @@
         <span class="badge">Live</span>
         <h2>Radio Flux</h2>
         <p>Écoutez des webradios soigneusement sélectionnées ou explorez notre catalogue complet.</p>
-        <Button variant="primary" href="#/radio">Ouvrir Radio Flux</Button>
+        <a class="btn btn--radio-flux btn--lg" href="#/radio">Ouvrir Radio Flux</a>
       </div>
 
       <!-- Grille 3×3 vignettes rondes -->
@@ -569,6 +570,21 @@
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.40);
   }
 
+  .btn--radio-flux {
+    background: #1e1e26;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: background var(--transition-base), color var(--transition-base),
+                border-color var(--transition-base), box-shadow var(--transition-base);
+  }
+  .btn--radio-flux:hover {
+    background: #2a2a2a;
+    color: #fff;
+    border-color: #9D00FF;
+    box-shadow: 0 4px 24px rgba(157, 0, 255, 0.28);
+  }
+
   .btn--surprise {
     background: #FF6B00;
     color: #080808;
@@ -630,9 +646,11 @@
   /* ---- Radar des Sorties ---- */
   .section-radar { margin-bottom: var(--space-2xl); }
   .section-radar :global(.card-artist) { color: var(--accent-teal); }
+  .section-radar :global(.card-clip) { --card-play-color: var(--accent-teal); }
 
   /* ---- Clips en Vedette ---- */
   .section-clips :global(.card-artist) { color: var(--accent-teal); }
+  .section-clips :global(.card-clip) { --card-play-color: var(--accent-neon); }
 
   /* Container élargi pour les sliders */
   .container--wide { max-width: 1600px; }
@@ -786,10 +804,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.6rem;
-    color: #F5C400;
     opacity: 0;
-    background: rgba(0, 0, 0, 0.45);
     transition: opacity 200ms ease;
   }
   .beat-card:hover .beat-card__play { opacity: 1; }

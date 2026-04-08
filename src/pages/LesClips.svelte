@@ -11,6 +11,13 @@
   let sortBy   = $state('date');
   let loading  = $state(false);
 
+  // Pré-active le tri si l'URL contient ?sort=votes (ex: depuis "En Vedette")
+  $effect(() => {
+    const params = new URLSearchParams(window.location.hash.split('?')[1] ?? '');
+    const sort = params.get('sort');
+    if (sort === 'votes' || sort === 'views') setSort(/** @type {'votes'|'views'} */ (sort));
+  });
+
   // La pill "Vues" nécessite VITE_YOUTUBE_API_KEY
   const hasYoutubeKey = !!(import.meta.env?.VITE_YOUTUBE_API_KEY);
 
