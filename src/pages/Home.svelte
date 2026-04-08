@@ -476,44 +476,45 @@
     animation: glitch-multicolor 7s linear infinite;
     animation-delay: -3s;
   }
-  /* Scintillement néon rouge sur "musique" toutes les 19s */
+  /* Scintillement "lumière qui bug" sur "musique" toutes les 19s */
   .hero-title .neon.neon-musique {
-    color: #888;
+    color: #F5C400;
+    text-shadow: 0 0 12px rgba(245, 196, 0, 0.6), 0 0 24px rgba(245, 196, 0, 0.25);
     animation: glitch-multicolor 7s linear infinite, musique-flicker 19s ease-in-out infinite;
     animation-delay: -3s, 4s;
   }
   @keyframes musique-flicker {
     0%, 88%, 100% {
-      color: #888;
-      text-shadow: none;
+      color: #F5C400;
+      text-shadow: 0 0 12px rgba(245, 196, 0, 0.6), 0 0 24px rgba(245, 196, 0, 0.25);
       opacity: 1;
     }
-    /* Flash 1 — coupure sèche */
+    /* Flash 1 — coupure sèche, gris sans glow */
     88.3% {
-      color: #ff2020;
-      text-shadow: 0 0 14px rgba(255, 30, 30, 1), 0 0 28px rgba(255, 30, 30, 0.5);
+      color: #666;
+      text-shadow: none;
       opacity: 0.15;
     }
     88.6% {
-      color: #ff2020;
-      text-shadow: 0 0 12px rgba(255, 30, 30, 0.9);
+      color: #999;
+      text-shadow: none;
       opacity: 1;
     }
-    /* Flash 2 — coupure sèche */
+    /* Flash 2 — deuxième coupure */
     88.9% {
-      color: #ff2020;
+      color: #555;
       text-shadow: none;
       opacity: 0.1;
     }
     89.2% {
-      color: #ff2020;
-      text-shadow: 0 0 16px rgba(255, 30, 30, 1), 0 0 32px rgba(255, 30, 30, 0.6);
-      opacity: 1;
-    }
-    /* Retour gris */
-    89.8% {
       color: #888;
       text-shadow: none;
+      opacity: 1;
+    }
+    /* Retour jaune avec glow */
+    89.8% {
+      color: #F5C400;
+      text-shadow: 0 0 12px rgba(245, 196, 0, 0.6), 0 0 24px rgba(245, 196, 0, 0.25);
       opacity: 1;
     }
   }

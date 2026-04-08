@@ -297,6 +297,7 @@
     align-items: center;
     gap: var(--space-md);
     cursor: pointer;
+    min-width: 0; /* empêche le grid item de dépasser 1fr sur mobile */
     transition:
       border-color var(--transition-base),
       box-shadow   var(--transition-base),
