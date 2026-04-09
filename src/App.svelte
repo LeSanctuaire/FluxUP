@@ -64,9 +64,14 @@
     }
 
     console.log('✅ Création du player YouTube...');
+    // Récupérer les dimensions du conteneur et calculer la hauteur (16:9)
+    const playerContainer = document.getElementById('surprise-player-container');
+    const playerWidth = playerContainer?.offsetWidth || 900;
+    const playerHeight = Math.round(playerWidth * 9 / 16);
+
     youtubePlayer = new win.YT.Player('surprise-player-container', {
-      height: '100%',
-      width: '100%',
+      height: playerHeight,
+      width: playerWidth,
       videoId: surpriseStore.currentSource?.youtubeId || '',
       events: {
         onReady: onPlayerReady,
@@ -117,6 +122,18 @@
   // Charger l'API au premier render
   $effect(() => {
     loadYouTubeAPI();
+  });
+
+  // Bloquer le scroll quand la modal s'ouvre
+  $effect(() => {
+    if (surpriseStore.showModal) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+      };
+    }
   });
 
   // Créer/détruire le player quand la modal s'ouvre/ferme
@@ -405,7 +422,8 @@
     box-shadow: 0 0 60px var(--accent-neon-glow);
     width: 100%;
     max-width: 720px;
-    overflow: hidden;
+    max-height: 90vh;
+    overflow-y: auto;
     animation: sslideUp 0.22s ease;
   }
 
@@ -451,16 +469,17 @@
   }
   .surprise-close:hover { color: var(--text-primary); background: rgba(255,255,255,0.08); }
 
-  /* Ratio 16/9 */
   .surprise-video {
     position: relative;
     width: 100%;
-    height: 500px;
+    aspect-ratio: 16 / 9;
     background: #000;
+    min-height: 500px;
   }
   #surprise-player-container {
     width: 100%;
     height: 100%;
+    display: block;
   }
 
   .surprise-actions {
