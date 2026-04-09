@@ -38,6 +38,7 @@
             { label: 'La Crypte', href: '#/crypte' },
             { label: 'Le Temple du Roots', href: '#/reggae-dub' },
             { label: 'Classiques Rap FR', href: '#/classiques-rap-fr' },
+            { label: 'Sets & Mix', href: '#/setsmix', inactive: true, badge: 'Bientôt' },
           ],
         },
       ],
@@ -252,7 +253,7 @@
                       else navTo(link.href);
                     }}
                   >
-                    <span class="link-arrow">›</span>{link.label}{#if link.inactive}<span class="link-soon">bientôt</span>{/if}
+                    <span class="link-arrow">›</span>{link.label}{#if link.inactive}<span class="link-soon">{link.badge || 'bientôt'}</span>{/if}
                   </a>
                 {/each}
               {/each}

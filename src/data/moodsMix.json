@@ -1,0 +1,138 @@
+[
+  {
+    "id": "rap-fr-90s",
+    "title": "HipHop/Rap Classiques [FR]",
+    "emoji": "🎤",
+    "color": "var(--accent-orange)",
+    "sets": [
+      {
+        "id": "8351823",
+        "title": "A Base De Popopopop",
+        "artist": "Remi Sterio, C2LATEK",
+        "url": "https://app.hearthis.at/embed/8351823/transparent_black/?hcolor=dbb700&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      },
+      {
+        "id": "5587392",
+        "title": "MIX RAP FR 90-00 #01",
+        "artist": "NAABS",
+        "url": "https://app.hearthis.at/embed/5587392/transparent_black/?hcolor=e8bb09&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      },
+      {
+        "id": "6908499",
+        "title": "RAP FRANCAIS OLD SCHOOL - KING SIZE MIX",
+        "artist": "DJ NOKTA aka Darkfader",
+        "url": "https://app.hearthis.at/embed/6908499/transparent_black/?hcolor=d6b900&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      },
+      {
+        "id": "13477800",
+        "title": "C'était Mieux Maintenant - #03 Storytelling Rap français",
+        "artist": "RDB (rdbfm)",
+        "url": "https://app.hearthis.at/embed/13477800/transparent_black/?hcolor=d6b200&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      },
+      {
+        "id": "12996400",
+        "title": "C'était Mieux Maintenant - #01 Albums Classiques Rap Français",
+        "artist": "RDB (rdbfm)",
+        "url": "https://app.hearthis.at/embed/12996400/transparent_black/?hcolor=d6b900&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      }
+    ]
+  },
+  {
+    "id": "hiphop-rap-us",
+    "title": "HipHop/Rap & RnB [US]",
+    "emoji": "🎤",
+    "color": "#10c995",
+    "sets": [
+      {
+        "id": "5734273",
+        "title": "BACK TO THE 2000. 04",
+        "artist": "SABRY OCONNELL",
+        "url": "https://app.hearthis.at/embed/5734273/transparent_black/?hcolor=10c995&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      },
+      {
+        "id": "1368585",
+        "title": "Prodigy (Mobb Deep) Tribute Mix",
+        "artist": "Dj Emilio",
+        "url": "https://app.hearthis.at/embed/1368585/transparent_black/?hcolor=10c995&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      },
+      {
+        "id": "6103718",
+        "title": "the djweston vinyl mixtape show itch fm radio e2",
+        "artist": "dj paul weston",
+        "url": "https://app.hearthis.at/embed/6103718/transparent_black/?hcolor=10c995&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      },
+      {
+        "id": "13035197",
+        "title": "Timeless RnB Classics - Mixed by Steve Island",
+        "artist": "Back in Time (Classics)",
+        "url": "https://app.hearthis.at/embed/13035197/transparent_black/?hcolor=10c995&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      },
+      {
+        "id": "12779272",
+        "title": "RnB Classics 90s mix by DJ Lomeas",
+        "artist": "DJ Lomeas",
+        "url": "https://app.hearthis.at/embed/12779272/transparent_black/?hcolor=10c995&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      }
+    ]
+  },
+  {
+    "id": "deep-house-nu-funk",
+    "title": "Deep House Funk Disco",
+    "emoji": "☀️",
+    "color": "#f59e0b",
+    "sets": [
+      {
+        "id": "12338404",
+        "title": "My Sunday Brunch 133 By SabryOConnell",
+        "artist": "SABRY OCONNELL",
+        "url": "https://app.hearthis.at/embed/12338404/transparent_black/?hcolor=d6b900&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      },
+      {
+        "id": "14109545",
+        "title": "Disco d'Oro #17 20260406",
+        "artist": "Deeben",
+        "url": "https://app.hearthis.at/embed/14109545/transparent_black/?hcolor=f2c618&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      }
+    ]
+  },
+  {
+    "id": "reggae-dub-roots",
+    "title": "Reggae Dub & Roots",
+    "emoji": "🎶",
+    "color": "#07ad0c",
+    "sets": [
+      {
+        "id": "13965103",
+        "title": "DUB CHRONICLES VOL. 12",
+        "artist": "Jahkeem",
+        "url": "https://app.hearthis.at/embed/13965103/transparent_black/?hcolor=07ad0c&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      },
+      {
+        "id": "14116760",
+        "title": "UB40 The Homely Mix",
+        "artist": "Strebor",
+        "url": "https://app.hearthis.at/embed/14116760/transparent_black/?hcolor=4bbf07&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      },
+      {
+        "id": "13909515",
+        "title": "DUB CHRONICLES VOL. 10",
+        "artist": "Jahkeem",
+        "url": "https://app.hearthis.at/embed/13909515/transparent_black/?hcolor=06ba06&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      }
+    ]
+  },
+  {
+    "id": "top-radio-playlist",
+    "title": "Top Radio Playlist",
+    "emoji": "📻",
+    "color": "#07a6e0",
+    "sets": [
+      {
+        "id": "11153539",
+        "title": "Cappelle Classics - 2000's editie (Part I) - 3 juni 2024",
+        "artist": "Peter van Cappelle",
+        "url": "https://app.hearthis.at/embed/11153539/transparent_black/?hcolor=07a6e0&color=&style=2&block_size=2&block_space=1&background=1&waveform=0&cover=0&autoplay=1&css="
+      }
+    ]
+  }
+]
