@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import Navbar from './components/Navbar.svelte';
   import Footer from './components/Footer.svelte';
   import PlayerAudio from './components/PlayerAudio.svelte';
@@ -26,6 +26,129 @@
   let currentRoute = $state(window.location.hash || '#/');
   let clipId  = $state(null);
   let beatId  = $state(null);
+
+  // ── Enchaînement automatique des vidéos (YouTube Player API minimal) ────────
+  /** @type {any} */
+  let youtubePlayer = null;
+
+  // Charger l'API YouTube une seule fois
+  function loadYouTubeAPI() {
+    const win = /** @type {any} */ (window);
+    if (win.YT) return; // Déjà chargée
+    const script = document.createElement('script');
+    script.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(script);
+  }
+
+  // Initialiser le player quand la modal s'ouvre
+  async function initializePlayer() {
+    const win = /** @type {any} */ (window);
+    console.log('🎬 Initialisation player...');
+    console.log('   API YT disponible?', !!win.YT?.Player);
+    console.log('   VideoId:', surpriseStore.currentSource?.youtubeId);
+
+    if (!win.YT || !win.YT.Player) {
+      console.warn('❌ YouTube API not ready');
+      return;
+    }
+
+    // Attendre que le DOM soit mis à jour
+    await tick();
+
+    // Vérifier que le conteneur existe
+    const container = document.getElementById('surprise-player-container');
+    console.log('   Conteneur trouvé?', !!container);
+    if (!container) {
+      console.warn('❌ Player container not found in DOM');
+      return;
+    }
+
+    console.log('✅ Création du player YouTube...');
+    youtubePlayer = new win.YT.Player('surprise-player-container', {
+      height: '100%',
+      width: '100%',
+      videoId: surpriseStore.currentSource?.youtubeId || '',
+      events: {
+        onReady: onPlayerReady,
+        onStateChange: onPlayerStateChange,
+      },
+      playerVars: {
+        autoplay: 1,
+        controls: 1,
+        rel: 0,
+        modestbranding: 1,
+      },
+    });
+  }
+
+  // Quand le player est prêt
+  function onPlayerReady(/** @type {any} */ event) {
+    event.target.playVideo();
+  }
+
+  // Quand l'état du player change
+  function onPlayerStateChange(/** @type {any} */ event) {
+    // event.data === 0 = ENDED
+    if (event.data === 0) {
+      console.log('📺 Fin vidéo détectée, lancement suivante...');
+      surpriseStore.next();
+    }
+  }
+
+  // Charger une nouvelle vidéo quand currentSource change
+  $effect(() => {
+    const videoId = surpriseStore.currentSource?.youtubeId;
+    console.log('📺 Effect vidéo - player existe?', !!youtubePlayer, 'videoId:', videoId);
+
+    if (youtubePlayer && videoId) {
+      console.log('🎬 Chargement vidéo:', videoId);
+      try {
+        // Utiliser loadVideoById pour vraiment charger ET lancer
+        youtubePlayer.loadVideoById({
+          videoId: videoId,
+          startSeconds: 0,
+        });
+      } catch (e) {
+        console.warn('Erreur chargement vidéo:', e);
+      }
+    }
+  });
+
+  // Charger l'API au premier render
+  $effect(() => {
+    loadYouTubeAPI();
+  });
+
+  // Créer/détruire le player quand la modal s'ouvre/ferme
+  $effect(() => {
+    const win = /** @type {any} */ (window);
+
+    if (surpriseStore.showModal) {
+      // Créer le player SEULEMENT la première fois
+      if (!youtubePlayer) {
+        if (win.YT && win.YT.Player) {
+          initializePlayer().catch(err => console.error('Erreur init player:', err));
+        } else {
+          const timeout = setTimeout(() => {
+            if (!youtubePlayer && win.YT && win.YT.Player) {
+              initializePlayer().catch(err => console.error('Erreur init player:', err));
+            }
+          }, 500);
+          return () => clearTimeout(timeout);
+        }
+      }
+    } else {
+      // Détruire le player quand la modal se ferme
+      if (youtubePlayer) {
+        try {
+          youtubePlayer.destroy();
+        } catch (e) {
+          console.warn('Erreur destruction player:', e);
+        }
+        youtubePlayer = null;
+      }
+    }
+  });
 
   // ----- Bouton scroll-to-top -----
   let showScrollTop = $state(false);
@@ -63,17 +186,25 @@
   let sVoting  = $state(false);
   let sPlusOne = $state(false);
 
-  // Réinitialise quand le clip change (bouton "Un autre clip")
+  // Réinitialise le vote quand la source change (bouton "Autre")
   $effect(() => {
-    const yId = surpriseStore.currentClip?.youtubeId;
-    if (yId) {
+    // Réinitialiser le vote si la source change ET c'est un clip
+    if (surpriseStore.currentSource?.type === 'clip') {
+      const yId = surpriseStore.currentSource.youtubeId;
       sVoted  = hasVotedLocally(yId);
+      sVoting = false;
+    } else {
+      // Playlist : pas de vote
+      sVoted  = false;
       sVoting = false;
     }
   });
 
   async function handleSurpriseVote() {
-    const yId = surpriseStore.currentClip?.youtubeId;
+    // Seulement si c'est un clip
+    if (surpriseStore.currentSource?.type !== 'clip') return;
+
+    const yId = surpriseStore.currentSource.youtubeId;
     if (!yId || sVoted || sVoting) return;
     sVoting = true;
     const result = await postVote(yId);
@@ -159,7 +290,7 @@
 
 <!-- ======= MODAL GLOBALE "ME SURPRENDRE" ======= -->
 <!-- Accessible depuis n'importe quelle page via surpriseStore -->
-{#if surpriseStore.showModal && surpriseStore.currentClip}
+{#if surpriseStore.showModal && surpriseStore.currentSource}
   <div
     class="surprise-backdrop"
     role="dialog"
@@ -173,75 +304,72 @@
       <!-- En-tête -->
       <div class="surprise-header">
         <div class="surprise-meta">
-          <h2 class="surprise-title">{surpriseStore.currentClip.title}</h2>
-          <p class="surprise-artists">{surpriseStore.currentClip.artists?.join(', ')}</p>
+          <h2 class="surprise-title">{surpriseStore.currentSource.title}</h2>
+          <p class="surprise-artists">{surpriseStore.currentSource.artist}</p>
         </div>
         <button class="surprise-close" onclick={() => surpriseStore.close()} aria-label="Fermer">✕</button>
       </div>
 
-      <!-- Iframe YouTube autoplay -->
-      <div class="surprise-video">
-        <iframe
-          loading="lazy"
-          src="https://www.youtube.com/embed/{surpriseStore.currentClip.youtubeId}?autoplay=1&rel=0"
-          title={surpriseStore.currentClip.title}
-          frameborder="0"
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
+      <!-- Player YouTube (enchaînement automatique) -->
+      <div class="surprise-video" id="surprise-player-container"></div>
 
-      <!-- Actions -->
+      <!-- Actions adaptatives : affichées seulement pour les clips (pas beats ni playlists) -->
       <div class="surprise-actions">
-        <!-- Ligne 1 : voter + classement -->
-        <div class="surprise-vote-row">
-          <div class="svote-wrap">
-            <button
-              class="sbtn sbtn--vote"
-              class:sbtn--voted={sVoted}
-              onclick={handleSurpriseVote}
-              disabled={sVoted || sVoting}
-              aria-label={sVoted ? 'Déjà voté' : 'Voter pour ce clip'}
-            >
-              {#if sVoting}
-                <span class="svote-spinner" aria-hidden="true"></span>Envoi…
-              {:else if sVoted}
-                ✓ Voté
-              {:else}
-                ▲ Voter
+        {#if surpriseStore.currentSource.source === 'clips'}
+          <!-- Ligne 1 : voter + classement (seulement clips) -->
+          <div class="surprise-vote-row">
+            <div class="svote-wrap">
+              <button
+                class="sbtn sbtn--vote"
+                class:sbtn--voted={sVoted}
+                onclick={handleSurpriseVote}
+                disabled={sVoted || sVoting}
+                aria-label={sVoted ? 'Déjà voté' : 'Voter pour ce clip'}
+              >
+                {#if sVoting}
+                  <span class="svote-spinner" aria-hidden="true"></span>Envoi…
+                {:else if sVoted}
+                  ✓ Voté
+                {:else}
+                  ▲ Voter
+                {/if}
+              </button>
+              {#if sPlusOne}
+                <span class="splus-one" aria-hidden="true">+1</span>
               {/if}
-            </button>
-            {#if sPlusOne}
-              <span class="splus-one" aria-hidden="true">+1</span>
-            {/if}
+            </div>
+            <a
+              href="#/classement"
+              class="sbtn sbtn--gold"
+              onclick={() => surpriseStore.close()}
+            >
+              Classement
+            </a>
           </div>
-          <a
-            href="#/classement"
-            class="sbtn sbtn--gold"
-            onclick={() => surpriseStore.close()}
-          >
-            Classement
-          </a>
-        </div>
 
-        <!-- Ligne 2 : abonner / autre clip / fermer -->
-        {#if surpriseStore.currentClip.channelId}
-          <a
-            class="sbtn sbtn--yt"
-            href="https://www.youtube.com/channel/{surpriseStore.currentClip.channelId}?sub_confirmation=1"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="S'abonner à la chaîne YouTube"
-          >
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-            </svg>
-            S'abonner
-          </a>
+          <!-- YouTube subscribe (seulement clips) -->
+          {#if surpriseStore.currentSource.channelId}
+            <a
+              class="sbtn sbtn--yt"
+              href="https://www.youtube.com/channel/{surpriseStore.currentSource.channelId}?sub_confirmation=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="S'abonner à la chaîne YouTube"
+            >
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              S'abonner
+            </a>
+          {/if}
         {/if}
+
+        <!-- Bouton "Un autre" : toujours visible (clips ET playlists) -->
         <button class="sbtn sbtn--orange" onclick={() => surpriseStore.next()}>
-          Un autre clip
+          Un autre
         </button>
+
+        <!-- Bouton Fermer : toujours visible -->
         <button class="sbtn sbtn--ghost" onclick={() => surpriseStore.close()}>
           Fermer
         </button>
@@ -327,15 +455,12 @@
   .surprise-video {
     position: relative;
     width: 100%;
-    padding-top: 56.25%;
+    height: 500px;
     background: #000;
   }
-  .surprise-video iframe {
-    position: absolute;
-    inset: 0;
+  #surprise-player-container {
     width: 100%;
     height: 100%;
-    border: none;
   }
 
   .surprise-actions {

@@ -1,49 +1,38 @@
 /**
  * core/surpriseStore.svelte.js
- * Store global partagé pour la modal "Me Surprendre" (clips aléatoires).
+ * Store global partagé pour la modal "Me Surprendre" (mode aléatoire global).
+ * Sélectionne aléatoirement parmi : Clips, Beats, La Crypte, Classiques Rap FR, Temple du Roots.
  * Peut être déclenché depuis n'importe quel composant (Navbar, Home…).
  */
-import clipsData from '../data/clips.json';
+import { pickRandomSource } from './randomSourceFactory.svelte.js';
 import { ytLiveStore } from './ytLiveStore.svelte.js';
 
 // ── État réactif (singleton Svelte 5) ────────────────────────────────────────
-let showModal   = $state(false);
-let currentClip = $state(null);
-let seenIds     = $state(new Set());
-
-/**
- * Choisit un clip aléatoire non encore vu.
- * Réinitialise quand tous les clips ont été affichés.
- */
-function getRandomClip() {
-  if (seenIds.size >= clipsData.length) seenIds = new Set();
-  const unseen = clipsData.filter(c => !seenIds.has(c.youtubeId));
-  const pick   = unseen[Math.floor(Math.random() * unseen.length)];
-  seenIds      = new Set([...seenIds, pick.youtubeId]);
-  return pick;
-}
+let showModal = $state(false);
+/** @type {any} */
+let currentSource = $state(null);
 
 // ── API publique ─────────────────────────────────────────────────────────────
 export const surpriseStore = {
-  get showModal()   { return showModal;   },
-  get currentClip() { return currentClip; },
+  get showModal()    { return showModal;    },
+  get currentSource() { return currentSource; },
 
-  /** Ouvre la modal avec un clip aléatoire */
+  /** Ouvre la modal avec une source aléatoire (clip ou playlist) */
   trigger() {
     ytLiveStore.stop();
-    currentClip = getRandomClip();
-    showModal   = true;
+    currentSource = pickRandomSource();
+    showModal = true;
   },
 
-  /** Passe au clip suivant sans fermer */
+  /** Sélectionne une autre source sans fermer */
   next() {
     ytLiveStore.stop();
-    currentClip = getRandomClip();
+    currentSource = pickRandomSource();
   },
 
   /** Ferme la modal */
   close() {
-    showModal   = false;
-    currentClip = null;
+    showModal    = false;
+    currentSource = null;
   },
 };
